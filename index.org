@@ -1,5 +1,13 @@
 * flaregun.org
 
-*** blog
+** emacs vs vim
+
+can you do this shit in vim!? i bet you cant!
+
+does your vim have magit? case closed
+
+** blog
+
 i might eventually write somethign here...
-if youre reading this, cross your fingers they merge my kernel patch!
+
+but if youre reading this, cross your fingers they merge my kernel patch!
