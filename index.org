@@ -1,0 +1,5 @@
+* flaregun.org
+
+*** blog
+i might eventually write somethign here...
+if youre reading this, cross your fingers they merge my kernel patch!
