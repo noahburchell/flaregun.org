@@ -6,7 +6,9 @@
 * blog
 
 ** uhh
-... working on an 'article'
+... working on an 'article' \\
+but if youre reading this cross your fingers my kernel patch is merged! \\
+(i want the cool points)
 
 * faq
 
