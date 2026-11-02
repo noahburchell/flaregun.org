@@ -1,13 +1,22 @@
-* flaregun.org
+* blog
+
+** uhh
+... working on an 'article'
+
+* faq
 
 ** emacs vs vim
-
-can you do this shit in vim!? i bet you cant!
-
 does your vim have magit? case closed
 
-** blog
+** linux for beginners
+fedora kde
 
-i might eventually write somethign here...
+** best distro
+gentoo
 
-but if youre reading this, cross your fingers they merge my kernel patch!
+** tabs or spaces
+tabs (8 spaces wide)
+
+* contact: noah burchell
+  - *contact* :: [[mailto:noah@nburch.org][noah@nburch.org]]
+  - *phone* :: no phone
