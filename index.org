@@ -1,3 +1,6 @@
+#+TITLE: flaregun.org
+#+OPTIONS: num:nil
+
 * blog
 
 ** uhh
@@ -17,6 +20,7 @@ gentoo
 ** tabs or spaces
 tabs (8 spaces wide)
 
-* contact: noah burchell
+* contact
+  - *name* :: noah burchell
   - *contact* :: [[mailto:noah@nburch.org][noah@nburch.org]]
   - *phone* :: no phone
