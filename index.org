@@ -1,6 +1,3 @@
-#+OPTIONS: toc:nil num:nil html-style:nil
-#+HTML_HEAD: <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-
 #+TITLE: flaregun.org
 
 * blog
