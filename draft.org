@@ -1,0 +1,44 @@
+** tips for linux beginners [2026-11-04 Wed]
+you just installed your distro of choice using the guide below?
+brilliant! now that youre part of the team, here are some tips!
+
+*** linux isnt windows
+the old windows-isms of grabbing random executables off the web to
+install software, or rebooting to fix issues, or playing valorant,
+are gone. on linux, software is installed through the command line
+using a package manager, or through a gui app store (if your
+desktop environment provides one). most issues on linux do not need
+a reboot and most updates dont need one either. unless the kernel
+has been updated or you genuinely dont know where to start fixing an
+issue. otherwise you can just leave it running
+
+*** the terminal isnt scary
+/if you learn which commands are./
+
+a lot of people advise beginners to avoid the terminal at all costs.
+this is counterproductive, at some point you will have to use it to
+fix an issue or use some tool that you want to use. if you can write
+=/gamemode creative=, you can write =dnf upgrade --refresh=.
+so how do you tell a scary command from a safe command? as a
+general rule, just look it up! we have /google/ yknow!? if you
+are told to run a command you dont understand, for example:
+
+=find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'=
+
+i think the =find= command would probably help /find/ somethign,
+but im not exactly sure. so i should probably /google/ it!
+im also not exactly sure what the rest of it means... =$(uname -r)=
+doesnt look like a directory, maybe i should look it up!
+
+bonus tip: if the command has some word or character starting
+with a hyphen (like -iname, -r, -rf, -a, -h) its probably a
+/flag/ that goes along with the command, so for the example above
+you could look up "find command iname option" or something
+
+also there are certain commands to pay *extra* attention to
+
+=sudo, doas, rm, dd, curl | *=
+
+at the end of the day if you are trying properly to learn,
+somethign will break. so this isnt just a linux tip, but to
+every computer user, keep backups!! please!

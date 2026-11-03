@@ -111,7 +111,7 @@ the biggest points are covered, but there are some other things i should note.
 
 *proprietary software (🤮)*:
 
-for people with nvidia cards, distros such as pop_os, linux mint,
+for people with nvidia cards, distros such as pop os, linux mint,
 and ubuntu make the installation process simpler. although it
 is still very much possible on every distro so dont think about it
 too much. (for example, on fedora youll have to enable rpm fusion repo).
@@ -129,7 +129,7 @@ i feel that is outdated. if you are using an ai on a free plan or
 other low-tier ais, sure, they will hallucinate. if you are paying
 for a premium ai such as claude opus, i find hallucinations rare.
 although it is still best practice to flinch at anything prefixed with
-=sudo =
+=sudo=
 
 *** conclusion
 now that youve decided what properties you want your distro to have,
@@ -162,12 +162,12 @@ becasue rolling distros always ship a new kernel
 * faq
 
 ** emacs or vim
-does your vim have magit? case closed
+two words: org mode
 
-** linux for beginners
+** best distro for beginners
 fedora kde
 
-** best distro
+** distro par excellence
 gentoo
 
 ** tabs or spaces
