@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-03 Tue 13:34 -->
+<!-- 2026-11-03 Tue 18:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>flaregun.org</title>
@@ -202,67 +202,213 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org388b7c9">1. blog</a>
+<li><a href="#org970aac3">1. blog</a>
 <ul>
-<li><a href="#org397b19e">1.1. uhh</a></li>
+<li><a href="#orgca1bd96">1.1. distro guide <span class="timestamp-wrapper"><span class="timestamp">[2026-11-03 Tue]</span></span></a>
+<ul>
+<li><a href="#org7a67e41">1.1.1. desktop environment</a></li>
+<li><a href="#org2d87402">1.1.2. mutability</a></li>
+<li><a href="#orga65f1df">1.1.3. release cycle</a></li>
+<li><a href="#orgcc395bb">1.1.4. installation difficulty</a></li>
 </ul>
 </li>
-<li><a href="#org0ac8571">2. faq</a>
-<ul>
-<li><a href="#org93205e2">2.1. emacs vs vim</a></li>
-<li><a href="#org6873ced">2.2. linux for beginners</a></li>
-<li><a href="#orgbb0d67e">2.3. best distro</a></li>
-<li><a href="#orgfe8a88c">2.4. tabs or spaces</a></li>
 </ul>
 </li>
-<li><a href="#org451ee0a">3. contact</a></li>
+<li><a href="#org5b8b29e">2. faq</a>
+<ul>
+<li><a href="#org58007e3">2.1. emacs or vim</a></li>
+<li><a href="#orgb042f8b">2.2. linux for beginners</a></li>
+<li><a href="#org2c57cd6">2.3. best distro</a></li>
+<li><a href="#org155d088">2.4. tabs or spaces</a></li>
+</ul>
+</li>
+<li><a href="#org3e2e151">3. contact</a></li>
+<li><a href="#org0150a43">4. donate?</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org388b7c9" class="outline-2">
-<h2 id="org388b7c9"><span class="section-number-2">1.</span> blog</h2>
+<div id="outline-container-org970aac3" class="outline-2">
+<h2 id="org970aac3"><span class="section-number-2">1.</span> blog</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org397b19e" class="outline-3">
-<h3 id="org397b19e"><span class="section-number-3">1.1.</span> uhh</h3>
+<div id="outline-container-orgca1bd96" class="outline-3">
+<h3 id="orgca1bd96"><span class="section-number-3">1.1.</span> distro guide <span class="timestamp-wrapper"><span class="timestamp">[2026-11-03 Tue]</span></span></h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
-&hellip; working on an 'article' <br />
-but if youre reading this cross your fingers my kernel patch is merged! <br />
+you want to use linux but cant pick a distro? good news,
+its very easy. but it is also easy to be overwhelmed with choice
+when you start researching and find hundreds of options
+to choose from. if you know what you want, that number
+may shrink to one or two, making it more manageable. so what
+really are the differences between distros? the biggest
+ones for new users to be concerned about are probably (in order):
+</p>
+
+<ul class="org-ul">
+<li>default desktop environment</li>
+<li>mutability</li>
+<li>release cycle</li>
+<li>installation difficulty</li>
+</ul>
+
+<p>
+so, what do all these things mean, and how does this
+make the distro decision easier? lets address these
+points one by one.
+</p>
+</div>
+<div id="outline-container-org7a67e41" class="outline-4">
+<h4 id="org7a67e41"><span class="section-number-4">1.1.1.</span> desktop environment</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+if you are used to windows, then you (probably) want
+a distribution that comes with KDE plasma. but, to be sure,
+this is a good place to take advantage of <b>live usbs</b>. what
+is a live usb? it is a usb storage drive that has had a bootable
+linux distribution installed on it. this is mostly used for
+installing a distro, but people also make use of it to <b>try</b>
+the distro to get a feel before they commit to an installation.
+now, lots of people frame this as trying the <b>distro</b>, but
+it isnt. you are not trying the distro*, you are trying the
+<b>desktop environment</b>. that is just as valuable, but it also
+means a live usb of fedora kde isnt a different experience
+to a live usb of kubuntu. here are good options other than kde:
+</p>
+
+<ul class="org-ul">
+<li>gnome (opinionated, i personally love it on a laptop but hate it on a desktop)</li>
+<li>cinnamon (mints default, like kde in its familiarity to windows users)</li>
+<li>xfce (lighter, easy to use but different)</li>
+<li>sway (lighter (not a de, just a compositor), tiling, but not recommended unless you want to learn a new workflow)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2d87402" class="outline-4">
+<h4 id="org2d87402"><span class="section-number-4">1.1.2.</span> mutability</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+a "mutable" or "traditional" distro is just&hellip; a standard one.
+on the other hand, an immutable linux distro locks system
+files as read only and updates the system as one image.
+i dont have experience with immutable distros, so this is
+my "advice". you probably dont want one. not yet at least.
+this is because nearly 100% of advice you'll find online
+assumes your distro is mutable. so for now, avoid distros
+that are "atomic" or "immutable".
+</p>
+</div>
+</div>
+<div id="outline-container-orga65f1df" class="outline-4">
+<h4 id="orga65f1df"><span class="section-number-4">1.1.3.</span> release cycle</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+if you noticed the asterisk from back in the desktop environment
+section, this is exactly that. the one way two distros with the same
+de do differ on a live usb (and installed) is hardware support. some
+distributions have newer packages, which means a newer kernel, and
+that (generally) means support for newer hardware. a <b>live usb</b> is
+a decent way to check this. another aspect of "release cycle" is
+<b>rolling release</b> versus <b>point release</b> distributions.
+</p>
+
+<p>
+<b>rolling release</b>:
+</p>
+
+<p>
+rolling release distros do not have version numbers.
+packages get updates steadily, like apps on your phone.
+examples of rolling release distros are arch, gentoo (&lt;3),
+and tumbleweed. the advantages of this model are:
+</p>
+<ul class="org-ul">
+<li>newer packages</li>
+<li>small updates</li>
+</ul>
+<p>
+the disadvantages are:
+</p>
+<ul class="org-ul">
+<li>slightly higher chance of breakage</li>
+<li>frequent updates</li>
+</ul>
+
+<p>
+<b>point release</b>:
+</p>
+
+<p>
+point release distros have version numbers (debian 13).
+things mostly stay the same between releases. this is
+like your phones os, in contrast to the apps on it. some
+examples of distros like this are: fedora, ubuntu, debian,
+and mint. the advantages:
+</p>
+<ul class="org-ul">
+<li>less breakage</li>
+<li>less frequent updates</li>
+</ul>
+<p>
+the disadvantages:
+</p>
+<ul class="org-ul">
+<li>larger updates</li>
+<li>older packages</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcc395bb" class="outline-4">
+<h4 id="orgcc395bb"><span class="section-number-4">1.1.4.</span> installation difficulty</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<p>
+this one is at the bottom, because i dont think it is very important.
+people will often talk about distros like arch and gentoo and their
+"difficulty", but that is mostly <b>not</b> because of the installation process.
+the difficulty comes from maintenance (keeping it running smooth).
+</p>
+
+<p>
+im a believer that if you locked 100 people in a room and handed them a
+printed copy of the arch wiki installation guide, most of them would
+come out with a working distro. obviously, this isnt something people
+want to do for no reason, but in the case that you were dead set on
+using a certain distro and it happened to have a difficult installation
+process, just, try.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0ac8571" class="outline-2">
-<h2 id="org0ac8571"><span class="section-number-2">2.</span> faq</h2>
+</div>
+<div id="outline-container-org5b8b29e" class="outline-2">
+<h2 id="org5b8b29e"><span class="section-number-2">2.</span> faq</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org93205e2" class="outline-3">
-<h3 id="org93205e2"><span class="section-number-3">2.1.</span> emacs vs vim</h3>
+<div id="outline-container-org58007e3" class="outline-3">
+<h3 id="org58007e3"><span class="section-number-3">2.1.</span> emacs or vim</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 does your vim have magit? case closed
 </p>
 </div>
 </div>
-<div id="outline-container-org6873ced" class="outline-3">
-<h3 id="org6873ced"><span class="section-number-3">2.2.</span> linux for beginners</h3>
+<div id="outline-container-orgb042f8b" class="outline-3">
+<h3 id="orgb042f8b"><span class="section-number-3">2.2.</span> linux for beginners</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 fedora kde
 </p>
 </div>
 </div>
-<div id="outline-container-orgbb0d67e" class="outline-3">
-<h3 id="orgbb0d67e"><span class="section-number-3">2.3.</span> best distro</h3>
+<div id="outline-container-org2c57cd6" class="outline-3">
+<h3 id="org2c57cd6"><span class="section-number-3">2.3.</span> best distro</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 gentoo
 </p>
 </div>
 </div>
-<div id="outline-container-orgfe8a88c" class="outline-3">
-<h3 id="orgfe8a88c"><span class="section-number-3">2.4.</span> tabs or spaces</h3>
+<div id="outline-container-org155d088" class="outline-3">
+<h3 id="org155d088"><span class="section-number-3">2.4.</span> tabs or spaces</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 tabs (8 spaces wide)
@@ -270,8 +416,8 @@ tabs (8 spaces wide)
 </div>
 </div>
 </div>
-<div id="outline-container-org451ee0a" class="outline-2">
-<h2 id="org451ee0a"><span class="section-number-2">3.</span> contact</h2>
+<div id="outline-container-org3e2e151" class="outline-2">
+<h2 id="org3e2e151"><span class="section-number-2">3.</span> contact</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li><b>name</b>: noah burchell</li>
@@ -280,10 +426,18 @@ tabs (8 spaces wide)
 </ul>
 </div>
 </div>
+<div id="outline-container-org0150a43" class="outline-2">
+<h2 id="org0150a43"><span class="section-number-2">4.</span> donate?</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li><a href="https://my.fsf.org/donate">donate to fsf</a></li>
+</ul>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-03 Tue 13:34</p>
+<p class="date">Created: 2026-11-03 Tue 18:31</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

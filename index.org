@@ -2,13 +2,103 @@
 
 * blog
 
-** uhh
-... working on an 'article' \\
-but if youre reading this cross your fingers my kernel patch is merged! \\
+** distro guide [2026-11-03 Tue]
+you want to use linux but cant pick a distro? good news,
+its very easy. but it is also easy to be overwhelmed with choice
+when you start researching and find hundreds of options
+to choose from. if you know what you want, that number
+may shrink to one or two, making it more manageable. so what
+really are the differences between distros? the biggest
+ones for new users to be concerned about are probably (in order):
+
+- default desktop environment
+- mutability
+- release cycle
+- installation difficulty
+
+so, what do all these things mean, and how does this
+make the distro decision easier? lets address these
+points one by one.
+
+*** desktop environment
+if you are used to windows, then you (probably) want
+a distribution that comes with KDE plasma. but, to be sure,
+this is a good place to take advantage of *live usbs*. what
+is a live usb? it is a usb storage drive that has had a bootable
+linux distribution installed on it. this is mostly used for
+installing a distro, but people also make use of it to *try*
+the distro to get a feel before they commit to an installation.
+now, lots of people frame this as trying the *distro*, but
+it isnt. you are not trying the distro*, you are trying the
+*desktop environment*. that is just as valuable, but it also
+means a live usb of fedora kde isnt a different experience
+to a live usb of kubuntu. here are good options other than kde:
+
+- gnome (opinionated, i personally love it on a laptop but hate it on a desktop)
+- cinnamon (mints default, like kde in its familiarity to windows users)
+- xfce (lighter, easy to use but different)
+- sway (lighter (not a de, just a compositor), tiling, but not recommended unless you want to learn a new workflow)
+
+*** mutability
+a "mutable" or "traditional" distro is just... a standard one.
+on the other hand, an immutable linux distro locks system
+files as read only and updates the system as one image.
+i dont have experience with immutable distros, so this is
+my "advice". you probably dont want one. not yet at least.
+this is because nearly 100% of advice you'll find online
+assumes your distro is mutable. so for now, avoid distros
+that are "atomic" or "immutable".
+
+*** release cycle
+if you noticed the asterisk from back in the desktop environment
+section, this is exactly that. the one way two distros with the same
+de do differ on a live usb (and installed) is hardware support. some
+distributions have newer packages, which means a newer kernel, and
+that (generally) means support for newer hardware. a *live usb* is
+a decent way to check this. another aspect of "release cycle" is
+*rolling release* versus *point release* distributions.
+
+*rolling release*:
+
+rolling release distros do not have version numbers.
+packages get updates steadily, like apps on your phone.
+examples of rolling release distros are arch, gentoo (<3),
+and tumbleweed. the advantages of this model are:
+- newer packages
+- small updates
+the disadvantages are:
+- slightly higher chance of breakage
+- frequent updates
+
+*point release*:
+
+point release distros have version numbers (debian 13).
+things mostly stay the same between releases. this is
+like your phones os, in contrast to the apps on it. some
+examples of distros like this are: fedora, ubuntu, debian,
+and mint. the advantages:
+- less breakage
+- less frequent updates
+the disadvantages:
+- larger updates
+- older packages
+
+*** installation difficulty
+this one is at the bottom, because i dont think it is very important.
+people will often talk about distros like arch and gentoo and their
+"difficulty", but that is mostly *not* because of the installation process.
+the difficulty comes from maintenance (keeping it running smooth).
+
+im a believer that if you locked 100 people in a room and handed them a
+printed copy of the arch wiki installation guide, most of them would
+come out with a working distro. obviously, this isnt something people
+want to do for no reason, but in the case that you were dead set on
+using a certain distro and it happened to have a difficult installation
+process, just, try.
 
 * faq
 
-** emacs vs vim
+** emacs or vim
 does your vim have magit? case closed
 
 ** linux for beginners
@@ -24,3 +114,6 @@ tabs (8 spaces wide)
   - *name*: noah burchell
   - *contact*: [[mailto:noah@nburch.org][noah@nburch.org]]
   - *phone*: no phone
+
+* donate?
+  - [[https://my.fsf.org/donate][donate to fsf]]
