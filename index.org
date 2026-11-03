@@ -2,6 +2,10 @@
 
 * blog
 
+** more blogs?
+maybe coming soon..... in the meantime cross your
+fingers my kernel patch is merged! 
+
 ** distro guide [2026-11-03 Tue]
 you want to use linux but cant pick a distro? good news,
 its very easy. but it is also easy to be overwhelmed with choice
