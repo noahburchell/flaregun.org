@@ -1,8 +1,11 @@
-** tips for linux beginners [2026-11-04 Wed]
-you just installed your distro of choice using the guide below?
+#+TITLE: tips for linux beginners [2026-11-04 Wed]
+#+HTML_LINK_UP: ../index.html
+#+HTML_LINK_HOME: ../index.html
+
+you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]?
 brilliant! now that youre part of the team, here are some tips!
 
-*** linux isnt windows
+* linux isnt windows
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
@@ -12,7 +15,7 @@ a reboot and most updates dont need one either. unless the kernel
 has been updated or you genuinely dont know where to start fixing an
 issue. otherwise you can just leave it running
 
-*** the terminal isnt scary
+* the terminal isnt scary
 /if you learn which commands are./
 
 a lot of people advise beginners to avoid the terminal at all costs.
@@ -35,10 +38,10 @@ with a hyphen (like -iname, -r, -rf, -a, -h) its probably a
 /flag/ that goes along with the command, so for the example above
 you could look up "find command iname option" or something
 
-also there are certain commands to pay *extra* attention to
+there are certain commands to pay *extra* attention to
 
 =sudo, doas, rm, dd, curl | *=
 
-at the end of the day if you are trying properly to learn,
-somethign will break. so this isnt just a linux tip, but to
-every computer user, keep backups!! please!
+* ill keep adding to this
+
+when i think of more to say..... keep notice! i (usually) have good advice
