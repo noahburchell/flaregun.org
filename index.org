@@ -67,7 +67,7 @@ and tumbleweed. the advantages of this model are:
 - newer packages
 - small updates
 the disadvantages are:
-- slightly higher chance of breakage
+- slightly higher chance of breakage (depending on distro, arch will break more than gentoo)
 - frequent updates
 
 *point release*:
@@ -78,7 +78,7 @@ like your phones os, in contrast to the apps on it. some
 examples of distros like this are: fedora, ubuntu, debian,
 and mint. the advantages:
 - less breakage
-- less frequent updates
+- less frequent updates (note: there are still regular bug-fix updates, but no new versions)
 the disadvantages:
 - larger updates
 - older packages
