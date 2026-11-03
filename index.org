@@ -137,8 +137,8 @@ its time to find your distro. this can be done through the search tool
 at [[https://linuxbasecamp.com/distros][linux basecamp]]. if you just want a quick pick right now, see below
 
 *** quick picks
-every pick here is mutable. hardware age only matters for point release.
-rolling distros always ship a new kernel
+every pick here is mutable. hardware age only matters for point release
+becasue rolling distros always ship a new kernel
 
 - coming from windows, or on a desktop (you probably want kde)
   - point release
