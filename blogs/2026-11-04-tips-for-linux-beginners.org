@@ -2,6 +2,8 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 
+currently unfininshed so uhhh look at the other posts
+
 you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]?
 brilliant! now that youre part of the team, here are some tips!
 
@@ -40,8 +42,40 @@ you could look up "find command iname option" or something
 
 there are certain commands to pay *extra* attention to
 
-=sudo, doas, rm, dd, curl | *=
+=sudo / doas, rm, dd, curl | *=
+
+=sudo / doas=: any commands ran with either of these prefixes can
+do... anything.
+
+=rm=: this command doesnt send somethign to the trash, it permenantly
+deletes it and there is not undo
+
+=dd=: this command writes data somewhere, youll often see
+=dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync=.
+this is not inherently unsafe, its actually the standard way to create a
+bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
+if the location you typed (for example =/dev/sda=) is your boot drive,
+depending on the size of the disk image, youll overwrite:
+
+1. the protective mbr
+2. the primary gpt header and partition table
+3. the entire efi system partition
+4. the beginning of the next partition, and its superblock
+5. if the input never ends (=if=/dev/zero=), then literally everything
+
+*always double check its correct with* =lsblk=
+
+=curl https://example.com/example.sh | bash= or the more evil version
+=curl https://example.com/example.sh | sudo bash=: these commands download
+a script from that site and execute it immediately without showing you what
+theyre doing. never do this. if a site wants you to install their
+software like this, first make sure the site is trustworthy, then download
+it alone (=curl -O https://example.com/example.sh=), then use =ls= to check
+the filename, then with that information run =less ./example.sh= to review
+it, then you can run it by first making it executable (=chmod +x ./example.sh=),
+and executing it like so: =./example.sh=
 
 * ill keep adding to this
 
 when i think of more to say..... keep notice! i (usually) have good advice
+

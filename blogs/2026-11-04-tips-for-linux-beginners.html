@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-03 Tue 21:41 -->
+<!-- 2026-11-03 Tue 22:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,18 +206,22 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf095de9">1. linux isnt windows</a></li>
-<li><a href="#org7930024">2. the terminal isnt scary</a></li>
-<li><a href="#org1e774d0">3. ill keep adding to this</a></li>
+<li><a href="#orgb53ca2e">1. linux isnt windows</a></li>
+<li><a href="#org0d168b2">2. the terminal isnt scary</a></li>
+<li><a href="#org98078e6">3. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
 <p>
+currently unfininshed so uhhh look at the other posts
+</p>
+
+<p>
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-orgf095de9" class="outline-2">
-<h2 id="orgf095de9"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-orgb53ca2e" class="outline-2">
+<h2 id="orgb53ca2e"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
@@ -231,8 +235,8 @@ issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org7930024" class="outline-2">
-<h2 id="org7930024"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-org0d168b2" class="outline-2">
+<h2 id="org0d168b2"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>if you learn which commands are.</i>
@@ -271,12 +275,55 @@ there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
-<code>sudo, doas, rm, dd, curl | *</code>
+<code>sudo / doas, rm, dd, curl | *</code>
+</p>
+
+<p>
+<code>sudo / doas</code>: any commands ran with either of these prefixes can
+do&hellip; anything.
+</p>
+
+<p>
+<code>rm</code>: this command doesnt send somethign to the trash, it permenantly
+deletes it and there is not undo
+</p>
+
+<p>
+<code>dd</code>: this command writes data somewhere, youll often see
+<code>dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync</code>.
+this is not inherently unsafe, its actually the standard way to create a
+bootable usb. it becomes dangerous if <code>of=/dev/sdX</code> is the wrong location.
+if the location you typed (for example <code>/dev/sda</code>) is your boot drive,
+depending on the size of the disk image, youll overwrite:
+</p>
+
+<ol class="org-ol">
+<li>the protective mbr</li>
+<li>the primary gpt header and partition table</li>
+<li>the entire efi system partition</li>
+<li>the beginning of the next partition, and its superblock</li>
+<li>if the input never ends (<code>if=/dev/zero</code>), then literally everything</li>
+</ol>
+
+<p>
+<b>always double check its correct with</b> <code>lsblk</code>
+</p>
+
+<p>
+<code>curl https://example.com/example.sh | bash</code> or the more evil version
+<code>curl https://example.com/example.sh | sudo bash</code>: these commands download
+a script from that site and execute it immediately without showing you what
+theyre doing. never do this. if a site wants you to install their
+software like this, first make sure the site is trustworthy, then download
+it alone (<code>curl -O https://example.com/example.sh</code>), then use <code>ls</code> to check
+the filename, then with that information run <code>less ./example.sh</code> to review
+it, then you can run it by first making it executable (<code>chmod +x ./example.sh</code>),
+and executing it like so: <code>./example.sh</code>
 </p>
 </div>
 </div>
-<div id="outline-container-org1e774d0" class="outline-2">
-<h2 id="org1e774d0"><span class="section-number-2">3.</span> ill keep adding to this</h2>
+<div id="outline-container-org98078e6" class="outline-2">
+<h2 id="org98078e6"><span class="section-number-2">3.</span> ill keep adding to this</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
@@ -286,7 +333,7 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-03 Tue 21:41</p>
+<p class="date">Created: 2026-11-03 Tue 22:57</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
