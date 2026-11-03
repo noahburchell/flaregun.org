@@ -32,6 +32,12 @@ are told to run a command you dont understand, for example:
 
 i think the =find= command would probably help /find/ somethign,
 but im not exactly sure. so i should probably /google/ it!
+
+although, before i google it maybe ill get more accurate
+information from the /man pages included with most commands/.
+i can access these with the command =man=, so in this case,
+=man find=
+
 im also not exactly sure what the rest of it means... =$(uname -r)=
 doesnt look like a directory, maybe i should look it up!
 
