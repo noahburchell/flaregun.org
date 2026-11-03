@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-11-03 Tue 22:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>c style</title>
+<meta name="author" content="Noah Burchell" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">c style</h1>
+<div class="org-src-container">
+<pre class="src src-C"><code>#include "style.h"
+
+#include &lt;errno.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#define VAL_MIN      -1000
+#define VAL_MAX      1000
+#define ARRAY_LEN(a) (sizeof(a) / sizeof(*(a)))
+
+typedef enum state {
+	STATE_IDLE,
+	STATE_RUNNING,
+	STATE_DONE,
+} state;
+
+typedef struct item {
+	const char* name;
+	state       state;
+	uint32_t    n, cap;
+	int*        vals;
+} item;
+
+static const char* const state_names[] = { "idle", "running", "done" };
+static_assert(ARRAY_LEN(state_names) == STATE_DONE + 1, "state_names covers enum state");
+
+[[noreturn]] static void die(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
+
+static void usage(FILE* f) {
+	fputs("usage: style [OPTION]... VALUE...\n"
+	      "\n"
+	      "  -n NAME    name the item NAME\n"
+	      "      --help display this help and exit\n"
+	      "\n"
+	      "VALUE is an integer between -1000 and 1000, NAME defaults to item\n",
+	      f);
+}
+
+static void die(const char* fmt, ...) {
+	va_list ap;
+
+	va_start(ap, fmt);
+	fputs("style: ", stderr);
+	vfprintf(stderr, fmt, ap);
+	fputc('\n', stderr);
+	va_end(ap);
+	exit(1);
+}
+
+static int cmp_int(const void* a, const void* b) {
+	int x = *(const int*)a;
+	int y = *(const int*)b;
+
+	return x &lt; y ? -1 : x &gt; y;
+}
+
+static bool parse_int(const char* s, int* out) {
+	char* end;
+	long v;
+
+	errno = 0;
+	v = strtol(s, &amp;end, 10);
+	if(errno || end == s || *end
+	   || v &lt; VAL_MIN || v &gt; VAL_MAX) {
+		return false;
+	}
+
+	*out = (int)v;
+
+	return true;
+}
+
+static int* item_find(const item* it, int v) {
+	int* p = it-&gt;vals;
+	int* end = it-&gt;vals + it-&gt;n;
+
+	while(p &lt; end) {
+		if(*p == v) {
+			return p;
+		}
+
+		p++;
+	}
+
+	return nullptr;
+}
+
+static void item_push(item* it, int v) {
+	if(it-&gt;n == it-&gt;cap) {
+		it-&gt;cap = it-&gt;cap ? it-&gt;cap * 2 : 8;
+
+		it-&gt;vals = realloc(it-&gt;vals, it-&gt;cap * sizeof(*it-&gt;vals));
+		if(!it-&gt;vals) {
+			die("realloc: %s", strerror(errno));
+		}
+	}
+
+	it-&gt;vals[it-&gt;n++] = v;
+}
+
+// the caller guarantees at least one value
+static void item_run(item* it) {
+	uint32_t i = 0;
+	int sum = 0;
+
+	switch(it-&gt;state) {
+		case STATE_IDLE:
+			it-&gt;state = STATE_RUNNING;
+			break;
+		case STATE_RUNNING:
+			die("%s: already running", it-&gt;name);
+		case STATE_DONE:
+			return;
+	}
+
+	qsort(it-&gt;vals, it-&gt;n, sizeof(*it-&gt;vals), cmp_int);
+
+	do {
+		sum += it-&gt;vals[i];
+	} while(++i &lt; it-&gt;n);
+
+	it-&gt;state = STATE_DONE;
+
+	printf("%s: %u value%s, sum %d, state %s\n", it-&gt;name, it-&gt;n,
+	       it-&gt;n == 1 ? "" : "s", sum, state_names[it-&gt;state]);
+}
+
+int main(int argc, char** argv) {
+	item it = { .name = "item" };
+	int k, v, rc = 0;
+
+	for(k = 1; k &lt; argc; k++) {
+		if(!strcmp(argv[k], "--help")) {
+			usage(stdout);
+			return 0;
+		}
+
+		if(!strcmp(argv[k], "-n")) {
+			if(++k == argc) {
+				fprintf(stderr, "style: '-n' needs a name\n");
+				usage(stderr);
+				return 2;
+			}
+
+			it.name = argv[k];
+			continue;
+		}
+
+		if(argv[k][0] == '-') {
+			fprintf(stderr, "style: unknown option '%s'\n", argv[k]);
+			usage(stderr);
+			return 2;
+		}
+
+		break;
+	}
+
+	if(k == argc) {
+		usage(stderr);
+		return 2;
+	}
+
+	for(; k &lt; argc; k++) {
+		if(!parse_int(argv[k], &amp;v)) {
+			fprintf(stderr, "style: '%s' is not an integer between %d and %d\n", argv[k], VAL_MIN, VAL_MAX);
+			rc = 2;
+			goto out;
+		}
+
+		if(item_find(&amp;it, v)) {
+			continue;
+		}
+
+		item_push(&amp;it, v);
+	}
+
+	item_run(&amp;it);
+
+out:
+	free(it.vals);
+
+	return rc;
+}
+</code></pre>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Noah Burchell</p>
+<p class="date">Created: 2026-11-03 Tue 22:26</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+#+TITLE: c style
+#+HTML_LINK_UP: ../index.html
+#+HTML_LINK_HOME: ../index.html
+
+#+begin_src C -i :eval no :tangle no
+#include "style.h"
+
+#include <errno.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define VAL_MIN      -1000
+#define VAL_MAX      1000
+#define ARRAY_LEN(a) (sizeof(a) / sizeof(*(a)))
+
+typedef enum state {
+	STATE_IDLE,
+	STATE_RUNNING,
+	STATE_DONE,
+} state;
+
+typedef struct item {
+	const char* name;
+	state       state;
+	uint32_t    n, cap;
+	int*        vals;
+} item;
+
+static const char* const state_names[] = { "idle", "running", "done" };
+static_assert(ARRAY_LEN(state_names) == STATE_DONE + 1, "state_names covers enum state");
+
+[[noreturn]] static void die(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
+
+static void usage(FILE* f) {
+	fputs("usage: style [OPTION]... VALUE...\n"
+	      "\n"
+	      "  -n NAME    name the item NAME\n"
+	      "      --help display this help and exit\n"
+	      "\n"
+	      "VALUE is an integer between -1000 and 1000, NAME defaults to item\n",
+	      f);
+}
+
+static void die(const char* fmt, ...) {
+	va_list ap;
+
+	va_start(ap, fmt);
+	fputs("style: ", stderr);
+	vfprintf(stderr, fmt, ap);
+	fputc('\n', stderr);
+	va_end(ap);
+	exit(1);
+}
+
+static int cmp_int(const void* a, const void* b) {
+	int x = *(const int*)a;
+	int y = *(const int*)b;
+
+	return x < y ? -1 : x > y;
+}
+
+static bool parse_int(const char* s, int* out) {
+	char* end;
+	long v;
+
+	errno = 0;
+	v = strtol(s, &end, 10);
+	if(errno || end == s || *end
+	   || v < VAL_MIN || v > VAL_MAX) {
+		return false;
+	}
+
+	,*out = (int)v;
+
+	return true;
+}
+
+static int* item_find(const item* it, int v) {
+	int* p = it->vals;
+	int* end = it->vals + it->n;
+
+	while(p < end) {
+		if(*p == v) {
+			return p;
+		}
+
+		p++;
+	}
+
+	return nullptr;
+}
+
+static void item_push(item* it, int v) {
+	if(it->n == it->cap) {
+		it->cap = it->cap ? it->cap * 2 : 8;
+
+		it->vals = realloc(it->vals, it->cap * sizeof(*it->vals));
+		if(!it->vals) {
+			die("realloc: %s", strerror(errno));
+		}
+	}
+
+	it->vals[it->n++] = v;
+}
+
+// the caller guarantees at least one value
+static void item_run(item* it) {
+	uint32_t i = 0;
+	int sum = 0;
+
+	switch(it->state) {
+		case STATE_IDLE:
+			it->state = STATE_RUNNING;
+			break;
+		case STATE_RUNNING:
+			die("%s: already running", it->name);
+		case STATE_DONE:
+			return;
+	}
+
+	qsort(it->vals, it->n, sizeof(*it->vals), cmp_int);
+
+	do {
+		sum += it->vals[i];
+	} while(++i < it->n);
+
+	it->state = STATE_DONE;
+
+	printf("%s: %u value%s, sum %d, state %s\n", it->name, it->n,
+	       it->n == 1 ? "" : "s", sum, state_names[it->state]);
+}
+
+int main(int argc, char** argv) {
+	item it = { .name = "item" };
+	int k, v, rc = 0;
+
+	for(k = 1; k < argc; k++) {
+		if(!strcmp(argv[k], "--help")) {
+			usage(stdout);
+			return 0;
+		}
+
+		if(!strcmp(argv[k], "-n")) {
+			if(++k == argc) {
+				fprintf(stderr, "style: '-n' needs a name\n");
+				usage(stderr);
+				return 2;
+			}
+
+			it.name = argv[k];
+			continue;
+		}
+
+		if(argv[k][0] == '-') {
+			fprintf(stderr, "style: unknown option '%s'\n", argv[k]);
+			usage(stderr);
+			return 2;
+		}
+
+		break;
+	}
+
+	if(k == argc) {
+		usage(stderr);
+		return 2;
+	}
+
+	for(; k < argc; k++) {
+		if(!parse_int(argv[k], &v)) {
+			fprintf(stderr, "style: '%s' is not an integer between %d and %d\n", argv[k], VAL_MIN, VAL_MAX);
+			rc = 2;
+			goto out;
+		}
+
+		if(item_find(&it, v)) {
+			continue;
+		}
+
+		item_push(&it, v);
+	}
+
+	item_run(&it);
+
+out:
+	free(it.vals);
+
+	return rc;
+}
+#+end_src

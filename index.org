@@ -3,6 +3,7 @@
 * blog
 - [[file:blogs/2026-11-04-tips-for-linux-beginners.org][tips for linux beginners]] [2026-11-04 Wed]
 - [[file:blogs/2026-11-03-distro-guide.org][distro guide]] [2026-11-03 Tue] 
+- [[file:blogs/c-style.org][c style]]
   
 ** more blogs?
 maybe coming soon..... in the meantime cross your
