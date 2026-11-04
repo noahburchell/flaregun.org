@@ -11,15 +11,16 @@ install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
 using a package manager (see [[*package management][package management]]), through a gui
 app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]). most issues on linux
-do not need a reboot, and most updates dont need one either*. (unless
-the kernel, systemd (or whatever init youre using), graphics drivers
-(especially nvidia), or glibc has been updated.) or unless you genuinely
-dont know where to start fixing an issue. otherwise you can just leave
-it running
+or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]).
 
-/*on an atomic distro like bazzite, every update needs/
-/a reboot, becasue theyre done as images/
+most issues on linux do not need a reboot, and most updates
+dont need one either[fn:atomic]. unless the kernel, systemd (or whatever
+init youre using), graphics drivers (especially nvidia), or glibc has been updated.
+a reboot could also help if you genuinely dont know where to start fixing an issue.
+otherwise you can just leave it running
+
+[fn:atomic] on an atomic distro like bazzite, every update needs
+a reboot, becasue theyre done as images
 
 * the terminal isnt scary
 /...if you learn which commands are/
@@ -66,11 +67,20 @@ now, there are certain commands to pay *extra* attention to
 
 =sudo / doas, rm, dd, curl | *=
 
-=sudo / doas=: any commands run with either of these prefixes can
-do... anything.
+=sudo / doas=: commands that start with either of these run as *root*.
+that means, it has total privileges, it can do *anything*. never run a
+gui app as root, and if a command doesnt work, running it with sudo often
+will not help unless the command genuinely needs root. if you happen to run
+something like =sudo mkdir ./foo=, you will later run into issues where
+you cannot remove this directory or make files in it. that is because
+the directory is owned by root and not your user. this can be resolved
+with =sudo chown -R $USER:$USER ./foo=
 
 =rm=: this command doesnt send something to the trash, it permanently
-deletes it and there is no undo
+deletes it and there is no undo. the most common failiure is most
+often not =rm -rf /= or something like that, but =rm -rf $DIR/*=.
+=$DIR= should expand to =/home/user/some/trash=, but if it has been
+unset, it will expand to "" and the command =rm -rf /*= will run
 
 =dd=: this command writes data somewhere, youll often see:
 
@@ -80,17 +90,22 @@ dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync
 
 this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
-if the location you typed (for example =/dev/sda=) is your boot drive[1]
+luckily there is a small habit that makes it very safe, always run =lsblk=
+before running =dd=. =lsblk= will show you all of the drives connected
+to your computer, making it easy to determine the correct one. 
+
+but just so you know,
+if the location you typed (for example =/dev/sda=) is your boot drive[fn:nvme]
 or a drive with your stuff on it, depending on the size of the disk image,
 youll overwrite:
 
 1. the protective mbr
-2. the primary gpt header and partition table [2]
+2. the primary gpt header and partition table[fn:gpt]
 3. the entire efi system partition
 4. the beginning of the next partition, and its superblock
 5. if the input never ends (=if=/dev/zero=), then literally everything
 
-*always double check its correct with* =lsblk=
+*so always double check its correct with* =lsblk=
 
 =curl https://example.com/example.sh | bash= or the more evil version
 =curl https://example.com/example.sh | sudo bash=: these commands download
@@ -106,7 +121,7 @@ and executing it like so: =./example.sh=
 
 i dont want to go too much into teaching shell, but this one difference
 is worth a note. these are redirection operators, as an example:
-=echo "gentoo" > gentoo.txt= will do this[3]:
+=echo "gentoo" > gentoo.txt= will do this[fn:cat]:
 
 #+begin_src sh :eval no
 noah@lychee ~ % echo "gentoo" > gentoo.txt
@@ -144,35 +159,35 @@ gentoo
 noah@lychee ~ % 
 #+end_src
 
-notice the difference here, =>= will truncate the file[4] and *replace* it with what its given.
+notice the difference here, =>= will truncate the file[fn:truncate] and *replace* it with what its given.
 =>>= on the other hand will append to the file, *not* overwriting the content. (if there is
 no file, then they act the same for all intents and purposes)
 
 i have lost 12h of log data from this very difference >:(
 
-[1]: /on a modern device with an nvme drive, =/dev/nvme0n1= is probably your boot drive/
+[fn:nvme] on a modern device with an nvme drive, =/dev/nvme0n1= is probably your boot drive
 
-[2]: /gpt keeps a backup header at the end of the disk, so the partition table can sometimes be recovered/
+[fn:gpt] gpt keeps a backup header at the end of the disk, so the partition table can sometimes be recovered
 
-[3]: /the command =cat= (short for catenate) is a very common command for/
-/writing the content of a file or input stream to standard output. echo/
-/writes its arguments to standard output/
+[fn:cat] the command =cat= (short for (con)catenate) is a very common command for
+writing the content of a file or input stream to standard output. echo
+writes its arguments to standard output
 
-[4]: /truncation happens prior to the command executing, so =sort foo.txt > foo.txt= will/
-/leave you with an empty file. in this case =sort -o foo.txt foo.txt= is correct/
+[fn:truncate] truncation happens prior to the command executing, so =sort foo.txt > foo.txt= will
+leave you with an empty file. in this case =sort -o foo.txt foo.txt= is correct
 
 * you learnt windows, you can learn linux
 i think its called the curse of knowledge, where you forget what it was like
 to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
-learnt what a sketchy vs safe download looked like[1]. so you should expect
+learnt what a sketchy vs safe download looked like[fn:curlbash]. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
 [[*package management][package management]]) for apps, learn how your desktop works, and, dont be
-discouraged if you fuck something up[2]. youre learning!
+discouraged if you fuck something up[fn:backups]. youre learning!
 
-[1]: /kinda like the =curl | bash= i mentioned earlier/
+[fn:curlbash] kinda like the =curl | bash= i mentioned earlier
 
-[2]: /keeping backups is recommended, see [[*backups][backups]] for more info/
+[fn:backups] keeping backups is recommended, see [[*backups][backups]] for more info
 
 * package management
 the most common way to install software on linux is through the package
@@ -187,10 +202,11 @@ managers mentioned:
 - installing a package: =apt install whatever=
 - removing a package: =apt remove whatever= (or =apt purge whatever= to also delete config files)
 - syncing repos: =apt update=
-- updating everything: =apt upgrade= *
+- updating everything: =apt upgrade=[fn:aptfull]
 - searching for a package: =apt search whatever=
 
-/* =apt upgrade= wont remove packages, you may need =apt full-upgrade= occasionally/
+[fn:aptfull] =apt upgrade= wont remove packages, you may need =apt full-upgrade= occasionally
+
 
 *dnf*:
 
@@ -204,10 +220,11 @@ managers mentioned:
 
 - installing a package: =pacman -S whatever=
 - removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
-- syncing repos + updating everything: =pacman -Syu= *
+- syncing repos + updating everything: =pacman -Syu=[fn:partial]
 - searching for a package: =pacman -Ss whatever=
 
-/*never use =pacman -Sy whataver=, partial upgrades are unsuported/
+[fn:partial] never use =pacman -Sy whataver=, partial upgrades are unsuported
+
 
 *zypper*:
 
@@ -251,7 +268,7 @@ just listen to your package manager! it sounds simple, of course, but
 many people tend to just hit yes on autopilot. this is normal, but you should
 avoid this behavior as the output of your package manager is *not* useless
 monospace text, its telling you *exactly* what it is going to do! now, you
-might mention that you wouldnt know removing, say, glibc[1] was any different
+might mention that you wouldnt know removing, say, glibc[fn:glibc] was any different
 to removing libcaca, thats reasonable. so the best advice i can give you is
 to research anything youre unsure about. scan the package managers output for
 keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
@@ -275,15 +292,15 @@ a third party package:
 - can be outdated or unmaintained (security worry)
 - can, in very rare cases, just be malicious (google: "aur incident")
 
-so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][2] for the package first.
+so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][fn:flatpak] for the package first.
 
 *tip*: remove third-party repos you dont use anymore
 
-[1]: /glibc is gnus c standard library implementation, if it were removed (assuming/
-/your distro doesnt use musl) nothing will run correctly and you will need to/
-/rescue your os from a live usb. so dont remove it unless you want a challenge/
+[fn:glibc] glibc is gnus c standard library implementation, if it were removed (assuming
+your distro doesnt use musl) nothing will run correctly and you will need to
+rescue your os from a live usb. so dont remove it unless you want a challenge
 
-[2]: /flatpak is also third-party, it just wont conflict with system packages/
+[fn:flatpak] flatpak is also third-party, it just wont conflict with system packages
 
 * flatpak and appimage
 working on it........

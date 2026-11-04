@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 19:25 -->
+<!-- 2026-11-04 Wed 20:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,19 +206,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org52e779a">1. linux isnt windows</a></li>
-<li><a href="#orgaf8adbc">2. the terminal isnt scary</a></li>
-<li><a href="#orgd1bb14f">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#org8eab751">4. package management</a></li>
-<li><a href="#org7cf487e">5. flatpak and appimage</a></li>
-<li><a href="#org3886e10">6. backups</a></li>
-<li><a href="#org82359ba">7. where to find help</a>
+<li><a href="#orgb1b748d">1. linux isnt windows</a></li>
+<li><a href="#org22d9302">2. the terminal isnt scary</a></li>
+<li><a href="#orgc7a8205">3. you learnt windows, you can learn linux</a></li>
+<li><a href="#org05ebf01">4. package management</a></li>
+<li><a href="#org7c2e6ac">5. flatpak and appimage</a></li>
+<li><a href="#org2ee3e15">6. backups</a></li>
+<li><a href="#org86f1320">7. where to find help</a>
 <ul>
-<li><a href="#org98ed831">7.1. for general advice</a></li>
-<li><a href="#org4b929de">7.2. for specific commands</a></li>
+<li><a href="#org8f93e9c">7.1. for general advice</a></li>
+<li><a href="#orgcbddf83">7.2. for specific commands</a></li>
 </ul>
 </li>
-<li><a href="#org02ff70d">8. ill keep adding to this</a></li>
+<li><a href="#org8cc17d3">8. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -226,25 +226,29 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-org52e779a" class="outline-2">
-<h2 id="org52e779a"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-orgb1b748d" class="outline-2">
+<h2 id="orgb1b748d"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager (see <a href="#org8eab751">package management</a>), through a gui
+using a package manager (see <a href="#org05ebf01">package management</a>), through a gui
 app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see <a href="#org7cf487e">flatpak and appimage</a>). most issues on linux
-do not need a reboot, and most updates dont need one either. (unless
-the kernel, systemd (or whatever init youre using), or glibc has been
-updated.) or unless you genuinely dont know where to start fixing an
-issue. otherwise you can just leave it running
+or with an appimage (see <a href="#org7c2e6ac">flatpak and appimage</a>).
+</p>
+
+<p>
+most issues on linux do not need a reboot, and most updates
+dont need one either<sup><a id="fnr.atomic" class="footref" href="#fn.atomic" role="doc-backlink">1</a></sup>. unless the kernel, systemd (or whatever
+init youre using), graphics drivers (especially nvidia), or glibc has been updated.
+a reboot could also help if you genuinely dont know where to start fixing an issue.
+otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-orgaf8adbc" class="outline-2">
-<h2 id="orgaf8adbc"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-org22d9302" class="outline-2">
+<h2 id="org22d9302"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>&hellip;if you learn which commands are</i>
@@ -297,7 +301,7 @@ you could look up "find command iname option" or something
 
 <p>
 bonus bonus tip: <a href="https://explainshell.com">explainshell.com</a> and <code>tldr</code> are great resources
-that i explain more thoroughly in <a href="#org82359ba">where to find help</a>, i very
+that i explain more thoroughly in <a href="#org86f1320">where to find help</a>, i very
 much recommend reading that section
 </p>
 
@@ -310,13 +314,22 @@ now, there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
-<code>sudo / doas</code>: any commands run with either of these prefixes can
-do&hellip; anything.
+<code>sudo / doas</code>: commands that start with either of these run as <b>root</b>.
+that means, it has total privileges, it can do <b>anything</b>. never run a
+gui app as root, and if a command doesnt work, running it with sudo often
+will not help unless the command genuinely needs root. if you happen to run
+something like <code>sudo mkdir ./foo</code>, you will later run into issues where
+you cannot remove this directory or make files in it. that is because
+the directory is owned by root and not your user. this can be resolved
+with <code>sudo chown -R $USER:$USER ./foo</code>
 </p>
 
 <p>
 <code>rm</code>: this command doesnt send something to the trash, it permanently
-deletes it and there is no undo
+deletes it and there is no undo. the most common failiure is most
+often not <code>rm -rf /</code> or something like that, but <code>rm -rf $DIR/*</code>.
+<code>$DIR</code> should expand to <code>/home/user/some/trash</code>, but if it has been
+unset, it will expand to "" and the command <code>rm -rf /*</code> will run
 </p>
 
 <p>
@@ -331,21 +344,28 @@ deletes it and there is no undo
 <p>
 this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if <code>of=/dev/sdX</code> is the wrong location.
-if the location you typed (for example <code>/dev/sda</code>) is your boot drive[1]
+luckily there is a small habit that makes it very safe, always run <code>lsblk</code>
+before running <code>dd</code>. <code>lsblk</code> will show you all of the drives connected
+to your computer, making it easy to determine the correct one. 
+</p>
+
+<p>
+but just so you know,
+if the location you typed (for example <code>/dev/sda</code>) is your boot drive<sup><a id="fnr.nvme" class="footref" href="#fn.nvme" role="doc-backlink">2</a></sup>
 or a drive with your stuff on it, depending on the size of the disk image,
 youll overwrite:
 </p>
 
 <ol class="org-ol">
 <li>the protective mbr</li>
-<li>the primary gpt header and partition table [2]</li>
+<li>the primary gpt header and partition table<sup><a id="fnr.gpt" class="footref" href="#fn.gpt" role="doc-backlink">3</a></sup></li>
 <li>the entire efi system partition</li>
 <li>the beginning of the next partition, and its superblock</li>
 <li>if the input never ends (<code>if=/dev/zero</code>), then literally everything</li>
 </ol>
 
 <p>
-<b>always double check its correct with</b> <code>lsblk</code>
+<b>so always double check its correct with</b> <code>lsblk</code>
 </p>
 
 <p>
@@ -367,7 +387,7 @@ and executing it like so: <code>./example.sh</code>
 <p>
 i dont want to go too much into teaching shell, but this one difference
 is worth a note. these are redirection operators, as an example:
-<code>echo "gentoo" &gt; gentoo.txt</code> will do this[3]:
+<code>echo "gentoo" &gt; gentoo.txt</code> will do this<sup><a id="fnr.cat" class="footref" href="#fn.cat" role="doc-backlink">4</a></sup>:
 </p>
 
 <div class="org-src-container">
@@ -414,7 +434,7 @@ noah@lychee ~ %
 </div>
 
 <p>
-notice the difference here, <code>&gt;</code> will truncate the file[4] and <b>replace</b> it with what its given.
+notice the difference here, <code>&gt;</code> will truncate the file<sup><a id="fnr.truncate" class="footref" href="#fn.truncate" role="doc-backlink">5</a></sup> and <b>replace</b> it with what its given.
 <code>&gt;&gt;</code> on the other hand will append to the file, <b>not</b> overwriting the content. (if there is
 no file, then they act the same for all intents and purposes)
 </p>
@@ -422,57 +442,30 @@ no file, then they act the same for all intents and purposes)
 <p>
 i have lost 12h of log data from this very difference &gt;:(
 </p>
-
-<p>
-[1]: <i>on a modern device with an nvme drive, <code>/dev/nvme0n1</code> is probably your boot drive</i>
-</p>
-
-<p>
-[2]: <i>gpt keeps a backup header at the end of the disk, so the partition table can sometimes be recovered</i>
-</p>
-
-<p>
-[3]: <i>the command <code>cat</code> (short for catenate) is a very common command for</i>
-<i>writing the content of a file or input stream to standard output. echo</i>
-writes input text to standard output/
-</p>
-
-<p>
-[4]: <i>truncation happens prior to the command executing, so <code>sort foo.txt &gt; foo.txt</code> will</i>
-<i>leave you with an empty file</i>
-</p>
 </div>
 </div>
-<div id="outline-container-orgd1bb14f" class="outline-2">
-<h2 id="orgd1bb14f"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-orgc7a8205" class="outline-2">
+<h2 id="orgc7a8205"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
 to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
-learnt what a sketchy vs safe download looked like[1]. so you should expect
+learnt what a sketchy vs safe download looked like<sup><a id="fnr.curlbash" class="footref" href="#fn.curlbash" role="doc-backlink">6</a></sup>. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
-<a href="#org8eab751">package management</a>) for apps, learn how your desktop works, and, dont be
-discouraged if you fuck something up[2]. youre learning!
-</p>
-
-<p>
-[1]: <i>kinda like the <code>curl | bash</code> i mentioned earlier</i>
-</p>
-
-<p>
-[2]: <i>keeping backups is recommended, see <a href="#org3886e10">backups</a> for more info</i>
+<a href="#org05ebf01">package management</a>) for apps, learn how your desktop works, and, dont be
+discouraged if you fuck something up<sup><a id="fnr.backups" class="footref" href="#fn.backups" role="doc-backlink">7</a></sup>. youre learning!
 </p>
 </div>
 </div>
-<div id="outline-container-org8eab751" class="outline-2">
-<h2 id="org8eab751"><span class="section-number-2">4.</span> package management</h2>
+<div id="outline-container-org05ebf01" class="outline-2">
+<h2 id="org05ebf01"><span class="section-number-2">4.</span> package management</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
 portage. (note: for alternatives such as flatpak and appimage, see
-<a href="#org7cf487e">flatpak and appimage</a>). to communicate with these package managers,
+<a href="#org7c2e6ac">flatpak and appimage</a>). to communicate with these package managers,
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 </p>
@@ -485,13 +478,9 @@ managers mentioned:
 <li>installing a package: <code>apt install whatever</code></li>
 <li>removing a package: <code>apt remove whatever</code> (or <code>apt purge whatever</code> to also delete config files)</li>
 <li>syncing repos: <code>apt update</code></li>
-<li>updating everything: <code>apt upgrade</code> *</li>
+<li>updating everything: <code>apt upgrade</code><sup><a id="fnr.aptfull" class="footref" href="#fn.aptfull" role="doc-backlink">8</a></sup></li>
 <li>searching for a package: <code>apt search whatever</code></li>
 </ul>
-
-<p>
-<i>* <code>apt upgrade</code> wont install new dependencies, you may need <code>apt full-upgrade</code> occasionally</i>
-</p>
 
 <p>
 <b>dnf</b>:
@@ -512,13 +501,9 @@ managers mentioned:
 <ul class="org-ul">
 <li>installing a package: <code>pacman -S whatever</code></li>
 <li>removing a package: <code>pacman -R whatever</code> (or <code>pacman -Rns whatever</code> to also remove unneeded dependencies and config files)</li>
-<li>syncing repos + updating everything: <code>pacman -Syu</code> *</li>
+<li>syncing repos + updating everything: <code>pacman -Syu</code><sup><a id="fnr.partial" class="footref" href="#fn.partial" role="doc-backlink">9</a></sup></li>
 <li>searching for a package: <code>pacman -Ss whatever</code></li>
 </ul>
-
-<p>
-<i>*never use <code>pacman -Sy whataver</code>, partial upgrades are unsuported</i>
-</p>
 
 <p>
 <b>zypper</b>:
@@ -539,7 +524,7 @@ managers mentioned:
 <ul class="org-ul">
 <li>installing a package: <code>emerge -a whatever</code></li>
 <li>removing a package: <code>emerge -a --deselect whatever</code> then <code>emerge --depclean</code></li>
-<li>syncing repos: <code>emerge -a --sync</code></li>
+<li>syncing repos: <code>emerge --sync</code></li>
 <li>updating everything: <code>emerge -auDN @world</code></li>
 <li>searching for a package: <code>emerge --search whatever</code></li>
 </ul>
@@ -579,7 +564,7 @@ just listen to your package manager! it sounds simple, of course, but
 many people tend to just hit yes on autopilot. this is normal, but you should
 avoid this behavior as the output of your package manager is <b>not</b> useless
 monospace text, its telling you <b>exactly</b> what it is going to do! now, you
-might mention that you wouldnt know removing, say, glibc[1] was any different
+might mention that you wouldnt know removing, say, glibc<sup><a id="fnr.glibc" class="footref" href="#fn.glibc" role="doc-backlink">10</a></sup> was any different
 to removing libcaca, thats reasonable. so the best advice i can give you is
 to research anything youre unsure about. scan the package managers output for
 keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
@@ -613,50 +598,40 @@ a third party package:
 </ul>
 
 <p>
-so, make sure you check the official repos or <a href="#org7cf487e">flatpak</a>[2] for the package first.
+so, make sure you check the official repos or <a href="#org7c2e6ac">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">11</a></sup> for the package first.
 </p>
 
 <p>
 <b>tip</b>: remove third-party repos you dont use anymore
 </p>
-
-<p>
-[1]: <i>glibc is gnus c standard library implementation, if it were removed (assuming</i>
-<i>your distro doesnt use musl) nothing will run correctly and you will need to</i>
-<i>rescue your os from a live usb. so dont remove it unless you want a challenge</i>
-</p>
-
-<p>
-[2]: <i>flatpak is also third-party, it just wont conflict with system packages</i>
-</p>
 </div>
 </div>
-<div id="outline-container-org7cf487e" class="outline-2">
-<h2 id="org7cf487e"><span class="section-number-2">5.</span> flatpak and appimage</h2>
+<div id="outline-container-org7c2e6ac" class="outline-2">
+<h2 id="org7c2e6ac"><span class="section-number-2">5.</span> flatpak and appimage</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-org3886e10" class="outline-2">
-<h2 id="org3886e10"><span class="section-number-2">6.</span> backups</h2>
+<div id="outline-container-org2ee3e15" class="outline-2">
+<h2 id="org2ee3e15"><span class="section-number-2">6.</span> backups</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-org82359ba" class="outline-2">
-<h2 id="org82359ba"><span class="section-number-2">7.</span> where to find help</h2>
+<div id="outline-container-org86f1320" class="outline-2">
+<h2 id="org86f1320"><span class="section-number-2">7.</span> where to find help</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 there are many great resources for finding help with anything you need
 to know about linux
 </p>
 </div>
-<div id="outline-container-org98ed831" class="outline-3">
-<h3 id="org98ed831"><span class="section-number-3">7.1.</span> for general advice</h3>
+<div id="outline-container-org8f93e9c" class="outline-3">
+<h3 id="org8f93e9c"><span class="section-number-3">7.1.</span> for general advice</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 often the best way to get help with your distro is to find your distros
@@ -685,8 +660,8 @@ id advise beginners to be cautious
 </p>
 </div>
 </div>
-<div id="outline-container-org4b929de" class="outline-3">
-<h3 id="org4b929de"><span class="section-number-3">7.2.</span> for specific commands</h3>
+<div id="outline-container-orgcbddf83" class="outline-3">
+<h3 id="orgcbddf83"><span class="section-number-3">7.2.</span> for specific commands</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 <code>tldr</code>
@@ -723,18 +698,74 @@ sometimes lags behind and may not know about a very new flag
 </div>
 </div>
 </div>
-<div id="outline-container-org02ff70d" class="outline-2">
-<h2 id="org02ff70d"><span class="section-number-2">8.</span> ill keep adding to this</h2>
+<div id="outline-container-org8cc17d3" class="outline-2">
+<h2 id="org8cc17d3"><span class="section-number-2">8.</span> ill keep adding to this</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </p>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.atomic" class="footnum" href="#fnr.atomic" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+on an atomic distro like bazzite, every update needs
+a reboot, becasue theyre done as images
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.nvme" class="footnum" href="#fnr.nvme" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+on a modern device with an nvme drive, <code>/dev/nvme0n1</code> is probably your boot drive
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.gpt" class="footnum" href="#fnr.gpt" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+gpt keeps a backup header at the end of the disk, so the partition table can sometimes be recovered
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.cat" class="footnum" href="#fnr.cat" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+the command <code>cat</code> (short for (con)catenate) is a very common command for
+writing the content of a file or input stream to standard output. echo
+writes its arguments to standard output
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.truncate" class="footnum" href="#fnr.truncate" role="doc-backlink">5</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+truncation happens prior to the command executing, so <code>sort foo.txt &gt; foo.txt</code> will
+leave you with an empty file. in this case <code>sort -o foo.txt foo.txt</code> is correct
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.curlbash" class="footnum" href="#fnr.curlbash" role="doc-backlink">6</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+kinda like the <code>curl | bash</code> i mentioned earlier
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.backups" class="footnum" href="#fnr.backups" role="doc-backlink">7</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+keeping backups is recommended, see <a href="#org2ee3e15">backups</a> for more info
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.aptfull" class="footnum" href="#fnr.aptfull" role="doc-backlink">8</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<code>apt upgrade</code> wont remove packages, you may need <code>apt full-upgrade</code> occasionally
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.partial" class="footnum" href="#fnr.partial" role="doc-backlink">9</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+never use <code>pacman -Sy whataver</code>, partial upgrades are unsuported
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.glibc" class="footnum" href="#fnr.glibc" role="doc-backlink">10</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+glibc is gnus c standard library implementation, if it were removed (assuming
+your distro doesnt use musl) nothing will run correctly and you will need to
+rescue your os from a live usb. so dont remove it unless you want a challenge
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.flatpak" class="footnum" href="#fnr.flatpak" role="doc-backlink">11</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+flatpak is also third-party, it just wont conflict with system packages
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 19:25</p>
+<p class="date">Created: 2026-11-04 Wed 20:08</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
