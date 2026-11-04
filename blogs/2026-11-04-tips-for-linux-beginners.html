@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 16:51 -->
+<!-- 2026-11-04 Wed 16:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,14 +206,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org520527c">1. linux isnt windows</a></li>
-<li><a href="#org438df40">2. the terminal isnt scary</a></li>
-<li><a href="#org4affbb8">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#orgf0456ff">4. package management</a></li>
-<li><a href="#org2800dcf">5. flatpak and appimage</a></li>
-<li><a href="#org99e7a8c">6. backups</a></li>
-<li><a href="#orgf58373d">7. where to find help</a></li>
-<li><a href="#orgfa11014">8. ill keep adding to this</a></li>
+<li><a href="#org0acb339">1. linux isnt windows</a></li>
+<li><a href="#org0d214c9">2. the terminal isnt scary</a></li>
+<li><a href="#orgfb6fb52">3. you learnt windows, you can learn linux</a></li>
+<li><a href="#orgba19e5c">4. package management</a></li>
+<li><a href="#org238e54d">5. flatpak and appimage</a></li>
+<li><a href="#org2d16a53">6. backups</a></li>
+<li><a href="#orgf63e30c">7. where to find help</a></li>
+<li><a href="#org05e7344">8. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -221,16 +221,16 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-org520527c" class="outline-2">
-<h2 id="org520527c"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-org0acb339" class="outline-2">
+<h2 id="org0acb339"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager (see <a href="#orgf0456ff">package management</a>), through a gui
+using a package manager (see <a href="#orgba19e5c">package management</a>), through a gui
 app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see <a href="#org2800dcf">flatpak and appimage</a>). most issues on linux
+or with an appimage (see <a href="#org238e54d">flatpak and appimage</a>). most issues on linux
 do not need a reboot, and most updates dont need one either. (unless
 the kernel, systemd (or whatever init youre using), or glibc has been
 updated.) or unless you genuinely dont know where to start fixing an
@@ -238,8 +238,8 @@ issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org438df40" class="outline-2">
-<h2 id="org438df40"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-org0d214c9" class="outline-2">
+<h2 id="org0d214c9"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>&hellip;if you learn which commands are</i>
@@ -345,8 +345,8 @@ and executing it like so: <code>./example.sh</code>
 </p>
 </div>
 </div>
-<div id="outline-container-org4affbb8" class="outline-2">
-<h2 id="org4affbb8"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-orgfb6fb52" class="outline-2">
+<h2 id="orgfb6fb52"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
@@ -354,7 +354,7 @@ to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
-<a href="#orgf0456ff">package management</a>) for apps, learn how your desktop works, and, dont be
+<a href="#orgba19e5c">package management</a>) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up*. youre learning!
 </p>
 
@@ -363,18 +363,18 @@ discouraged if you fuck something up*. youre learning!
 </p>
 
 <p>
-<i>*keeping backups is recommended, see <a href="#org99e7a8c">backups</a> for more info</i>
+<i>*keeping backups is recommended, see <a href="#org2d16a53">backups</a> for more info</i>
 </p>
 </div>
 </div>
-<div id="outline-container-orgf0456ff" class="outline-2">
-<h2 id="orgf0456ff"><span class="section-number-2">4.</span> package management</h2>
+<div id="outline-container-orgba19e5c" class="outline-2">
+<h2 id="orgba19e5c"><span class="section-number-2">4.</span> package management</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
 portage. (note: for alternatives such as flatpak and appimage, see
-<a href="#org2800dcf">flatpak and appimage</a>). to communicate with these package managers,
+<a href="#org238e54d">flatpak and appimage</a>). to communicate with these package managers,
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 </p>
@@ -383,60 +383,60 @@ managers mentioned:
 <b>apt</b>:
 </p>
 
-<p>
-installing a package: <code>apt-get install whatever</code>
-removing a package: <code>apt-get remove whatever</code> (or <code>apt-get purge whatever</code> to also delete config files)
-syncing repos: <code>apt-get update</code>
-updating everything: <code>apt-get upgrade</code>
-searching for a package: <code>apt-cache search whatever</code>
-</p>
+<ul class="org-ul">
+<li>installing a package: <code>apt-get install whatever</code></li>
+<li>removing a package: <code>apt-get remove whatever</code> (or <code>apt-get purge whatever</code> to also delete config files)</li>
+<li>syncing repos: <code>apt-get update</code></li>
+<li>updating everything: <code>apt-get upgrade</code></li>
+<li>searching for a package: <code>apt-cache search whatever</code></li>
+</ul>
 
 <p>
 <b>dnf</b>:
 </p>
 
-<p>
-installing a package: <code>dnf install whatever</code>
-removing a package: <code>dnf remove whatever</code>
-syncing repos: <code>dnf makecache</code> (dnf usually does this automatically)
-updating everything: <code>dnf upgrade</code>
-searching for a package: <code>dnf search whatever</code>
-</p>
+<ul class="org-ul">
+<li>installing a package: <code>dnf install whatever</code></li>
+<li>removing a package: <code>dnf remove whatever</code></li>
+<li>syncing repos: <code>dnf makecache</code> (dnf usually does this automatically)</li>
+<li>updating everything: <code>dnf upgrade</code></li>
+<li>searching for a package: <code>dnf search whatever</code></li>
+</ul>
 
 <p>
 <b>pacman</b>:
 </p>
 
-<p>
-installing a package: <code>pacman -S whatever</code>
-removing a package: <code>pacman -R whatever</code> (or <code>pacman -Rns whatever</code> to also remove unneeded dependencies and config files)
-syncing repos + updating everything: <code>pacman -Syu</code>
-searching for a package: <code>pacman -Ss whatever</code>
-</p>
+<ul class="org-ul">
+<li>installing a package: <code>pacman -S whatever</code></li>
+<li>removing a package: <code>pacman -R whatever</code> (or <code>pacman -Rns whatever</code> to also remove unneeded dependencies and config files)</li>
+<li>syncing repos + updating everything: <code>pacman -Syu</code></li>
+<li>searching for a package: <code>pacman -Ss whatever</code></li>
+</ul>
 
 <p>
 <b>zypper</b>:
 </p>
 
-<p>
-installing a package: <code>zypper install whatever</code>
-removing a package: <code>zypper remove whatever</code>
-syncing repos: <code>zypper refresh</code>
-updating everything: <code>zypper update</code> (on tumbleweed use <code>zypper dup</code> instead)
-searching for a package: <code>zypper search whatever</code>
-</p>
+<ul class="org-ul">
+<li>installing a package: <code>zypper install whatever</code></li>
+<li>removing a package: <code>zypper remove whatever</code></li>
+<li>syncing repos: <code>zypper refresh</code></li>
+<li>updating everything: <code>zypper update</code> (on tumbleweed use <code>zypper dup</code> instead)</li>
+<li>searching for a package: <code>zypper search whatever</code></li>
+</ul>
 
 <p>
 <b>portage</b>:
 </p>
 
-<p>
-installing a package: <code>emerge whatever</code>
-removing a package: <code>emerge --deselect whatever</code> then <code>emerge --depclean</code>
-syncing repos: <code>emerge --sync</code>
-updating everything: <code>emerge -uDN @world</code>
-searching for a package: <code>emerge --search whatever</code>
-</p>
+<ul class="org-ul">
+<li>installing a package: <code>emerge whatever</code></li>
+<li>removing a package: <code>emerge --deselect whatever</code> then <code>emerge --depclean</code></li>
+<li>syncing repos: <code>emerge --sync</code></li>
+<li>updating everything: <code>emerge -uDN @world</code></li>
+<li>searching for a package: <code>emerge --search whatever</code></li>
+</ul>
 
 <p>
 installing or updating packages and syncing most often requires root privileges,
@@ -492,32 +492,32 @@ rescue your os from a live usb. so dont remove it unless you want a challenge
 </p>
 </div>
 </div>
-<div id="outline-container-org2800dcf" class="outline-2">
-<h2 id="org2800dcf"><span class="section-number-2">5.</span> flatpak and appimage</h2>
+<div id="outline-container-org238e54d" class="outline-2">
+<h2 id="org238e54d"><span class="section-number-2">5.</span> flatpak and appimage</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-org99e7a8c" class="outline-2">
-<h2 id="org99e7a8c"><span class="section-number-2">6.</span> backups</h2>
+<div id="outline-container-org2d16a53" class="outline-2">
+<h2 id="org2d16a53"><span class="section-number-2">6.</span> backups</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-orgf58373d" class="outline-2">
-<h2 id="orgf58373d"><span class="section-number-2">7.</span> where to find help</h2>
+<div id="outline-container-orgf63e30c" class="outline-2">
+<h2 id="orgf63e30c"><span class="section-number-2">7.</span> where to find help</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 still working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-orgfa11014" class="outline-2">
-<h2 id="orgfa11014"><span class="section-number-2">8.</span> ill keep adding to this</h2>
+<div id="outline-container-org05e7344" class="outline-2">
+<h2 id="org05e7344"><span class="section-number-2">8.</span> ill keep adding to this</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
@@ -527,7 +527,7 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 16:51</p>
+<p class="date">Created: 2026-11-04 Wed 16:59</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

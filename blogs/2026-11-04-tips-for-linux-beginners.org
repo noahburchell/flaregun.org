@@ -112,42 +112,42 @@ managers mentioned:
 
 *apt*:
 
-installing a package: =apt-get install whatever=
-removing a package: =apt-get remove whatever= (or =apt-get purge whatever= to also delete config files)
-syncing repos: =apt-get update=
-updating everything: =apt-get upgrade=
-searching for a package: =apt-cache search whatever=
+- installing a package: =apt-get install whatever=
+- removing a package: =apt-get remove whatever= (or =apt-get purge whatever= to also delete config files)
+- syncing repos: =apt-get update=
+- updating everything: =apt-get upgrade=
+- searching for a package: =apt-cache search whatever=
 
 *dnf*:
 
-installing a package: =dnf install whatever=
-removing a package: =dnf remove whatever=
-syncing repos: =dnf makecache= (dnf usually does this automatically)
-updating everything: =dnf upgrade=
-searching for a package: =dnf search whatever=
+- installing a package: =dnf install whatever=
+- removing a package: =dnf remove whatever=
+- syncing repos: =dnf makecache= (dnf usually does this automatically)
+- updating everything: =dnf upgrade=
+- searching for a package: =dnf search whatever=
 
 *pacman*:
 
-installing a package: =pacman -S whatever=
-removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
-syncing repos + updating everything: =pacman -Syu=
-searching for a package: =pacman -Ss whatever=
+- installing a package: =pacman -S whatever=
+- removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
+- syncing repos + updating everything: =pacman -Syu=
+- searching for a package: =pacman -Ss whatever=
 
 *zypper*:
 
-installing a package: =zypper install whatever=
-removing a package: =zypper remove whatever=
-syncing repos: =zypper refresh=
-updating everything: =zypper update= (on tumbleweed use =zypper dup= instead)
-searching for a package: =zypper search whatever=
+- installing a package: =zypper install whatever=
+- removing a package: =zypper remove whatever=
+- syncing repos: =zypper refresh=
+- updating everything: =zypper update= (on tumbleweed use =zypper dup= instead)
+- searching for a package: =zypper search whatever=
 
 *portage*:
 
-installing a package: =emerge whatever=
-removing a package: =emerge --deselect whatever= then =emerge --depclean=
-syncing repos: =emerge --sync=
-updating everything: =emerge -uDN @world=
-searching for a package: =emerge --search whatever=
+- installing a package: =emerge whatever=
+- removing a package: =emerge --deselect whatever= then =emerge --depclean=
+- syncing repos: =emerge --sync=
+- updating everything: =emerge -uDN @world=
+- searching for a package: =emerge --search whatever=
 
 installing or updating packages and syncing most often requires root privileges,
 so make sure to run those commands with =sudo= or =doas=
