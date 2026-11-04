@@ -149,7 +149,7 @@ either cloning the source tree and going through the usual steps of
 comiling it or getting it through your distros package manager. (fedora
 has it in copr))
 
-fedora comes with a default selinux r^x policy that may reduce performance
+fedora comes with a default selinux ~r^x~ policy that may reduce performance
 of certain .net games (based on my experience with terraria, though this
 is anecdotal), so keep that in mind. (note: dont blindly change selinux
 policies, only look into it if you get a specific violation, and make sure
