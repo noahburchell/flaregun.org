@@ -78,7 +78,7 @@ the disadvantages are:
 point release distros have version numbers (debian 13).
 things mostly stay the same between releases. this is
 like your phones os, in contrast to the apps on it. some
-examples of distros like this are: fedora, ubuntu, debian,
+examples of distros like this are: fedora*, ubuntu, debian,
 and mint. the advantages:
 - less breakage
 - less frequent updates (note: there are still regular bug-fix updates, but no new versions)
@@ -87,6 +87,10 @@ the disadvantages:
 - older packages
 
 so, rolling or point?
+
+/*fedora is technically point release, but it is really/
+/somewhere in between rolling and point as it regularly/
+/ships new kernels and updates/
 
 * installation difficulty
 this one is at the bottom, because i dont think it is very important.
@@ -146,6 +150,7 @@ becasue rolling distros always ship a new kernel
     - nvidia and want zero fuss -> linux mint
   - rolling release
     - want an easy install -> cachyos (kde)
+    - okay with semi-rolling -> fedora kde
     - want to learn -> arch
     - want cool points -> gentoo <3
 - unfamiliar with windows and on a laptop (you probably want gnome)
@@ -155,5 +160,6 @@ becasue rolling distros always ship a new kernel
     - very old hardware -> xubuntu, or mint xfce
   - rolling release
     - want an easy install -> cachyos (gnome)
+    - okay with semi-rolling -> fedora kde
     - want to learn -> arch
     - want cool points -> gentoo <3

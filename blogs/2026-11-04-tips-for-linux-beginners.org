@@ -87,6 +87,17 @@ the filename, then with that information run =less ./example.sh= to review
 it, then you can run it by first making it executable (=chmod +x ./example.sh=),
 and executing it like so: =./example.sh=
 
+* you learnt windows, you can learn linux
+i think its called the curse of knowledge, where you forget what it was like
+to not know? whatever it is, the point is that at some point you had to
+learn how to use windows, you had to learn how to search for an app, you
+learnt what a sketchy vs safe download looked like*. so you should expect
+to have to learn how to use linux, learn how to use the package manager for
+apps, learn how your desktop works, and, dont be discouraged if you fuck
+something up. youre learning!
+
+/*kinda like the =curl | bash= i mentioned earlier/
+
 * ill keep adding to this
 
 when i think of more to say..... keep notice! i (usually) have good advice
