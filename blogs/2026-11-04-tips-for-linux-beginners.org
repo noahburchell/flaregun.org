@@ -9,12 +9,13 @@ brilliant! now that youre part of the team, here are some tips!
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager (see *package management*), or through a gui
-app store (if your desktop environment provides one). most issues on
-linux do not need a reboot, and most updates dont need one either.
-(unless the kernel, systemd (or whatever init youre using), or glibc
-has been updated.) or unless you genuinely dont know where to start
-fixing an issue. otherwise you can just leave it running
+using a package manager (see [[*package management][package management]]), through a gui
+app store (if your desktop environment provides one), through flatpak,
+or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]). most issues on linux
+do not need a reboot, and most updates dont need one either. (unless
+the kernel, systemd (or whatever init youre using), or glibc has been
+updated.) or unless you genuinely dont know where to start fixing an
+issue. otherwise you can just leave it running
 
 * the terminal isnt scary
 /...if you learn which commands are/
@@ -94,18 +95,18 @@ to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
-*package management*) for apps, learn how your desktop works, and, dont be
+[[*package management][package management]]) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up*. youre learning!
 
 /*kinda like the =curl | bash= i mentioned earlier/
 
-/*keeping backups is recommended, see *backups* for more info/
+/*keeping backups is recommended, see [[*backups][backups]] for more info/
 
 * package management
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
 portage. (note: for alternatives such as flatpak and appimage, see
-*flatpak and appimage*). to communicate with these package managers,
+[[*flatpak and appimage][flatpak and appimage]]). to communicate with these package managers,
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 
@@ -190,10 +191,13 @@ your distro doesnt use musl) nothing will run correctly and you will need to
 rescue your os from a live usb. so dont remove it unless you want a challenge
 
 * flatpak and appimage
+working on it........
 
 * backups
+working on it........
 
 * where to find help
+still working on it........
 
 * ill keep adding to this
 
