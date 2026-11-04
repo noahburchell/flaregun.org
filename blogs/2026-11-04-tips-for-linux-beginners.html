@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 16:25 -->
+<!-- 2026-11-04 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,11 +206,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org22051f1">1. linux isnt windows</a></li>
-<li><a href="#orgc748e35">2. the terminal isnt scary</a></li>
-<li><a href="#orgcd6528a">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#org89f5b18">4. package management</a></li>
-<li><a href="#org1bcf8ac">5. ill keep adding to this</a></li>
+<li><a href="#org7fc2e6b">1. linux isnt windows</a></li>
+<li><a href="#orgecdd393">2. the terminal isnt scary</a></li>
+<li><a href="#org5d0c694">3. you learnt windows, you can learn linux</a></li>
+<li><a href="#org2c54fc3">4. package management</a></li>
+<li><a href="#orgad65b6f">5. flatpak and appimage</a></li>
+<li><a href="#orga260416">6. backups</a></li>
+<li><a href="#orgf200e6e">7. where to find help</a></li>
+<li><a href="#org5720129">8. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -218,8 +221,8 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-org22051f1" class="outline-2">
-<h2 id="org22051f1"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-org7fc2e6b" class="outline-2">
+<h2 id="org7fc2e6b"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
@@ -228,14 +231,14 @@ are gone. on linux, software is installed through the command line
 using a package manager (see <b>package management</b>), or through a gui
 app store (if your desktop environment provides one). most issues on
 linux do not need a reboot, and most updates dont need one either.
-(unless the kernel, systemd (or whatever init your using), or glibc
+(unless the kernel, systemd (or whatever init youre using), or glibc
 has been updated.) or unless you genuinely dont know where to start
 fixing an issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-orgc748e35" class="outline-2">
-<h2 id="orgc748e35"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-orgecdd393" class="outline-2">
+<h2 id="orgecdd393"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>&hellip;if you learn which commands are</i>
@@ -248,7 +251,7 @@ fix an issue or use some tool that you want to use. if you can write
 <code>/gamemode creative</code>, you can write <code>dnf upgrade --refresh</code>.
 so how do you tell a scary command from a safe command? as a
 general rule, just look it up! we have <i>google</i> and <code>man</code> yknow!?
-(note: man is prefered in many cases) if you are told to run a command
+(note: man is preferred in many cases) if you are told to run a command
 you dont understand, for example:
 </p>
 
@@ -257,7 +260,7 @@ you dont understand, for example:
 </p>
 
 <p>
-i think the <code>find</code> command would probably help <i>find</i> somethign,
+i think the <code>find</code> command would probably help <i>find</i> something,
 but im not exactly sure. so i should probably search for it!
 </p>
 
@@ -272,7 +275,7 @@ i can access these with the command <code>man</code>, so in this case,
 im also not exactly sure what the rest of it means&hellip; <code>$(uname -r)</code>
 doesnt look like a directory, maybe i should look it up! (note: if
 a command contains <code>$(something)</code>, it evaluates the command (in this
-case <code>something</code>) inside the parenthesis and uses its output as
+case <code>something</code>) inside the parentheses and uses its output as
 text. <code>uname -r</code> gets your kernels version string, in my case
 <code>7.3.1-lychee</code>, so the command would expand to
 <code>find /lib/modules/7.3.1-lychee -iname 'nvidia*.ko*'</code>)
@@ -294,13 +297,13 @@ there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
-<code>sudo / doas</code>: any commands ran with either of these prefixes can
+<code>sudo / doas</code>: any commands run with either of these prefixes can
 do&hellip; anything.
 </p>
 
 <p>
-<code>rm</code>: this command doesnt send somethign to the trash, it permenantly
-deletes it and there is not undo
+<code>rm</code>: this command doesnt send something to the trash, it permanently
+deletes it and there is no undo
 </p>
 
 <p>
@@ -308,7 +311,7 @@ deletes it and there is not undo
 <code>dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync</code>.
 this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if <code>of=/dev/sdX</code> is the wrong location.
-if the location you typed (for example <code>/dev/sda</code>) is your boot drive,
+if the location you typed (for example <code>/dev/sda</code>) is your boot drive*,
 depending on the size of the disk image, youll overwrite:
 </p>
 
@@ -328,17 +331,21 @@ depending on the size of the disk image, youll overwrite:
 <code>curl https://example.com/example.sh | bash</code> or the more evil version
 <code>curl https://example.com/example.sh | sudo bash</code>: these commands download
 a script from that site and execute it immediately without showing you what
-theyre doing. never do this. if a site wants you to install their
-software like this, first make sure the site is trustworthy, then download
+its doing. never do this blindly. if a site wants you to install their
+software like this, first make <b>sure</b> the site is trustworthy, then download
 it alone (<code>curl -O https://example.com/example.sh</code>), then use <code>ls</code> to check
 the filename, then with that information run <code>less ./example.sh</code> to review
 it, then you can run it by first making it executable (<code>chmod +x ./example.sh</code>),
 and executing it like so: <code>./example.sh</code>
 </p>
+
+<p>
+<i>*on a modern device with an nvme drive, <code>/dev/nvme0n1</code> is probably your boot drive</i>
+</p>
 </div>
 </div>
-<div id="outline-container-orgcd6528a" class="outline-2">
-<h2 id="orgcd6528a"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-org5d0c694" class="outline-2">
+<h2 id="org5d0c694"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
@@ -347,22 +354,28 @@ learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
 <b>package management</b>) for apps, learn how your desktop works, and, dont be
-discouraged if you fuck something up. youre learning!
+discouraged if you fuck something up*. youre learning!
 </p>
 
 <p>
 <i>*kinda like the <code>curl | bash</code> i mentioned earlier</i>
 </p>
+
+<p>
+<i><b>keeping backups is recommended, see *backups</b> for more info</i>
+</p>
 </div>
 </div>
-<div id="outline-container-org89f5b18" class="outline-2">
-<h2 id="org89f5b18"><span class="section-number-2">4.</span> package management</h2>
+<div id="outline-container-org2c54fc3" class="outline-2">
+<h2 id="org2c54fc3"><span class="section-number-2">4.</span> package management</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
-portage. to communicate with these package managers, you will use the
-terminal, here are examples for each of the package managers mentioned:
+portage. (note: for alternatives such as flatpak and appimage, see
+<b>flatpak and appimage</b>). to communicate with these package managers,
+you will use the terminal, here are examples for each of the package
+managers mentioned:
 </p>
 
 <p>
@@ -478,9 +491,21 @@ rescue your os from a live usb. so dont remove it unless you want a challenge
 </p>
 </div>
 </div>
-<div id="outline-container-org1bcf8ac" class="outline-2">
-<h2 id="org1bcf8ac"><span class="section-number-2">5.</span> ill keep adding to this</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgad65b6f" class="outline-2">
+<h2 id="orgad65b6f"><span class="section-number-2">5.</span> flatpak and appimage</h2>
+</div>
+
+<div id="outline-container-orga260416" class="outline-2">
+<h2 id="orga260416"><span class="section-number-2">6.</span> backups</h2>
+</div>
+
+<div id="outline-container-orgf200e6e" class="outline-2">
+<h2 id="orgf200e6e"><span class="section-number-2">7.</span> where to find help</h2>
+</div>
+
+<div id="outline-container-org5720129" class="outline-2">
+<h2 id="org5720129"><span class="section-number-2">8.</span> ill keep adding to this</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </p>
@@ -489,7 +514,7 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 16:25</p>
+<p class="date">Created: 2026-11-04 Wed 16:43</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

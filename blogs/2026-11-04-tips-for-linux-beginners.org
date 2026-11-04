@@ -12,7 +12,7 @@ are gone. on linux, software is installed through the command line
 using a package manager (see *package management*), or through a gui
 app store (if your desktop environment provides one). most issues on
 linux do not need a reboot, and most updates dont need one either.
-(unless the kernel, systemd (or whatever init your using), or glibc
+(unless the kernel, systemd (or whatever init youre using), or glibc
 has been updated.) or unless you genuinely dont know where to start
 fixing an issue. otherwise you can just leave it running
 
@@ -25,12 +25,12 @@ fix an issue or use some tool that you want to use. if you can write
 =/gamemode creative=, you can write =dnf upgrade --refresh=.
 so how do you tell a scary command from a safe command? as a
 general rule, just look it up! we have /google/ and =man= yknow!?
-(note: man is prefered in many cases) if you are told to run a command
+(note: man is preferred in many cases) if you are told to run a command
 you dont understand, for example:
 
 =find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'=
 
-i think the =find= command would probably help /find/ somethign,
+i think the =find= command would probably help /find/ something,
 but im not exactly sure. so i should probably search for it!
 
 although, before i google it maybe ill get more accurate
@@ -41,7 +41,7 @@ i can access these with the command =man=, so in this case,
 im also not exactly sure what the rest of it means... =$(uname -r)=
 doesnt look like a directory, maybe i should look it up! (note: if
 a command contains =$(something)=, it evaluates the command (in this
-case =something=) inside the parenthesis and uses its output as
+case =something=) inside the parentheses and uses its output as
 text. =uname -r= gets your kernels version string, in my case
 =7.3.1-lychee=, so the command would expand to
 =find /lib/modules/7.3.1-lychee -iname 'nvidia*.ko*'=)
@@ -55,17 +55,17 @@ there are certain commands to pay *extra* attention to
 
 =sudo / doas, rm, dd, curl | *=
 
-=sudo / doas=: any commands ran with either of these prefixes can
+=sudo / doas=: any commands run with either of these prefixes can
 do... anything.
 
-=rm=: this command doesnt send somethign to the trash, it permenantly
-deletes it and there is not undo
+=rm=: this command doesnt send something to the trash, it permanently
+deletes it and there is no undo
 
 =dd=: this command writes data somewhere, youll often see
 =dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync=.
 this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
-if the location you typed (for example =/dev/sda=) is your boot drive,
+if the location you typed (for example =/dev/sda=) is your boot drive*,
 depending on the size of the disk image, youll overwrite:
 
 1. the protective mbr
@@ -79,12 +79,14 @@ depending on the size of the disk image, youll overwrite:
 =curl https://example.com/example.sh | bash= or the more evil version
 =curl https://example.com/example.sh | sudo bash=: these commands download
 a script from that site and execute it immediately without showing you what
-theyre doing. never do this. if a site wants you to install their
-software like this, first make sure the site is trustworthy, then download
+its doing. never do this blindly. if a site wants you to install their
+software like this, first make *sure* the site is trustworthy, then download
 it alone (=curl -O https://example.com/example.sh=), then use =ls= to check
 the filename, then with that information run =less ./example.sh= to review
 it, then you can run it by first making it executable (=chmod +x ./example.sh=),
 and executing it like so: =./example.sh=
+
+/*on a modern device with an nvme drive, =/dev/nvme0n1= is probably your boot drive/
 
 * you learnt windows, you can learn linux
 i think its called the curse of knowledge, where you forget what it was like
@@ -93,15 +95,19 @@ learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
 *package management*) for apps, learn how your desktop works, and, dont be
-discouraged if you fuck something up. youre learning!
+discouraged if you fuck something up*. youre learning!
 
 /*kinda like the =curl | bash= i mentioned earlier/
+
+/*keeping backups is recommended, see *backups* for more info/
 
 * package management
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
-portage. to communicate with these package managers, you will use the
-terminal, here are examples for each of the package managers mentioned:
+portage. (note: for alternatives such as flatpak and appimage, see
+*flatpak and appimage*). to communicate with these package managers,
+you will use the terminal, here are examples for each of the package
+managers mentioned:
 
 *apt*:
 
@@ -182,6 +188,12 @@ it just comes with time.
 *glibc is gnus c standard library implementation, if it were removed (assuming
 your distro doesnt use musl) nothing will run correctly and you will need to
 rescue your os from a live usb. so dont remove it unless you want a challenge
+
+* flatpak and appimage
+
+* backups
+
+* where to find help
 
 * ill keep adding to this
 
