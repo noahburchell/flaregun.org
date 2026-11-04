@@ -160,6 +160,6 @@ becasue rolling distros always ship a new kernel
     - very old hardware -> xubuntu, or mint xfce
   - rolling release
     - want an easy install -> cachyos (gnome)
-    - okay with semi-rolling -> fedora kde
+    - okay with semi-rolling -> fedora workstation
     - want to learn -> arch
     - want cool points -> gentoo <3
