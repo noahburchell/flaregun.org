@@ -149,10 +149,11 @@ either cloning the source tree and going through the usual steps of
 comiling it or getting it through your distros package manager. (fedora
 has it in copr))
 
-fedora comes with a default selinux policy that may reduce performance
-of certain .net games (based on my experience with terraria), so keep
-that in mind if you go that route as you may want to disable that
-*specific* policy.
+fedora comes with a default selinux r^x policy that may reduce performance
+of certain .net games (based on my experience with terraria, though this
+is anecdotal), so keep that in mind. (note: dont blindly change selinux
+policies, only look into it if you get a specific violation, and make sure
+you know what youre disabling)
 
 * conclusion
 now that youve decided what properties you want your distro to have,
