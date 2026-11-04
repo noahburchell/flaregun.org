@@ -12,10 +12,14 @@ are gone. on linux, software is installed through the command line
 using a package manager (see [[*package management][package management]]), through a gui
 app store (if your desktop environment provides one), through flatpak,
 or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]). most issues on linux
-do not need a reboot, and most updates dont need one either. (unless
-the kernel, systemd (or whatever init youre using), or glibc has been
-updated.) or unless you genuinely dont know where to start fixing an
-issue. otherwise you can just leave it running
+do not need a reboot, and most updates dont need one either*. (unless
+the kernel, systemd (or whatever init youre using), graphics drivers
+(especially nvidia), or glibc has been updated.) or unless you genuinely
+dont know where to start fixing an issue. otherwise you can just leave
+it running
+
+/*on an atomic distro like bazzite, every update needs/
+/a reboot, becasue theyre done as images/
 
 * the terminal isnt scary
 /...if you learn which commands are/
@@ -29,7 +33,9 @@ general rule, just look it up! we have /google/ and =man= yknow!?
 (note: man is preferred in many cases) if you are told to run a command
 you dont understand, for example:
 
-=find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'=
+#+begin_src sh :eval no
+find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'
+#+end_src
 
 i think the =find= command would probably help /find/ something,
 but im not exactly sure. so i should probably search for it!
@@ -66,15 +72,20 @@ do... anything.
 =rm=: this command doesnt send something to the trash, it permanently
 deletes it and there is no undo
 
-=dd=: this command writes data somewhere, youll often see
-=dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync=.
+=dd=: this command writes data somewhere, youll often see:
+
+#+begin_src sh :eval no
+dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync
+#+end_src
+
 this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
-if the location you typed (for example =/dev/sda=) is your boot drive*,
-depending on the size of the disk image, youll overwrite:
+if the location you typed (for example =/dev/sda=) is your boot drive[1]
+or a drive with your stuff on it, depending on the size of the disk image,
+youll overwrite:
 
 1. the protective mbr
-2. the primary gpt header and partition table
+2. the primary gpt header and partition table [2]
 3. the entire efi system partition
 4. the beginning of the next partition, and its superblock
 5. if the input never ends (=if=/dev/zero=), then literally everything
@@ -86,25 +97,82 @@ depending on the size of the disk image, youll overwrite:
 a script from that site and execute it immediately without showing you what
 its doing. never do this blindly. if a site wants you to install their
 software like this, first make *sure* the site is trustworthy, then download
-it alone (=curl -O https://example.com/example.sh=), then use =ls= to check
+it alone (=curl -LO https://example.com/example.sh=), then use =ls= to check
 the filename, then with that information run =less ./example.sh= to review
 it, then you can run it by first making it executable (=chmod +x ./example.sh=),
 and executing it like so: =./example.sh=
 
-/*on a modern device with an nvme drive, =/dev/nvme0n1= is probably your boot drive/
+*> vs >>*
+
+i dont want to go too much into teaching shell, but this one difference
+is worth a note. these are redirection operators, as an example:
+=echo "gentoo" > gentoo.txt= will do this[3]:
+
+#+begin_src sh :eval no
+noah@lychee ~ % echo "gentoo" > gentoo.txt
+noah@lychee ~ % cat gentoo.txt 
+gentoo
+noah@lychee ~ % 
+#+end_src
+
+now, lets look at what =>>= will do:
+
+#+begin_src sh :eval no
+noah@lychee ~ % echo "gentoo" > gentoo.txt
+noah@lychee ~ % cat gentoo.txt 
+gentoo
+noah@lychee ~ % echo "gentoo" >> gentoo.txt 
+noah@lychee ~ % cat gentoo.txt             
+gentoo
+gentoo
+noah@lychee ~ % 
+#+end_src
+
+now, lets use =>= again on the same file:
+
+#+begin_src sh :eval no
+noah@lychee ~ % echo "gentoo" > gentoo.txt
+noah@lychee ~ % cat gentoo.txt 
+gentoo
+noah@lychee ~ % echo "gentoo" >> gentoo.txt 
+noah@lychee ~ % cat gentoo.txt             
+gentoo
+gentoo
+noah@lychee ~ % echo "gentoo" > gentoo.txt 
+noah@lychee ~ % cat gentoo.txt            
+gentoo
+noah@lychee ~ % 
+#+end_src
+
+notice the difference here, =>= will truncate the file[4] and *replace* it with what its given.
+=>>= on the other hand will append to the file, *not* overwriting the content. (if there is
+no file, then they act the same for all intents and purposes)
+
+i have lost 12h of log data from this very difference >:(
+
+[1]: /on a modern device with an nvme drive, =/dev/nvme0n1= is probably your boot drive/
+
+[2]: /gpt keeps a backup header at the end of the disk, so the partition table can sometimes be recovered/
+
+[3]: /the command =cat= (short for catenate) is a very common command for/
+/writing the content of a file or input stream to standard output. echo/
+/writes its arguments to standard output/
+
+[4]: /truncation happens prior to the command executing, so =sort foo.txt > foo.txt= will/
+/leave you with an empty file. in this case =sort -o foo.txt foo.txt= is correct/
 
 * you learnt windows, you can learn linux
 i think its called the curse of knowledge, where you forget what it was like
 to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
-learnt what a sketchy vs safe download looked like*. so you should expect
+learnt what a sketchy vs safe download looked like[1]. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
 [[*package management][package management]]) for apps, learn how your desktop works, and, dont be
-discouraged if you fuck something up*. youre learning!
+discouraged if you fuck something up[2]. youre learning!
 
-/*kinda like the =curl | bash= i mentioned earlier/
+[1]: /kinda like the =curl | bash= i mentioned earlier/
 
-/*keeping backups is recommended, see [[*backups][backups]] for more info/
+[2]: /keeping backups is recommended, see [[*backups][backups]] for more info/
 
 * package management
 the most common way to install software on linux is through the package
@@ -116,13 +184,13 @@ managers mentioned:
 
 *apt*:
 
-- installing a package: =apt-get install whatever=
-- removing a package: =apt-get remove whatever= (or =apt-get purge whatever= to also delete config files)
-- syncing repos: =apt-get update=
-- updating everything: =apt-get upgrade= *
-- searching for a package: =apt-cache search whatever=
+- installing a package: =apt install whatever=
+- removing a package: =apt remove whatever= (or =apt purge whatever= to also delete config files)
+- syncing repos: =apt update=
+- updating everything: =apt upgrade= *
+- searching for a package: =apt search whatever=
 
-/* =apt-get upgrade= wont install new dependencies, you may need =apt-get full-upgrade= occasionally/
+/* =apt upgrade= wont remove packages, you may need =apt full-upgrade= occasionally/
 
 *dnf*:
 
@@ -151,10 +219,10 @@ managers mentioned:
 
 *portage*:
 
-- installing a package: =emerge whatever=
-- removing a package: =emerge --deselect whatever= then =emerge --depclean=
+- installing a package: =emerge -a whatever=
+- removing a package: =emerge -a --deselect whatever= then =emerge --depclean=
 - syncing repos: =emerge --sync=
-- updating everything: =emerge -uDN @world=
+- updating everything: =emerge -auDN @world=
 - searching for a package: =emerge --search whatever=
 
 installing or updating packages and syncing most often requires root privileges,
@@ -183,7 +251,7 @@ just listen to your package manager! it sounds simple, of course, but
 many people tend to just hit yes on autopilot. this is normal, but you should
 avoid this behavior as the output of your package manager is *not* useless
 monospace text, its telling you *exactly* what it is going to do! now, you
-might mention that you wouldnt know removing, say, glibc* was any different
+might mention that you wouldnt know removing, say, glibc[1] was any different
 to removing libcaca, thats reasonable. so the best advice i can give you is
 to research anything youre unsure about. scan the package managers output for
 keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
@@ -193,10 +261,6 @@ your package manager asks you to do something /unusual/, such as asking you to
 type "yes do as i say!" to continue. over time, you will learn what is important
 and whats not, so dont worry, you wont be stuck looking things up for very long,
 it just comes with time.
-
-*glibc is gnus c standard library implementation, if it were removed (assuming
-your distro doesnt use musl) nothing will run correctly and you will need to
-rescue your os from a live usb. so dont remove it unless you want a challenge
 
 *be careful with third-party packages*
 
@@ -211,9 +275,15 @@ a third party package:
 - can be outdated or unmaintained (security worry)
 - can, in very rare cases, just be malicious (google: "aur incident")
 
-so, make sure you check the official repos or [[*flatpak and appimage][flatpak]] for the package first.
+so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][2] for the package first.
 
 *tip*: remove third-party repos you dont use anymore
+
+[1]: /glibc is gnus c standard library implementation, if it were removed (assuming/
+/your distro doesnt use musl) nothing will run correctly and you will need to/
+/rescue your os from a live usb. so dont remove it unless you want a challenge/
+
+[2]: /flatpak is also third-party, it just wont conflict with system packages/
 
 * flatpak and appimage
 working on it........
@@ -228,7 +298,7 @@ to know about linux
 ** for general advice
 
 often the best way to get help with your distro is to find your distros
-specific wiki, such as the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] or [[https://wiki.gentoo.org/wiki/Handbook:Main_Page][gentoo handbook]]. also, there tends
+specific wiki, such as the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] or [[https://wiki.gentoo.org/wiki/Main_Page][gentoo wiki]]. also, there tends
 to be a discord server available, official or unofficial, with people there
 that like helping newcomers
 
@@ -265,7 +335,8 @@ of the time
 
 i never knew about this site until recent! its great, and i wish
 someone told me about it sooner. it breaks a command down piece by
-piece, and makes it easy to understand.
+piece, and makes it easy to understand. the only note is that it
+sometimes lags behind and may not know about a very new flag
 
 * ill keep adding to this
 
