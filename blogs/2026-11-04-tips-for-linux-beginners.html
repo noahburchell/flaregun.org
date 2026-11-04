@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-03 Tue 23:54 -->
+<!-- 2026-11-04 Wed 12:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
+<meta name="author" content="Noah Burchell" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
   #content { max-width: 60em; margin: auto; }
@@ -205,9 +206,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org31d44de">1. linux isnt windows</a></li>
-<li><a href="#org938b9fc">2. the terminal isnt scary</a></li>
-<li><a href="#orgf84436d">3. ill keep adding to this</a></li>
+<li><a href="#org353cf4b">1. linux isnt windows</a></li>
+<li><a href="#org49183e2">2. the terminal isnt scary</a></li>
+<li><a href="#orgb88f7b4">3. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -219,8 +220,8 @@ currently unfininshed so uhhh look at the other posts
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-org31d44de" class="outline-2">
-<h2 id="org31d44de"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-org353cf4b" class="outline-2">
+<h2 id="org353cf4b"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
@@ -234,11 +235,11 @@ issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org938b9fc" class="outline-2">
-<h2 id="org938b9fc"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-org49183e2" class="outline-2">
+<h2 id="org49183e2"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-<i>if you learn which commands are.</i>
+<i>&hellip;if you learn which commands are</i>
 </p>
 
 <p>
@@ -248,7 +249,8 @@ fix an issue or use some tool that you want to use. if you can write
 <code>/gamemode creative</code>, you can write <code>dnf upgrade --refresh</code>.
 so how do you tell a scary command from a safe command? as a
 general rule, just look it up! we have <i>google</i> and <code>man</code> yknow!?
-if you are told to run a command you dont understand, for example:
+(note: man is prefered in many cases) if you are told to run a command
+you dont understand, for example:
 </p>
 
 <p>
@@ -269,7 +271,12 @@ i can access these with the command <code>man</code>, so in this case,
 
 <p>
 im also not exactly sure what the rest of it means&hellip; <code>$(uname -r)</code>
-doesnt look like a directory, maybe i should look it up!
+doesnt look like a directory, maybe i should look it up! (note: if
+a command contains <code>$(something)</code>, it evaluates the command (in this
+case <code>something</code>) inside the parenthesis and uses its output as
+text. <code>uname -r</code> gets your kernels version string, in my case
+<code>7.3.1-lychee</code>, so the command would expand to
+<code>find /lib/modules/7.3.1-lychee -iname 'nvidia*.ko*'</code>)
 </p>
 
 <p>
@@ -331,8 +338,8 @@ and executing it like so: <code>./example.sh</code>
 </p>
 </div>
 </div>
-<div id="outline-container-orgf84436d" class="outline-2">
-<h2 id="orgf84436d"><span class="section-number-2">3.</span> ill keep adding to this</h2>
+<div id="outline-container-orgb88f7b4" class="outline-2">
+<h2 id="orgb88f7b4"><span class="section-number-2">3.</span> ill keep adding to this</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
@@ -341,7 +348,8 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2026-11-03 Tue 23:54</p>
+<p class="author">Author: Noah Burchell</p>
+<p class="date">Created: 2026-11-04 Wed 12:59</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

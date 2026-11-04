@@ -126,7 +126,9 @@ for a premium ai such as claude opus, i find hallucinations rare.
 although it is still best practice to flinch at anything prefixed with
 =sudo=
 
-*warning*: do not run commands you dont understand
+*tip*: you should never run commands you dont understand, so if you
+are using an llm you may find it helpful to add a system instruction or
+something of the sort telling the llm to expain any command it gives you
 
 * conclusion
 now that youve decided what properties you want your distro to have,
