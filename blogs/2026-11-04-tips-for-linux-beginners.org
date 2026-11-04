@@ -20,7 +20,7 @@ a reboot could also help if you genuinely dont know where to start fixing an iss
 otherwise you can just leave it running
 
 [fn:atomic] on an atomic distro like bazzite, every system update needs
-a reboot, becasue theyre done as images. flatpak updates dont
+a reboot, because theyre done as images. flatpak updates dont
 
 * the terminal isnt scary
 /...if you learn which commands are/
@@ -72,12 +72,12 @@ that means, it has total privileges, it can do *anything*. never run a
 gui app as root, and if a command doesnt work, running it with sudo often
 will not help unless the command genuinely needs root. if you happen to run
 something like =sudo mkdir ./foo=, you will later run into issues where
-you cannot remove this directory or make files in it. that is because
+you cannot make files in it. that is because
 the directory is owned by root and not your user. this can be resolved
 with =sudo chown -R $USER:$USER ./foo=
 
 =rm=: this command doesnt send something to the trash, it permanently
-deletes it and there is no undo. the most common failiure is most
+deletes it and there is no undo. the most common failure is most
 often not =rm -rf /= or something like that, but =rm -rf $DIR/*=.
 =$DIR= should expand to =/home/user/some/trash=, but if it has been
 unset, it will expand to "" and the command =rm -rf /*= will run.
@@ -93,7 +93,11 @@ this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
 luckily there is a small habit that makes it very safe, always run =lsblk=
 before running =dd=. =lsblk= will show you all of the drives connected
-to your computer, making it easy to determine the correct one. 
+to your computer, making it easy to determine the correct one.
+
+*tip*: if you cant tell which device is your usb, run =lsblk=, unplug
+it, run =lsblk= again, then plug it back in and run =lsblk= a third time.
+it will have dissapeared and came back
 
 but just so you know,
 if the location you typed (for example =/dev/sda=) is your boot drive[fn:nvme]
@@ -224,7 +228,7 @@ managers mentioned:
 - syncing repos + updating everything: =pacman -Syu=[fn:partial]
 - searching for a package: =pacman -Ss whatever=
 
-[fn:partial] never use =pacman -Sy whataver=, partial upgrades are unsuported
+[fn:partial] never use =pacman -Sy whatever=, partial upgrades are unsupported
 
 
 *zypper*:
@@ -324,14 +328,13 @@ can talk about.
   =chmod +x whatever.AppImage= (or tick "allow executing" in your file manager)
 - it bundles almost everything it needs. if one wont start, you might be
   missing =libfuse2=
-- this is as close as youll get to the windows experience, good and bad.
+- this is as close as youll get to the windows experience, good or bad.
   appimages arent sandboxed and dont auto update, so only download them
   from the projects official site
 
 * backups
 youve heard the usual [[https://en.wikipedia.org/wiki/Backup][3-2-1 advice]] many times so ill spare that, what
-i want to mention are linux specific tools that can be used to backup
-your system, along with linux specific things you should backup.
+is linux specific things you should backup.
 
 *what to backup*
 
@@ -375,13 +378,13 @@ so check before you skip it
 *mistakes to avoid*
 
 - hidden files: =cp -r ~/* /backup= skips everything starting with a dot,
-  which is all your config. use =rsync -a ~/ /backup/= or a real backup tool
+  which is all your config. use =rsync -aHAX ~/ /backup/= or a real backup tool
 - the filesystem on your backup drive: if you copy to a fat32 or exfat usb,
   you lose permissions, ownership and symlinks, and your restore will be
   broken in weird ways. use a linux native filesystem, or a tool that stores its own
   format (borg, restic)
 - secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too.
-  that means either exclude them and back them up seperately and encrypted,
+  that means either exclude them and back them up separately and encrypted,
   or encrypt your whole backup
 - snapshots arent backups[fn:snapshot]: a snapshot on the same drive dies
   with the drive. its great for undoing a bad update, not for when your
@@ -415,24 +418,6 @@ id advise beginners to be cautious
 
 ** for specific commands
 
-* how to ask for help
-now that you know where to find help, heres the information you need to include:
-
-- your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
-- what you were trying to do
-- the exact error message copied as text. *do not upload a phone photo do your monitor*
-- relevant logs
-- what you already tried
-
-now that youve got the relevant information ready, heres what to do:
-
-- [[https://dontasktoask.com/][dont ask to ask]]
-- [[https://xyproblem.info/][ask about the real goal]]
-- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and what fixed it]]
-- be patient and polite
-- *ask about commands you dont understand*
-- *>ask about commands you dont understand<*
-
 =tldr=
 
 this command is unlike man in that you will need to install it, but it is
@@ -442,7 +427,7 @@ and a full man page is sometimes overwhelming
 =man=
 
 this command is an interface for manual pages, typing =man foo= will bring
-up the manual page for =foo=. this is good becasue the information there will
+up the manual page for =foo=. this is good because the information there will
 (usually) be specific to the exact version of the software you have installed,
 though it is quite dense and assumes you already know what youre doing a lot
 of the time
@@ -453,6 +438,24 @@ i never knew about this site until recent! its great, and i wish
 someone told me about it sooner. it breaks a command down piece by
 piece, and makes it easy to understand. the only note is that it
 sometimes lags behind and may not know about a very new flag
+
+* how to ask for help
+now that you know where to find help, heres the information you need to include:
+
+- your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
+- what you were trying to do
+- the exact error message copied as text. *do not upload a phone photo of your monitor*
+- relevant logs (get kernel logs with =dmesg=, boot logs depend on your init, so for systemd specifically: =journalctl -b= (this boot), =journalctl -b -1= (previous boot))
+- what you already tried
+
+now that youve got the relevant information ready, heres what to do:
+
+- [[https://dontasktoask.com/][dont ask to ask]]
+- [[https://xyproblem.info/][ask about the real goal]]
+- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and what fixed it]]
+- be patient and polite
+- *ask about commands you dont understand*
+- *>ask about commands you dont understand<*
 
 * ill keep adding to this
 
