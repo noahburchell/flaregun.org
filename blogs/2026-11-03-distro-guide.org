@@ -149,7 +149,7 @@ becasue rolling distros always ship a new kernel
     - older hardware -> linux mint, kubuntu, fedora kde
     - nvidia and want zero fuss -> linux mint
   - rolling release
-    - want an easy install -> cachyos (kde)
+    - want an easy install -> cachyos* (kde)
     - okay with semi-rolling -> fedora kde
     - want to learn -> arch
     - want cool points -> gentoo <3
@@ -159,7 +159,10 @@ becasue rolling distros always ship a new kernel
     - older hardware -> ubuntu, fedora workstation
     - very old hardware -> xubuntu, or mint xfce
   - rolling release
-    - want an easy install -> cachyos (gnome)
+    - want an easy install -> cachyos* (gnome)
     - okay with semi-rolling -> fedora workstation
     - want to learn -> arch
     - want cool points -> gentoo <3
+
+/*cachyos: the point about maintenance being the difficult part/
+/still holds, so expect something to break eventually/
