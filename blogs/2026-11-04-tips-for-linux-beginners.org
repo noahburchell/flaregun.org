@@ -2,8 +2,6 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 
-currently unfininshed so uhhh look at the other posts
-
 you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]?
 brilliant! now that youre part of the team, here are some tips!
 
@@ -11,11 +9,12 @@ brilliant! now that youre part of the team, here are some tips!
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager, or through a gui app store (if your
-desktop environment provides one). most issues on linux do not need
-a reboot and most updates dont need one either. unless the kernel
-has been updated or you genuinely dont know where to start fixing an
-issue. otherwise you can just leave it running
+using a package manager (see *package management*), or through a gui
+app store (if your desktop environment provides one). most issues on
+linux do not need a reboot, and most updates dont need one either.
+(unless the kernel, systemd (or whatever init your using), or glibc
+has been updated.) or unless you genuinely dont know where to start
+fixing an issue. otherwise you can just leave it running
 
 * the terminal isnt scary
 /...if you learn which commands are/
@@ -92,11 +91,97 @@ i think its called the curse of knowledge, where you forget what it was like
 to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
-to have to learn how to use linux, learn how to use the package manager for
-apps, learn how your desktop works, and, dont be discouraged if you fuck
-something up. youre learning!
+to have to learn how to use linux, learn how to use the package manager (see
+*package management*) for apps, learn how your desktop works, and, dont be
+discouraged if you fuck something up. youre learning!
 
 /*kinda like the =curl | bash= i mentioned earlier/
+
+* package management
+the most common way to install software on linux is through the package
+manager. common package managers include: apt, dnf, pacman, zypper and
+portage. to communicate with these package managers, you will use the
+terminal, here are examples for each of the package managers mentioned:
+
+*apt*:
+
+installing a package: =apt-get install whatever=
+removing a package: =apt-get remove whatever= (or =apt-get purge whatever= to also delete config files)
+syncing repos: =apt-get update=
+updating everything: =apt-get upgrade=
+searching for a package: =apt-cache search whatever=
+
+*dnf*:
+
+installing a package: =dnf install whatever=
+removing a package: =dnf remove whatever=
+syncing repos: =dnf makecache= (dnf usually does this automatically)
+updating everything: =dnf upgrade=
+searching for a package: =dnf search whatever=
+
+*pacman*:
+
+installing a package: =pacman -S whatever=
+removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
+syncing repos + updating everything: =pacman -Syu=
+searching for a package: =pacman -Ss whatever=
+
+*zypper*:
+
+installing a package: =zypper install whatever=
+removing a package: =zypper remove whatever=
+syncing repos: =zypper refresh=
+updating everything: =zypper update= (on tumbleweed use =zypper dup= instead)
+searching for a package: =zypper search whatever=
+
+*portage*:
+
+installing a package: =emerge whatever=
+removing a package: =emerge --deselect whatever= then =emerge --depclean=
+syncing repos: =emerge --sync=
+updating everything: =emerge -uDN @world=
+searching for a package: =emerge --search whatever=
+
+installing or updating packages and syncing most often requires root privileges,
+so make sure to run those commands with =sudo= or =doas=
+
+now that you know how to use it, its important to know what youre doing
+and why it is this way. briefly, your distros maintainers have a "repo"
+(repository) that is pretty much a sort of database of packages. it contains
+the package and metadata for each one that is used when you install that
+package. this may include dependencies and packages its incompatible with.
+what is a dependency? its /another/ package that the package needs to
+function correctly. so when you ask the package manager to install a
+package, it may install a few packages alongside it if it depends on them.
+also, your package manager will most likely verify the integrity of the
+package and that it came from a trustworthy source after it downloads it
+(one of the many reasons this approach is far superior to the windows approach).
+"syncing" just means updating the database.
+
+*dont delete your desktop*
+
+you may have seen that... situation linus was in when he deleted his desktop
+using pop os. this was caused by a packaging mistake with steam, but linus
+could have avoided this, and you can too, so heres how:
+
+just listen to your package manager! it sounds simple, of course, but
+many people tend to just hit yes on autopilot. this is normal, but you should
+avoid this behavior as the output of your package manager is *not* useless
+monospace text, its telling you *exactly* what it is going to do! now, you
+might mention that you wouldnt know removing, say, glibc* was any different
+to removing libcaca, thats reasonable. so the best advice i can give you is
+to research anything youre unsure about. scan the package managers output for
+keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
+"xorg", "mesa", "base", "systemd" to make sure nothing important is being removed,
+and if youre even slightly unsure, just look it up. be *very* attentive if
+your package manager asks you to do something /unusual/, such as asking you to
+type "yes do as i say!" to continue. over time, you will learn what is important
+and whats not, so dont worry, you wont be stuck looking things up for very long,
+it just comes with time.
+
+*glibc is gnus c standard library implementation, if it were removed (assuming
+your distro doesnt use musl) nothing will run correctly and you will need to
+rescue your os from a live usb. so dont remove it unless you want a challenge
 
 * ill keep adding to this
 

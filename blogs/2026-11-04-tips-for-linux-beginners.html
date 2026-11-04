@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 13:17 -->
+<!-- 2026-11-04 Wed 16:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,38 +206,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc5beeb2">1. linux isnt windows</a></li>
-<li><a href="#org98ebac5">2. the terminal isnt scary</a></li>
-<li><a href="#org3eb9b88">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#org8cafa6a">4. ill keep adding to this</a></li>
+<li><a href="#org22051f1">1. linux isnt windows</a></li>
+<li><a href="#orgc748e35">2. the terminal isnt scary</a></li>
+<li><a href="#orgcd6528a">3. you learnt windows, you can learn linux</a></li>
+<li><a href="#org89f5b18">4. package management</a></li>
+<li><a href="#org1bcf8ac">5. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
 <p>
-currently unfininshed so uhhh look at the other posts
-</p>
-
-<p>
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-orgc5beeb2" class="outline-2">
-<h2 id="orgc5beeb2"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-org22051f1" class="outline-2">
+<h2 id="org22051f1"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager, or through a gui app store (if your
-desktop environment provides one). most issues on linux do not need
-a reboot and most updates dont need one either. unless the kernel
-has been updated or you genuinely dont know where to start fixing an
-issue. otherwise you can just leave it running
+using a package manager (see <b>package management</b>), or through a gui
+app store (if your desktop environment provides one). most issues on
+linux do not need a reboot, and most updates dont need one either.
+(unless the kernel, systemd (or whatever init your using), or glibc
+has been updated.) or unless you genuinely dont know where to start
+fixing an issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org98ebac5" class="outline-2">
-<h2 id="org98ebac5"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-orgc748e35" class="outline-2">
+<h2 id="orgc748e35"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>&hellip;if you learn which commands are</i>
@@ -339,17 +337,17 @@ and executing it like so: <code>./example.sh</code>
 </p>
 </div>
 </div>
-<div id="outline-container-org3eb9b88" class="outline-2">
-<h2 id="org3eb9b88"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-orgcd6528a" class="outline-2">
+<h2 id="orgcd6528a"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
 to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
-to have to learn how to use linux, learn how to use the package manager for
-apps, learn how your desktop works, and, dont be discouraged if you fuck
-something up. youre learning!
+to have to learn how to use linux, learn how to use the package manager (see
+<b>package management</b>) for apps, learn how your desktop works, and, dont be
+discouraged if you fuck something up. youre learning!
 </p>
 
 <p>
@@ -357,9 +355,132 @@ something up. youre learning!
 </p>
 </div>
 </div>
-<div id="outline-container-org8cafa6a" class="outline-2">
-<h2 id="org8cafa6a"><span class="section-number-2">4.</span> ill keep adding to this</h2>
+<div id="outline-container-org89f5b18" class="outline-2">
+<h2 id="org89f5b18"><span class="section-number-2">4.</span> package management</h2>
 <div class="outline-text-2" id="text-4">
+<p>
+the most common way to install software on linux is through the package
+manager. common package managers include: apt, dnf, pacman, zypper and
+portage. to communicate with these package managers, you will use the
+terminal, here are examples for each of the package managers mentioned:
+</p>
+
+<p>
+<b>apt</b>:
+</p>
+
+<p>
+installing a package: <code>apt-get install whatever</code>
+removing a package: <code>apt-get remove whatever</code> (or <code>apt-get purge whatever</code> to also delete config files)
+syncing repos: <code>apt-get update</code>
+updating everything: <code>apt-get upgrade</code>
+searching for a package: <code>apt-cache search whatever</code>
+</p>
+
+<p>
+<b>dnf</b>:
+</p>
+
+<p>
+installing a package: <code>dnf install whatever</code>
+removing a package: <code>dnf remove whatever</code>
+syncing repos: <code>dnf makecache</code> (dnf usually does this automatically)
+updating everything: <code>dnf upgrade</code>
+searching for a package: <code>dnf search whatever</code>
+</p>
+
+<p>
+<b>pacman</b>:
+</p>
+
+<p>
+installing a package: <code>pacman -S whatever</code>
+removing a package: <code>pacman -R whatever</code> (or <code>pacman -Rns whatever</code> to also remove unneeded dependencies and config files)
+syncing repos + updating everything: <code>pacman -Syu</code>
+searching for a package: <code>pacman -Ss whatever</code>
+</p>
+
+<p>
+<b>zypper</b>:
+</p>
+
+<p>
+installing a package: <code>zypper install whatever</code>
+removing a package: <code>zypper remove whatever</code>
+syncing repos: <code>zypper refresh</code>
+updating everything: <code>zypper update</code> (on tumbleweed use <code>zypper dup</code> instead)
+searching for a package: <code>zypper search whatever</code>
+</p>
+
+<p>
+<b>portage</b>:
+</p>
+
+<p>
+installing a package: <code>emerge whatever</code>
+removing a package: <code>emerge --deselect whatever</code> then <code>emerge --depclean</code>
+syncing repos: <code>emerge --sync</code>
+updating everything: <code>emerge -uDN @world</code>
+searching for a package: <code>emerge --search whatever</code>
+</p>
+
+<p>
+installing or updating packages and syncing most often requires root privileges,
+so make sure to run those commands with <code>sudo</code> or <code>doas</code>
+</p>
+
+<p>
+now that you know how to use it, its important to know what youre doing
+and why it is this way. briefly, your distros maintainers have a "repo"
+(repository) that is pretty much a sort of database of packages. it contains
+the package and metadata for each one that is used when you install that
+package. this may include dependencies and packages its incompatible with.
+what is a dependency? its <i>another</i> package that the package needs to
+function correctly. so when you ask the package manager to install a
+package, it may install a few packages alongside it if it depends on them.
+also, your package manager will most likely verify the integrity of the
+package and that it came from a trustworthy source after it downloads it
+(one of the many reasons this approach is far superior to the windows approach).
+"syncing" just means updating the database.
+</p>
+
+<p>
+<b>dont delete your desktop</b>
+</p>
+
+<p>
+you may have seen that&hellip; situation linus was in when he deleted his desktop
+using pop os. this was caused by a packaging mistake with steam, but linus
+could have avoided this, and you can too, so heres how:
+</p>
+
+<p>
+just listen to your package manager! it sounds simple, of course, but
+many people tend to just hit yes on autopilot. this is normal, but you should
+avoid this behavior as the output of your package manager is <b>not</b> useless
+monospace text, its telling you <b>exactly</b> what it is going to do! now, you
+might mention that you wouldnt know removing, say, glibc* was any different
+to removing libcaca, thats reasonable. so the best advice i can give you is
+to research anything youre unsure about. scan the package managers output for
+keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
+"xorg", "mesa", "base", "systemd" to make sure nothing important is being removed,
+and if youre even slightly unsure, just look it up. be <b>very</b> attentive if
+your package manager asks you to do something <i>unusual</i>, such as asking you to
+type "yes do as i say!" to continue. over time, you will learn what is important
+and whats not, so dont worry, you wont be stuck looking things up for very long,
+it just comes with time.
+</p>
+
+<p>
+*glibc is gnus c standard library implementation, if it were removed (assuming
+your distro doesnt use musl) nothing will run correctly and you will need to
+rescue your os from a live usb. so dont remove it unless you want a challenge
+</p>
+</div>
+</div>
+<div id="outline-container-org1bcf8ac" class="outline-2">
+<h2 id="org1bcf8ac"><span class="section-number-2">5.</span> ill keep adding to this</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </p>
@@ -368,7 +489,7 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 13:17</p>
+<p class="date">Created: 2026-11-04 Wed 16:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
