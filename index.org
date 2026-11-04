@@ -14,6 +14,9 @@ fingers my kernel patch is merged!
 ** emacs or vim
 two words: org mode
 
+** best filesystem
+btrfs
+
 ** best distro for beginners
 fedora kde
 
