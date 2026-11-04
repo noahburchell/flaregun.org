@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 17:47 -->
+<!-- 2026-11-04 Wed 17:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,14 +206,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org64b88ae">1. linux isnt windows</a></li>
-<li><a href="#org2611a1c">2. the terminal isnt scary</a></li>
-<li><a href="#org9b1fef8">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#orgc987294">4. package management</a></li>
-<li><a href="#orgcae6ee5">5. flatpak and appimage</a></li>
-<li><a href="#org94afc47">6. backups</a></li>
-<li><a href="#orgc026f54">7. where to find help</a></li>
-<li><a href="#org5796f32">8. ill keep adding to this</a></li>
+<li><a href="#org11274ad">1. linux isnt windows</a></li>
+<li><a href="#orga661481">2. the terminal isnt scary</a></li>
+<li><a href="#org2a10253">3. you learnt windows, you can learn linux</a></li>
+<li><a href="#org2033050">4. package management</a></li>
+<li><a href="#orga4ba47e">5. flatpak and appimage</a></li>
+<li><a href="#org32a88c1">6. backups</a></li>
+<li><a href="#orgd44df56">7. where to find help</a></li>
+<li><a href="#orgfe55a06">8. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -221,16 +221,16 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-org64b88ae" class="outline-2">
-<h2 id="org64b88ae"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-org11274ad" class="outline-2">
+<h2 id="org11274ad"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager (see <a href="#orgc987294">package management</a>), through a gui
+using a package manager (see <a href="#org2033050">package management</a>), through a gui
 app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see <a href="#orgcae6ee5">flatpak and appimage</a>). most issues on linux
+or with an appimage (see <a href="#orga4ba47e">flatpak and appimage</a>). most issues on linux
 do not need a reboot, and most updates dont need one either. (unless
 the kernel, systemd (or whatever init youre using), or glibc has been
 updated.) or unless you genuinely dont know where to start fixing an
@@ -238,8 +238,8 @@ issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org2611a1c" class="outline-2">
-<h2 id="org2611a1c"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-orga661481" class="outline-2">
+<h2 id="orga661481"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>&hellip;if you learn which commands are</i>
@@ -345,8 +345,8 @@ and executing it like so: <code>./example.sh</code>
 </p>
 </div>
 </div>
-<div id="outline-container-org9b1fef8" class="outline-2">
-<h2 id="org9b1fef8"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-org2a10253" class="outline-2">
+<h2 id="org2a10253"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
@@ -354,7 +354,7 @@ to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like*. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
-<a href="#orgc987294">package management</a>) for apps, learn how your desktop works, and, dont be
+<a href="#org2033050">package management</a>) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up*. youre learning!
 </p>
 
@@ -363,18 +363,18 @@ discouraged if you fuck something up*. youre learning!
 </p>
 
 <p>
-<i>*keeping backups is recommended, see <a href="#org94afc47">backups</a> for more info</i>
+<i>*keeping backups is recommended, see <a href="#org32a88c1">backups</a> for more info</i>
 </p>
 </div>
 </div>
-<div id="outline-container-orgc987294" class="outline-2">
-<h2 id="orgc987294"><span class="section-number-2">4.</span> package management</h2>
+<div id="outline-container-org2033050" class="outline-2">
+<h2 id="org2033050"><span class="section-number-2">4.</span> package management</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
 portage. (note: for alternatives such as flatpak and appimage, see
-<a href="#orgcae6ee5">flatpak and appimage</a>). to communicate with these package managers,
+<a href="#orga4ba47e">flatpak and appimage</a>). to communicate with these package managers,
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 </p>
@@ -501,6 +501,9 @@ rescue your os from a live usb. so dont remove it unless you want a challenge
 
 <p>
 <b>be careful with third-party packages</b>
+</p>
+
+<p>
 sometimes, youll need something that isnt available in your distros official repo.
 in these cases, youll typically want to either add a third-party repository (like
 a ppa on ubuntu or an overlay on gentoo) or use a third-party source (such as the
@@ -518,7 +521,7 @@ a third party package:
 </ul>
 
 <p>
-so, make sure you check the official repos or <a href="#orgcae6ee5">flatpak</a> for the package first.
+so, make sure you check the official repos or <a href="#orga4ba47e">flatpak</a> for the package first.
 </p>
 
 <p>
@@ -526,32 +529,32 @@ so, make sure you check the official repos or <a href="#orgcae6ee5">flatpak</a> 
 </p>
 </div>
 </div>
-<div id="outline-container-orgcae6ee5" class="outline-2">
-<h2 id="orgcae6ee5"><span class="section-number-2">5.</span> flatpak and appimage</h2>
+<div id="outline-container-orga4ba47e" class="outline-2">
+<h2 id="orga4ba47e"><span class="section-number-2">5.</span> flatpak and appimage</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-org94afc47" class="outline-2">
-<h2 id="org94afc47"><span class="section-number-2">6.</span> backups</h2>
+<div id="outline-container-org32a88c1" class="outline-2">
+<h2 id="org32a88c1"><span class="section-number-2">6.</span> backups</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-orgc026f54" class="outline-2">
-<h2 id="orgc026f54"><span class="section-number-2">7.</span> where to find help</h2>
+<div id="outline-container-orgd44df56" class="outline-2">
+<h2 id="orgd44df56"><span class="section-number-2">7.</span> where to find help</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 still working on it&hellip;&hellip;..
 </p>
 </div>
 </div>
-<div id="outline-container-org5796f32" class="outline-2">
-<h2 id="org5796f32"><span class="section-number-2">8.</span> ill keep adding to this</h2>
+<div id="outline-container-orgfe55a06" class="outline-2">
+<h2 id="orgfe55a06"><span class="section-number-2">8.</span> ill keep adding to this</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
@@ -561,7 +564,7 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 17:47</p>
+<p class="date">Created: 2026-11-04 Wed 17:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
