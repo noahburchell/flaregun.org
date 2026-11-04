@@ -52,7 +52,11 @@ with a hyphen (like -iname, -r, -rf, -a, -h) its probably a
 /flag/ that goes along with the command, so for the example above
 you could look up "find command iname option" or something
 
-there are certain commands to pay *extra* attention to
+bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources
+that i explain more thoroughly in [[*where to find help][where to find help]], i very
+much recommend reading that section
+
+now, there are certain commands to pay *extra* attention to
 
 =sudo / doas, rm, dd, curl | *=
 
@@ -218,7 +222,50 @@ working on it........
 working on it........
 
 * where to find help
-still working on it........
+there are many great resources for finding help with anything you need
+to know about linux
+
+** for general advice
+
+often the best way to get help with your distro is to find your distros
+specific wiki, such as the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] or [[https://wiki.gentoo.org/wiki/Handbook:Main_Page][gentoo handbook]]. also, there tends
+to be a discord server available, official or unofficial, with people there
+that like helping newcomers
+
+the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] tends to be particularly helpful even if you are not using arch,
+as it covers certain distro-agnostic topics very well
+
+*on llms*:
+
+yes, they have gotten much better, and they can generally be trusted
+(especially premium models) with certain tasks. with a catch. this is only true
+if you understand what the model is telling you. you might find it helpful
+to add system instructions that instruct the model to explain the commands its
+giving you, or just asking it about parts of the advice you dont understand.
+so, while powerful for people who already somewhat know what theyre doing,
+id advise beginners to be cautious
+
+** for specific commands
+
+=tldr=
+
+this command is unlike man in that you will need to install it, but it is
+often more helpful for beginners as it gives short, example-based summaries,
+and a full man page is sometimes overwhelming
+
+=man=
+
+this command is an interface for manual pages, typing =man foo= will bring
+up the manual page for =foo=. this is good becasue the information there will
+(usually) be specific to the exact version of the software you have installed,
+though it is quite dense and assumes you already know what youre doing a lot
+of the time
+
+[[https://explainshell.com][explainshell.com]]
+
+i never knew about this site until recent! its great, and i wish
+someone told me about it sooner. it breaks a command down piece by
+piece, and makes it easy to understand.
 
 * ill keep adding to this
 
