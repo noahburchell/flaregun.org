@@ -459,5 +459,9 @@ now that youve got the relevant information ready, heres what to do:
 
 * ill keep adding to this
 
-when i think of more to say..... keep notice! i (usually) have good advice
+when i think of more to say..... keep notice! i (usually) have good advice..
 
+whats coming later?
+- how to start actually using the terminal for tasks
+- file permissions
+- uhh more...
