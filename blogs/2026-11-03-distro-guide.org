@@ -21,7 +21,7 @@ is a decision for you to make
 
 * desktop environment
 if you are used to windows, then you (probably) want
-a distribution that comes with KDE plasma. but, to be sure,
+a distribution that comes with kde plasma. but, to be sure,
 this is a good place to take advantage of *live usbs*. what
 is a live usb? it is a usb storage drive that has had a bootable
 linux distribution installed on it. this is mostly used for
