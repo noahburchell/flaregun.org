@@ -195,6 +195,7 @@ your distro doesnt use musl) nothing will run correctly and you will need to
 rescue your os from a live usb. so dont remove it unless you want a challenge
 
 *be careful with third-party packages*
+
 sometimes, youll need something that isnt available in your distros official repo.
 in these cases, youll typically want to either add a third-party repository (like
 a ppa on ubuntu or an overlay on gentoo) or use a third-party source (such as the
