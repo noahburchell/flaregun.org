@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 20:08 -->
+<!-- 2026-11-04 Wed 21:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,19 +206,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb1b748d">1. linux isnt windows</a></li>
-<li><a href="#org22d9302">2. the terminal isnt scary</a></li>
-<li><a href="#orgc7a8205">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#org05ebf01">4. package management</a></li>
-<li><a href="#org7c2e6ac">5. flatpak and appimage</a></li>
-<li><a href="#org2ee3e15">6. backups</a></li>
-<li><a href="#org86f1320">7. where to find help</a>
+<li><a href="#orgbb19c9e">1. linux isnt windows</a></li>
+<li><a href="#org70b49dc">2. the terminal isnt scary</a></li>
+<li><a href="#orga8fb53c">3. you learnt windows, you can learn linux</a></li>
+<li><a href="#org9f56f0e">4. package management</a></li>
+<li><a href="#org09e3147">5. flatpak and appimage</a></li>
+<li><a href="#org79015cc">6. backups</a></li>
+<li><a href="#org5c72417">7. where to find help</a>
 <ul>
-<li><a href="#org8f93e9c">7.1. for general advice</a></li>
-<li><a href="#orgcbddf83">7.2. for specific commands</a></li>
+<li><a href="#orgee549c7">7.1. for general advice</a></li>
+<li><a href="#org7e62bad">7.2. for specific commands</a></li>
 </ul>
 </li>
-<li><a href="#org8cc17d3">8. ill keep adding to this</a></li>
+<li><a href="#org747795b">8. how to ask for help</a></li>
+<li><a href="#orgf2d598d">9. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -226,16 +227,16 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-orgb1b748d" class="outline-2">
-<h2 id="orgb1b748d"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-orgbb19c9e" class="outline-2">
+<h2 id="orgbb19c9e"><span class="section-number-2">1.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager (see <a href="#org05ebf01">package management</a>), through a gui
+using a package manager (see <a href="#org9f56f0e">package management</a>), through a gui
 app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see <a href="#org7c2e6ac">flatpak and appimage</a>).
+or with an appimage (see <a href="#org09e3147">flatpak and appimage</a>).
 </p>
 
 <p>
@@ -247,8 +248,8 @@ otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org22d9302" class="outline-2">
-<h2 id="org22d9302"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
+<div id="outline-container-org70b49dc" class="outline-2">
+<h2 id="org70b49dc"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <i>&hellip;if you learn which commands are</i>
@@ -301,7 +302,7 @@ you could look up "find command iname option" or something
 
 <p>
 bonus bonus tip: <a href="https://explainshell.com">explainshell.com</a> and <code>tldr</code> are great resources
-that i explain more thoroughly in <a href="#org86f1320">where to find help</a>, i very
+that i explain more thoroughly in <a href="#org5c72417">where to find help</a>, i very
 much recommend reading that section
 </p>
 
@@ -329,7 +330,8 @@ with <code>sudo chown -R $USER:$USER ./foo</code>
 deletes it and there is no undo. the most common failiure is most
 often not <code>rm -rf /</code> or something like that, but <code>rm -rf $DIR/*</code>.
 <code>$DIR</code> should expand to <code>/home/user/some/trash</code>, but if it has been
-unset, it will expand to "" and the command <code>rm -rf /*</code> will run
+unset, it will expand to "" and the command <code>rm -rf /*</code> will run.
+always wrap variables like this: <code>rm -rf "${DIR:?}"/*</code>
 </p>
 
 <p>
@@ -444,8 +446,8 @@ i have lost 12h of log data from this very difference &gt;:(
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7a8205" class="outline-2">
-<h2 id="orgc7a8205"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-orga8fb53c" class="outline-2">
+<h2 id="orga8fb53c"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
@@ -453,19 +455,19 @@ to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like<sup><a id="fnr.curlbash" class="footref" href="#fn.curlbash" role="doc-backlink">6</a></sup>. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
-<a href="#org05ebf01">package management</a>) for apps, learn how your desktop works, and, dont be
+<a href="#org9f56f0e">package management</a>) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up<sup><a id="fnr.backups" class="footref" href="#fn.backups" role="doc-backlink">7</a></sup>. youre learning!
 </p>
 </div>
 </div>
-<div id="outline-container-org05ebf01" class="outline-2">
-<h2 id="org05ebf01"><span class="section-number-2">4.</span> package management</h2>
+<div id="outline-container-org9f56f0e" class="outline-2">
+<h2 id="org9f56f0e"><span class="section-number-2">4.</span> package management</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
 portage. (note: for alternatives such as flatpak and appimage, see
-<a href="#org7c2e6ac">flatpak and appimage</a>). to communicate with these package managers,
+<a href="#org09e3147">flatpak and appimage</a>). to communicate with these package managers,
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 </p>
@@ -571,7 +573,7 @@ keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
 "xorg", "mesa", "base", "systemd" to make sure nothing important is being removed,
 and if youre even slightly unsure, just look it up. be <b>very</b> attentive if
 your package manager asks you to do something <i>unusual</i>, such as asking you to
-type "yes do as i say!" to continue. over time, you will learn what is important
+type "yes do as i say!" to continue (linus!). over time, you will learn what is important
 and whats not, so dont worry, you wont be stuck looking things up for very long,
 it just comes with time.
 </p>
@@ -598,7 +600,7 @@ a third party package:
 </ul>
 
 <p>
-so, make sure you check the official repos or <a href="#org7c2e6ac">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">11</a></sup> for the package first.
+so, make sure you check the official repos or <a href="#org09e3147">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">11</a></sup> for the package first.
 </p>
 
 <p>
@@ -606,32 +608,132 @@ so, make sure you check the official repos or <a href="#org7c2e6ac">flatpak</a><
 </p>
 </div>
 </div>
-<div id="outline-container-org7c2e6ac" class="outline-2">
-<h2 id="org7c2e6ac"><span class="section-number-2">5.</span> flatpak and appimage</h2>
+<div id="outline-container-org09e3147" class="outline-2">
+<h2 id="org09e3147"><span class="section-number-2">5.</span> flatpak and appimage</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-working on it&hellip;&hellip;..
+ill admit i dont have much experience with flatpak or appimage, so itll be
+better you do your own research here. there are some points for each that i
+can talk about.
 </p>
+
+<p>
+<b>flatpak</b>:
+</p>
+<ul class="org-ul">
+<li>you dont need sudo to install them (flatpak asks for your password itself,
+or use <code>--user</code> to install just for your user)</li>
+<li>apps share common "runtimes" instead of system libraries, so they wont
+conflict with system packages. (this is also why your first flatpak is a
+big download and the rest are smaller)</li>
+<li>apps are sandboxed, but each app chooses its own permissions, and some ask
+for access to your whole home folder. install <a href="https://flathub.org/apps/com.github.tchx84.Flatseal">flatseal</a> to check and change them</li>
+<li>install with <code>flatpak install flathub org.example.App</code>, update with <code>flatpak update</code>
+(your app store might already be doing this for you)</li>
+</ul>
+
+<p>
+<b>appimage</b>:
+</p>
+<ul class="org-ul">
+<li>an appimage needs the executable bit set before it can run:
+<code>chmod +x whatever.AppImage</code> (or tick "allow executing" in your file manager)</li>
+<li>it bundles almost everything it needs. if one wont start, you might be
+missing <code>libfuse2</code></li>
+<li>this is as close as youll get to the windows experience, good and bad.
+appimages arent sandboxed and dont auto update, so only download them
+from the projects official site</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org2ee3e15" class="outline-2">
-<h2 id="org2ee3e15"><span class="section-number-2">6.</span> backups</h2>
+<div id="outline-container-org79015cc" class="outline-2">
+<h2 id="org79015cc"><span class="section-number-2">6.</span> backups</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-working on it&hellip;&hellip;..
+youve heard the usual <a href="https://en.wikipedia.org/wiki/Backup">3-2-1 advice</a> many times so ill spare that, what
+i want to mention are linux specific tools that can be used to backup
+your system, along with linux specific things you should backup.
 </p>
+
+<p>
+<b>what to backup</b>
+</p>
+
+<p>
+your home folder covers most of it, but some important stuff lives
+outside of it:
+</p>
+
+<ul class="org-ul">
+<li><code>/etc</code>: this is where system config is. fstab, network settings,
+third-party repos (<code>/etc/apt/sources.list.d</code>, <code>/etc/yum.repos.d</code>), and
+if youve ever done <code>sudo nano</code> on something, its probably in here</li>
+<li>a list of your installed packages. its tiny, and it saves you the
+"what did i even have installed" when you reinstall:
+<ul class="org-ul">
+<li>pacman: <code>pacman -Qqe &gt; pkglist.txt</code></li>
+<li>apt: <code>apt-mark showmanual &gt; pkglist.txt</code></li>
+<li>dnf: <code>dnf repoquery --userinstalled &gt; pkglist.txt</code></li>
+<li>portage: backup <code>/var/lib/portage/world</code> and everything in <code>/etc/portage</code></li>
+<li>flatpak: <code>flatpak list --app --columns=application &gt; flatpaks.txt</code></li>
+</ul></li>
+<li>your kernel config (<code>/usr/src/linux/.config</code>) if you compile your own.
+<b>you do not want to redo that from scratch</b></li>
+<li>some of <code>/var/lib</code>: vms (<code>/var/lib/libvirt/images</code>), docker volumes
+(<code>/var/lib/docker/volumes</code>), databases. if you dont know what these are,
+you probably dont have any, so dont worry about it</li>
+<li><code>/root</code> and <code>/var/spool/cron</code> (if you dont know what this is it doesnt apply to you)</li>
+</ul>
+
+<p>
+<b>what not to backup</b>
+</p>
+
+<p>
+some stuff in home is big and useless to keep around:
+</p>
+
+<ul class="org-ul">
+<li><code>~/.cache</code>: its literally cache, apps will rebuild it</li>
+<li><code>~/.local/share/Trash</code>: you threw it away for a reason</li>
+<li><code>~/.var/app/*/cache</code>: flatpak app caches. <b>keep the rest of</b>
+<code>~/.var/app</code> <b>though</b>, thats where flatpak apps keep their settings and data</li>
+<li>steam games (<code>~/.local/share/Steam/steamapps/common</code>): theyre huge and
+you can just redownload them<sup><a id="fnr.steamsaves" class="footref" href="#fn.steamsaves" role="doc-backlink">12</a></sup></li>
+<li>anything you can rebuild, like <code>node_modules</code>, build folders, or
+<code>~/.local/share/containers</code></li>
+</ul>
+
+<p>
+<b>mistakes to avoid</b>
+</p>
+
+<ul class="org-ul">
+<li>hidden files: <code>cp -r ~/* /backup</code> skips everything starting with a dot,
+which is all your config. use <code>rsync -a ~/ /backup/</code> or a real backup tool</li>
+<li>the filesystem on your backup drive: if you copy to a fat32 or exfat usb,
+you lose permissions, ownership and symlinks, and your restore will be
+broken in weird ways. use a linux native filesystem, or a tool that stores its own
+format (borg, restic)</li>
+<li>secrets: <code>~/.ssh</code> and <code>~/.gnupg</code> are in home, so they get backed up too.
+that means either exclude them and back them up seperately and encrypted,
+or encrypt your whole backup</li>
+<li>snapshots arent backups<sup><a id="fnr.snapshot" class="footref" href="#fn.snapshot" role="doc-backlink">13</a></sup>: a snapshot on the same drive dies
+with the drive. its great for undoing a bad update, not for when your
+ssd dies</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org86f1320" class="outline-2">
-<h2 id="org86f1320"><span class="section-number-2">7.</span> where to find help</h2>
+<div id="outline-container-org5c72417" class="outline-2">
+<h2 id="org5c72417"><span class="section-number-2">7.</span> where to find help</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 there are many great resources for finding help with anything you need
 to know about linux
 </p>
 </div>
-<div id="outline-container-org8f93e9c" class="outline-3">
-<h3 id="org8f93e9c"><span class="section-number-3">7.1.</span> for general advice</h3>
+<div id="outline-container-orgee549c7" class="outline-3">
+<h3 id="orgee549c7"><span class="section-number-3">7.1.</span> for general advice</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 often the best way to get help with your distro is to find your distros
@@ -660,9 +762,38 @@ id advise beginners to be cautious
 </p>
 </div>
 </div>
-<div id="outline-container-orgcbddf83" class="outline-3">
-<h3 id="orgcbddf83"><span class="section-number-3">7.2.</span> for specific commands</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org7e62bad" class="outline-3">
+<h3 id="org7e62bad"><span class="section-number-3">7.2.</span> for specific commands</h3>
+</div>
+</div>
+<div id="outline-container-org747795b" class="outline-2">
+<h2 id="org747795b"><span class="section-number-2">8.</span> how to ask for help</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+now that you know where to find help, heres the information you need to include:
+</p>
+
+<ul class="org-ul">
+<li>your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and hardware if its relevant (especially the GPU). <code>inxi -Fxz</code> gives you most of this in one go.</li>
+<li>what you were trying to do</li>
+<li>the exact error message copied as text. <b>do not upload a phone photo do your monitor</b></li>
+<li>relevant logs</li>
+<li>what you already tried</li>
+</ul>
+
+<p>
+now that youve got the relevant information ready, heres what to do:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://dontasktoask.com/">dont ask to ask</a></li>
+<li><a href="https://xyproblem.info/">ask about the real goal</a></li>
+<li>stay there to answer questions and <a href="https://xkcd.com/979/">let people know when its resolved and what fixed it</a></li>
+<li>be patient and polite</li>
+<li><b>ask about commands you dont understand</b></li>
+<li><b>&gt;ask about commands you dont understand&lt;</b></li>
+</ul>
+
 <p>
 <code>tldr</code>
 </p>
@@ -697,10 +828,9 @@ sometimes lags behind and may not know about a very new flag
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org8cc17d3" class="outline-2">
-<h2 id="org8cc17d3"><span class="section-number-2">8.</span> ill keep adding to this</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgf2d598d" class="outline-2">
+<h2 id="orgf2d598d"><span class="section-number-2">9.</span> ill keep adding to this</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 </p>
@@ -711,8 +841,8 @@ when i think of more to say&hellip;.. keep notice! i (usually) have good advice
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.atomic" class="footnum" href="#fnr.atomic" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-on an atomic distro like bazzite, every update needs
-a reboot, becasue theyre done as images
+on an atomic distro like bazzite, every system update needs
+a reboot, becasue theyre done as images. flatpak updates dont
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.nvme" class="footnum" href="#fnr.nvme" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
@@ -739,7 +869,7 @@ kinda like the <code>curl | bash</code> i mentioned earlier
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.backups" class="footnum" href="#fnr.backups" role="doc-backlink">7</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-keeping backups is recommended, see <a href="#org2ee3e15">backups</a> for more info
+keeping backups is recommended, see <a href="#org79015cc">backups</a> for more info
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.aptfull" class="footnum" href="#fnr.aptfull" role="doc-backlink">8</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
@@ -760,12 +890,21 @@ rescue your os from a live usb. so dont remove it unless you want a challenge
 flatpak is also third-party, it just wont conflict with system packages
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.steamsaves" class="footnum" href="#fnr.steamsaves" role="doc-backlink">12</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+most games use steam cloud for saves, but not all of them,
+so check before you skip it
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.snapshot" class="footnum" href="#fnr.snapshot" role="doc-backlink">13</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+also, timeshift skips your home folder by default
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 20:08</p>
+<p class="date">Created: 2026-11-04 Wed 21:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -19,8 +19,8 @@ init youre using), graphics drivers (especially nvidia), or glibc has been updat
 a reboot could also help if you genuinely dont know where to start fixing an issue.
 otherwise you can just leave it running
 
-[fn:atomic] on an atomic distro like bazzite, every update needs
-a reboot, becasue theyre done as images
+[fn:atomic] on an atomic distro like bazzite, every system update needs
+a reboot, becasue theyre done as images. flatpak updates dont
 
 * the terminal isnt scary
 /...if you learn which commands are/
@@ -80,7 +80,8 @@ with =sudo chown -R $USER:$USER ./foo=
 deletes it and there is no undo. the most common failiure is most
 often not =rm -rf /= or something like that, but =rm -rf $DIR/*=.
 =$DIR= should expand to =/home/user/some/trash=, but if it has been
-unset, it will expand to "" and the command =rm -rf /*= will run
+unset, it will expand to "" and the command =rm -rf /*= will run.
+always wrap variables like this: =rm -rf "${DIR:?}"/*=
 
 =dd=: this command writes data somewhere, youll often see:
 
@@ -275,7 +276,7 @@ keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
 "xorg", "mesa", "base", "systemd" to make sure nothing important is being removed,
 and if youre even slightly unsure, just look it up. be *very* attentive if
 your package manager asks you to do something /unusual/, such as asking you to
-type "yes do as i say!" to continue. over time, you will learn what is important
+type "yes do as i say!" to continue (linus!). over time, you will learn what is important
 and whats not, so dont worry, you wont be stuck looking things up for very long,
 it just comes with time.
 
@@ -303,10 +304,90 @@ rescue your os from a live usb. so dont remove it unless you want a challenge
 [fn:flatpak] flatpak is also third-party, it just wont conflict with system packages
 
 * flatpak and appimage
-working on it........
+ill admit i dont have much experience with flatpak or appimage, so itll be
+better you do your own research here. there are some points for each that i
+can talk about.
+
+*flatpak*:
+- you dont need sudo to install them (flatpak asks for your password itself,
+  or use =--user= to install just for your user)
+- apps share common "runtimes" instead of system libraries, so they wont
+  conflict with system packages. (this is also why your first flatpak is a
+  big download and the rest are smaller)
+- apps are sandboxed, but each app chooses its own permissions, and some ask
+  for access to your whole home folder. install [[https://flathub.org/apps/com.github.tchx84.Flatseal][flatseal]] to check and change them
+- install with =flatpak install flathub org.example.App=, update with =flatpak update=
+  (your app store might already be doing this for you)
+
+*appimage*:
+- an appimage needs the executable bit set before it can run:
+  =chmod +x whatever.AppImage= (or tick "allow executing" in your file manager)
+- it bundles almost everything it needs. if one wont start, you might be
+  missing =libfuse2=
+- this is as close as youll get to the windows experience, good and bad.
+  appimages arent sandboxed and dont auto update, so only download them
+  from the projects official site
 
 * backups
-working on it........
+youve heard the usual [[https://en.wikipedia.org/wiki/Backup][3-2-1 advice]] many times so ill spare that, what
+i want to mention are linux specific tools that can be used to backup
+your system, along with linux specific things you should backup.
+
+*what to backup*
+
+your home folder covers most of it, but some important stuff lives
+outside of it:
+
+- =/etc=: this is where system config is. fstab, network settings,
+  third-party repos (=/etc/apt/sources.list.d=, =/etc/yum.repos.d=), and
+  if youve ever done =sudo nano= on something, its probably in here
+- a list of your installed packages. its tiny, and it saves you the
+  "what did i even have installed" when you reinstall:
+  - pacman: =pacman -Qqe > pkglist.txt=
+  - apt: =apt-mark showmanual > pkglist.txt=
+  - dnf: =dnf repoquery --userinstalled > pkglist.txt=
+  - portage: backup =/var/lib/portage/world= and everything in =/etc/portage=
+  - flatpak: =flatpak list --app --columns=application > flatpaks.txt=
+- your kernel config (=/usr/src/linux/.config=) if you compile your own.
+  *you do not want to redo that from scratch*
+- some of =/var/lib=: vms (=/var/lib/libvirt/images=), docker volumes
+  (=/var/lib/docker/volumes=), databases. if you dont know what these are,
+  you probably dont have any, so dont worry about it
+- =/root= and =/var/spool/cron= (if you dont know what this is it doesnt apply to you)
+
+*what not to backup*
+
+some stuff in home is big and useless to keep around:
+
+- =~/.cache=: its literally cache, apps will rebuild it
+- =~/.local/share/Trash=: you threw it away for a reason
+- =~/.var/app/*/cache=: flatpak app caches. *keep the rest of*
+  =~/.var/app= *though*, thats where flatpak apps keep their settings and data
+- steam games (=~/.local/share/Steam/steamapps/common=): theyre huge and
+  you can just redownload them[fn:steamsaves]
+- anything you can rebuild, like =node_modules=, build folders, or
+  =~/.local/share/containers=
+
+[fn:steamsaves] most games use steam cloud for saves, but not all of them,
+so check before you skip it
+
+
+*mistakes to avoid*
+
+- hidden files: =cp -r ~/* /backup= skips everything starting with a dot,
+  which is all your config. use =rsync -a ~/ /backup/= or a real backup tool
+- the filesystem on your backup drive: if you copy to a fat32 or exfat usb,
+  you lose permissions, ownership and symlinks, and your restore will be
+  broken in weird ways. use a linux native filesystem, or a tool that stores its own
+  format (borg, restic)
+- secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too.
+  that means either exclude them and back them up seperately and encrypted,
+  or encrypt your whole backup
+- snapshots arent backups[fn:snapshot]: a snapshot on the same drive dies
+  with the drive. its great for undoing a bad update, not for when your
+  ssd dies
+
+[fn:snapshot] also, timeshift skips your home folder by default
 
 * where to find help
 there are many great resources for finding help with anything you need
@@ -333,6 +414,24 @@ so, while powerful for people who already somewhat know what theyre doing,
 id advise beginners to be cautious
 
 ** for specific commands
+
+* how to ask for help
+now that you know where to find help, heres the information you need to include:
+
+- your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
+- what you were trying to do
+- the exact error message copied as text. *do not upload a phone photo do your monitor*
+- relevant logs
+- what you already tried
+
+now that youve got the relevant information ready, heres what to do:
+
+- [[https://dontasktoask.com/][dont ask to ask]]
+- [[https://xyproblem.info/][ask about the real goal]]
+- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and what fixed it]]
+- be patient and polite
+- *ask about commands you dont understand*
+- *>ask about commands you dont understand<*
 
 =tldr=
 
