@@ -115,8 +115,10 @@ managers mentioned:
 - installing a package: =apt-get install whatever=
 - removing a package: =apt-get remove whatever= (or =apt-get purge whatever= to also delete config files)
 - syncing repos: =apt-get update=
-- updating everything: =apt-get upgrade=
+- updating everything: =apt-get upgrade= *
 - searching for a package: =apt-cache search whatever=
+
+/* =apt-get upgrade= wont install new dependencies, you may need =apt-get full-upgrade= occasionally/
 
 *dnf*:
 
@@ -130,8 +132,10 @@ managers mentioned:
 
 - installing a package: =pacman -S whatever=
 - removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
-- syncing repos + updating everything: =pacman -Syu=
+- syncing repos + updating everything: =pacman -Syu= *
 - searching for a package: =pacman -Ss whatever=
+
+/*never use =pacman -Sy whataver=, partial upgrades are unsuported/
 
 *zypper*:
 
@@ -189,6 +193,22 @@ it just comes with time.
 *glibc is gnus c standard library implementation, if it were removed (assuming
 your distro doesnt use musl) nothing will run correctly and you will need to
 rescue your os from a live usb. so dont remove it unless you want a challenge
+
+*be careful with third-party packages*
+sometimes, youll need something that isnt available in your distros official repo.
+in these cases, youll typically want to either add a third-party repository (like
+a ppa on ubuntu or an overlay on gentoo) or use a third-party source (such as the
+aur on arch). this is incredibly valuable, but it should be used carefully.
+
+a third party package:
+- isnt checked by distro maintainers
+- can conflict with or replace official packages, leading to issues updating
+- can be outdated or unmaintained (security worry)
+- can, in very rare cases, just be malicious (google: "aur incident")
+
+so, make sure you check the official repos or [[*flatpak and appimage][flatpak]] for the package first.
+
+*tip*: remove third-party repos you dont use anymore
 
 * flatpak and appimage
 working on it........
