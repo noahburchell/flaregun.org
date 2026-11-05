@@ -196,7 +196,7 @@ live usb and [[*how to chroot][chroot]] to rebuild them, and verify theyre built
 
 ** Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
 
-*if you use an initramfs - if you dont know this is you*:
+*if you use an initramfs - if you dont know, this is you*:
 
 first, try regenerating it
 
