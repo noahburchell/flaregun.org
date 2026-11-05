@@ -79,7 +79,7 @@ so if you run =ls= right now, you may see "Documents", "Downloads", etc.
 go to documents: since =ls= listed "Documents" in your current directory, you can
 type =cd Documents= to go there
 
-** =.= =..=
+** "=.=" "=..="
 =.= is your current directory. so if you run =ls= and see "Documents",
 =cd ./Documents= is equivelant to =cd Documents=
 
@@ -118,8 +118,7 @@ guide, if you installed =vim= or =mg=, ill assume you know how to use them
 *** i dont want to type this super long filename
 - *tab completion*: start typing a file or directory name and hit tab.
   the shell fills in the rest (if what your looking for exists). hit
-  tab twice to see every option. use this constantly, it also means
-  you cant typo a filename
+  tab twice to see every option
 - *spaces*: =cat my file.txt= looks for a file called "my" and
   one called "file.txt". quote it like =cat "my file.txt"= or escape
   the space =cat my\ file.txt=. tab completion does this for you
@@ -128,25 +127,20 @@ also, most linux native filesystems is case sensitive so
 =Documents= and =documents= are two different directories
 
 *** looking at files
-- =cat foo.txt=: prints the whole file. fine for small files
+- =cat foo.txt=: prints the whole file
 - =less foo.txt=: opens the file in a pager you can scroll through. =q=
-  to quit, =/word= to search, =n= for the next match. use this for
-  anything longer than your terminal
+  to quit, =/word= to search, =n= for the next match
 - =ls -l=: lists files with their size, owner, permissions and
-  modification date. =ls -a= also shows hidden files (anything starting
-  with a dot, which is where all your config lives). =ls -la= does both
-- =file foo=: tells you what a file actually is, regardless of its
-  extension (or lack of one)
+  modification date. =ls -a= also shows hidden files, =ls -la= does both
+- =file foo=: tells you what file a file is
 
 *** making, copying, moving
-- =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes the whole
-  chain at once
-- =touch foo.txt=: makes an empty file (or updates the timestamp if it exists)
-- =cp foo.txt bar.txt=: copies a file. for directories you need
-  =cp -r foo bar=
+- =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes all of those at
+  once if they dont exist
+- =touch foo.txt=: makes an empty file
+- =cp foo.txt bar.txt=: copies a file foo.txt to bar.txt
 - =mv foo.txt bar.txt=: moves a file. this is also how you *rename*
-  things, there is no separate rename command. =mv foo.txt ~/Documents/=
-  moves it somewhere else, keeping the name
+  things
 
 note that =cp= and =mv= will overwrite an existing file with the
 same name without asking. add =-i= if you want to be asked
@@ -158,16 +152,19 @@ reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe
 way to replace a file is to write the new version somewhere else and =mv= it
 over the top
 
+how do i know when i need a trailing slash versus when i dont? i dont
+know, im asking the same thign
+
 [fn:inode] =cp= truncates the existing file and writes into the same inode.
 =mv= on the same filesystem is a =rename()=, which swaps the directory entry
-to point at the source inode in one step. across filesystems =mv= is just
+to point at the source inode. across filesystems =mv= is just
 copy then delete and loses this property
 
 *** deleting
 =rm= deletes files, =rm -r= deletes directories, and none of it goes to
 the trash. i covered this in [[*dont lose your data][dont lose your data]].
 if you want a terminal command that actually uses
-the trash, =gio trash foo= probably already works on your desktop, or
+the trash, =gio trash foo= probably will work, or
 install =trash-cli= and use =trash-put foo=
 
 *** editing with nano
@@ -501,11 +498,11 @@ can talk about.
   (your app store might already be doing this for you)
 
 *appimage*:
-- an appimage needs the executable bit set before it can run:
-  =chmod +x whatever.AppImage= (or tick "allow executing" in your file manager)
+- an appimage needs the executable bit set before it can run.
+  =chmod +x whatever.AppImage=
 - it bundles almost everything it needs. if one wont start, you might be
   missing =libfuse2=
-- this is as close as youll get to the windows experience, good or bad.
+- this is as close as youll get to the windows experience.
   appimages arent sandboxed and dont auto update, so only download them
   from the projects official site
 
@@ -519,13 +516,12 @@ your home folder covers most of it, but some important stuff lives
 outside of it:
 
 - =/etc=: this is where system config is. fstab, network settings,
-  third-party repos (=/etc/apt/sources.list.d=, =/etc/yum.repos.d=), and
-  if youve ever done =sudo nano= on something, its probably in here
-- a list of your installed packages. its tiny, and it saves you the
-  "what did i even have installed" when you reinstall:
+  third-party repos
+- a list of your installed packages
   - pacman: =pacman -Qqe > pkglist.txt=
   - apt: =apt-mark showmanual > pkglist.txt=
   - dnf: =dnf repoquery --userinstalled > pkglist.txt=
+  - zypper: im actually not sure, so look it up
   - portage: backup =/var/lib/portage/world= and everything in =/etc/portage=
   - flatpak: =flatpak list --app --columns=application > flatpaks.txt=
 - your kernel config (=/usr/src/linux/.config=) if you compile your own.
@@ -539,12 +535,13 @@ outside of it:
 
 some stuff in home is big and useless to keep around:
 
-- =~/.cache=: its literally cache, apps will rebuild it
-- =~/.local/share/Trash=: you threw it away for a reason
+- =~/.cache=: its literally cache
+- =~/.local/share/Trash=: ...
 - =~/.var/app/*/cache=: flatpak app caches. *keep the rest of*
   =~/.var/app= *though*, thats where flatpak apps keep their settings and data
 - steam games (=~/.local/share/Steam/steamapps/common=): theyre huge and
-  you can just redownload them[fn:steamsaves]
+  you can just redownload them[fn:steamsaves]. (unless youre still on vdsl,
+  fuck you iinet!)
 - anything you can rebuild, like =node_modules=, or build folders
 
 [fn:steamsaves] most games use steam cloud for saves, but not all of them,
@@ -554,11 +551,9 @@ so check before you skip it
 ** mistakes to avoid
 
 - hidden files: =cp -r ~/* /backup= skips everything starting with a dot,
-  which is all your config. use =rsync -aHAX ~/ /backup/= or a real backup tool
-- the filesystem on your backup drive: if you copy to a fat32 or exfat usb,
-  you lose permissions, ownership and symlinks, and your restore will be
-  broken in weird ways. use a linux native filesystem, or a tool that stores its own
-  format (borg, restic)
+  which is all your config. use =rsync -aHAX ~/ /backup/= or some other tool
+- if you copy to a fat32 or exfat usb, you lose permissions, ownership and
+  symlinks,use a linux native filesystem
 - secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too.
   that means either exclude them and back them up separately and encrypted,
   or encrypt your whole backup
