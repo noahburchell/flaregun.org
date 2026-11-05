@@ -115,18 +115,21 @@ so its important to know how to view, create, move, and edit
 files without opening a file manager. im going to assume =nano= for this
 guide, if you installed =vim= or =mg=, ill assume you know how to use them
 
-*** i dont want to type this super long filename
-- *tab completion*: start typing a file or directory name and hit tab.
-  the shell fills in the rest (if what your looking for exists). hit
-  tab twice to see every option
-- *spaces*: =cat my file.txt= looks for a file called "my" and
-  one called "file.txt". quote it like =cat "my file.txt"= or escape
-  the space =cat my\ file.txt=. tab completion does this for you
+*i dont want to type this super long filename*:
+
+luckily, you have *tab completion*. start typing a file or directory name
+then press tab and the shell fills in the rest (if what your looking for
+exists). hit tab twice to see every option.
+
+spaces in filenames? =cat my file.txt= looks for a file called "my" and
+one called "file.txt". quote it like =cat "my file.txt"= or escape
+the space =cat my\ file.txt=. tab completion does this for you
 
 also, most linux native filesystems is case sensitive so
 =Documents= and =documents= are two different directories
 
-*** looking at files
+*looking at files*:
+
 - =cat foo.txt=: prints the whole file
 - =less foo.txt=: opens the file in a pager you can scroll through. =q=
   to quit, =/word= to search, =n= for the next match
@@ -134,7 +137,8 @@ also, most linux native filesystems is case sensitive so
   modification date. =ls -a= also shows hidden files, =ls -la= does both
 - =file foo=: tells you what file a file is
 
-*** making, copying, moving
+*making, copying, moving*:
+
 - =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes all of those at
   once if they dont exist
 - =touch foo.txt=: makes an empty file
@@ -152,39 +156,41 @@ reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe
 way to replace a file is to write the new version somewhere else and =mv= it
 over the top
 
-how do i know when i need a trailing slash versus when i dont? i dont
-know, im asking the same thign
+when does =cp= copy only the contents of the directory into the new directory
+versus copying the whole directory into the directory making it a subdirectory
+of the new directory? honestly, i dont fucking know. it seems to flip a coin.
 
 [fn:inode] =cp= truncates the existing file and writes into the same inode.
 =mv= on the same filesystem is a =rename()=, which swaps the directory entry
 to point at the source inode. across filesystems =mv= is just
 copy then delete and loses this property
 
-*** deleting
+*deleting*:
+
 =rm= deletes files, =rm -r= deletes directories, and none of it goes to
 the trash. i covered this in [[*dont lose your data][dont lose your data]].
 if you want a terminal command that actually uses
 the trash, =gio trash foo= probably will work, or
 install =trash-cli= and use =trash-put foo=
 
-*** editing with nano
-=nano foo.txt= opens the file (or creates it if it doesnt exist). the
-bottom of the screen shows the shortcuts, where =^= means ctrl and =M-=
-means alt. the ones you actually need:
+*editing with nano*:
 
-- =ctrl+o=: save (it asks for the filename, just hit enter)
-- =ctrl+x=: exit (it asks to save if you havent)
+=nano foo.txt= opens the file (or creates it). the
+bottom of the screen shows the shortcuts. =^= means ctrl and =M-=
+means alt. here are common ones:
+
+- =ctrl+o=: save
+- =ctrl+x=: exit
 - =ctrl+w=: search
 - =ctrl+k=: cut the current line, =ctrl+u= to paste it back
 - =alt+u=: undo
-- =ctrl+g=: help, if you forget any of this
+- =ctrl+g=: help
 
 if the file is owned by root (most of =/etc=), you will need
-=sudo nano /etc/foo=[fn:sudoedit]. this is where "its asking for a filename
-and wont let me save" comes from, nano opened fine but you dont have
-permission to write. youll have to exit and reopen it with sudo
+=sudo nano /etc/foo=[fn:sudoedit]
 
-*** wildcards
+*wildcards*:
+
 you will see =*= in a lot of commands. the shell expands it to "every
 file that matches", so =ls *.txt= lists every file ending in .txt and
 =cp ~/Pictures/*.png /backup/= copies every png. this is useful and also
@@ -528,7 +534,7 @@ outside of it:
   *you do not want to redo that from scratch*
 - some of =/var/lib=: vms (=/var/lib/libvirt/images=), docker volumes
   (=/var/lib/docker/volumes=), databases. if you dont know what these are,
-  you probably dont have any, so dont worry about it
+  you probably dont have any
 - =/root= and =/var/spool/cron= (if you dont know what this is it doesnt apply to you)
 
 ** what not to backup
@@ -545,23 +551,23 @@ some stuff in home is big and useless to keep around:
 - anything you can rebuild, like =node_modules=, or build folders
 
 [fn:steamsaves] most games use steam cloud for saves, but not all of them,
-so check before you skip it
+so check
 
 
 ** mistakes to avoid
 
-- hidden files: =cp -r ~/* /backup= skips everything starting with a dot,
-  which is all your config. use =rsync -aHAX ~/ /backup/= or some other tool
+- hidden files: =cp -r ~/* /backup= skips hidden files. use
+  =rsync -aHAX ~/ /backup/= or some other tool. (or just backup hidden files
+  manually)
 - if you copy to a fat32 or exfat usb, you lose permissions, ownership and
   symlinks,use a linux native filesystem
 - secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too.
   that means either exclude them and back them up separately and encrypted,
-  or encrypt your whole backup
-- snapshots arent backups[fn:snapshot]: a snapshot on the same drive dies
-  with the drive. its great for undoing a bad update, not for when your
-  ssd dies
+  or encrypt your whole backup 
+- snapshots arent backups[fn:snapshot]
 
-[fn:snapshot] also, timeshift skips your home folder by default
+[fn:snapshot] theyre good for system rollbacks not for keeping data safe.
+also, timeshift skips your home folder by default
 
 * where to find help
 there are many great resources for finding help with anything you need
@@ -643,7 +649,8 @@ youre probably on one of these:
 - void: runit
 - youre a legend: [[https://github.com/noahburchell/ninit][ninit]]
   
-not sure? =cat /proc/1/comm= tells you what your init is.
+not sure? =cat /proc/1/comm= tells you what your init is. (well, sysvinit shows as "init"
+so if it says that try rc-update to see what you have)
 
 | task            | systemd                | openrc                  | runit                             |
 |-----------------+------------------------+-------------------------+-----------------------------------|
