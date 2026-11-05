@@ -2,6 +2,8 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 
+* this is a work in progress!
+
 first, dont worry! chances are, no data is lost and nothing is broken.
 it takes a great deal of effort to "break" a linux install, and no,
 a missing desktop is not a broken install! at one point getty was
@@ -132,8 +134,8 @@ the corner and a short message in the middle:
              VFS: Unable to mount root fs on unknown-block(0,0)
 #+end_example
 
-the last line is the reason. depending on the distro the colours differ,
-there may be a qr code next to the message, or the screen shows the
+the last line is the reason. depending on the kernel the colours differ,
+and there may be a qr code next to the message, or the screen shows the
 last lines of the kernel log instead
 
 if your kernel is older or your graphics driver doesnt support the panic
@@ -194,7 +196,13 @@ live usb and [[*how to chroot][chroot]] to rebuild them, and verify theyre built
 
 ** Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
 
-if you run with no initramfs:
+*if you use an initramfs - if you dont know this is you*:
+
+first, try regenerating it
+
+if that doesnt work, /boot might be full. delete old kernels and try again
+
+*if you run with no initramfs*:
 
 first, check your kernel cmdline for UUID,
 the UUID lives in the filesystems superblock and the kernel cannot
@@ -205,12 +213,6 @@ resolved by the kernel
 if your cmdline does say PARTUUID, the next likely issue is
 that you built your kernel with the necesary device and
 filesystem drivers as modules. make them =y
-
-if you use an initramfs:
-
-first, try regenerating it
-
-if that doesnt work, /boot might be full. delete old kernels and try again
 
 ** Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.
 
