@@ -12,10 +12,11 @@ if youre a begginner and want to learn linux, read all the sections
   to learn
 - you dont have to read top down, jump to the sections you want
   to learn about
-
+- there may be words you dont understand and arent explained, you are encouraged to look things up
+  
 * linux isnt windows
 the old windows-isms of grabbing random executables off the web to
-install software, or rebooting to fix issues, or playing valorant,
+install software, rebooting to fix issues, and playing valorant,
 are gone. on linux, software is installed through the command line
 using a package manager (see [[*package management][package management]]), through a gui
 app store (if your desktop environment provides one), through flatpak,
@@ -272,7 +273,7 @@ portage. (note: for alternatives such as flatpak and appimage, see
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 
-** apt:
+** apt
 
 - installing a package: =apt install whatever=
 - removing a package: =apt remove whatever= (or =apt purge whatever= to also delete config files)
@@ -283,7 +284,7 @@ managers mentioned:
 [fn:aptfull] =apt upgrade= wont remove packages, you may need =apt full-upgrade= occasionally
 
 
-** dnf:
+** dnf
 
 - installing a package: =dnf install whatever=
 - removing a package: =dnf remove whatever=
@@ -291,7 +292,7 @@ managers mentioned:
 - updating everything: =dnf upgrade=
 - searching for a package: =dnf search whatever=
 
-** pacman:
+** pacman
 
 - installing a package: =pacman -S whatever=
 - removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
@@ -301,7 +302,7 @@ managers mentioned:
 [fn:partial] never use =pacman -Sy whatever=, partial upgrades are unsupported
 
 
-** zypper:
+** zypper
 
 - installing a package: =zypper install whatever=
 - removing a package: =zypper remove whatever=
@@ -309,7 +310,7 @@ managers mentioned:
 - updating everything: =zypper update= (on tumbleweed use =zypper dup= instead)
 - searching for a package: =zypper search whatever=
 
-** portage:
+** portage
 
 - installing a package: =emerge -a whatever=
 - removing a package: =emerge -a --deselect whatever= then =emerge --depclean=
