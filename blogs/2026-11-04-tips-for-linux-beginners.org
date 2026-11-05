@@ -272,7 +272,7 @@ portage. (note: for alternatives such as flatpak and appimage, see
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 
-*apt*:
+** apt:
 
 - installing a package: =apt install whatever=
 - removing a package: =apt remove whatever= (or =apt purge whatever= to also delete config files)
@@ -283,7 +283,7 @@ managers mentioned:
 [fn:aptfull] =apt upgrade= wont remove packages, you may need =apt full-upgrade= occasionally
 
 
-*dnf*:
+** dnf:
 
 - installing a package: =dnf install whatever=
 - removing a package: =dnf remove whatever=
@@ -291,7 +291,7 @@ managers mentioned:
 - updating everything: =dnf upgrade=
 - searching for a package: =dnf search whatever=
 
-*pacman*:
+** pacman:
 
 - installing a package: =pacman -S whatever=
 - removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
@@ -301,7 +301,7 @@ managers mentioned:
 [fn:partial] never use =pacman -Sy whatever=, partial upgrades are unsupported
 
 
-*zypper*:
+** zypper:
 
 - installing a package: =zypper install whatever=
 - removing a package: =zypper remove whatever=
@@ -309,7 +309,7 @@ managers mentioned:
 - updating everything: =zypper update= (on tumbleweed use =zypper dup= instead)
 - searching for a package: =zypper search whatever=
 
-*portage*:
+** portage:
 
 - installing a package: =emerge -a whatever=
 - removing a package: =emerge -a --deselect whatever= then =emerge --depclean=
@@ -333,7 +333,7 @@ package and that it came from a trustworthy source after it downloads it
 (one of the many reasons this approach is far superior to the windows approach).
 "syncing" just means updating the database.
 
-*dont delete your desktop*
+** dont delete your desktop
 
 you may have seen that... situation linus was in when he deleted his desktop
 using pop os. this was caused by a packaging mistake with steam, but linus
@@ -354,7 +354,7 @@ type "yes do as i say!" to continue (linus!). over time, you will learn what is 
 and whats not, so dont worry, you wont be stuck looking things up for very long,
 it just comes with time.
 
-*be careful with third-party packages*
+** be careful with third-party packages
 
 sometimes, youll need something that isnt available in your distros official repo.
 in these cases, youll typically want to either add a third-party repository (like
@@ -406,7 +406,7 @@ can talk about.
 youve heard the usual [[https://en.wikipedia.org/wiki/Backup][3-2-1 advice]] many times so ill spare that, what
 is linux specific things you should backup.
 
-*what to backup*
+** what to backup
 
 your home folder covers most of it, but some important stuff lives
 outside of it:
@@ -428,7 +428,7 @@ outside of it:
   you probably dont have any, so dont worry about it
 - =/root= and =/var/spool/cron= (if you dont know what this is it doesnt apply to you)
 
-*what not to backup*
+** what not to backup
 
 some stuff in home is big and useless to keep around:
 
@@ -445,7 +445,7 @@ some stuff in home is big and useless to keep around:
 so check before you skip it
 
 
-*mistakes to avoid*
+** mistakes to avoid
 
 - hidden files: =cp -r ~/* /backup= skips everything starting with a dot,
   which is all your config. use =rsync -aHAX ~/ /backup/= or a real backup tool
@@ -515,7 +515,7 @@ now that you know where to find help, heres the information you need to include:
 - your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
 - what you were trying to do
 - the exact error message copied as text. *do not upload a phone photo of your monitor*
-- relevant logs (get kernel logs with =dmesg=, boot logs depend on your init, so for systemd specifically: =journalctl -b= (this boot), =journalctl -b -1= (previous boot))
+- relevant logs (get kernel logs with =dmesg=, boot logs with =journalctl -b= (this boot), =journalctl -b -1= (previous boot). see [[*not every distro uses systemd][not every distro uses systemd]])
 - what you already tried
 
 now that youve got the relevant information ready, heres what to do:
@@ -531,6 +531,25 @@ now that youve got the relevant information ready, heres what to do:
 
 ** how to get your desktop back
 coming soon...
+
+* not every distro uses systemd
+most guides you find online assume systemd, but its not the only init.
+if a guide tells you to run =systemctl= and you get "command not found",
+youre probably on one of these:
+
+- mx linux, antix, devuan: sysvinit
+- gentoo, alpine, artix: openrc (artix also offers runit, dinit, s6)
+- void: runit
+- your a legend: [[https://github.com/noahburchell/ninit][ninit]]
+  
+not sure? =cat /proc/1/comm= tells you what your init is.
+
+| task            | systemd                | openrc                  | runit                             |
+|-----------------+------------------------+-------------------------+-----------------------------------|
+| check a service | =systemctl status foo= | =rc-service foo status= | =sv status foo=                   |
+| start a service | =systemctl start foo=  | =rc-service foo start=  | =sv up foo=                       |
+| start on boot   | =systemctl enable foo= | =rc-update add foo=     | =ln -s /etc/sv/foo /var/service/= |
+| logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
 
 * ill keep adding to this
 
