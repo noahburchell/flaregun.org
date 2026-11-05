@@ -165,6 +165,7 @@ of the new directory? honestly, i dont fucking know. it seems to flip a coin.
 to point at the source inode. across filesystems =mv= is just
 copy then delete and loses this property
 
+
 *deleting*:
 
 =rm= deletes files, =rm -r= deletes directories, and none of it goes to
