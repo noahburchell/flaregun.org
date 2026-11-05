@@ -5,6 +5,14 @@
 you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]?
 brilliant! now that youre part of the team, here are some tips!
 
+* how to use this guide
+if youre a begginner and want to learn linux, read all the sections 
+
+- this guide is aimed at beginners, but some sections require willingness
+  to learn
+- you dont have to read top down, jump to the sections you want
+  to learn about
+
 * linux isnt windows
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
@@ -23,13 +31,74 @@ otherwise you can just leave it running
 a reboot, because theyre done as images. flatpak updates dont
 
 * the terminal isnt scary
-/...if you learn which commands are/
-
 a lot of people advise beginners to avoid the terminal at all costs.
 this is counterproductive, at some point you will have to use it to
-fix an issue or use some tool that you want to use. if you can write
-=/gamemode creative=, you can write =dnf upgrade --refresh=.
-so how do you tell a scary command from a safe command? as a
+fix an issue or use some tool that you want to use.
+
+*if you can write* =/gamemode creative=, *you can write* =dnf upgrade --refresh=.
+
+** how to use the terminal
+well, you first need to open one! if you have deliberately installed
+a terminal emulator, i can assume you know what its called. but
+for people whove never thought about it, heres a list of the default
+terminal installed with each desktop environment:
+
+- kde: konsole
+- gnome: gnome terminal
+- xfce4: xfce4-terminal
+
+so just open it like any other app, then you should see something that
+looks like either one of these:
+
+#+begin_src sh :eval no
+[user@host ~]$ 
+user@host:~$ 
+#+end_src
+
+(note: for this guide ill use "user" and "host" as a placeholder for your
+username and hostname)
+
+this is called a prompt. the important parts of each are the =user=, =host=,
+=~= and =$=. (the rest is just decoration)
+
+- =user=: your username
+- =host=: your hostname
+- =~=: your current working directory
+- =$=: delimiter, it marks the end of the prompt (not important, just know as your user it is "=$=", but as root its "=#=")
+
+you can type text here and itll appear just after your prompt. so, what do you
+/do/ with this? well it depends on what youre trying to do. working on this
+section......
+
+** sudo / doas
+=sudo= and =doas= are privilege elevation tools that let
+permitted users run commands as root or another user. for now, your can ignore
+the "other user" part and just think of it as running a command as *root*.
+
+*who is root?*
+root is the user account with the user id 0, now that probably doesnt mean much to you,
+so just think of it as the administrator account. certain things you will need to do
+require administrator privileges, the most common example is probably installing new
+software. see [[*package management][package management]]
+
+when you run a command with =sudo= or =doas=, a prompt will appear asking you to
+type your password. often, it will provide no visual feedback. this is normal, it
+isnt frozen, its just not showing you whats being typed. so, to get an idea, please
+open your terminal and type the command =sudo echo hi= or =doas echo hi=. (if your not
+sure which tool you have installed, try sudo first as its the more common one). you
+should see a prompt asking for your password. type your password in, and hit enter.
+if you typed your password correctly and you have the required privileges, you should
+see "hi". if you run the same command, it may not ask for your password, this is becasue
+sudo (and doas with persist enabled) cache your credentials so you dont have to repeatedly
+type your password. if you see an error such as "user is not in the sudoers file", it
+means your account does not have administrator permissions
+
+** editors
+config files. working on it...
+
+** learning to read commands
+nobody knows every command, there are too many.  
+so how do we tell a scary command from a safe command? as a
 general rule, just look it up! we have /google/ and =man= yknow!?
 (note: man is preferred in many cases) if you are told to run a command
 you dont understand, for example:
@@ -63,18 +132,19 @@ bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are g
 that i explain more thoroughly in [[*where to find help][where to find help]], i very
 much recommend reading that section
 
-now, there are certain commands to pay *extra* attention to
+* dont lose your data
+there are certain commands to pay *extra* attention to
 
 =sudo / doas, rm, dd, curl | *=
 
-=sudo / doas=: commands that start with either of these run as *root*.
-that means, it has total privileges, it can do *anything*. never run a
+=sudo / doas=: these commands were covered in [[*sudo / doas][sudo / doas]]. but i only covered
+how to use them, not the places where it becomes a problem. never run a
 gui app as root, and if a command doesnt work, running it with sudo often
 will not help unless the command genuinely needs root. if you happen to run
 something like =sudo mkdir ./foo=, you will later run into issues where
 you cannot make files in it. that is because
 the directory is owned by root and not your user. this can be resolved
-with =sudo chown -R $USER:$USER ./foo=
+with =sudo chown -R "$USER": ./foo=
 
 =rm=: this command doesnt send something to the trash, it permanently
 deletes it and there is no undo. the most common failure is most
@@ -456,6 +526,11 @@ now that youve got the relevant information ready, heres what to do:
 - be patient and polite
 - *ask about commands you dont understand*
 - *>ask about commands you dont understand<*
+
+* how to help yourself
+
+** how to get your desktop back
+coming soon...
 
 * ill keep adding to this
 

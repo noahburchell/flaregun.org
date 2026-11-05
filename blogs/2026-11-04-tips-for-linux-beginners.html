@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-04 Wed 22:20 -->
+<!-- 2026-11-05 Thu 12:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,20 +206,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc0600e3">1. linux isnt windows</a></li>
-<li><a href="#orgdaa487c">2. the terminal isnt scary</a></li>
-<li><a href="#org961493b">3. you learnt windows, you can learn linux</a></li>
-<li><a href="#org6667802">4. package management</a></li>
-<li><a href="#org78e828c">5. flatpak and appimage</a></li>
-<li><a href="#org269e35e">6. backups</a></li>
-<li><a href="#orge8b6947">7. where to find help</a>
+<li><a href="#org47fb37e">1. how to use this guide</a></li>
+<li><a href="#orgd25026d">2. linux isnt windows</a></li>
+<li><a href="#org07ae32a">3. the terminal isnt scary</a>
 <ul>
-<li><a href="#org7707585">7.1. for general advice</a></li>
-<li><a href="#org670f8c5">7.2. for specific commands</a></li>
+<li><a href="#orge6296e4">3.1. how to use the terminal</a></li>
+<li><a href="#org8bbacfd">3.2. sudo / doas</a></li>
+<li><a href="#org930a09d">3.3. editors</a></li>
+<li><a href="#org33e4df1">3.4. learning to read commands</a></li>
 </ul>
 </li>
-<li><a href="#orgf5bb484">8. how to ask for help</a></li>
-<li><a href="#orgb241602">9. ill keep adding to this</a></li>
+<li><a href="#org472e450">4. dont lose your data</a></li>
+<li><a href="#org3177f9a">5. you learnt windows, you can learn linux</a></li>
+<li><a href="#org0b37a8a">6. package management</a></li>
+<li><a href="#org123b799">7. flatpak and appimage</a></li>
+<li><a href="#org0614f1e">8. backups</a></li>
+<li><a href="#orgac6d1c7">9. where to find help</a>
+<ul>
+<li><a href="#orge960989">9.1. for general advice</a></li>
+<li><a href="#org17e6ca8">9.2. for specific commands</a></li>
+</ul>
+</li>
+<li><a href="#orgcd6067f">10. how to ask for help</a></li>
+<li><a href="#org5cbc46d">11. how to help yourself</a>
+<ul>
+<li><a href="#org1e1ad13">11.1. how to get your desktop back</a></li>
+</ul>
+</li>
+<li><a href="#org2f25e5d">12. ill keep adding to this</a></li>
 </ul>
 </div>
 </div>
@@ -227,16 +241,31 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-orgc0600e3" class="outline-2">
-<h2 id="orgc0600e3"><span class="section-number-2">1.</span> linux isnt windows</h2>
+<div id="outline-container-org47fb37e" class="outline-2">
+<h2 id="org47fb37e"><span class="section-number-2">1.</span> how to use this guide</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+if youre a begginner and want to learn linux, read all the sections 
+</p>
+
+<ul class="org-ul">
+<li>this guide is aimed at beginners, but some sections require willingness
+to learn</li>
+<li>you dont have to read top down, jump to the sections you want
+to learn about</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd25026d" class="outline-2">
+<h2 id="orgd25026d"><span class="section-number-2">2.</span> linux isnt windows</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 the old windows-isms of grabbing random executables off the web to
 install software, or rebooting to fix issues, or playing valorant,
 are gone. on linux, software is installed through the command line
-using a package manager (see <a href="#org6667802">package management</a>), through a gui
+using a package manager (see <a href="#org0b37a8a">package management</a>), through a gui
 app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see <a href="#org78e828c">flatpak and appimage</a>).
+or with an appimage (see <a href="#org123b799">flatpak and appimage</a>).
 </p>
 
 <p>
@@ -248,19 +277,116 @@ otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-orgdaa487c" class="outline-2">
-<h2 id="orgdaa487c"><span class="section-number-2">2.</span> the terminal isnt scary</h2>
-<div class="outline-text-2" id="text-2">
-<p>
-<i>&hellip;if you learn which commands are</i>
-</p>
-
+<div id="outline-container-org07ae32a" class="outline-2">
+<h2 id="org07ae32a"><span class="section-number-2">3.</span> the terminal isnt scary</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 a lot of people advise beginners to avoid the terminal at all costs.
 this is counterproductive, at some point you will have to use it to
-fix an issue or use some tool that you want to use. if you can write
-<code>/gamemode creative</code>, you can write <code>dnf upgrade --refresh</code>.
-so how do you tell a scary command from a safe command? as a
+fix an issue or use some tool that you want to use.
+</p>
+
+<p>
+<b>if you can write</b> <code>/gamemode creative</code>, <b>you can write</b> <code>dnf upgrade --refresh</code>.
+</p>
+</div>
+<div id="outline-container-orge6296e4" class="outline-3">
+<h3 id="orge6296e4"><span class="section-number-3">3.1.</span> how to use the terminal</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+well, you first need to open one! if you have deliberately installed
+a terminal emulator, i can assume you know what its called. but
+for people whove never thought about it, heres a list of the default
+terminal installed with each desktop environment:
+</p>
+
+<ul class="org-ul">
+<li>kde: konsole</li>
+<li>gnome: gnome terminal</li>
+<li>xfce4: xfce4-terminal</li>
+</ul>
+
+<p>
+so just open it like any other app, then you should see something that
+looks like either one of these:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><code>[user@host ~]$ 
+user@host:~$ 
+</code></pre>
+</div>
+
+<p>
+(note: for this guide ill use "user" and "host" as a placeholder for your
+username and hostname)
+</p>
+
+<p>
+this is called a prompt. the important parts of each are the <code>user</code>, <code>host</code>,
+<code>~</code> and <code>$</code>. (the rest is just decoration)
+</p>
+
+<ul class="org-ul">
+<li><code>user</code>: your username</li>
+<li><code>host</code>: your hostname</li>
+<li><code>~</code>: your current working directory</li>
+<li><code>$</code>: delimiter, it marks the end of the prompt (not important, just know as your user it is "<code>$</code>", but as root its "<code>#</code>")</li>
+</ul>
+
+<p>
+you can type text here and itll appear just after your prompt. so, what do you
+<i>do</i> with this? well it depends on what youre trying to do. working on this
+section&hellip;&hellip;
+</p>
+</div>
+</div>
+<div id="outline-container-org8bbacfd" class="outline-3">
+<h3 id="org8bbacfd"><span class="section-number-3">3.2.</span> sudo / doas</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<code>sudo</code> and <code>doas</code> are privilege elevation tools that let
+permitted users run commands as root or another user. for now, your can ignore
+the "other user" part and just think of it as running a command as <b>root</b>.
+</p>
+
+<p>
+<b>who is root?</b>
+root is the user account with the user id 0, now that probably doesnt mean much to you,
+so just think of it as the administrator account. certain things you will need to do
+require administrator privileges, the most common example is probably installing new
+software. see <a href="#org0b37a8a">package management</a>
+</p>
+
+<p>
+when you run a command with <code>sudo</code> or <code>doas</code>, a prompt will appear asking you to
+type your password. often, it will provide no visual feedback. this is normal, it
+isnt frozen, its just not showing you whats being typed. so, to get an idea, please
+open your terminal and type the command <code>sudo echo hi</code> or <code>doas echo hi</code>. (if your not
+sure which tool you have installed, try sudo first as its the more common one). you
+should see a prompt asking for your password. type your password in, and hit enter.
+if you typed your password correctly and you have the required privileges, you should
+see "hi". if you run the same command, it may not ask for your password, this is becasue
+sudo (and doas with persist enabled) cache your credentials so you dont have to repeatedly
+type your password. if you see an error such as "user is not in the sudoers file", it
+means your account does not have administrator permissions
+</p>
+</div>
+</div>
+<div id="outline-container-org930a09d" class="outline-3">
+<h3 id="org930a09d"><span class="section-number-3">3.3.</span> editors</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+config files. working on it&hellip;
+</p>
+</div>
+</div>
+<div id="outline-container-org33e4df1" class="outline-3">
+<h3 id="org33e4df1"><span class="section-number-3">3.4.</span> learning to read commands</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+nobody knows every command, there are too many.  
+so how do we tell a scary command from a safe command? as a
 general rule, just look it up! we have <i>google</i> and <code>man</code> yknow!?
 (note: man is preferred in many cases) if you are told to run a command
 you dont understand, for example:
@@ -302,12 +428,17 @@ you could look up "find command iname option" or something
 
 <p>
 bonus bonus tip: <a href="https://explainshell.com">explainshell.com</a> and <code>tldr</code> are great resources
-that i explain more thoroughly in <a href="#orge8b6947">where to find help</a>, i very
+that i explain more thoroughly in <a href="#orgac6d1c7">where to find help</a>, i very
 much recommend reading that section
 </p>
-
+</div>
+</div>
+</div>
+<div id="outline-container-org472e450" class="outline-2">
+<h2 id="org472e450"><span class="section-number-2">4.</span> dont lose your data</h2>
+<div class="outline-text-2" id="text-4">
 <p>
-now, there are certain commands to pay <b>extra</b> attention to
+there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
@@ -315,14 +446,14 @@ now, there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
-<code>sudo / doas</code>: commands that start with either of these run as <b>root</b>.
-that means, it has total privileges, it can do <b>anything</b>. never run a
+<code>sudo / doas</code>: these commands were covered in <a href="#org8bbacfd">sudo / doas</a>. but i only covered
+how to use them, not the places where it becomes a problem. never run a
 gui app as root, and if a command doesnt work, running it with sudo often
 will not help unless the command genuinely needs root. if you happen to run
 something like <code>sudo mkdir ./foo</code>, you will later run into issues where
 you cannot make files in it. that is because
 the directory is owned by root and not your user. this can be resolved
-with <code>sudo chown -R $USER:$USER ./foo</code>
+with <code>sudo chown -R "$USER": ./foo</code>
 </p>
 
 <p>
@@ -452,28 +583,28 @@ i have lost 12h of log data from this very difference &gt;:(
 </p>
 </div>
 </div>
-<div id="outline-container-org961493b" class="outline-2">
-<h2 id="org961493b"><span class="section-number-2">3.</span> you learnt windows, you can learn linux</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org3177f9a" class="outline-2">
+<h2 id="org3177f9a"><span class="section-number-2">5.</span> you learnt windows, you can learn linux</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 i think its called the curse of knowledge, where you forget what it was like
 to not know? whatever it is, the point is that at some point you had to
 learn how to use windows, you had to learn how to search for an app, you
 learnt what a sketchy vs safe download looked like<sup><a id="fnr.curlbash" class="footref" href="#fn.curlbash" role="doc-backlink">6</a></sup>. so you should expect
 to have to learn how to use linux, learn how to use the package manager (see
-<a href="#org6667802">package management</a>) for apps, learn how your desktop works, and, dont be
+<a href="#org0b37a8a">package management</a>) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up<sup><a id="fnr.backups" class="footref" href="#fn.backups" role="doc-backlink">7</a></sup>. youre learning!
 </p>
 </div>
 </div>
-<div id="outline-container-org6667802" class="outline-2">
-<h2 id="org6667802"><span class="section-number-2">4.</span> package management</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org0b37a8a" class="outline-2">
+<h2 id="org0b37a8a"><span class="section-number-2">6.</span> package management</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 the most common way to install software on linux is through the package
 manager. common package managers include: apt, dnf, pacman, zypper and
 portage. (note: for alternatives such as flatpak and appimage, see
-<a href="#org78e828c">flatpak and appimage</a>). to communicate with these package managers,
+<a href="#org123b799">flatpak and appimage</a>). to communicate with these package managers,
 you will use the terminal, here are examples for each of the package
 managers mentioned:
 </p>
@@ -606,7 +737,7 @@ a third party package:
 </ul>
 
 <p>
-so, make sure you check the official repos or <a href="#org78e828c">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">11</a></sup> for the package first.
+so, make sure you check the official repos or <a href="#org123b799">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">11</a></sup> for the package first.
 </p>
 
 <p>
@@ -614,9 +745,9 @@ so, make sure you check the official repos or <a href="#org78e828c">flatpak</a><
 </p>
 </div>
 </div>
-<div id="outline-container-org78e828c" class="outline-2">
-<h2 id="org78e828c"><span class="section-number-2">5.</span> flatpak and appimage</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org123b799" class="outline-2">
+<h2 id="org123b799"><span class="section-number-2">7.</span> flatpak and appimage</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 ill admit i dont have much experience with flatpak or appimage, so itll be
 better you do your own research here. there are some points for each that i
@@ -652,9 +783,9 @@ from the projects official site</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org269e35e" class="outline-2">
-<h2 id="org269e35e"><span class="section-number-2">6.</span> backups</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org0614f1e" class="outline-2">
+<h2 id="org0614f1e"><span class="section-number-2">8.</span> backups</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 youve heard the usual <a href="https://en.wikipedia.org/wiki/Backup">3-2-1 advice</a> many times so ill spare that, what
 is linux specific things you should backup.
@@ -729,17 +860,17 @@ ssd dies</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge8b6947" class="outline-2">
-<h2 id="orge8b6947"><span class="section-number-2">7.</span> where to find help</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orgac6d1c7" class="outline-2">
+<h2 id="orgac6d1c7"><span class="section-number-2">9.</span> where to find help</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 there are many great resources for finding help with anything you need
 to know about linux
 </p>
 </div>
-<div id="outline-container-org7707585" class="outline-3">
-<h3 id="org7707585"><span class="section-number-3">7.1.</span> for general advice</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-orge960989" class="outline-3">
+<h3 id="orge960989"><span class="section-number-3">9.1.</span> for general advice</h3>
+<div class="outline-text-3" id="text-9-1">
 <p>
 often the best way to get help with your distro is to find your distros
 specific wiki, such as the <a href="https://wiki.archlinux.org/title/Main_page">arch wiki</a> or <a href="https://wiki.gentoo.org/wiki/Main_Page">gentoo wiki</a>. also, there tends
@@ -767,9 +898,9 @@ id advise beginners to be cautious
 </p>
 </div>
 </div>
-<div id="outline-container-org670f8c5" class="outline-3">
-<h3 id="org670f8c5"><span class="section-number-3">7.2.</span> for specific commands</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org17e6ca8" class="outline-3">
+<h3 id="org17e6ca8"><span class="section-number-3">9.2.</span> for specific commands</h3>
+<div class="outline-text-3" id="text-9-2">
 <p>
 <code>tldr</code>
 </p>
@@ -805,9 +936,9 @@ sometimes lags behind and may not know about a very new flag
 </div>
 </div>
 </div>
-<div id="outline-container-orgf5bb484" class="outline-2">
-<h2 id="orgf5bb484"><span class="section-number-2">8.</span> how to ask for help</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgcd6067f" class="outline-2">
+<h2 id="orgcd6067f"><span class="section-number-2">10.</span> how to ask for help</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 now that you know where to find help, heres the information you need to include:
 </p>
@@ -834,9 +965,22 @@ now that youve got the relevant information ready, heres what to do:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb241602" class="outline-2">
-<h2 id="orgb241602"><span class="section-number-2">9.</span> ill keep adding to this</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-org5cbc46d" class="outline-2">
+<h2 id="org5cbc46d"><span class="section-number-2">11.</span> how to help yourself</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-org1e1ad13" class="outline-3">
+<h3 id="org1e1ad13"><span class="section-number-3">11.1.</span> how to get your desktop back</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+coming soon&hellip;
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2f25e5d" class="outline-2">
+<h2 id="org2f25e5d"><span class="section-number-2">12.</span> ill keep adding to this</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 when i think of more to say&hellip;.. keep notice! i (usually) have good advice..
 </p>
@@ -884,7 +1028,7 @@ kinda like the <code>curl | bash</code> i mentioned earlier
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.backups" class="footnum" href="#fnr.backups" role="doc-backlink">7</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-keeping backups is recommended, see <a href="#org269e35e">backups</a> for more info
+keeping backups is recommended, see <a href="#org0614f1e">backups</a> for more info
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.aptfull" class="footnum" href="#fnr.aptfull" role="doc-backlink">8</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
@@ -919,7 +1063,7 @@ also, timeshift skips your home folder by default
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-04 Wed 22:20</p>
+<p class="date">Created: 2026-11-05 Thu 12:14</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
