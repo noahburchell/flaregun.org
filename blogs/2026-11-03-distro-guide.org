@@ -1,4 +1,4 @@
-#+TITLE: distro guide [2026-11-03 Tue]
+#+TITLE: how to pick a linux distro [2026-11-03 Tue]
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 

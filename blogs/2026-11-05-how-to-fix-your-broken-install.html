@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-11-05 Thu 16:33 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>how to fix your "broken" install [2026-11-05 Thu]</title>
+<meta name="author" content="Noah Burchell" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div><div id="content" class="content">
+<h1 class="title">how to fix your "broken" install <span class="timestamp-wrapper"><span class="timestamp">[2026-11-05 Thu]</span></span></h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd1a8128">1. jump table</a>
+<ul>
+<li><a href="#org2437143">1.1. getty</a></li>
+<li><a href="#orga723588">1.2. blinking cursor</a></li>
+<li><a href="#orgc58021c">1.3. systemd emergency shell</a></li>
+<li><a href="#org19f5ff8">1.4. initramfs shell</a></li>
+<li><a href="#org2c236e9">1.5. grub rescue</a></li>
+<li><a href="#org5f5df52">1.6. no bootable device</a></li>
+<li><a href="#orgceccc66">1.7. kernel panic</a></li>
+</ul>
+</li>
+<li><a href="#org0ae963d">2. how to get your desktop back</a>
+<ul>
+<li><a href="#org75e6892">2.1. i have getty</a></li>
+<li><a href="#org7ae55f2">2.2. i have a blinking cursor</a></li>
+</ul>
+</li>
+<li><a href="#org637c9ec">3. how to get out of an emergency shell</a>
+<ul>
+<li><a href="#orge326b2d">3.1. i have an emergency shell</a></li>
+<li><a href="#org83a2f36">3.2. i have an initramfs shell</a></li>
+</ul>
+</li>
+<li><a href="#org391488b">4. how to get your bootloader back</a>
+<ul>
+<li><a href="#org5f509f1">4.1. i have grub rescue</a></li>
+<li><a href="#orged05fef">4.2. i have no bootable device</a></li>
+</ul>
+</li>
+<li><a href="#orge889d74">5. fixing kernel panics</a>
+<ul>
+<li><a href="#org3e04a8d">5.1. Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</a></li>
+<li><a href="#org380421f">5.2. Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.</a></li>
+<li><a href="#orgf37e721">5.3. Kernel panic - not syncing: Attempted to kill init! exitcode=0x&hellip;</a></li>
+<li><a href="#orga572eb7">5.4. Kernel panic - not syncing: Fatal exception</a></li>
+<li><a href="#orgdd1911b">5.5. Kernel panic - not syncing: Fatal Machine Check</a></li>
+</ul>
+</li>
+<li><a href="#orgb451a60">6. how to chroot</a></li>
+</ul>
+</div>
+</div>
+<p>
+first, dont worry! chances are, no data is lost and nothing is broken.
+it takes a great deal of effort to "break" a linux install, and no,
+a missing desktop is not a broken install! at one point getty was
+all you had, it wasnt broken then and it isnt now. so, how do we
+learn how to fix it? we need to start by determining what "broken" looks
+like, then you can jump to the section that fits your situation
+</p>
+<div id="outline-container-orgd1a8128" class="outline-2">
+<h2 id="orgd1a8128"><span class="section-number-2">1.</span> jump table</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+each of these is a point in the boot where things stopped. they go from
+"nearly everything works" to "💀", and the fixes get
+harder in the same order. find the one that matches your screen, then
+jump to its section
+</p>
+</div>
+<div id="outline-container-org2437143" class="outline-3">
+<h3 id="org2437143"><span class="section-number-3">1.1.</span> getty</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+this is the prompt you get most often when your gui breaks,
+it looks something like this:
+</p>
+
+<pre class="example" id="org6ce8d9e">
+Linux 7.3.1 (tty3)
+
+hostname login: _
+</pre>
+
+<p>
+everything booted, only the desktop is missing. you can log in and fix
+it from here without a live usb. go to <a href="#org75e6892">i have getty</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orga723588" class="outline-3">
+<h3 id="orga723588"><span class="section-number-3">1.2.</span> blinking cursor</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+well, it looks like a blinking cursor in the top left
+</p>
+
+<pre class="example" id="orgff93cbe">
+_
+</pre>
+
+<p>
+the system booted and tried to start the desktop, but the graphics
+driver or display manager never got a picture up. pressing
+<code>ctrl+alt+f3</code> usually gets you a getty so you can look at logs.
+if that works and you get a getty, go to <a href="#org75e6892">i have getty</a>, else
+go to <a href="#org7ae55f2">i have a blinking cursor</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgc58021c" class="outline-3">
+<h3 id="orgc58021c"><span class="section-number-3">1.3.</span> systemd emergency shell</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+note: i cant cover every init, but most of them will give you a root
+shell, and the same fixes may apply.
+</p>
+
+<p>
+systemd stopped partway through boot and asks for the root password
+</p>
+
+<pre class="example" id="orgb6d1980">
+You are in emergency mode. After logging in, type "journalctl -xb" to view
+system logs, "systemctl reboot" to reboot, or "exit"
+to continue bootup.
+Give root password for maintenance
+(or press Control-D to continue): _
+</pre>
+
+<p>
+the kernel is fine and your root filesystem is mounted, but something
+else (usually a line in <code>/etc/fstab</code>) failed to mount or failed its
+filesystem check. your whole system is right there to fix.
+go to <a href="#orge326b2d">i have an emergency shell</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org19f5ff8" class="outline-3">
+<h3 id="org19f5ff8"><span class="section-number-3">1.4.</span> initramfs shell</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+looks a lot like the emergency shell, but it doesnt ask for a password
+and the prompt is <code>dracut:/#</code> (fedora, opensuse), <code>[rootfs ]#</code> (arch)
+or <code>(initramfs)</code> (debian, ubuntu, mint)
+</p>
+
+<pre class="example" id="orgc552296">
+Warning: /dev/disk/by-uuid/1234abcd-56ef-7890-abcd-ef1234567890 does not exist
+
+Generating "/run/initramfs/rdsosreport.txt"
+
+Entering emergency mode. Exit the shell to continue.
+Type "journalctl" to view system logs.
+
+dracut:/# _
+</pre>
+
+<p>
+the initramfs (initial ram filesystem (needed
+becasuse often filesystem drivers are built as
+modules, so kernel cant mount root without help))
+couldnt find your root filesystem. none of your
+real system is available yet. go to <a href="#org83a2f36">i have an initramfs shell</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org2c236e9" class="outline-3">
+<h3 id="org2c236e9"><span class="section-number-3">1.5.</span> grub rescue</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+grub started but cant find the rest of itself
+</p>
+
+<pre class="example" id="org23e6c2a">
+error: no such partition.
+Entering rescue mode...
+grub rescue&gt; _
+</pre>
+
+<p>
+the partition grub was told to load from moved, was deleted or changed
+filesystem. nothing of linux has run yet.
+go to <a href="#org5f509f1">i have grub rescue</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org5f5df52" class="outline-3">
+<h3 id="org5f5df52"><span class="section-number-3">1.6.</span> no bootable device</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+the firmware found nothing to boot at all. the exact words depend on
+your motherboard, and it may instead drop you into the firmware setup
+or boot straight into windows
+</p>
+
+<pre class="example" id="org76e1361">
+No bootable device -- insert boot disk and press any key
+</pre>
+
+<p>
+the bootloader is missing, its efi entry is gone, or the boot order
+points at the wrong disk.
+go to <a href="#orged05fef">i have no bootable device</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgceccc66" class="outline-3">
+<h3 id="orgceccc66"><span class="section-number-3">1.7.</span> kernel panic</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+on any recent kernel this is usually a black screen with a penguin in
+the corner and a short message in the middle:
+</p>
+
+<pre class="example" id="orgd7dda67">
+    .--.        _
+   |o_o |      | |
+   |:_/ |      | |
+  //   \ \     |_|
+ (|     | )     _
+/'\_   _/`\    (_)
+\___)=(___/
+
+
+
+
+                              KERNEL PANIC!
+
+                       Please reboot your computer.
+
+            VFS: Unable to mount root fs on unknown-block(0,0)
+</pre>
+
+<p>
+the last line is the reason. depending on the distro the colours differ,
+there may be a qr code next to the message, or the screen shows the
+last lines of the kernel log instead
+</p>
+
+<p>
+if your kernel is older or your graphics driver doesnt support the panic
+screen, you get the text version, a wall of log with a line that starts
+with <code>Kernel panic - not syncing:</code>
+</p>
+
+<pre class="example" id="orgd442000">
+[    1.234567] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[    1.234567] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 7.3.1 #1
+[    1.234567] Call Trace:
+...
+[    1.234567] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
+</pre>
+
+<p>
+either way the kernel itself gave up, so nothing after it can run. the
+reason is the line under the message on the panic screen, or the text
+after <code>not syncing:</code> in the log version. find the matching heading in
+<a href="#orge889d74">fixing kernel panics</a>
+</p>
+
+<p>
+most fixes from the initramfs shell onwards need a live usb and a
+<a href="#orgb451a60">chroot</a>, so read that section first if you havent
+done one before
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0ae963d" class="outline-2">
+<h2 id="org0ae963d"><span class="section-number-2">2.</span> how to get your desktop back</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org75e6892" class="outline-3">
+<h3 id="org75e6892"><span class="section-number-3">2.1.</span> i have getty</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+login, look at recent package transactions to find what deleted your
+desktop, then reinstall it
+</p>
+
+<p>
+or, if no recent transactions describe anything desktop related, check
+logs for anything display manager related (probably lightdm, sddm, gdm or
+plasma dm), it may not be starting for whatever reason, in which case you
+can login and exec your desktop to get a gui making it easier to seach the
+web or ask for help
+</p>
+
+<p>
+if you cant find logs relating to a display manager, make sure its service
+is enabled. whether thats through <code>systemctl</code> or somethign else
+</p>
+</div>
+</div>
+<div id="outline-container-org7ae55f2" class="outline-3">
+<h3 id="org7ae55f2"><span class="section-number-3">2.2.</span> i have a blinking cursor</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+nvidia + fedora? you may have rebooted before akmods built the driver.
+live usb and <a href="#orgb451a60">chroot</a> to rebuild them, and verify theyre built before rebooting
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org637c9ec" class="outline-2">
+<h2 id="org637c9ec"><span class="section-number-2">3.</span> how to get out of an emergency shell</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orge326b2d" class="outline-3">
+<h3 id="orge326b2d"><span class="section-number-3">3.1.</span> i have an emergency shell</h3>
+</div>
+
+<div id="outline-container-org83a2f36" class="outline-3">
+<h3 id="org83a2f36"><span class="section-number-3">3.2.</span> i have an initramfs shell</h3>
+</div>
+</div>
+<div id="outline-container-org391488b" class="outline-2">
+<h2 id="org391488b"><span class="section-number-2">4.</span> how to get your bootloader back</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org5f509f1" class="outline-3">
+<h3 id="org5f509f1"><span class="section-number-3">4.1.</span> i have grub rescue</h3>
+</div>
+
+<div id="outline-container-orged05fef" class="outline-3">
+<h3 id="orged05fef"><span class="section-number-3">4.2.</span> i have no bootable device</h3>
+</div>
+</div>
+<div id="outline-container-orge889d74" class="outline-2">
+<h2 id="orge889d74"><span class="section-number-2">5.</span> fixing kernel panics</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org3e04a8d" class="outline-3">
+<h3 id="org3e04a8d"><span class="section-number-3">5.1.</span> Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+if you run with no initramfs:
+</p>
+
+<p>
+first, check your kernel cmdline for UUID,
+the UUID lives in the filesystems superblock and the kernel cannot
+resolve it, it needs userspace (initramfs). so find the partitions
+PARTUUID and use that, it lives in the partition table and can be
+resolved by the kernel
+</p>
+
+<p>
+if your cmdline does say PARTUUID, the next likely issue is
+that you built your kernel with the necesary device and
+filesystem drivers as modules. make them =y
+</p>
+
+<p>
+if you use an initramfs:
+</p>
+
+<p>
+first, try regenerating it
+</p>
+
+<p>
+if that doesnt work, /boot might be full. delete old kernels and try again
+</p>
+</div>
+</div>
+<div id="outline-container-org380421f" class="outline-3">
+<h3 id="org380421f"><span class="section-number-3">5.2.</span> Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.</h3>
+</div>
+
+<div id="outline-container-orgf37e721" class="outline-3">
+<h3 id="orgf37e721"><span class="section-number-3">5.3.</span> Kernel panic - not syncing: Attempted to kill init! exitcode=0x&hellip;</h3>
+</div>
+
+<div id="outline-container-orga572eb7" class="outline-3">
+<h3 id="orga572eb7"><span class="section-number-3">5.4.</span> Kernel panic - not syncing: Fatal exception</h3>
+</div>
+
+<div id="outline-container-orgdd1911b" class="outline-3">
+<h3 id="orgdd1911b"><span class="section-number-3">5.5.</span> Kernel panic - not syncing: Fatal Machine Check</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+💀
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb451a60" class="outline-2">
+<h2 id="orgb451a60"><span class="section-number-2">6.</span> how to chroot</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Noah Burchell</p>
+<p class="date">Created: 2026-11-05 Thu 16:33</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

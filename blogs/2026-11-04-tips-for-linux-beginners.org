@@ -45,16 +45,16 @@ for people whove never thought about it, heres a list of the default
 terminal installed with each desktop environment:
 
 - kde: konsole
-- gnome: gnome terminal
+- gnome: gnome terminal (this changes a lot so just search for terminal or console)
 - xfce4: xfce4-terminal
 
 so just open it like any other app, then you should see something that
 looks like either one of these:
 
-#+begin_src sh :eval no
+#+begin_example
 [user@host ~]$ 
 user@host:~$ 
-#+end_src
+#+end_example
 
 (note: for this guide ill use "user" and "host" as a placeholder for your
 username and hostname)
@@ -156,7 +156,7 @@ reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe
 way to replace a file is to write the new version somewhere else and =mv= it
 over the top
 
-when does =cp= copy only the contents of the directory into the new directory
+when does =cp= or =rsync= copy only the contents of the directory into the new directory
 versus copying the whole directory into the directory making it a subdirectory
 of the new directory? honestly, i dont fucking know. it seems to flip a coin.
 
@@ -208,9 +208,9 @@ general rule, just look it up! we have /google/ and =man= yknow!?
 (note: man is preferred in many cases) if you are told to run a command
 you dont understand, for example:
 
-#+begin_src sh :eval no
+#+begin_example
 find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'
-#+end_src
+#+end_example
 
 i think the =find= command would probably help /find/ something,
 but im not exactly sure. so i should probably search for it!
@@ -263,9 +263,9 @@ expands to all directories in root, which isnt protected)
 
 =dd=: this command writes data somewhere, youll often see:
 
-#+begin_src sh :eval no
+#+begin_example
 dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync
-#+end_src
+#+end_example
 
 this is not inherently unsafe, its actually the standard way to create a
 bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
@@ -306,16 +306,16 @@ i dont want to go too much into teaching shell, but this one difference
 is worth a note. these are redirection operators, as an example:
 =echo "gentoo" > gentoo.txt= will do this[fn:cat]:
 
-#+begin_src sh :eval no
+#+begin_example
 noah@lychee ~ % echo "gentoo" > gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
 noah@lychee ~ % 
-#+end_src
+#+end_example
 
 now, lets look at what =>>= will do:
 
-#+begin_src sh :eval no
+#+begin_example
 noah@lychee ~ % echo "gentoo" > gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -324,11 +324,11 @@ noah@lychee ~ % cat gentoo.txt
 gentoo
 gentoo
 noah@lychee ~ % 
-#+end_src
+#+end_example
 
 now, lets use =>= again on the same file:
 
-#+begin_src sh :eval no
+#+begin_example
 noah@lychee ~ % echo "gentoo" > gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -340,7 +340,7 @@ noah@lychee ~ % echo "gentoo" > gentoo.txt
 noah@lychee ~ % cat gentoo.txt            
 gentoo
 noah@lychee ~ % 
-#+end_src
+#+end_example
 
 notice the difference here, =>= will truncate the file[fn:truncate] and *replace* it with what its given.
 =>>= on the other hand will append to the file, *not* overwriting the content. (if there is
@@ -633,12 +633,10 @@ now that youve got the relevant information ready, heres what to do:
 - stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and what fixed it]]
 - be patient and polite
 - *ask about commands you dont understand*
-- *>ask about commands you dont understand<*
+- *again, ask about commands you dont understand*
 
 * how to help yourself
-
-** how to get your desktop back
-coming soon...
+this has moved to its own post: [[file:2026-11-05-how-to-fix-your-broken-install.org][how to fix your "broken" install]]
 
 * not every distro uses systemd
 most guides you find online assume systemd, but its not the only init.

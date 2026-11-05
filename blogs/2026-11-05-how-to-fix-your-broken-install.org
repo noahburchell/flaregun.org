@@ -1,0 +1,226 @@
+#+TITLE: how to fix your "broken" install [2026-11-05 Thu]
+#+HTML_LINK_UP: ../index.html
+#+HTML_LINK_HOME: ../index.html
+
+first, dont worry! chances are, no data is lost and nothing is broken.
+it takes a great deal of effort to "break" a linux install, and no,
+a missing desktop is not a broken install! at one point getty was
+all you had, it wasnt broken then and it isnt now. so, how do we
+learn how to fix it? we need to start by determining what "broken" looks
+like, then you can jump to the section that fits your situation
+
+* jump table
+
+each of these is a point in the boot where things stopped. they go from
+"nearly everything works" to "💀", and the fixes get
+harder in the same order. find the one that matches your screen, then
+jump to its section
+
+** getty
+this is the prompt you get most often when your gui breaks,
+it looks something like this:
+
+#+begin_example
+Linux 7.3.1 (tty3)
+
+hostname login: _
+#+end_example
+
+everything booted, only the desktop is missing. you can log in and fix
+it from here without a live usb. go to [[*i have getty][i have getty]]
+
+** blinking cursor
+well, it looks like a blinking cursor in the top left
+
+#+begin_example
+_
+#+end_example
+
+the system booted and tried to start the desktop, but the graphics
+driver or display manager never got a picture up. pressing
+=ctrl+alt+f3= usually gets you a getty so you can look at logs.
+if that works and you get a getty, go to [[*i have getty][i have getty]], else
+go to [[*i have a blinking cursor][i have a blinking cursor]]
+
+** systemd emergency shell
+note: i cant cover every init, but most of them will give you a root
+shell, and the same fixes may apply.
+
+systemd stopped partway through boot and asks for the root password
+
+#+begin_example
+You are in emergency mode. After logging in, type "journalctl -xb" to view
+system logs, "systemctl reboot" to reboot, or "exit"
+to continue bootup.
+Give root password for maintenance
+(or press Control-D to continue): _
+#+end_example
+
+the kernel is fine and your root filesystem is mounted, but something
+else (usually a line in =/etc/fstab=) failed to mount or failed its
+filesystem check. your whole system is right there to fix.
+go to [[*i have an emergency shell][i have an emergency shell]]
+
+** initramfs shell
+looks a lot like the emergency shell, but it doesnt ask for a password
+and the prompt is =dracut:/#= (fedora, opensuse), =[rootfs ]#= (arch)
+or =(initramfs)= (debian, ubuntu, mint)
+
+#+begin_example
+Warning: /dev/disk/by-uuid/1234abcd-56ef-7890-abcd-ef1234567890 does not exist
+
+Generating "/run/initramfs/rdsosreport.txt"
+
+Entering emergency mode. Exit the shell to continue.
+Type "journalctl" to view system logs.
+
+dracut:/# _
+#+end_example
+
+the initramfs (initial ram filesystem (needed
+becasuse often filesystem drivers are built as
+modules, so kernel cant mount root without help))
+couldnt find your root filesystem. none of your
+real system is available yet. go to [[*i have an initramfs shell][i have an initramfs shell]]
+
+** grub rescue
+grub started but cant find the rest of itself
+
+#+begin_example
+error: no such partition.
+Entering rescue mode...
+grub rescue> _
+#+end_example
+
+the partition grub was told to load from moved, was deleted or changed
+filesystem. nothing of linux has run yet.
+go to [[*i have grub rescue][i have grub rescue]]
+
+** no bootable device
+the firmware found nothing to boot at all. the exact words depend on
+your motherboard, and it may instead drop you into the firmware setup
+or boot straight into windows
+
+#+begin_example
+No bootable device -- insert boot disk and press any key
+#+end_example
+
+the bootloader is missing, its efi entry is gone, or the boot order
+points at the wrong disk.
+go to [[*i have no bootable device][i have no bootable device]]
+
+** kernel panic
+on any recent kernel this is usually a black screen with a penguin in
+the corner and a short message in the middle:
+
+#+begin_example
+     .--.        _
+    |o_o |      | |
+    |:_/ |      | |
+   //   \ \     |_|
+  (|     | )     _
+ /'\_   _/`\    (_)
+ \___)=(___/
+
+
+
+
+                               KERNEL PANIC!
+
+                        Please reboot your computer.
+
+             VFS: Unable to mount root fs on unknown-block(0,0)
+#+end_example
+
+the last line is the reason. depending on the distro the colours differ,
+there may be a qr code next to the message, or the screen shows the
+last lines of the kernel log instead
+
+if your kernel is older or your graphics driver doesnt support the panic
+screen, you get the text version, a wall of log with a line that starts
+with =Kernel panic - not syncing:=
+
+#+begin_example
+[    1.234567] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[    1.234567] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 7.3.1 #1
+[    1.234567] Call Trace:
+...
+[    1.234567] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
+#+end_example
+
+either way the kernel itself gave up, so nothing after it can run. the
+reason is the line under the message on the panic screen, or the text
+after =not syncing:= in the log version. find the matching heading in
+[[*fixing kernel panics][fixing kernel panics]]
+
+most fixes from the initramfs shell onwards need a live usb and a
+[[*how to chroot][chroot]], so read that section first if you havent
+done one before
+
+* how to get your desktop back
+
+** i have getty
+
+login, look at recent package transactions to find what deleted your
+desktop, then reinstall it
+
+or, if no recent transactions describe anything desktop related, check
+logs for anything display manager related (probably lightdm, sddm, gdm or
+plasma dm), it may not be starting for whatever reason, in which case you
+can login and exec your desktop to get a gui making it easier to seach the
+web or ask for help
+
+if you cant find logs relating to a display manager, make sure its service
+is enabled. whether thats through =systemctl= or somethign else
+
+** i have a blinking cursor
+
+nvidia + fedora? you may have rebooted before akmods built the driver.
+live usb and [[*how to chroot][chroot]] to rebuild them, and verify theyre built before rebooting
+
+* how to get out of an emergency shell
+
+** i have an emergency shell
+
+** i have an initramfs shell
+
+* how to get your bootloader back
+
+** i have grub rescue
+
+** i have no bootable device
+
+* fixing kernel panics
+
+** Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+
+if you run with no initramfs:
+
+first, check your kernel cmdline for UUID,
+the UUID lives in the filesystems superblock and the kernel cannot
+resolve it, it needs userspace (initramfs). so find the partitions
+PARTUUID and use that, it lives in the partition table and can be
+resolved by the kernel
+
+if your cmdline does say PARTUUID, the next likely issue is
+that you built your kernel with the necesary device and
+filesystem drivers as modules. make them =y
+
+if you use an initramfs:
+
+first, try regenerating it
+
+if that doesnt work, /boot might be full. delete old kernels and try again
+
+** Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.
+
+** Kernel panic - not syncing: Attempted to kill init! exitcode=0x...
+
+** Kernel panic - not syncing: Fatal exception
+
+** Kernel panic - not syncing: Fatal Machine Check
+
+💀
+
+* how to chroot
+
