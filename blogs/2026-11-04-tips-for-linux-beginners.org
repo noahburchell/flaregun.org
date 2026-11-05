@@ -143,7 +143,7 @@ also, most linux native filesystems is case sensitive so
   once if they dont exist
 - =touch foo.txt=: makes an empty file
 - =cp foo.txt bar.txt=: copies a file foo.txt to bar.txt
-- =mv foo.txt bar.txt=: moves a file. this is also how you *rename*
+- =mv foo.txt bar.txt=: moves a file. this is also how you rename
   things
 
 note that =cp= and =mv= will overwrite an existing file with the
