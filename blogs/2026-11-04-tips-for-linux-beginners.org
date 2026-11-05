@@ -110,7 +110,92 @@ type your password. if you see an error such as "user is not in the sudoers file
 means your account does not have administrator permissions
 
 ** file manipulation
-config files. working on it...
+this may be the second most common use of the terminal next to [[*package management][package management]].
+so its important to know how to view, create, move, and edit
+files without opening a file manager. im going to assume =nano= for this
+guide, if you installed =vim= or =mg=, ill assume you know how to use them
+
+*** i dont want to type this super long filename
+- *tab completion*: start typing a file or directory name and hit tab.
+  the shell fills in the rest (if what your looking for exists). hit
+  tab twice to see every option. use this constantly, it also means
+  you cant typo a filename
+- *spaces*: =cat my file.txt= looks for a file called "my" and
+  one called "file.txt". quote it like =cat "my file.txt"= or escape
+  the space =cat my\ file.txt=. tab completion does this for you
+
+also, most linux native filesystems is case sensitive so
+=Documents= and =documents= are two different directories
+
+*** looking at files
+- =cat foo.txt=: prints the whole file. fine for small files
+- =less foo.txt=: opens the file in a pager you can scroll through. =q=
+  to quit, =/word= to search, =n= for the next match. use this for
+  anything longer than your terminal
+- =ls -l=: lists files with their size, owner, permissions and
+  modification date. =ls -a= also shows hidden files (anything starting
+  with a dot, which is where all your config lives). =ls -la= does both
+- =file foo=: tells you what a file actually is, regardless of its
+  extension (or lack of one)
+
+*** making, copying, moving
+- =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes the whole
+  chain at once
+- =touch foo.txt=: makes an empty file (or updates the timestamp if it exists)
+- =cp foo.txt bar.txt=: copies a file. for directories you need
+  =cp -r foo bar=
+- =mv foo.txt bar.txt=: moves a file. this is also how you *rename*
+  things, there is no separate rename command. =mv foo.txt ~/Documents/=
+  moves it somewhere else, keeping the name
+
+note that =cp= and =mv= will overwrite an existing file with the
+same name without asking. add =-i= if you want to be asked
+
+another difference: =mv= (on the same drive) is instant and all or nothing,
+the file either has the old content or the new content.
+=cp= rewrites the destination bit by bit, so if its interrupted or something
+reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe
+way to replace a file is to write the new version somewhere else and =mv= it
+over the top
+
+[fn:inode] =cp= truncates the existing file and writes into the same inode.
+=mv= on the same filesystem is a =rename()=, which swaps the directory entry
+to point at the source inode in one step. across filesystems =mv= is just
+copy then delete and loses this property
+
+*** deleting
+=rm= deletes files, =rm -r= deletes directories, and none of it goes to
+the trash. i covered this in [[*dont lose your data][dont lose your data]].
+if you want a terminal command that actually uses
+the trash, =gio trash foo= probably already works on your desktop, or
+install =trash-cli= and use =trash-put foo=
+
+*** editing with nano
+=nano foo.txt= opens the file (or creates it if it doesnt exist). the
+bottom of the screen shows the shortcuts, where =^= means ctrl and =M-=
+means alt. the ones you actually need:
+
+- =ctrl+o=: save (it asks for the filename, just hit enter)
+- =ctrl+x=: exit (it asks to save if you havent)
+- =ctrl+w=: search
+- =ctrl+k=: cut the current line, =ctrl+u= to paste it back
+- =alt+u=: undo
+- =ctrl+g=: help, if you forget any of this
+
+if the file is owned by root (most of =/etc=), you will need
+=sudo nano /etc/foo=[fn:sudoedit]. this is where "its asking for a filename
+and wont let me save" comes from, nano opened fine but you dont have
+permission to write. youll have to exit and reopen it with sudo
+
+*** wildcards
+you will see =*= in a lot of commands. the shell expands it to "every
+file that matches", so =ls *.txt= lists every file ending in .txt and
+=cp ~/Pictures/*.png /backup/= copies every png. this is useful and also
+how =rm -rf $DIR/*= goes wrong (see [[*dont lose your data][dont lose your data]])
+
+[fn:sudoedit] =sudoedit /etc/foo= is a better way to do this if you have
+sudo, it copies the file, opens it as your normal user, and copies it
+back when you save
 
 ** learning to read commands
 nobody knows every command, there are too many.  
@@ -167,7 +252,10 @@ deletes it and there is no undo. the most common failure is most
 often not =rm -rf /= or something like that, but =rm -rf $DIR/*=.
 =$DIR= should expand to =/home/user/some/trash=, but if it has been
 unset, it will expand to "" and the command =rm -rf /*= will run.
-always wrap variables like this: =rm -rf "${DIR:?}"/*=
+always wrap variables like this: =rm -rf "${DIR:?}"/*=. (you might
+know that modern =rm= will block =rm -rf /= and you need
+the =--no-preserve-root= flag, this is different becasuse =*=
+expands to all directories in root, which isnt protected)
 
 =dd=: this command writes data somewhere, youll often see:
 
@@ -333,8 +421,11 @@ managers mentioned:
 - updating everything: =emerge -auDN @world=
 - searching for a package: =emerge --search whatever=
 
-installing or updating packages and syncing most often requires root privileges,
-so make sure to run those commands with =sudo= or =doas=
+if youre unsure which package manager came with your distro, you can use
+the command =which apt dnf pacman zypper emerge=, and the one that returns
+a path is the one you have. also installing or updating packages and
+syncing most often requires root privileges, so make sure to run those
+commands with =sudo= or =doas=
 
 now that you know how to use it, its important to know what youre doing
 and why it is this way. briefly, your distros maintainers have a "repo"
@@ -555,7 +646,7 @@ youre probably on one of these:
 - mx linux, antix, devuan: sysvinit
 - gentoo, alpine, artix: openrc (artix also offers runit, dinit, s6)
 - void: runit
-- your a legend: [[https://github.com/noahburchell/ninit][ninit]]
+- youre a legend: [[https://github.com/noahburchell/ninit][ninit]]
   
 not sure? =cat /proc/1/comm= tells you what your init is.
 
