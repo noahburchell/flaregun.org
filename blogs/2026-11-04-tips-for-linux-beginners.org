@@ -65,11 +65,26 @@ this is called a prompt. the important parts of each are the =user=, =host=,
 - =user=: your username
 - =host=: your hostname
 - =~=: your current working directory
-- =$=: delimiter, it marks the end of the prompt (not important, just know as your user it is "=$=", but as root its "=#=")
+- =$=: delimiter, it marks the end of the prompt (not important, just know as your user it is "=$=" (or =%= for zsh), but as root its "=#=")
 
-you can type text here and itll appear just after your prompt. so, what do you
-/do/ with this? well it depends on what youre trying to do. working on this
-section......
+you can type text here and itll appear just after your
+prompt. so now lets go over some important commands
+
+** ls, cd
+=ls= will list everything in your current working directory. usually, when you
+open the terminal this will be =/home/user= (=~= is a shortcut for =/home/user=).
+so if you run =ls= right now, you may see "Documents", "Downloads", etc.
+
+=cd= will move you into a directory. lets say you just ran =ls=, and you want to
+go to documents: since =ls= listed "Documents" in your current directory, you can
+type =cd Documents= to go there
+
+** =.= =..=
+=.= is your current directory. so if you run =ls= and see "Documents",
+=cd ./Documents= is equivelant to =cd Documents=
+
+=..= is the parent directory. if you just ran =cd Documents=, you will be
+in =/home/user/Documents=. so running =cd ../= will move you back to =~=
 
 ** sudo / doas
 =sudo= and =doas= are privilege elevation tools that let
@@ -94,7 +109,7 @@ sudo (and doas with persist enabled) cache your credentials so you dont have to 
 type your password. if you see an error such as "user is not in the sudoers file", it
 means your account does not have administrator permissions
 
-** editors
+** file manipulation
 config files. working on it...
 
 ** learning to read commands
@@ -439,8 +454,7 @@ some stuff in home is big and useless to keep around:
   =~/.var/app= *though*, thats where flatpak apps keep their settings and data
 - steam games (=~/.local/share/Steam/steamapps/common=): theyre huge and
   you can just redownload them[fn:steamsaves]
-- anything you can rebuild, like =node_modules=, build folders, or
-  =~/.local/share/containers=
+- anything you can rebuild, like =node_modules=, or build folders
 
 [fn:steamsaves] most games use steam cloud for saves, but not all of them,
 so check before you skip it
@@ -557,6 +571,5 @@ not sure? =cat /proc/1/comm= tells you what your init is.
 when i think of more to say..... keep notice! i (usually) have good advice..
 
 whats coming later?
-- how to start actually using the terminal for tasks
 - file permissions
 - uhh more...
