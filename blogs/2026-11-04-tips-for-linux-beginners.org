@@ -480,7 +480,8 @@ research here. there are some points for each that i can talk about.
 - install with =flatpak install flathub org.example.App=, update with =flatpak update= (your app
   store might already be doing this for you)
 - on some distros, flathub isnt configured by default, so you need to add the remote repo with
-  =flatpak remote-add --if-not-exists flathub https://flathub.org=
+  =flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo=
+  (unless the link changed since, check online for recent updates)
 - to remove unused deps(runtimes), use =flatpak uninstall --unused=
 
 *appimage*:
@@ -613,8 +614,9 @@ dont =chmod -R 777= things. it "fixes" the error by making the file writable by 
 user on the system. find out which permission is actually missing instead
 
 ** root ignores this
-root passes every rwx check, which is why =sudo= "fixes" permission errors (thats the wrong
-fix, see [[*dont lose your data][dont lose your data]]). the one thing root doesnt ignore is the next section
+root passes every rw(x) check, which is why =sudo= "fixes" permission errors (thats the wrong
+fix, see [[*dont lose your data][dont lose your data]]). root doesnt ignore the execute bit on files, immutable files,
+read only mounted filesystems and [[*selinux and apparmor][selinux/apparmour]]
 
 ** permission denied, but ls -l says im allowed?
 in order of likelihood:
@@ -632,10 +634,11 @@ allowed to touch this at all", this is called mandatory access control (mac)
 
 *do i have this?*:
 
-- fedora, rhel, bazzite, silverblue and friends: selinux. =getenforce= prints enforcing, permissive
+- anything fedora or rhel based: selinux. =getenforce= prints enforcing, permissive
   or disabled
-- ubuntu, debian, opensuse: apparmor. =sudo aa-status= lists the loaded profiles
-- arch, gentoo, void: probably neither unless you set it up
+- ubuntu, debian: apparmor. =sudo aa-status= lists the loaded profiles
+- arch, gentoo: probably neither unless you set it up
+- anything else: check! it should be easy to find if you look up your distro
 
 if you dont have it, skip this section
 
