@@ -479,6 +479,9 @@ research here. there are some points for each that i can talk about.
   check and change them
 - install with =flatpak install flathub org.example.App=, update with =flatpak update= (your app
   store might already be doing this for you)
+- on some distros, flathub isnt configured by default, so you need to add the remote repo with
+  =flatpak remote-add --if-not-exists flathub https://flathub.org=
+- to remove unused deps(runtimes), use =flatpak uninstall --unused=
 
 *appimage*:
 - an appimage needs the executable bit set before it can run. =chmod +x whatever.AppImage=
