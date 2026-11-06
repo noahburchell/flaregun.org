@@ -942,8 +942,8 @@ or card, case insensitively.
 - man page :: manual page. read with =man=
 - mbr :: master boot record. the first sector of a disk, holding a legacy partition table and some
   boot code
-- mesa :: the open source implementation of opengl and vulkan. the graphics drivers for amd and
-  intel gpus are part of it
+- mesa :: the open source implementation of opengl and vulkan. the usespace half of the graphics
+  drivers for amd and intel gpus
 - mount :: to attach a filesystem to a directory so its contents are reachable there. the directory
   is the mount point
 - musl :: a small c standard library used in place of glibc by alpine and some other distros
