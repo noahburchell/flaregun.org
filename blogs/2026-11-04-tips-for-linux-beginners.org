@@ -574,12 +574,16 @@ on debian/ubuntu) is what lets you use sudo at all
 add yourself to a group with =sudo usermod -aG groupname "$USER"=. without the -a, you replace your
 groups instead of adding one (not good). then log out and back in, group changes dont apply to
 sessions that are already open becasue theres no syscall to reread /etc/group for an existing
-process. (also there is no syscall to change the creation time of a file, uhh thats not relevant but
+process[fn:dumbsyscall]
+
+
+[fn:dumbsyscall] also there is no syscall to change the creation time of a file, uhh thats not relevant but
 its a fun fact. if you did want a file that was created a long time ago, you have to go line 1722 (i
 just checked!) of =kernel/time/timekeeping.c= and remove that check that checks if the time youre
 tying to set the time to is less than monotonic, then you can set the time to @0 and create a file.
 you can also ignore this its not relevant at all i just wanted to say this becasue i did it to
-create a file from 1970 and thought it was cool)
+create a file from 1970 and thought it was cool
+
 
 [fn:dockergroup] if docker daemon runs as root (it probably does), being in the docker group grants
 passwordless root, thats honestly probably fine for a home pc, but still be aware (omarchy!)
@@ -741,7 +745,9 @@ should backup.
 
 your home folder covers most of it, but some important stuff lives outside of it:
 
-- =/etc=: this is where system config is. fstab, network settings, third-party repos
+- =/etc=: this is where system config is. fstab, network settings and third-party repos
+  and the lot, treat this as somewhat sensitive tho be becasue it may contain wifi
+  passwords and other shit. (is yours 12345678? i see you)
 - a list of your installed packages
   - pacman: =pacman -Qqe > pkglist.txt=
   - apt: =apt-mark showmanual > pkglist.txt=
@@ -866,6 +872,11 @@ says that try rc-update to see what you have)
 | logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
 
 * more terminal commands?
+im just rambling from memory here, so maybe use read the section about how to read terminal
+commands. i use the terminal for pretty much everything, and these are the commands i use all
+the time so they must be important but ill also probably forget some and add them later
+
+also, these arent man pages so go read them too
 
 ** ln
 the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target>
@@ -882,6 +893,20 @@ for =nvidia=, you can do this: =dmesg | grep "nvidia"=. to search =foo.txt= for 
 "fOo", etc (ignoring case), you can use: =grep -i "foo" foo.txt=. another common flag combo is this:
 =dmesg | grep -iE "amd|video|card"=. that will search dmesgs output for any mention of amd, video,
 or card, case insensitively.
+
+** du
+disk useage, =-h= makes the sizes readable, and =-a= includes files. so pretty much you can use
+=du -hd 1 ~= (=-d 1= specifies max depth to look, you can try it with and without on your home dir
+to see the difference) to see the disk useage of all folders in your home dir, and use
+=du -ahd 1 ~= to include the files too
+
+* trivia
+these dont fit anywhere i just thought they would make good bullets
+
+- linux has clock_nanosleep() but macos doesnt for some reason (mach_wait_until() may acheive the same
+  thing as an absolute clock_nanosleep())
+- you dont actuallt need a bootloader, as long as you built your kernel with CONFIG_EFI_STUB and give it
+  an nvram entry
 
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
