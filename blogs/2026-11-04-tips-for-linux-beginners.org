@@ -574,7 +574,7 @@ on debian/ubuntu) is what lets you use sudo at all
 add yourself to a group with =sudo usermod -aG groupname "$USER"=. without the -a, you replace your
 groups instead of adding one (not good). then log out and back in, group changes dont apply to
 sessions that are already open becasue theres no syscall to reread /etc/group for an existing
-process (also there is no syscall to change the creation time of a file, uhh thats not relevant but
+process. (also there is no syscall to change the creation time of a file, uhh thats not relevant but
 its a fun fact. if you did want a file that was created a long time ago, you have to go line 1722 (i
 just checked!) of =kernel/time/timekeeping.c= and remove that check that checks if the time youre
 tying to set the time to is less than monotonic, then you can set the time to @0 and create a file.
