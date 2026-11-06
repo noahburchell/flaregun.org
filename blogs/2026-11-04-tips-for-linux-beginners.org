@@ -531,7 +531,7 @@ drwxr-xr-x 2 noah noah 4096 Nov  1 00:00 Documents
 the third column is the owner, the fourth is the group. the first column is the permissions
 themselves. so =foo.txt= is owned by user =noah= and group =noah=
 
-** what is -rw-r--r--
+** what is ~-rw-r--r--~
 =-rw-r--r--= has 1 character for the type, then 3 groups of 3 characters for perms
 
 *the first character*: the file type. =d= directory, =-= regular file, =l= symlink, =c= character
@@ -910,7 +910,7 @@ or card, case insensitively.
   bootloaders from. required to boot a uefi machine. usually the first partition on the boot drive
   (it doesnt have to be, and you can have two on the same drive lol)
 - environment variable :: a named value held by a process and inherited by any processes it starts.
-  =$HOME=, =$PATH= and =$USER= are examples
+n  =$HOME=, =$PATH= and =$USER= are examples
 - executable bit :: a file permission that allows the file to be run as a program. set with =chmod
   +x=
 - filesystem :: the format that organizes files on a partition. ext4, btrfs and xfs are linux
