@@ -707,31 +707,32 @@ says that try rc-update to see what you have)
 | logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
 
 * glossary
-- appimage :: a single executable file that bundles an application with most of the libraries it
-  needs. runs on any distro without being installed. not sandboxed, does not update itself
+- appimage :: a single executable that bundles an application with most of the libraries it
+  needs. runs on any distro without being installed
 - atomic distro :: a distro that updates the whole system as one image instead of package by
   package. every system update takes effect on the next reboot. bazzite and fedora silverblue are
   examples
-- aur :: the arch user repository. user-submitted build scripts for arch linux, not checked by the
-  distro maintainers
-- block device :: a device file that exposes storage in fixed-size blocks, such as a disk or a
-  partition. found under =/dev=
-- bootloader :: the program the firmware runs to load the kernel. grub and systemd-boot are common
+- aur :: the arch user repository. user submitted build scripts for arch, not checked by the
+  maintainers
+- block device :: a device file that exposes storage in blocks, such as a disk or a
+  partition. found in =/dev=
+- bootloader :: the program the firmware runs to load the kernel. grub or systemd-boot are common
 - daemon :: a program that runs in the background with no terminal attached, usually started by the
-  init system. sshd and cupsd are daemons
+  init system. sshd and keyd are daemons
 - dependency :: a package that another package needs to function. the package manager installs
   dependencies alongside the package that requires them
-- desktop environment :: the programs that together provide the graphical desktop: window manager,
+- desktop environment :: the collection of programms that together provide a window manager,
   panel, settings, file manager and default apps. kde plasma, gnome and xfce are examples
 - device file :: a file under =/dev= that represents a piece of hardware or a kernel interface.
   reading and writing the file reads and writes the device
 - distro :: a linux distribution. the linux kernel packaged with a package manager, an init system
   and a selection of software, maintained and released as one operating system
 - dotfile :: a file or directory whose name starts with a period, also called a hidden file. =ls=
-  does not show it without =-a=. most per-user configuration lives in dotfiles
+  does not show it without =-a=. most user configuration lives in dotfiles
 - efi system partition :: a fat32 (or fat16/fat12 as per uefi standard) partition the firmware reads
    bootloaders from. required to boot a uefi machine. usually the first partition on the boot drive
-- environment variable :: a named value held by a process and inherited by the processes it starts.
+   (it doesnt have to be, and you can have two on the same drive lol)
+- environment variable :: a named value held by a process and inherited by any processes it starts.
   =$HOME=, =$PATH= and =$USER= are examples
 - executable bit :: a file permission that allows the file to be run as a program. set with
   =chmod +x=
@@ -742,18 +743,21 @@ says that try rc-update to see what you have)
 - flatpak :: a package format that installs apps into a sandbox with their own runtime libraries,
   independent of the distros packages. flathub is the main flatpak repository
 - glibc :: the gnu c library. the c standard library most distros are built on. nearly every
-  program on the system depends on it
+  program on the system depends on it (even =reboot=)
 - gpt :: guid partition table. the modern partition table format. keeps a primary header at the
   start of the disk and a backup at the end
 - home directory :: the directory a user owns for their files and configuration, usually
   =/home/user=. =~= expands to it
-- hostname :: the name of the machine on the network. shown in the prompt
+- hostname :: the name of the machine
 - init :: the first process the kernel starts, pid 1. it starts every other service and adopts
-  orphaned processes. systemd, openrc, runit and sysvinit are init systems
+  orphaned processes. systemd, openrc, ninit and sysvinit are init systems
 - inode :: the on-disk record of a files metadata and the location of its data. a filename is a
   directory entry that points at an inode
-- kernel :: the core of the operating system. it manages hardware, memory, processes and
-  filesystems. linux is the kernel, everything else is userspace
+- kernel :: the "manager" of processes, and the interface for userspace to hardware and other stuff.
+  sometimes refered to as the "core", but i dont really like that framing, since its a part of every
+  process (well, not since whichever cpu vulnerability that i forgot the name of) but lets not
+  overcomplicate this actually, just look it up it needs a whole nother article to explain 50% of
+  it! 
 - kernel module :: kernel code loaded at runtime, usually a driver. stored under
   =/lib/modules/VERSION= as =.ko= files
 - live usb :: a usb drive that boots a complete linux system without installing anything. used to
