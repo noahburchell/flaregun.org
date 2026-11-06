@@ -903,9 +903,9 @@ to see the difference) to see the disk useage of all folders in your home dir, a
 * trivia
 these dont fit anywhere i just thought they would make good bullets
 
-- linux has clock_nanosleep() but macos doesnt for some reason (mach_wait_until() may acheive the same
-  thing as an absolute clock_nanosleep())
-- you dont actuallt need a bootloader, as long as you built your kernel with CONFIG_EFI_STUB and give it
+- linux has =clock_nanosleep()= but macos doesnt for some reason (=mach_wait_until()= may acheive the same
+  thing as an absolute =clock_nanosleep()=)
+- you dont actuallt need a bootloader, as long as you built your kernel with =CONFIG_EFI_STUB= and give it
   an nvram entry
 
 * glossary
