@@ -11,7 +11,7 @@ if youre a begginner and want to learn linux, read all the sections
 - this guide is aimed at beginners, but some sections require willingness to learn
 - you dont have to read top down, jump to the sections you want to learn about
 - there may be words you dont understand and arent explained, you are encouraged to look things up.
-  though, there is a glossary you can check out first.
+  though, there is a [[*glossary][glossary]] you can check out first.
 
 * linux isnt windows
 the old windows-isms of grabbing random executables off the web to install software, rebooting to
@@ -707,4 +707,121 @@ says that try rc-update to see what you have)
 | logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
 
 * glossary
-- distro :: 
+- appimage :: a single executable file that bundles an application with most of the libraries it
+  needs. runs on any distro without being installed. not sandboxed, does not update itself
+- atomic distro :: a distro that updates the whole system as one image instead of package by
+  package. every system update takes effect on the next reboot. bazzite and fedora silverblue are
+  examples
+- aur :: the arch user repository. user-submitted build scripts for arch linux, not checked by the
+  distro maintainers
+- block device :: a device file that exposes storage in fixed-size blocks, such as a disk or a
+  partition. found under =/dev=
+- bootloader :: the program the firmware runs to load the kernel. grub and systemd-boot are common
+- daemon :: a program that runs in the background with no terminal attached, usually started by the
+  init system. sshd and cupsd are daemons
+- dependency :: a package that another package needs to function. the package manager installs
+  dependencies alongside the package that requires them
+- desktop environment :: the programs that together provide the graphical desktop: window manager,
+  panel, settings, file manager and default apps. kde plasma, gnome and xfce are examples
+- device file :: a file under =/dev= that represents a piece of hardware or a kernel interface.
+  reading and writing the file reads and writes the device
+- distro :: a linux distribution. the linux kernel packaged with a package manager, an init system
+  and a selection of software, maintained and released as one operating system
+- dotfile :: a file or directory whose name starts with a period, also called a hidden file. =ls=
+  does not show it without =-a=. most per-user configuration lives in dotfiles
+- efi system partition :: a fat32 (or fat16/fat12 as per uefi standard) partition the firmware reads
+   bootloaders from. required to boot a uefi machine. usually the first partition on the boot drive
+- environment variable :: a named value held by a process and inherited by the processes it starts.
+  =$HOME=, =$PATH= and =$USER= are examples
+- executable bit :: a file permission that allows the file to be run as a program. set with
+  =chmod +x=
+- filesystem :: the format that organizes files on a partition. ext4, btrfs and xfs are linux
+  native, fat32, exfat and ntfs are not
+- flag :: an argument that changes how a command behaves, written with a leading hyphen such as
+  =-r= or =--help=. also called an option
+- flatpak :: a package format that installs apps into a sandbox with their own runtime libraries,
+  independent of the distros packages. flathub is the main flatpak repository
+- glibc :: the gnu c library. the c standard library most distros are built on. nearly every
+  program on the system depends on it
+- gpt :: guid partition table. the modern partition table format. keeps a primary header at the
+  start of the disk and a backup at the end
+- home directory :: the directory a user owns for their files and configuration, usually
+  =/home/user=. =~= expands to it
+- hostname :: the name of the machine on the network. shown in the prompt
+- init :: the first process the kernel starts, pid 1. it starts every other service and adopts
+  orphaned processes. systemd, openrc, runit and sysvinit are init systems
+- inode :: the on-disk record of a files metadata and the location of its data. a filename is a
+  directory entry that points at an inode
+- kernel :: the core of the operating system. it manages hardware, memory, processes and
+  filesystems. linux is the kernel, everything else is userspace
+- kernel module :: kernel code loaded at runtime, usually a driver. stored under
+  =/lib/modules/VERSION= as =.ko= files
+- live usb :: a usb drive that boots a complete linux system without installing anything. used to
+  install a distro and to repair one that no longer boots
+- man page :: the manual page for a command, file format or system call. read with =man=
+- mbr :: master boot record. the first sector of a disk, holding the legacy partition table and
+  boot code. a gpt disk keeps a protective mbr there so old tools do not treat the disk as empty
+- mesa :: the open source implementation of opengl and vulkan. the graphics drivers for amd and
+  intel gpus are part of it
+- mount :: to attach a filesystem to a directory so its contents are reachable there. the directory
+  is the mount point
+- musl :: a small c standard library used in place of glibc by alpine and some other distros
+- nvme :: a storage interface for ssds attached over pcie. the drives appear as =/dev/nvme0n1=,
+  their partitions as =/dev/nvme0n1p1=
+- overlay :: a third-party package repository on gentoo
+- package :: a software component in the format the package manager installs. holds the files plus
+  metadata such as version, dependencies and conflicts
+- package manager :: the program that installs, removes and updates packages from repositories and
+  tracks what is installed. apt, dnf, pacman, zypper and portage are examples
+- pager :: a program that shows text one screen at a time. =less= is the usual one, =man= uses it
+- partition :: a region of a disk listed in the partition table. holds one filesystem or is used
+  as swap
+- pid :: process id. the number the kernel assigns to each running process
+- pipe :: the =|= operator. connects the standard output of one command to the standard input of
+  the next
+- ppa :: personal package archive. a third-party repository for ubuntu
+- process :: a running program. has a pid, a user, a working directory and environment variables
+- prompt :: the text the shell prints when it is waiting for a command
+- redirection :: sending a commands output to a file, or reading its input from one. =>= writes
+  the file, =>>= appends to it, =<= reads from it
+- repository :: a server holding packages and an index of their metadata. the package manager
+  downloads from the repositories configured for the distro. abbreviated to repo
+- root :: the user with user id 0. every permission check passes for root. also the top of the
+  filesystem tree, =/=, which every path starts from
+- sandbox :: a restricted environment that limits what a program can reach, such as files,
+  devices and the network
+- service :: a program the init system starts and supervises, usually a daemon
+- shell :: the program that reads commands from the terminal and runs them. bash is the default on
+  most distros, zsh and fish are alternatives
+- signal :: a notification the kernel delivers to a process. sigint (ctrl c) asks the process to
+  stop, sigkill ends it without asking
+- snapshot :: a copy of a filesystems state at a point in time, kept on the same disk. used for
+  rollback, it is not a backup
+- standard output :: the stream a program writes its normal output to, shown in the terminal unless
+  redirected. standard error carries its error messages, standard input is what it reads
+- sudo :: runs a command as another user, root by default, after checking that the calling user is
+  permitted in =/etc/sudoers=. doas is a smaller equivalent
+- superblock :: the record at the start of a filesystem describing its layout, size and state. the
+  filesystem cannot be mounted without it
+- symlink :: symbolic link. a file that holds the path to another file. most operations follow it
+  to the target
+- sync :: downloading the latest repository index so the package manager knows the current package
+  versions
+- systemd :: the init system used by most distros. also provides journald for logs, logind,
+  networkd, timers and more
+- tab completion :: pressing tab makes the shell finish the command, filename or option being typed
+- terminal emulator :: a graphical program that displays a terminal for a shell to run in. konsole,
+  gnome terminal and alacritty are examples
+- third-party repository :: a repository not run by the distro and added by the user. ppas,
+  overlays and the aur are examples
+- uid :: user id. the number that identifies a user to the kernel. root is 0
+- userspace :: everything that is not the kernel: programs, libraries, the shell and the desktop
+- wayland :: the current display protocol, the way programs draw windows and receive input. it is
+  replacing x11
+- wildcard :: a character the shell expands to matching filenames. =*= matches any string, =?=
+  matches one character. also called a glob
+- wine :: a compatibility layer that runs windows programs on linux. proton is valves version of it
+  for steam
+- working directory :: the directory a process resolves relative paths against. =cd= changes it,
+  =pwd= prints it, the prompt shows it
+- x11 :: the x window system, the display protocol used before wayland. xorg is its server
