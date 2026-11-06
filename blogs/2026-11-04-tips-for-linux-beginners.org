@@ -228,7 +228,8 @@ bonus tip: if the command has some word or character starting with a hyphen (lik
 -a, -h) its probably a /flag/ that goes along with the command, so for the example above you could
 look up "find command iname option" or something
 
-bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources that i explain more thoroughly in [[*where to find
+bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources that i explain more thoroughly in
+[[*where to find
  help][where to find help]], i very much recommend reading that section
 
 * dont lose your data
@@ -586,9 +587,10 @@ passwordless root, thats honestly probably fine for a home pc, but still be awar
 ** changing permissions
 =chmod= changes rwx
 
-- =chmod +x script.sh=: make it executable (for everyone) (also make sure you are holding shift and
-  dont accidentally put =x, becasuse that does this weird bs where it makes it only exectable
-  causing a weird error that you /may/ spend too long trying to figure out....)
+- =chmod +x script.sh=: make it executable (for everyone[fn:foreveryone]) (also make sure you
+  are holding shift and dont accidentally put =x, becasuse that does this weird bs where it
+  makes it only exectable causing a weird error that you /may/ spend too long trying to figure
+  out....)
 - =chmod u+w foo=: give the owner (=u=) write
 - =chmod go-r secret.txt=: take read away from group (=g=) and others (=o=)
 - =chmod -R ...=: do it recursively
@@ -608,6 +610,8 @@ primary group")
 
 dont =chmod -R 777= things. it "fixes" the error by making the file writable by every program and
 user on the system. find out which permission is actually missing instead
+
+[fn:foreveryone] without u/g/o/a, its filtered by your umask
 
 ** root ignores this
 root passes every rw(x) check, which is why =sudo= "fixes" permission errors (thats the wrong fix,
