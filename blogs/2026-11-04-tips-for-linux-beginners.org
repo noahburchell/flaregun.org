@@ -2,183 +2,165 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 
-you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]?
-brilliant! now that youre part of the team, here are some tips!
+you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]? brilliant! now that youre part of the
+team, here are some tips!
 
 * how to use this guide
-if youre a begginner and want to learn linux, read all the sections 
+if youre a begginner and want to learn linux, read all the sections
 
-- this guide is aimed at beginners, but some sections require willingness
-  to learn
-- you dont have to read top down, jump to the sections you want
-  to learn about
-- there may be words you dont understand and arent explained, you are encouraged to look things up
-  
+- this guide is aimed at beginners, but some sections require willingness to learn
+- you dont have to read top down, jump to the sections you want to learn about
+- there may be words you dont understand and arent explained, you are encouraged to look things up.
+  though, there is a glossary you can check out first.
+
 * linux isnt windows
-the old windows-isms of grabbing random executables off the web to
-install software, rebooting to fix issues, and playing valorant,
-are gone. on linux, software is installed through the command line
-using a package manager (see [[*package management][package management]]), through a gui
-app store (if your desktop environment provides one), through flatpak,
-or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]).
+the old windows-isms of grabbing random executables off the web to install software, rebooting to
+fix issues, and playing valorant, are gone. on linux, software is installed through the command line
+using a package manager (see [[*package management][package management]]), through a gui app store (if your desktop
+environment provides one), through flatpak, or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]).
 
-most issues on linux do not need a reboot, and most updates
-dont need one either[fn:atomic]. unless the kernel, systemd (or whatever
-init youre using), graphics drivers (especially nvidia), or glibc has been updated.
-a reboot could also help if you genuinely dont know where to start fixing an issue.
-otherwise you can just leave it running
+most issues on linux do not need a reboot, and most updates dont need one either[fn:atomic]. unless
+the kernel, systemd (or whatever init youre using), graphics drivers (especially nvidia), or glibc
+has been updated. a reboot could also help if you genuinely dont know where to start fixing an
+issue. otherwise you can just leave it running
 
-[fn:atomic] on an atomic distro like bazzite, every system update needs
-a reboot, because theyre done as images. flatpak updates dont
+[fn:atomic] on an atomic distro like bazzite, every system update needs a reboot, because theyre
+done as images. flatpak updates dont
 
 * the terminal isnt scary
-a lot of people advise beginners to avoid the terminal at all costs.
-this is counterproductive, at some point you will have to use it to
-fix an issue or use some tool that you want to use.
+a lot of people advise beginners to avoid the terminal at all costs. this is counterproductive, at
+some point you will have to use it to fix an issue or use some tool that you want to use.
 
 *if you can write* =/gamemode creative=, *you can write* =dnf upgrade --refresh=.
 
 ** how to use the terminal
-well, you first need to open one! if you have deliberately installed
-a terminal emulator, i can assume you know what its called. but
-for people whove never thought about it, heres a list of the default
-terminal installed with each desktop environment:
+well, you first need to open one! if you have deliberately installed a terminal emulator, i can
+assume you know what its called. but for people whove never thought about it, heres a list of the
+default terminal installed with each desktop environment:
 
 - kde: konsole
 - gnome: gnome terminal (this changes a lot so just search for terminal or console)
 - xfce4: xfce4-terminal
 
-so just open it like any other app, then you should see something that
-looks like either one of these:
+so just open it like any other app, then you should see something that looks like either one of
+these:
 
 #+begin_example
 [user@host ~]$ 
 user@host:~$ 
 #+end_example
 
-(note: for this guide ill use "user" and "host" as a placeholder for your
-username and hostname)
+(note: for this guide ill use "user" and "host" as a placeholder for your username and hostname)
 
-this is called a prompt. the important parts of each are the =user=, =host=,
-=~= and =$=. (the rest is just decoration)
+this is called a prompt. the important parts of each are the =user=, =host=, =~= and =$=. (the rest
+is just decoration)
 
 - =user=: your username
 - =host=: your hostname
 - =~=: your current working directory
-- =$=: delimiter, it marks the end of the prompt (not important, just know as your user it is "=$=" (or =%= for zsh), but as root its "=#=")
+- =$=: delimiter, it marks the end of the prompt (not important, just know as your user it is "=$="
+  (or =%= for zsh), but as root its "=#=")
 
-you can type text here and itll appear just after your
-prompt. so now lets go over some important commands
+you can type text here and itll appear just after your prompt. so now lets go over some important
+commands
 
 ** ls, cd
-=ls= will list everything in your current working directory. usually, when you
-open the terminal this will be =/home/user= (=~= is a shortcut for =/home/user=).
-so if you run =ls= right now, you may see "Documents", "Downloads", etc.
+=ls= will list everything in your current working directory. usually, when you open the terminal
+this will be =/home/user= (=~= is a shortcut for =/home/user=). so if you run =ls= right now, you
+may see "Documents", "Downloads", etc.
 
-=cd= will move you into a directory. lets say you just ran =ls=, and you want to
-go to documents: since =ls= listed "Documents" in your current directory, you can
-type =cd Documents= to go there
+=cd= will move you into a directory. lets say you just ran =ls=, and you want to go to documents:
+since =ls= listed "Documents" in your current directory, you can type =cd Documents= to go there
 
 ** "=.=" "=..="
-=.= is your current directory. so if you run =ls= and see "Documents",
-=cd ./Documents= is equivelant to =cd Documents=
+=.= is your current directory. so if you run =ls= and see "Documents", =cd ./Documents= is
+equivelant to =cd Documents=
 
-=..= is the parent directory. if you just ran =cd Documents=, you will be
-in =/home/user/Documents=. so running =cd ../= will move you back to =~=
+=..= is the parent directory. if you just ran =cd Documents=, you will be in =/home/user/Documents=.
+so running =cd ../= will move you back to =~=
 
 ** sudo / doas
-=sudo= and =doas= are privilege elevation tools that let
-permitted users run commands as root or another user. for now, your can ignore
-the "other user" part and just think of it as running a command as *root*.
+=sudo= and =doas= are privilege elevation tools that let permitted users run commands as root or
+another user. for now, your can ignore the "other user" part and just think of it as running a
+command as *root*.
 
-*who is root?*
-root is the user account with the user id 0, now that probably doesnt mean much to you,
-so just think of it as the administrator account. certain things you will need to do
-require administrator privileges, the most common example is probably installing new
-software. see [[*package management][package management]]
+*who is root?* root is the user account with the user id 0, now that probably doesnt mean much to
+you, so just think of it as the administrator account. certain things you will need to do require
+administrator privileges, the most common example is probably installing new software. see
+[[*package management][package management]]
 
-when you run a command with =sudo= or =doas=, a prompt will appear asking you to
-type your password. often, it will provide no visual feedback. this is normal, it
-isnt frozen, its just not showing you whats being typed. so, to get an idea, please
-open your terminal and type the command =sudo echo hi= or =doas echo hi=. (if your not
-sure which tool you have installed, try sudo first as its the more common one). you
-should see a prompt asking for your password. type your password in, and hit enter.
-if you typed your password correctly and you have the required privileges, you should
-see "hi". if you run the same command, it may not ask for your password, this is becasue
-sudo (and doas with persist enabled) cache your credentials so you dont have to repeatedly
-type your password. if you see an error such as "user is not in the sudoers file", it
-means your account does not have administrator permissions
+when you run a command with =sudo= or =doas=, a prompt will appear asking you to type your password.
+often, it will provide no visual feedback. this is normal, it isnt frozen, its just not showing you
+whats being typed. so, to get an idea, please open your terminal and type the command =sudo echo hi=
+or =doas echo hi=. (if your not sure which tool you have installed, try sudo first as its the more
+common one). you should see a prompt asking for your password. type your password in, and hit enter.
+if you typed your password correctly and you have the required privileges, you should see "hi". if
+you run the same command, it may not ask for your password, this is becasue sudo (and doas with
+persist enabled) cache your credentials so you dont have to repeatedly type your password. if you
+see an error such as "user is not in the sudoers file", it means your account does not have
+administrator permissions
 
 ** file manipulation
-this may be the second most common use of the terminal next to [[*package management][package management]].
-so its important to know how to view, create, move, and edit
-files without opening a file manager. im going to assume =nano= for this
-guide, if you installed =vim= or =mg=, ill assume you know how to use them
+this may be the second most common use of the terminal next to [[*package management][package
+management]]. so its important to know how to view, create, move, and edit files without opening a
+file manager. im going to assume =nano= for this guide, if you installed =vim= or =mg=, ill assume
+you know how to use them
 
 *i dont want to type this super long filename*:
 
-luckily, you have *tab completion*. start typing a file or directory name
-then press tab and the shell fills in the rest (if what your looking for
-exists). hit tab twice to see every option.
+luckily, you have *tab completion*. start typing a file or directory name then press tab and the
+shell fills in the rest (if what your looking for exists). hit tab twice to see every option.
 
-spaces in filenames? =cat my file.txt= looks for a file called "my" and
-one called "file.txt". quote it like =cat "my file.txt"= or escape
-the space =cat my\ file.txt=. tab completion does this for you
+spaces in filenames? =cat my file.txt= looks for a file called "my" and one called "file.txt". quote
+it like =cat "my file.txt"= or escape the space =cat my\ file.txt=. tab completion does this for you
 
-also, most linux native filesystems is case sensitive so
-=Documents= and =documents= are two different directories
+also, most linux native filesystems is case sensitive so =Documents= and =documents= are two
+different directories
 
 *looking at files*:
 
 - =cat foo.txt=: prints the whole file
-- =less foo.txt=: opens the file in a pager you can scroll through. =q=
-  to quit, =/word= to search, =n= for the next match
-- =ls -l=: lists files with their size, owner, permissions and
-  modification date. =ls -a= also shows hidden files, =ls -la= does both
+- =less foo.txt=: opens the file in a pager you can scroll through. =q= to quit, =/word= to search,
+  =n= for the next match
+- =ls -l=: lists files with their size, owner, permissions and modification date. =ls -a= also shows
+  hidden files, =ls -la= does both
 - =file foo=: tells you what file a file is
 
 *making, copying, moving*:
 
-- =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes all of those at
-  once if they dont exist
+- =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes all of those at once if they dont
+  exist
 - =touch foo.txt=: makes an empty file
 - =cp foo.txt bar.txt=: copies a file foo.txt to bar.txt
-- =mv foo.txt bar.txt=: moves a file. this is also how you rename
-  things
+- =mv foo.txt bar.txt=: moves a file. this is also how you rename things
 
-note that =cp= and =mv= will overwrite an existing file with the
-same name without asking. add =-i= if you want to be asked
+note that =cp= and =mv= will overwrite an existing file with the same name without asking. add =-i=
+if you want to be asked
 
-another difference: =mv= (on the same drive) is instant and all or nothing,
-the file either has the old content or the new content.
-=cp= rewrites the destination bit by bit, so if its interrupted or something
-reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe
-way to replace a file is to write the new version somewhere else and =mv= it
-over the top
+another difference: =mv= (on the same drive) is instant and all or nothing, the file either has the
+old content or the new content. =cp= rewrites the destination bit by bit, so if its interrupted or
+something reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe way to
+replace a file is to write the new version somewhere else and =mv= it over the top
 
-when does =cp= or =rsync= copy only the contents of the directory into the new directory
-versus copying the whole directory into the directory making it a subdirectory
-of the new directory? honestly, i dont fucking know. it seems to flip a coin.
+when does =cp= or =rsync= copy only the contents of the directory into the new directory versus
+copying the whole directory into the directory making it a subdirectory of the new directory?
+honestly, i dont fucking know. it seems to flip a coin.
 
-[fn:inode] =cp= truncates the existing file and writes into the same inode.
-=mv= on the same filesystem is a =rename()=, which swaps the directory entry
-to point at the source inode. across filesystems =mv= is just
-copy then delete and loses this property
+[fn:inode] =cp= truncates the existing file and writes into the same inode. =mv= on the same
+filesystem is a =rename()=, which swaps the directory entry to point at the source inode. across
+filesystems =mv= is just copy then delete and loses this property
 
 
 *deleting*:
 
-=rm= deletes files, =rm -r= deletes directories, and none of it goes to
-the trash. i covered this in [[*dont lose your data][dont lose your data]].
-if you want a terminal command that actually uses
-the trash, =gio trash foo= probably will work, or
-install =trash-cli= and use =trash-put foo=
+=rm= deletes files, =rm -r= deletes directories, and none of it goes to the trash. i covered this in
+[[*dont lose your data][dont lose your data]]. if you want a terminal command that actually uses the
+trash, =gio trash foo= probably will work, or install =trash-cli= and use =trash-put foo=
 
 *editing with nano*:
 
-=nano foo.txt= opens the file (or creates it). the
-bottom of the screen shows the shortcuts. =^= means ctrl and =M-=
-means alt. here are common ones:
+=nano foo.txt= opens the file (or creates it). the bottom of the screen shows the shortcuts. =^=
+means ctrl and =M-= means alt. here are common ones:
 
 - =ctrl+o=: save
 - =ctrl+x=: exit
@@ -187,79 +169,72 @@ means alt. here are common ones:
 - =alt+u=: undo
 - =ctrl+g=: help
 
-if the file is owned by root (most of =/etc=), you will need
-=sudo nano /etc/foo=[fn:sudoedit]
+if the file is owned by root (most of =/etc=), you will need =sudo nano /etc/foo=[fn:sudoedit]
 
 *wildcards*:
 
-you will see =*= in a lot of commands. the shell expands it to "every
-file that matches", so =ls *.txt= lists every file ending in .txt and
-=cp ~/Pictures/*.png /backup/= copies every png. this is useful and also
-how =rm -rf $DIR/*= goes wrong (see [[*dont lose your data][dont lose your data]])
+you will see =*= in a lot of commands. the shell expands it to "every file that matches", so =ls
+*.txt= lists every file ending in .txt and =cp ~/Pictures/*.png /backup/= copies every png. this is
+useful and also how =rm -rf $DIR/*= goes wrong (see [[*dont lose your data][dont lose your data]])
 
-[fn:sudoedit] =sudoedit /etc/foo= is a better way to do this if you have
-sudo, it copies the file, opens it as your normal user, and copies it
-back when you save
+[fn:sudoedit] =sudoedit /etc/foo= is a better way to do this if you have sudo, it copies the file,
+opens it as your normal user, and copies it back when you save
 
+** terminal survival
+... coming soon:
+
+- C-c / C-v -> C-Shift-c / C-Shift-v
+- kitty terminal emulator's smart coppy thing or maybe its ghostty i forgot
+
+...
+  
 ** learning to read commands
-nobody knows every command, there are too many.  
-so how do we tell a scary command from a safe command? as a
-general rule, just look it up! we have /google/ and =man= yknow!?
-(note: man is preferred in many cases) if you are told to run a command
-you dont understand, for example:
+nobody knows every command, there are too many. so how do we tell a scary command from a safe
+command? as a general rule, just look it up! we have /google/ and =man= yknow!? (note: man is
+preferred in many cases) if you are told to run a command you dont understand, for example:
 
 #+begin_example
 find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'
 #+end_example
 
-i think the =find= command would probably help /find/ something,
-but im not exactly sure. so i should probably search for it!
+i think the =find= command would probably help /find/ something, but im not exactly sure. so i
+should probably search for it!
 
-although, before i google it maybe ill get more accurate
-information from the /man pages included with most commands/.
-i can access these with the command =man=, so in this case,
-=man find=
+although, before i google it maybe ill get more accurate information from the /man pages included
+with most commands/. i can access these with the command =man=, so in this case, =man find=
 
-im also not exactly sure what the rest of it means... =$(uname -r)=
-doesnt look like a directory, maybe i should look it up! (note: if
-a command contains =$(something)=, it evaluates the command (in this
-case =something=) inside the parentheses and uses its output as
-text. =uname -r= gets your kernels version string, in my case
-=7.3.1-lychee=, so the command would expand to
-=find /lib/modules/7.3.1-lychee -iname 'nvidia*.ko*'=)
+im also not exactly sure what the rest of it means... =$(uname -r)= doesnt look like a directory,
+maybe i should look it up! (note: if a command contains =$(something)=, it evaluates the command (in
+this case =something=) inside the parentheses and uses its output as text. =uname -r= gets your
+kernels version string, in my case =7.3.1-lychee=, so the command would expand to =find
+/lib/modules/7.3.1-lychee -iname 'nvidia*.ko*'=)
 
-bonus tip: if the command has some word or character starting
-with a hyphen (like -iname, -r, -rf, -a, -h) its probably a
-/flag/ that goes along with the command, so for the example above
-you could look up "find command iname option" or something
+bonus tip: if the command has some word or character starting with a hyphen (like -iname, -r, -rf,
+-a, -h) its probably a /flag/ that goes along with the command, so for the example above you could
+look up "find command iname option" or something
 
-bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources
-that i explain more thoroughly in [[*where to find help][where to find help]], i very
-much recommend reading that section
+bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources that
+i explain more thoroughly in [[*where to find help][where to find help]], i very much recommend
+reading that section
 
 * dont lose your data
 there are certain commands to pay *extra* attention to
 
 =sudo / doas, rm, dd, curl | *=
 
-=sudo / doas=: these commands were covered in [[*sudo / doas][sudo / doas]]. but i only covered
-how to use them, not the places where it becomes a problem. never run a
-gui app as root, and if a command doesnt work, running it with sudo often
-will not help unless the command genuinely needs root. if you happen to run
-something like =sudo mkdir ./foo=, you will later run into issues where
-you cannot make files in it. that is because
-the directory is owned by root and not your user. this can be resolved
-with =sudo chown -R "$USER": ./foo=
+=sudo / doas=: these commands were covered in [[*sudo / doas][sudo / doas]]. but i only covered how
+to use them, not the places where it becomes a problem. never run a gui app as root, and if a
+command doesnt work, running it with sudo often will not help unless the command genuinely needs
+root. if you happen to run something like =sudo mkdir ./foo=, you will later run into issues where
+you cannot make files in it. that is because the directory is owned by root and not your user. this
+can be resolved with =sudo chown -R "$USER": ./foo=
 
-=rm=: this command doesnt send something to the trash, it permanently
-deletes it and there is no undo. the most common failure is most
-often not =rm -rf /= or something like that, but =rm -rf $DIR/*=.
-=$DIR= should expand to =/home/user/some/trash=, but if it has been
-unset, it will expand to "" and the command =rm -rf /*= will run.
-always wrap variables like this: =rm -rf "${DIR:?}"/*=. (you might
-know that modern =rm= will block =rm -rf /= and you need
-the =--no-preserve-root= flag, this is different becasuse =*=
-expands to all directories in root, which isnt protected)
+=rm=: this command doesnt send something to the trash, it permanently deletes it and there is no
+undo. the most common failure is most often not =rm -rf /= or something like that, but =rm -rf
+$DIR/*=. =$DIR= should expand to =/home/user/some/trash=, but if it has been unset, it will expand
+to "" and the command =rm -rf /*= will run. always wrap variables like this: =rm -rf "${DIR:?}"/*=.
+(you might know that modern =rm= will block =rm -rf /= and you need the =--no-preserve-root= flag,
+this is different becasuse =*= expands to all directories in root, which isnt protected)
 
 =dd=: this command writes data somewhere, youll often see:
 
@@ -267,44 +242,37 @@ expands to all directories in root, which isnt protected)
 dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync
 #+end_example
 
-this is not inherently unsafe, its actually the standard way to create a
-bootable usb. it becomes dangerous if =of=/dev/sdX= is the wrong location.
-luckily there is a small habit that makes it very safe, always run =lsblk=
-before running =dd=. =lsblk= will show you all of the drives connected
-to your computer, making it easy to determine the correct one.
+this is not inherently unsafe, its actually the standard way to create a bootable usb. it becomes
+dangerous if =of=/dev/sdX= is the wrong location. luckily there is a small habit that makes it very
+safe, always run =lsblk= before running =dd=. =lsblk= will show you all of the drives connected to
+your computer, making it easy to determine the correct one.
 
-*tip*: if you cant tell which device is your usb, run =lsblk=, unplug
-it, run =lsblk= again, then plug it back in and run =lsblk= a third time.
-it will have dissapeared and came back
+*tip*: if you cant tell which device is your usb, run =lsblk=, unplug it, run =lsblk= again, then
+plug it back in and run =lsblk= a third time. it will have dissapeared and came back
 
-but just so you know,
-if the location you typed (for example =/dev/sda=) is your boot drive[fn:nvme]
-or a drive with your stuff on it, depending on the size of the disk image,
-youll overwrite:
+but just so you know, if the location you typed (for example =/dev/sda=) is your boot drive[fn:nvme]
+or a drive with your stuff on it, depending on the size of the disk image, youll overwrite:
 
 1. the protective mbr
 2. the primary gpt header and partition table[fn:gpt]
-3. the entire efi system partition
+3. the entire efi system partition (if its at the start of the drive)
 4. the beginning of the next partition, and its superblock
 5. if the input never ends (=if=/dev/zero=), then literally everything
 
 *so always double check its correct with* =lsblk=
 
-=curl https://example.com/example.sh | bash= or the more evil version
-=curl https://example.com/example.sh | sudo bash=: these commands download
-a script from that site and execute it immediately without showing you what
-its doing. never do this blindly. if a site wants you to install their
-software like this, first make *sure* the site is trustworthy, then download
-it alone (=curl -LO https://example.com/example.sh=), then use =ls= to check
-the filename, then with that information run =less ./example.sh= to review
-it, then you can run it by first making it executable (=chmod +x ./example.sh=),
-and executing it like so: =./example.sh=
+=curl https://example.com/example.sh | bash= or the more evil version =curl
+https://example.com/example.sh | sudo bash=: these commands download a script from that site and
+execute it immediately without showing you what its doing. never do this blindly. if a site wants
+you to install their software like this, first make *sure* the site is trustworthy, then download it
+alone (=curl -LO https://example.com/example.sh=), then use =ls= to check the filename, then with
+that information run =less ./example.sh= to review it, then you can run it by first making it
+executable (=chmod +x ./example.sh=), and executing it like so: =./example.sh=
 
 *> vs >>*
 
-i dont want to go too much into teaching shell, but this one difference
-is worth a note. these are redirection operators, as an example:
-=echo "gentoo" > gentoo.txt= will do this[fn:cat]:
+i dont want to go too much into teaching shell, but this one difference is worth a note. these are
+redirection operators, as an example: =echo "gentoo" > gentoo.txt= will do this[fn:cat]:
 
 #+begin_example
 noah@lychee ~ % echo "gentoo" > gentoo.txt
@@ -342,29 +310,28 @@ gentoo
 noah@lychee ~ % 
 #+end_example
 
-notice the difference here, =>= will truncate the file[fn:truncate] and *replace* it with what its given.
-=>>= on the other hand will append to the file, *not* overwriting the content. (if there is
+notice the difference here, =>= will truncate the file[fn:truncate] and *replace* it with what its
+given. =>>= on the other hand will append to the file, *not* overwriting the content. (if there is
 no file, then they act the same for all intents and purposes)
 
 i have lost 12h of log data from this very difference >:(
 
 [fn:nvme] on a modern device with an nvme drive, =/dev/nvme0n1= is probably your boot drive
 
-[fn:gpt] gpt keeps a backup header at the end of the disk, so the partition table can sometimes be recovered
+[fn:gpt] gpt keeps a backup header at the end of the disk, so the partition table can sometimes be
+recovered
 
-[fn:cat] the command =cat= (short for (con)catenate) is a very common command for
-writing the content of a file or input stream to standard output. echo
-writes its arguments to standard output
+[fn:cat] the command =cat= (short for (con)catenate) is a very common command for writing the
+content of a file or input stream to standard output. echo writes its arguments to standard output
 
 [fn:truncate] truncation happens prior to the command executing, so =sort foo.txt > foo.txt= will
 leave you with an empty file. in this case =sort -o foo.txt foo.txt= is correct
 
 * you learnt windows, you can learn linux
-i think its called the curse of knowledge, where you forget what it was like
-to not know? whatever it is, the point is that at some point you had to
-learn how to use windows, you had to learn how to search for an app, you
-learnt what a sketchy vs safe download looked like[fn:curlbash]. so you should expect
-to have to learn how to use linux, learn how to use the package manager (see
+i think its called the curse of knowledge, where you forget what it was like to not know? whatever
+it is, the point is that at some point you had to learn how to use windows, you had to learn how to
+search for an app, you learnt what a sketchy vs safe download looked like[fn:curlbash]. so you
+should expect to have to learn how to use linux, learn how to use the package manager (see
 [[*package management][package management]]) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up[fn:backups]. youre learning!
 
@@ -373,12 +340,10 @@ discouraged if you fuck something up[fn:backups]. youre learning!
 [fn:backups] keeping backups is recommended, see [[*backups][backups]] for more info
 
 * package management
-the most common way to install software on linux is through the package
-manager. common package managers include: apt, dnf, pacman, zypper and
-portage. (note: for alternatives such as flatpak and appimage, see
-[[*flatpak and appimage][flatpak and appimage]]). to communicate with these package managers,
-you will use the terminal, here are examples for each of the package
-managers mentioned:
+the most common way to install software on linux is through the package manager. common package
+managers include: apt, dnf, pacman, zypper and portage. (note: for alternatives such as flatpak and
+appimage, see [[*flatpak and appimage][flatpak and appimage]]). to communicate with these package
+managers, you will use the terminal, here are examples for each of the package managers mentioned:
 
 ** apt
 
@@ -402,7 +367,8 @@ managers mentioned:
 ** pacman
 
 - installing a package: =pacman -S whatever=
-- removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded dependencies and config files)
+- removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded
+  dependencies and config files)
 - syncing repos + updating everything: =pacman -Syu=[fn:partial]
 - searching for a package: =pacman -Ss whatever=
 
@@ -425,52 +391,45 @@ managers mentioned:
 - updating everything: =emerge -auDN @world=
 - searching for a package: =emerge --search whatever=
 
-if youre unsure which package manager came with your distro, you can use
-the command =which apt dnf pacman zypper emerge=, and the one that returns
-a path is the one you have. also installing or updating packages and
-syncing most often requires root privileges, so make sure to run those
+if youre unsure which package manager came with your distro, you can use the command =which apt dnf
+pacman zypper emerge=, and the one that returns a path is the one you have. also installing or
+updating packages and syncing most often requires root privileges, so make sure to run those
 commands with =sudo= or =doas=
 
-now that you know how to use it, its important to know what youre doing
-and why it is this way. briefly, your distros maintainers have a "repo"
-(repository) that is pretty much a sort of database of packages. it contains
-the package and metadata for each one that is used when you install that
-package. this may include dependencies and packages its incompatible with.
-what is a dependency? its /another/ package that the package needs to
-function correctly. so when you ask the package manager to install a
-package, it may install a few packages alongside it if it depends on them.
-also, your package manager will most likely verify the integrity of the
-package and that it came from a trustworthy source after it downloads it
-(one of the many reasons this approach is far superior to the windows approach).
-"syncing" just means updating the database.
+now that you know how to use it, its important to know what youre doing and why it is this way.
+briefly, your distros maintainers have a "repo" (repository) that is pretty much a sort of database
+of packages. it contains the package and metadata for each one that is used when you install that
+package. this may include dependencies and packages its incompatible with. what is a dependency? its
+/another/ package that the package needs to function correctly. so when you ask the package manager
+to install a package, it may install a few packages alongside it if it depends on them. also, your
+package manager will most likely verify the integrity of the package and that it came from a
+trustworthy source after it downloads it (one of the many reasons this approach is far superior to
+the windows approach). "syncing" just means updating the database.
 
 ** dont delete your desktop
 
-you may have seen that... situation linus was in when he deleted his desktop
-using pop os. this was caused by a packaging mistake with steam, but linus
-could have avoided this, and you can too, so heres how:
+you may have seen that... situation linus was in when he deleted his desktop using pop os. this was
+caused by a packaging mistake with steam, but linus could have avoided this, and you can too, so
+heres how:
 
-just listen to your package manager! it sounds simple, of course, but
-many people tend to just hit yes on autopilot. this is normal, but you should
-avoid this behavior as the output of your package manager is *not* useless
-monospace text, its telling you *exactly* what it is going to do! now, you
-might mention that you wouldnt know removing, say, glibc[fn:glibc] was any different
-to removing libcaca, thats reasonable. so the best advice i can give you is
-to research anything youre unsure about. scan the package managers output for
-keywords like "desktop" (gnome-desktop, plasma-desktop), "system", "wayland",
-"xorg", "mesa", "base", "systemd" to make sure nothing important is being removed,
-and if youre even slightly unsure, just look it up. be *very* attentive if
-your package manager asks you to do something /unusual/, such as asking you to
-type "yes do as i say!" to continue (linus!). over time, you will learn what is important
-and whats not, so dont worry, you wont be stuck looking things up for very long,
-it just comes with time.
+just listen to your package manager! it sounds simple, of course, but many people tend to just hit
+yes on autopilot. this is normal, but you should avoid this behavior as the output of your package
+manager is *not* useless monospace text, its telling you *exactly* what it is going to do! now, you
+might mention that you wouldnt know removing, say, glibc[fn:glibc] was any different to removing
+libcaca, thats reasonable. so the best advice i can give you is to research anything youre unsure
+about. scan the package managers output for keywords like "desktop" (gnome-desktop, plasma-desktop),
+"system", "wayland", "xorg", "mesa", "base", "systemd" to make sure nothing important is being
+removed, and if youre even slightly unsure, just look it up. be *very* attentive if your package
+manager asks you to do something /unusual/, such as asking you to type "yes do as i say!" to
+continue (linus!). over time, you will learn what is important and whats not, so dont worry, you
+wont be stuck looking things up for very long, it just comes with time.
 
 ** be careful with third-party packages
 
-sometimes, youll need something that isnt available in your distros official repo.
-in these cases, youll typically want to either add a third-party repository (like
-a ppa on ubuntu or an overlay on gentoo) or use a third-party source (such as the
-aur on arch). this is incredibly valuable, but it should be used carefully.
+sometimes, youll need something that isnt available in your distros official repo. in these cases,
+youll typically want to either add a third-party repository (like a ppa on ubuntu or an overlay on
+gentoo) or use a third-party source (such as the aur on arch). this is incredibly valuable, but it
+should be used carefully.
 
 a third party package:
 - isnt checked by distro maintainers
@@ -478,52 +437,74 @@ a third party package:
 - can be outdated or unmaintained (security worry)
 - can, in very rare cases, just be malicious (google: "aur incident")
 
-so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][fn:flatpak] for the package first.
+so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][fn:flatpak] for the
+package first.
 
 *tip*: remove third-party repos you dont use anymore
 
-[fn:glibc] glibc is gnus c standard library implementation, if it were removed (assuming
-your distro doesnt use musl) nothing will run correctly and you will need to
-rescue your os from a live usb. so dont remove it unless you want a challenge
+[fn:glibc] glibc is gnus c standard library implementation, if it were removed (assuming your distro
+doesnt use musl) nothing will run correctly and you will need to rescue your os from a live usb. so
+dont remove it unless you want a challenge
 
 [fn:flatpak] flatpak is also third-party, it just wont conflict with system packages
 
 * flatpak and appimage
-ill admit i dont have much experience with flatpak or appimage, so itll be
-better you do your own research here. there are some points for each that i
-can talk about.
+ill admit i dont have much experience with flatpak or appimage, so itll be better you do your own
+research here. there are some points for each that i can talk about.
 
 *flatpak*:
-- you dont need sudo to install them (flatpak asks for your password itself,
-  or use =--user= to install just for your user)
-- apps share common "runtimes" instead of system libraries, so they wont
-  conflict with system packages. (this is also why your first flatpak is a
-  big download and the rest are smaller)
-- apps are sandboxed, but each app chooses its own permissions, and some ask
-  for access to your whole home folder. install [[https://flathub.org/apps/com.github.tchx84.Flatseal][flatseal]] to check and change them
-- install with =flatpak install flathub org.example.App=, update with =flatpak update=
-  (your app store might already be doing this for you)
+- you dont need sudo to install them (flatpak asks for your password itself, or use =--user= to
+  install just for your user)
+- apps share common "runtimes" instead of system libraries, so they wont conflict with system
+  packages. (this is also why your first flatpak is a big download and the rest are smaller)
+- apps are sandboxed, but each app chooses its own permissions, and some ask for access to your
+  whole home folder. install [[https://flathub.org/apps/com.github.tchx84.Flatseal][flatseal]] to
+  check and change them
+- install with =flatpak install flathub org.example.App=, update with =flatpak update= (your app
+  store might already be doing this for you)
 
 *appimage*:
-- an appimage needs the executable bit set before it can run.
-  =chmod +x whatever.AppImage=
-- it bundles almost everything it needs. if one wont start, you might be
-  missing =libfuse2=
-- this is as close as youll get to the windows experience.
-  appimages arent sandboxed and dont auto update, so only download them
-  from the projects official site
+- an appimage needs the executable bit set before it can run. =chmod +x whatever.AppImage=
+- it bundles almost everything it needs. if one wont start, you might be missing =libfuse2=
+- this is as close as youll get to the windows experience. appimages arent sandboxed and dont auto
+  update, so only download them from the projects official site
+
+* finding alternative apps
+i once read a reddit post about a user who was asking how to get rufus working through wine to
+make a bootable usb. honestly, that seems to make total sense, thats how you do it on windows,
+so it must be how you do it on linux. but, linux has plenty of tools that do the same thing without
+the trouble of trying to get it working through wine. for this case, a good gui like balena etcher
+works, or just dd if you dont want to install anything (see [[*dont lose your data][dont lose your data]])
+
+so as a rule, try reframe the question youre asking to what your trying to do. im not entirely
+sure how to describe this so here are some examples:
+
+- how do i get rufus working on linux? -> *how do i make a bootable usb on linux?*
+- how do i get notepad++ on linux -> *how do i install emacs on (your distro)?*
+- how do i get paint.net working on linux? -> *best linux photo editor?*
+- how do i get crystaldiskinfo working on linux? -> *how do i check my drives halth on linux?*
+- how do i open task manager on linux? -> *how do i see whats using my cpu on linux?*
+
+as a last resort, wine does work great. just make sure to try the native route first
+
+* permissions
+... in progress
+
+* yes, everything is a file
+...and it always has been. if you are on linux right now, i have an excersise that really made
+this concept click for me. make sure you read the terminal section of this guide first
+
+... in progress
 
 * backups
-youve heard the usual [[https://en.wikipedia.org/wiki/Backup][3-2-1 advice]] many times so ill spare that, what
-is linux specific things you should backup.
+youve heard the usual [[https://en.wikipedia.org/wiki/Backup][3-2-1 advice]] many times so ill spare
+that, what is linux specific things you should backup.
 
 ** what to backup
 
-your home folder covers most of it, but some important stuff lives
-outside of it:
+your home folder covers most of it, but some important stuff lives outside of it:
 
-- =/etc=: this is where system config is. fstab, network settings,
-  third-party repos
+- =/etc=: this is where system config is. fstab, network settings, third-party repos
 - a list of your installed packages
   - pacman: =pacman -Qqe > pkglist.txt=
   - apt: =apt-mark showmanual > pkglist.txt=
@@ -531,11 +512,10 @@ outside of it:
   - zypper: im actually not sure, so look it up
   - portage: backup =/var/lib/portage/world= and everything in =/etc/portage=
   - flatpak: =flatpak list --app --columns=application > flatpaks.txt=
-- your kernel config (=/usr/src/linux/.config=) if you compile your own.
-  *you do not want to redo that from scratch*
-- some of =/var/lib=: vms (=/var/lib/libvirt/images=), docker volumes
-  (=/var/lib/docker/volumes=), databases. if you dont know what these are,
-  you probably dont have any
+- your kernel config (=/usr/src/linux/.config=) if you compile your own. *you do not want to redo
+  that from scratch*
+- some of =/var/lib=: vms (=/var/lib/libvirt/images=), docker volumes (=/var/lib/docker/volumes=),
+  databases. if you dont know what these are, you probably dont have any
 - =/root= and =/var/spool/cron= (if you dont know what this is it doesnt apply to you)
 
 ** what not to backup
@@ -544,112 +524,106 @@ some stuff in home is big and useless to keep around:
 
 - =~/.cache=: its literally cache
 - =~/.local/share/Trash=: ...
-- =~/.var/app/*/cache=: flatpak app caches. *keep the rest of*
-  =~/.var/app= *though*, thats where flatpak apps keep their settings and data
-- steam games (=~/.local/share/Steam/steamapps/common=): theyre huge and
-  you can just redownload them[fn:steamsaves]. (unless youre still on vdsl,
-  fuck you iinet!)
+- =~/.var/app/*/cache=: flatpak app caches. *keep the rest of* =~/.var/app= *though*, thats where
+  flatpak apps keep their settings and data
+- steam games (=~/.local/share/Steam/steamapps/common=): theyre huge and you can just redownload
+  them[fn:steamsaves]. (unless youre still on vdsl, fuck you iinet!)
 - anything you can rebuild, like =node_modules=, or build folders
 
-[fn:steamsaves] most games use steam cloud for saves, but not all of them,
-so check
+[fn:steamsaves] most games use steam cloud for saves, but not all of them, so check
 
 
 ** mistakes to avoid
 
-- hidden files: =cp -r ~/* /backup= skips hidden files. use
-  =rsync -aHAX ~/ /backup/= or some other tool. (or just backup hidden files
-  manually)
-- if you copy to a fat32 or exfat usb, you lose permissions, ownership and
-  symlinks,use a linux native filesystem
-- secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too.
-  that means either exclude them and back them up separately and encrypted,
-  or encrypt your whole backup 
+- hidden files: =cp -r ~/* /backup= skips hidden files. use =rsync -aHAX ~/ /backup/= or some other
+  tool. (or just backup hidden files manually)
+- if you copy to a fat32 or exfat usb, you lose permissions, ownership and symlinks,use a linux
+  native filesystem
+- secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too. that means either exclude
+  them and back them up separately and encrypted, or encrypt your whole backup
 - snapshots arent backups[fn:snapshot]
 
-[fn:snapshot] theyre good for system rollbacks not for keeping data safe.
-also, timeshift skips your home folder by default
+[fn:snapshot] theyre good for system rollbacks not for keeping data safe. also, timeshift skips your
+home folder by default
 
 * where to find help
-there are many great resources for finding help with anything you need
-to know about linux
+there are many great resources for finding help with anything you need to know about linux
 
 ** for general advice
 
-often the best way to get help with your distro is to find your distros
-specific wiki, such as the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] or [[https://wiki.gentoo.org/wiki/Main_Page][gentoo wiki]]. also, there tends
-to be a discord server available, official or unofficial, with people there
-that like helping newcomers
+often the best way to get help with your distro is to find your distros specific wiki, such as the
+[[https://wiki.archlinux.org/title/Main_page][arch wiki]] or
+[[https://wiki.gentoo.org/wiki/Main_Page][gentoo wiki]]. also, there tends to be a discord server
+available, official or unofficial, with people there that like helping newcomers
 
-the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] tends to be particularly helpful even if you are not using arch,
-as it covers certain distro-agnostic topics very well
+the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] tends to be particularly helpful even
+if you are not using arch, as it covers certain distro-agnostic topics very well
 
 *on llms*:
 
-yes, they have gotten much better, and they can generally be trusted
-(especially premium models) with certain tasks. with a catch. this is only true
-if you understand what the model is telling you. you might find it helpful
-to add system instructions that instruct the model to explain the commands its
-giving you, or just asking it about parts of the advice you dont understand.
-so, while powerful for people who already somewhat know what theyre doing,
-id advise beginners to be cautious
+yes, they have gotten much better, and they can generally be trusted (especially premium models)
+with certain tasks. with a catch. this is only true if you understand what the model is telling you.
+you might find it helpful to add system instructions that instruct the model to explain the commands
+its giving you, or just asking it about parts of the advice you dont understand. so, while powerful
+for people who already somewhat know what theyre doing, id advise beginners to be cautious
 
 ** for specific commands
 
 =tldr=
 
-this command is unlike man in that you will need to install it, but it is
-often more helpful for beginners as it gives short, example-based summaries,
-and a full man page is sometimes overwhelming
+this command is unlike man in that you will need to install it, but it is often more helpful for
+beginners as it gives short, example-based summaries, and a full man page is sometimes overwhelming
 
 =man=
 
-this command is an interface for manual pages, typing =man foo= will bring
-up the manual page for =foo=. this is good because the information there will
-(usually) be specific to the exact version of the software you have installed,
-though it is quite dense and assumes you already know what youre doing a lot
-of the time
+this command is an interface for manual pages, typing =man foo= will bring up the manual page for
+=foo=. this is good because the information there will (usually) be specific to the exact version of
+the software you have installed, though it is quite dense and assumes you already know what youre
+doing a lot of the time
 
 [[https://explainshell.com][explainshell.com]]
 
-i never knew about this site until recent! its great, and i wish
-someone told me about it sooner. it breaks a command down piece by
-piece, and makes it easy to understand. the only note is that it
+i never knew about this site until recent! its great, and i wish someone told me about it sooner. it
+breaks a command down piece by piece, and makes it easy to understand. the only note is that it
 sometimes lags behind and may not know about a very new flag
 
 * how to ask for help
 now that you know where to find help, heres the information you need to include:
 
-- your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
+- your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and
+  hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
 - what you were trying to do
 - the exact error message copied as text. *do not upload a phone photo of your monitor*
-- relevant logs (get kernel logs with =dmesg=, boot logs with =journalctl -b= (this boot), =journalctl -b -1= (previous boot). see [[*not every distro uses systemd][not every distro uses systemd]])
+- relevant logs (get kernel logs with =dmesg=, boot logs with =journalctl -b= (this boot),
+  =journalctl -b -1= (previous boot). see [[*not every distro uses systemd][not every distro uses
+  systemd]])
 - what you already tried
 
 now that youve got the relevant information ready, heres what to do:
 
 - [[https://dontasktoask.com/][dont ask to ask]]
 - [[https://xyproblem.info/][ask about the real goal]]
-- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and what fixed it]]
+- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and
+  what fixed it]]
 - be patient and polite
 - *ask about commands you dont understand*
 - *again, ask about commands you dont understand*
 
 * how to help yourself
-this has moved to its own post: [[file:2026-11-05-how-to-fix-your-broken-install.org][how to fix your "broken" install]]
+this has moved to its own post: [[file:2026-11-05-how-to-fix-your-broken-install.org][how to fix
+your "broken" install]]
 
 * not every distro uses systemd
-most guides you find online assume systemd, but its not the only init.
-if a guide tells you to run =systemctl= and you get "command not found",
-youre probably on one of these:
+most guides you find online assume systemd, but its not the only init. if a guide tells you to run
+=systemctl= and you get "command not found", youre probably on one of these:
 
 - mx linux, antix, devuan: sysvinit
 - gentoo, alpine, artix: openrc (artix also offers runit, dinit, s6)
 - void: runit
 - youre a legend: [[https://github.com/noahburchell/ninit][ninit]]
   
-not sure? =cat /proc/1/comm= tells you what your init is. (well, sysvinit shows as "init"
-so if it says that try rc-update to see what you have)
+not sure? =cat /proc/1/comm= tells you what your init is. (well, sysvinit shows as "init" so if it
+says that try rc-update to see what you have)
 
 | task            | systemd                | openrc                  | runit                             |
 |-----------------+------------------------+-------------------------+-----------------------------------|
@@ -658,10 +632,5 @@ so if it says that try rc-update to see what you have)
 | start on boot   | =systemctl enable foo= | =rc-update add foo=     | =ln -s /etc/sv/foo /var/service/= |
 | logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
 
-* ill keep adding to this
-
-when i think of more to say..... keep notice! i (usually) have good advice..
-
-whats coming later?
-- file permissions
-- uhh more...
+* glossary
+- distro :: 
