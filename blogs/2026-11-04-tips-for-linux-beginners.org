@@ -507,7 +507,164 @@ as a last resort, wine does work great. just make sure to try the native route f
 [fn:gaming] gaming is the exception to this. often steam will handle this for you
 
 * permissions
-... in progress
+youve already seen this: =sudo mkdir ./foo= gave you a directory you cant write to, and
+an appimage wont run until =chmod +x=. both are permissions. "permission denied" is probably
+one of the most common errors youll see
+
+also, "permissions" means three different things on linux and people mix them up:
+
+1. unix file permissions (this section)
+2. selinux / apparmor (see [[*selinux and apparmor][selinux and apparmor]])
+3. app sandboxes like flatpak (see [[*flatpak and appimage][flatpak and appimage]])
+
+** basics
+every file has an owner and a group. then it has three sets of permissions for
+the owner, the group, and everyone else. run =ls -l= and look at one line
+
+#+begin_example
+-rw-r--r-- 1 noah noah 1234 Nov  1 00:00 foo.txt
+drwxr-xr-x 2 noah noah 4096 Nov  1 00:00 Documents
+#+end_example
+
+the third column is the owner, the fourth is the group. the first column is the permissions
+themselves. so =foo.txt= is owned by user =noah= and group =noah=
+
+** what is -rw-r--r--
+=-rw-r--r--= has 1 character for the type, then 3 groups of 3 characters for perms
+
+*the first character*: the file type. =d= directory, =-= regular file, =l= symlink, =c= character
+device, =b= block device, =p= named pipe and =s= socket
+
+*the next 3*: the owner. =r= read, =w= write, =x= execute. =-= means no
+
+*the next 3*: the group
+
+*the last 3*: everyone else
+
+- =-rw-r--r--= -> "a regular file, the owner can read and write it, everyone else can only read it".
+
+- =drwxr-xr-x= -> "a directory, the owner can do everything, everyone else can look around but not change
+  anything"
+
+if theres an 11th character (=.= or =+=), see [[*selinux and apparmor][selinux and apparmor]]
+
+...also this footnote i couldnt attatch to anything [fn:acl]
+
+** rwx is different for directories
+here:
+
+| perm | on a file           | on a directory                                  |
+|------+---------------------+-------------------------------------------------|
+| =r=  | read the contents   | list the names in it (=ls=)                     |
+| =w=  | change it           | create, delete or rename things in it           |
+| =x=  | run it as a program | enter it (=cd=) and access things in it by name |
+
+to delete a file you need =w= on the directory, so a read only file in a directory you own
+is still deletable by you. and a directory with =r= but no =x= lets you see names but not open any of them
+
+** who am i and what groups am i in
+=id= tells you your user, your primary group and every other group youre in. groups are how you get
+access to things without being root. on most distros being in =video= gives you video card access,
+=dialout= gives you serial access (i think), =docker= lets you talk to docker without root (do not add yourself
+to docker group if you dont know the consequence[fn:dockergroup]), =wheel= (or =sudo= on debian/ubuntu)
+is what lets you use sudo at all
+
+add yourself to a group with =sudo usermod -aG groupname "$USER"=.  without the -a, you replace your
+groups instead of adding one (not good). then log out and back in, group changes dont apply to sessions
+that are already open becasue theres no syscall to reread /etc/group for an existing process (also there
+is no syscall to change the creation time of a file, uhh thats not relevant but its a fun fact. if
+you did want a file that was created a long time ago, you have to go line 1722 (i just checked!)
+of =kernel/time/timekeeping.c= and remove that check that checks if the time youre tying to
+set the time to is less than monotonic, then you can set the time to @0 and create a file. you
+can also ignore this its not relevant at all i just wanted to say this becasue i did it to create
+a file from 1970 and thought it was cool)
+
+[fn:dockergroup] if docker daemon runs as root (it probably does), being in the docker group grants
+passwordless root, thats honestly probably fine for a home pc, but still be aware (omarchy!)
+
+** changing permissions
+=chmod= changes rwx
+
+- =chmod +x script.sh=: make it executable (for everyone)
+  (also make sure you are holding shift and dont accidentally put =x, becasuse that does this weird bs
+  where it makes it only exectable causing a weird error that you /may/ spend too long trying to figure
+  out....)
+- =chmod u+w foo=: give the owner (=u=) write
+- =chmod go-r secret.txt=: take read away from group (=g=) and others (=o=)
+- =chmod -R ...=: do it recursively
+
+guides will instead tell you =chmod 755= or =chmod 644=. those are the same thing as numbers: =r=4=,
+=w=2=, =x=1=, add them up per set. so =7= is =rwx=, =6= is =rw-=, =5= is =r-x=, =4= is =r--=. the
+three digits are owner, group, other
+
+- =644=: =rw-r--r--=, a normal file
+- =755=: =rwxr-xr-x=, a script or a directory
+- =600= / =700=: only you, used for secrets. ssh will actually refuse to work if =~/.ssh= isnt =700=
+  and your keys arent =600=, which is the first time most people meet permissions on purpose
+
+=chown= changes the owner and group: =sudo chown user:group foo=. the one youll actually use is
+fixing a root-owned directory: =sudo chown -R "$USER": ./foo= (the trailing colon means "and my
+primary group")
+
+dont =chmod -R 777= things. it "fixes" the error by making the file writable by every program and
+user on the system. find out which permission is actually missing instead
+
+** root ignores this
+root passes every rwx check, which is why =sudo= "fixes" permission errors (thats the wrong
+fix, see [[*dont lose your data][dont lose your data]]). the one thing root doesnt ignore is the next section
+
+** permission denied, but ls -l says im allowed?
+in order of likelihood:
+
+- you just added yourself to a group and havent logged out
+- the drive is fat32/exfat/ntfs. (permissions come from mount options, see [[*backups][backups]])
+- the partition is mounted =noexec=, somewhat common for =/tmp= and usb drives
+- the directory above it is missing =x= for you
+- its a flatpak and the sandbox cant see that folder. fix it in flatseal
+- selinux or apparmor (see below)
+
+** selinux and apparmor
+standard permissions tell you "is this user allowed". selinux and apparmor ask "is this program
+allowed to touch this at all", this is called mandatory access control (mac)
+
+*do i have this?*:
+
+- fedora, rhel, bazzite, silverblue and friends: selinux. =getenforce= prints enforcing, permissive
+  or disabled
+- ubuntu, debian, opensuse: apparmor. =sudo aa-status= lists the loaded profiles
+- arch, gentoo, void: probably neither unless you set it up
+
+*common issues*: you set up a web server (maybe using [[https://github.com/noahburchell/nhttp][nhttp]]!), samba, game server or ssh,
+you move a file into its directory, =ls -l= says the permissions are fine, and the service
+still cant read it
+
+with selinux thats because every file has a label (the 11th character =.= in =ls -l= means one is
+there, =ls -Z= shows it). a file *created* in =/var/www= gets a web label, a file *moved* there
+keeps the label from your home folder (remember, =mv= doesnt rewrite the file, see [fn:inode]).
+=sudo restorecon -Rv /path= puts the correct labels back. to see what got denied, you can look at
+=sudo ausearch -m avc -ts recent=, or on fedora just open the setroubleshoot notification, it
+explains it in english (i think, its been a while)
+
+with apparmor its per program. each (confined) program has a profile in =/etc/apparmor.d/= listing
+what it may touch, and your path isnt there. logs show up in =(sudo) dmesg | grep -i apparmor= or
+=journalctl -k | grep DENIED= (with systemd). you can set one profile to complain mode (log but allow)
+with =sudo aa-complain /path/to/program= while you work out whats missing
+
+*dont turn it off* (=setenforce 0= / =SELINUX=disabled=)
+
+it "fixes it", by removing it entirely. this is like disabling windows defender entirely becasue an
+app wont run, so dont do it. there is a proper permenant fix with =semanage fcontext= or somethign,
+im not going to cover that becasue i have no idea and dont use selinux. rhel docs are probably the
+best place to look
+
+[fn:acl] a =+= at the end of the permission string means the file has an acl, extra permissions for
+specific users or groups beyond the three sets. =getfacl foo= shows them
+
+** special perms
+
+youll sometimes see =s= or =t= where an =x= should be, for example on =/usr/bin/sudo=
+and =/tmp=. =s= (setuid) on the owner slot means the program runs as its owner,
+=t= on a directory means you can only delete your own files in it
 
 * yes, everything is a file
 if you are on linux right now, i have an excersise that really made this concept click for me.
@@ -705,6 +862,25 @@ says that try rc-update to see what you have)
 | start a service | =systemctl start foo=  | =rc-service foo start=  | =sv up foo=                       |
 | start on boot   | =systemctl enable foo= | =rc-update add foo=     | =ln -s /etc/sv/foo /var/service/= |
 | logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
+
+* more terminal?
+yes, there are some more very useful commands you should know about but i didnt go over becasue they
+arent like super required:
+
+** ln
+the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target> <source>=,
+and the target is relative to the source
+
+** grep
+grep is pretty much control s (search) (it stands for global regular expression print). it is one of the best
+commands. to use it, you either search a file directly, or pipe somehting into it. to search =foo.txt= for any
+mention of =foo=, you can do this: =grep "foo" foo.txt=, to search =dmesg= for =nvidia=, you can do this:
+=dmesg | grep "nvidia"=. to search =foo.txt= for any match of "Foo", "fOo", etc (ignoring case), you
+can use: =grep -i "foo" foo.txt=. another common flag combo is this: =dmesg | grep -iE "amd|video|card"=.
+that will search dmesgs output for any mention of amd, video, or card, case insensitively.
+
+*💡 tip*: you can create a symlink in a folder that points to the parent folder, creating a loop. this is actually
+completely useless, though
 
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it
