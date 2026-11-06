@@ -910,7 +910,7 @@ or card, case insensitively.
   bootloaders from. required to boot a uefi machine. usually the first partition on the boot drive
   (it doesnt have to be, and you can have two on the same drive lol)
 - environment variable :: a named value held by a process and inherited by any processes it starts.
-n  =$HOME=, =$PATH= and =$USER= are examples
+  =$HOME=, =$PATH= and =$USER= are examples
 - executable bit :: a file permission that allows the file to be run as a program. set with =chmod
   +x=
 - filesystem :: the format that organizes files on a partition. ext4, btrfs and xfs are linux
