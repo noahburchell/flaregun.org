@@ -760,24 +760,24 @@ says that try rc-update to see what you have)
   it! 
 - kernel module :: kernel code loaded at runtime, usually a driver. stored under
   =/lib/modules/VERSION= as =.ko= files
-- live usb :: a usb drive that boots a complete linux system without installing anything. used to
-  install a distro and to repair one that no longer boots
-- man page :: the manual page for a command, file format or system call. read with =man=
-- mbr :: master boot record. the first sector of a disk, holding the legacy partition table and
-  boot code. a gpt disk keeps a protective mbr there so old tools do not treat the disk as empty
+- live usb :: a usb drive that boots a complete linux system without installing anything. often
+  used to install a distro and to repair one that no longer boots
+- man page :: manual page. read with =man=
+- mbr :: master boot record. the first sector of a disk, holding a legacy partition table and
+  some boot code
 - mesa :: the open source implementation of opengl and vulkan. the graphics drivers for amd and
   intel gpus are part of it
 - mount :: to attach a filesystem to a directory so its contents are reachable there. the directory
   is the mount point
 - musl :: a small c standard library used in place of glibc by alpine and some other distros
 - nvme :: a storage interface for ssds attached over pcie. the drives appear as =/dev/nvme0n1=,
-  their partitions as =/dev/nvme0n1p1=
+  their partitions as =/dev/nvme0n1p1= (note: the =n1= means namespace 1, its an enterprise thing)
 - overlay :: a third-party package repository on gentoo
 - package :: a software component in the format the package manager installs. holds the files plus
   metadata such as version, dependencies and conflicts
 - package manager :: the program that installs, removes and updates packages from repositories and
   tracks what is installed. apt, dnf, pacman, zypper and portage are examples
-- pager :: a program that shows text one screen at a time. =less= is the usual one, =man= uses it
+- pager :: a program that shows text one screen at a time. =less= is the usual one
 - partition :: a region of a disk listed in the partition table. holds one filesystem or is used
   as swap
 - pid :: process id. the number the kernel assigns to each running process
@@ -794,15 +794,15 @@ says that try rc-update to see what you have)
   filesystem tree, =/=, which every path starts from
 - sandbox :: a restricted environment that limits what a program can reach, such as files,
   devices and the network
-- service :: a program the init system starts and supervises, usually a daemon
+- service :: a program the init system starts and (might) supervise(s), usually a daemon
 - shell :: the program that reads commands from the terminal and runs them. bash is the default on
-  most distros, zsh and fish are alternatives
-- signal :: a notification the kernel delivers to a process. sigint (ctrl c) asks the process to
-  stop, sigkill ends it without asking
+  most distros
+- signal :: a notification the kernel delivers to a process
 - snapshot :: a copy of a filesystems state at a point in time, kept on the same disk. used for
-  rollback, it is not a backup
+  rollback
 - standard output :: the stream a program writes its normal output to, shown in the terminal unless
-  redirected. standard error carries its error messages, standard input is what it reads
+  redirected. standard error carries its error messages, standard input is what it reads (note:
+  =/dev/stdout= and that are actually symlinks to =/proc/self/fd/x=, the more you know)
 - sudo :: runs a command as another user, root by default, after checking that the calling user is
   permitted in =/etc/sudoers=. doas is a smaller equivalent
 - superblock :: the record at the start of a filesystem describing its layout, size and state. the
@@ -813,15 +813,14 @@ says that try rc-update to see what you have)
   versions
 - systemd :: the init system used by most distros. also provides journald for logs, logind,
   networkd, timers and more
-- tab completion :: pressing tab makes the shell finish the command, filename or option being typed
-- terminal emulator :: a graphical program that displays a terminal for a shell to run in. konsole,
-  gnome terminal and alacritty are examples
+- terminal emulator :: a graphical program that displays a terminal for a shell to run in. like konsole,
+  gnome terminal and foot
 - third-party repository :: a repository not run by the distro and added by the user. ppas,
   overlays and the aur are examples
 - uid :: user id. the number that identifies a user to the kernel. root is 0
 - userspace :: everything that is not the kernel: programs, libraries, the shell and the desktop
 - wayland :: the current display protocol, the way programs draw windows and receive input. it is
-  replacing x11
+  replacing x11 (for the better!)
 - wildcard :: a character the shell expands to matching filenames. =*= matches any string, =?=
   matches one character. also called a glob
 - wine :: a compatibility layer that runs windows programs on linux. proton is valves version of it
