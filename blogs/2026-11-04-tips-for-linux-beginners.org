@@ -919,8 +919,6 @@ or card, case insensitively.
   or =--help=. also called an option
 - flatpak :: a package format that installs apps into a sandbox with their own runtime libraries,
   independent of the distros packages. flathub is the main flatpak repository
-- glibc :: the gnu c library. the c standard library most distros are built on. nearly every program
-  on the system depends on it (even =reboot=)
 - gpt :: guid partition table. the modern partition table format. keeps a primary header at the
   start of the disk and a backup at the end
 - home directory :: the directory a user owns for their files and configuration, usually
