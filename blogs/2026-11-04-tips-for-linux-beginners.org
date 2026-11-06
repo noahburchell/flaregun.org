@@ -861,9 +861,7 @@ says that try rc-update to see what you have)
 | start on boot   | =systemctl enable foo= | =rc-update add foo=     | =ln -s /etc/sv/foo /var/service/= |
 | logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
 
-* more terminal?
-yes, there are some more very useful commands you should know about but i didnt go over becasue they
-arent like super required:
+* more terminal commands?
 
 ** ln
 the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target>
@@ -880,7 +878,6 @@ for =nvidia=, you can do this: =dmesg | grep "nvidia"=. to search =foo.txt= for 
 "fOo", etc (ignoring case), you can use: =grep -i "foo" foo.txt=. another common flag combo is this:
 =dmesg | grep -iE "amd|video|card"=. that will search dmesgs output for any mention of amd, video,
 or card, case insensitively.
-
 
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
