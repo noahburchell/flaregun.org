@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-06 Fri 17:42 -->
+<!-- 2026-11-06 Fri 18:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -206,71 +206,71 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7ecb8c0">1. how to use this guide</a></li>
-<li><a href="#orgcb0dc27">2. linux isnt windows</a></li>
-<li><a href="#org82cb571">3. the terminal isnt scary</a>
+<li><a href="#org984bc05">1. how to use this guide</a></li>
+<li><a href="#org9a9af15">2. linux isnt windows</a></li>
+<li><a href="#orgb3edb26">3. the terminal isnt scary</a>
 <ul>
-<li><a href="#org9ee9be3">3.1. how to use the terminal</a></li>
-<li><a href="#org28d50e7">3.2. ls, cd</a></li>
-<li><a href="#org3aad476">3.3. "<code>.</code>" "<code>..</code>"</a></li>
-<li><a href="#orgc727462">3.4. sudo / doas</a></li>
-<li><a href="#orgdf93c20">3.5. file manipulation</a></li>
-<li><a href="#org233bec1">3.6. terminal survival</a></li>
-<li><a href="#org2d9d11f">3.7. learning to read commands</a></li>
+<li><a href="#orgbb247e0">3.1. how to use the terminal</a></li>
+<li><a href="#orga657c52">3.2. ls, cd</a></li>
+<li><a href="#org52bb3b4">3.3. "<code>.</code>" "<code>..</code>"</a></li>
+<li><a href="#org9680e0d">3.4. sudo / doas</a></li>
+<li><a href="#orgf96098d">3.5. file manipulation</a></li>
+<li><a href="#org28dd5ab">3.6. terminal survival</a></li>
+<li><a href="#orgb7b4e18">3.7. learning to read commands</a></li>
 </ul>
 </li>
-<li><a href="#orgfb08dbb">4. dont lose your data</a></li>
-<li><a href="#org6572ecf">5. you learnt windows, you can learn linux</a></li>
-<li><a href="#org5b58047">6. package management</a>
+<li><a href="#org325ecf3">4. dont lose your data</a></li>
+<li><a href="#org86e0a05">5. you learnt windows, you can learn linux</a></li>
+<li><a href="#orgcf448af">6. package management</a>
 <ul>
-<li><a href="#org389ac45">6.1. apt</a></li>
-<li><a href="#org207832c">6.2. dnf</a></li>
-<li><a href="#orgebebbd0">6.3. pacman</a></li>
-<li><a href="#org6df71dd">6.4. zypper</a></li>
-<li><a href="#org0e52038">6.5. portage</a></li>
-<li><a href="#orgbfa8aae">6.6. dont delete your desktop</a></li>
-<li><a href="#org15e1939">6.7. be careful with third-party packages</a></li>
+<li><a href="#orgd27f651">6.1. apt</a></li>
+<li><a href="#org46fbffb">6.2. dnf</a></li>
+<li><a href="#org8cbde46">6.3. pacman</a></li>
+<li><a href="#org6a682bc">6.4. zypper</a></li>
+<li><a href="#org097c169">6.5. portage</a></li>
+<li><a href="#orga170165">6.6. dont delete your desktop</a></li>
+<li><a href="#org72b10a3">6.7. be careful with third-party packages</a></li>
 </ul>
 </li>
-<li><a href="#org2ee5d0d">7. flatpak and appimage</a></li>
-<li><a href="#orgf44f685">8. finding alternative apps</a></li>
-<li><a href="#orge511874">9. permissions</a>
+<li><a href="#org5574cf6">7. flatpak and appimage</a></li>
+<li><a href="#orgb2ebc06">8. finding alternative apps</a></li>
+<li><a href="#orgdb6fbed">9. permissions</a>
 <ul>
-<li><a href="#org8ebc4a3">9.1. basics</a></li>
-<li><a href="#org6245436">9.2. what is -rw-r&ndash;r--</a></li>
-<li><a href="#orgf3b9a97">9.3. rwx is different for directories</a></li>
-<li><a href="#org70f2305">9.4. who am i and what groups am i in</a></li>
-<li><a href="#orga110c2c">9.5. changing permissions</a></li>
-<li><a href="#org67c2a65">9.6. root ignores this</a></li>
-<li><a href="#org298983d">9.7. permission denied, but ls -l says im allowed?</a></li>
-<li><a href="#org2ba3e92">9.8. selinux and apparmor</a></li>
-<li><a href="#orga430473">9.9. special perms</a></li>
+<li><a href="#orge0c545b">9.1. basics</a></li>
+<li><a href="#org7d7a05e">9.2. what is -rw-r&ndash;r--</a></li>
+<li><a href="#org308a24c">9.3. rwx is different for directories</a></li>
+<li><a href="#org5e05187">9.4. who am i and what groups am i in</a></li>
+<li><a href="#org386b658">9.5. changing permissions</a></li>
+<li><a href="#orgc64adda">9.6. root ignores this</a></li>
+<li><a href="#org5a516b3">9.7. permission denied, but ls -l says im allowed?</a></li>
+<li><a href="#orgbaf3632">9.8. selinux and apparmor</a></li>
+<li><a href="#orgff6dff5">9.9. special perms</a></li>
 </ul>
 </li>
-<li><a href="#orge3a50a8">10. yes, everything is a file</a></li>
-<li><a href="#org86d99fc">11. backups</a>
+<li><a href="#org4c7a36b">10. yes, everything is a file</a></li>
+<li><a href="#orgf472178">11. backups</a>
 <ul>
-<li><a href="#orgf25a350">11.1. what to backup</a></li>
-<li><a href="#orgf36187e">11.2. what not to backup</a></li>
-<li><a href="#org52d78f5">11.3. mistakes to avoid</a></li>
+<li><a href="#orgb5cb173">11.1. what to backup</a></li>
+<li><a href="#orgae81c00">11.2. what not to backup</a></li>
+<li><a href="#orge4d2b2a">11.3. mistakes to avoid</a></li>
 </ul>
 </li>
-<li><a href="#org868560d">12. where to find help</a>
+<li><a href="#orgee21cce">12. where to find help</a>
 <ul>
-<li><a href="#orgdd6a8ef">12.1. for general advice</a></li>
-<li><a href="#org4651d61">12.2. for specific commands</a></li>
+<li><a href="#orgc968f8a">12.1. for general advice</a></li>
+<li><a href="#org6a75caf">12.2. for specific commands</a></li>
 </ul>
 </li>
-<li><a href="#orge2b1d68">13. how to ask for help</a></li>
-<li><a href="#org30fa3ca">14. how to help yourself</a></li>
-<li><a href="#orgbda0bfa">15. not every distro uses systemd</a></li>
-<li><a href="#org81246f7">16. more terminal?</a>
+<li><a href="#org6bc16a8">13. how to ask for help</a></li>
+<li><a href="#org2d07394">14. how to help yourself</a></li>
+<li><a href="#org2e6822b">15. not every distro uses systemd</a></li>
+<li><a href="#org98682c3">16. more terminal?</a>
 <ul>
-<li><a href="#orgfbf83d6">16.1. ln</a></li>
-<li><a href="#orgba55a07">16.2. grep</a></li>
+<li><a href="#orgd688f7d">16.1. ln</a></li>
+<li><a href="#org88c9bec">16.2. grep</a></li>
 </ul>
 </li>
-<li><a href="#org5e7ab03">17. glossary</a></li>
+<li><a href="#org2e737cc">17. glossary</a></li>
 </ul>
 </div>
 </div>
@@ -278,8 +278,8 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>? brilliant! now that youre part of the
 team, here are some tips!
 </p>
-<div id="outline-container-org7ecb8c0" class="outline-2">
-<h2 id="org7ecb8c0"><span class="section-number-2">1.</span> how to use this guide</h2>
+<div id="outline-container-org984bc05" class="outline-2">
+<h2 id="org984bc05"><span class="section-number-2">1.</span> how to use this guide</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 if youre a begginner and want to learn linux, read all the sections
@@ -289,18 +289,18 @@ if youre a begginner and want to learn linux, read all the sections
 <li>this guide is aimed at beginners, but some sections require willingness to learn</li>
 <li>you dont have to read top down, jump to the sections you want to learn about</li>
 <li>there may be words you dont understand and arent explained, you are encouraged to look things up.
-though, there is a <a href="#org5e7ab03">glossary</a> you can check out first.</li>
+though, there is a <a href="#org2e737cc">glossary</a> you can check out first.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcb0dc27" class="outline-2">
-<h2 id="orgcb0dc27"><span class="section-number-2">2.</span> linux isnt windows</h2>
+<div id="outline-container-org9a9af15" class="outline-2">
+<h2 id="org9a9af15"><span class="section-number-2">2.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 the old windows-isms of grabbing random executables off the web to install software, rebooting to
 fix issues, and playing valorant, are gone. on linux, software is installed through the command line
-using a package manager (see <a href="#org5b58047">package management</a>), through a gui app store (if your desktop
-environment provides one), through flatpak, or with an appimage (see <a href="#org2ee5d0d">flatpak and appimage</a>).
+using a package manager (see <a href="#orgcf448af">package management</a>), through a gui app store (if your desktop
+environment provides one), through flatpak, or with an appimage (see <a href="#org5574cf6">flatpak and appimage</a>).
 </p>
 
 <p>
@@ -311,8 +311,8 @@ issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org82cb571" class="outline-2">
-<h2 id="org82cb571"><span class="section-number-2">3.</span> the terminal isnt scary</h2>
+<div id="outline-container-orgb3edb26" class="outline-2">
+<h2 id="orgb3edb26"><span class="section-number-2">3.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 a lot of people advise beginners to avoid the terminal at all costs. this is counterproductive, at
@@ -323,8 +323,8 @@ some point you will have to use it to fix an issue or use some tool that you wan
 <b>if you can write</b> <code>/gamemode creative</code>, <b>you can write</b> <code>dnf upgrade --refresh</code>.
 </p>
 </div>
-<div id="outline-container-org9ee9be3" class="outline-3">
-<h3 id="org9ee9be3"><span class="section-number-3">3.1.</span> how to use the terminal</h3>
+<div id="outline-container-orgbb247e0" class="outline-3">
+<h3 id="orgbb247e0"><span class="section-number-3">3.1.</span> how to use the terminal</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 well, you first need to open one! if you have deliberately installed a terminal emulator, i can
@@ -343,7 +343,7 @@ so just open it like any other app, then you should see something that looks lik
 these:
 </p>
 
-<pre class="example" id="orgeb3cdc2">
+<pre class="example" id="org8792d50">
 [user@host ~]$ 
 user@host:~$ 
 </pre>
@@ -371,8 +371,8 @@ commands
 </p>
 </div>
 </div>
-<div id="outline-container-org28d50e7" class="outline-3">
-<h3 id="org28d50e7"><span class="section-number-3">3.2.</span> ls, cd</h3>
+<div id="outline-container-orga657c52" class="outline-3">
+<h3 id="orga657c52"><span class="section-number-3">3.2.</span> ls, cd</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 <code>ls</code> will list everything in your current working directory. usually, when you open the terminal
@@ -386,8 +386,8 @@ since <code>ls</code> listed "Documents" in your current directory, you can type
 </p>
 </div>
 </div>
-<div id="outline-container-org3aad476" class="outline-3">
-<h3 id="org3aad476"><span class="section-number-3">3.3.</span> "<code>.</code>" "<code>..</code>"</h3>
+<div id="outline-container-org52bb3b4" class="outline-3">
+<h3 id="org52bb3b4"><span class="section-number-3">3.3.</span> "<code>.</code>" "<code>..</code>"</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 <code>.</code> is your current directory. so if you run <code>ls</code> and see "Documents", <code>cd ./Documents</code> is
@@ -400,8 +400,8 @@ so running <code>cd ../</code> will move you back to <code>~</code>
 </p>
 </div>
 </div>
-<div id="outline-container-orgc727462" class="outline-3">
-<h3 id="orgc727462"><span class="section-number-3">3.4.</span> sudo / doas</h3>
+<div id="outline-container-org9680e0d" class="outline-3">
+<h3 id="org9680e0d"><span class="section-number-3">3.4.</span> sudo / doas</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 <code>sudo</code> and <code>doas</code> are privilege elevation tools that let permitted users run commands as root or
@@ -413,7 +413,7 @@ command as <b>root</b>.
 <b>who is root?</b> root is the user account with the user id 0, now that probably doesnt mean much to
 you, so just think of it as the administrator account. certain things you will need to do require
 administrator privileges, the most common example is probably installing new software. see
-<a href="#org5b58047">package management</a>
+<a href="#orgcf448af">package management</a>
 </p>
 
 <p>
@@ -430,11 +430,11 @@ administrator permissions
 </p>
 </div>
 </div>
-<div id="outline-container-orgdf93c20" class="outline-3">
-<h3 id="orgdf93c20"><span class="section-number-3">3.5.</span> file manipulation</h3>
+<div id="outline-container-orgf96098d" class="outline-3">
+<h3 id="orgf96098d"><span class="section-number-3">3.5.</span> file manipulation</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
-this may be the second most common use of the terminal next to <a href="#org5b58047">package
+this may be the second most common use of the terminal next to <a href="#orgcf448af">package
 management</a>. so its important to know how to view, create, move, and edit files without opening a
 file manager. im going to assume <code>nano</code> for this guide, if you installed <code>vim</code> or <code>mg</code>, ill assume
 you know how to use them
@@ -508,7 +508,7 @@ honestly, i dont fucking know. it seems to flip a coin.
 
 <p>
 <code>rm</code> deletes files, <code>rm -r</code> deletes directories, and none of it goes to the trash. i covered this in
-<a href="#orgfb08dbb">dont lose your data</a>. if you want a terminal command that actually uses the
+<a href="#org325ecf3">dont lose your data</a>. if you want a terminal command that actually uses the
 trash, <code>gio trash foo</code> probably will work, or install <code>trash-cli</code> and use <code>trash-put foo</code>
 </p>
 
@@ -541,12 +541,12 @@ if the file is owned by root (most of <code>/etc</code>), you will need <code>su
 <p>
 you will see <code>*</code> in a lot of commands. the shell expands it to "every file that matches", so <code>ls
 *.txt</code> lists every file ending in .txt and <code>cp ~/Pictures/*.png /backup/</code> copies every png. this is
-useful and also how <code>rm -rf $DIR/*</code> goes wrong (see <a href="#orgfb08dbb">dont lose your data</a>)
+useful and also how <code>rm -rf $DIR/*</code> goes wrong (see <a href="#org325ecf3">dont lose your data</a>)
 </p>
 </div>
 </div>
-<div id="outline-container-org233bec1" class="outline-3">
-<h3 id="org233bec1"><span class="section-number-3">3.6.</span> terminal survival</h3>
+<div id="outline-container-org28dd5ab" class="outline-3">
+<h3 id="org28dd5ab"><span class="section-number-3">3.6.</span> terminal survival</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 if you have used the terminal previously, you may have noticed that the ususal control c and control
@@ -580,8 +580,8 @@ if you cant see the output</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2d9d11f" class="outline-3">
-<h3 id="org2d9d11f"><span class="section-number-3">3.7.</span> learning to read commands</h3>
+<div id="outline-container-orgb7b4e18" class="outline-3">
+<h3 id="orgb7b4e18"><span class="section-number-3">3.7.</span> learning to read commands</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 nobody knows every command, there are too many. so how do we tell a scary command from a safe
@@ -589,7 +589,7 @@ command? as a general rule, just look it up! we have <i>google</i> and <code>man
 preferred in many cases) if you are told to run a command you dont understand, for example:
 </p>
 
-<pre class="example" id="org02f0091">
+<pre class="example" id="orged53416">
 find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'
 </pre>
 
@@ -619,14 +619,14 @@ look up "find command iname option" or something
 
 <p>
 bonus bonus tip: <a href="https://explainshell.com">explainshell.com</a> and <code>tldr</code> are great resources that
-i explain more thoroughly in <a href="#org868560d">where to find help</a>, i very much recommend
+i explain more thoroughly in <a href="#orgee21cce">where to find help</a>, i very much recommend
 reading that section
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb08dbb" class="outline-2">
-<h2 id="orgfb08dbb"><span class="section-number-2">4.</span> dont lose your data</h2>
+<div id="outline-container-org325ecf3" class="outline-2">
+<h2 id="org325ecf3"><span class="section-number-2">4.</span> dont lose your data</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 there are certain commands to pay <b>extra</b> attention to
@@ -637,7 +637,7 @@ there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
-<code>sudo / doas</code>: these commands were covered in <a href="#orgc727462">sudo / doas</a>. but i only covered how
+<code>sudo / doas</code>: these commands were covered in <a href="#org9680e0d">sudo / doas</a>. but i only covered how
 to use them, not the places where it becomes a problem. never run a gui app as root, and if a
 command doesnt work, running it with sudo often will not help unless the command genuinely needs
 root. if you happen to run something like <code>sudo mkdir ./foo</code>, you will later run into issues where
@@ -658,7 +658,7 @@ this is different becasuse <code>*</code> expands to all directories in root, wh
 <code>dd</code>: this command writes data somewhere, youll often see:
 </p>
 
-<pre class="example" id="orga9b0ec4">
+<pre class="example" id="org84bbbe0">
 dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync
 </pre>
 
@@ -711,7 +711,7 @@ i dont want to go too much into teaching shell, but this one difference is worth
 redirection operators, as an example: <code>echo "gentoo" &gt; gentoo.txt</code> will do this<sup><a id="fnr.cat" class="footref" href="#fn.cat" role="doc-backlink">6</a></sup>:
 </p>
 
-<pre class="example" id="org0ef12c0">
+<pre class="example" id="org7872cae">
 noah@lychee ~ % echo "gentoo" &gt; gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -722,7 +722,7 @@ noah@lychee ~ %
 now, lets look at what <code>&gt;&gt;</code> will do:
 </p>
 
-<pre class="example" id="orgff252e8">
+<pre class="example" id="org6172d45">
 noah@lychee ~ % echo "gentoo" &gt; gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -737,7 +737,7 @@ noah@lychee ~ %
 now, lets use <code>&gt;</code> again on the same file:
 </p>
 
-<pre class="example" id="org3962e0d">
+<pre class="example" id="org2fc840b">
 noah@lychee ~ % echo "gentoo" &gt; gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -762,31 +762,31 @@ i have lost 12h of log data from this very difference &gt;:(
 </p>
 </div>
 </div>
-<div id="outline-container-org6572ecf" class="outline-2">
-<h2 id="org6572ecf"><span class="section-number-2">5.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-org86e0a05" class="outline-2">
+<h2 id="org86e0a05"><span class="section-number-2">5.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 i think its called the curse of knowledge, where you forget what it was like to not know? whatever
 it is, the point is that at some point you had to learn how to use windows, you had to learn how to
 search for an app, you learnt what a sketchy vs safe download looked like<sup><a id="fnr.curlbash" class="footref" href="#fn.curlbash" role="doc-backlink">8</a></sup>. so you
 should expect to have to learn how to use linux, learn how to use the package manager (see
-<a href="#org5b58047">package management</a>) for apps, learn how your desktop works, and, dont be
+<a href="#orgcf448af">package management</a>) for apps, learn how your desktop works, and, dont be
 discouraged if you fuck something up<sup><a id="fnr.backups" class="footref" href="#fn.backups" role="doc-backlink">9</a></sup>. youre learning!
 </p>
 </div>
 </div>
-<div id="outline-container-org5b58047" class="outline-2">
-<h2 id="org5b58047"><span class="section-number-2">6.</span> package management</h2>
+<div id="outline-container-orgcf448af" class="outline-2">
+<h2 id="orgcf448af"><span class="section-number-2">6.</span> package management</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 the most common way to install software on linux is through the package manager. common package
 managers include: apt, dnf, pacman, zypper and portage. (note: for alternatives such as flatpak and
-appimage, see <a href="#org2ee5d0d">flatpak and appimage</a>). to communicate with these package
+appimage, see <a href="#org5574cf6">flatpak and appimage</a>). to communicate with these package
 managers, you will use the terminal, here are examples for each of the package managers mentioned:
 </p>
 </div>
-<div id="outline-container-org389ac45" class="outline-3">
-<h3 id="org389ac45"><span class="section-number-3">6.1.</span> apt</h3>
+<div id="outline-container-orgd27f651" class="outline-3">
+<h3 id="orgd27f651"><span class="section-number-3">6.1.</span> apt</h3>
 <div class="outline-text-3" id="text-6-1">
 <ul class="org-ul">
 <li>installing a package: <code>apt install whatever</code></li>
@@ -797,8 +797,8 @@ managers, you will use the terminal, here are examples for each of the package m
 </ul>
 </div>
 </div>
-<div id="outline-container-org207832c" class="outline-3">
-<h3 id="org207832c"><span class="section-number-3">6.2.</span> dnf</h3>
+<div id="outline-container-org46fbffb" class="outline-3">
+<h3 id="org46fbffb"><span class="section-number-3">6.2.</span> dnf</h3>
 <div class="outline-text-3" id="text-6-2">
 <ul class="org-ul">
 <li>installing a package: <code>dnf install whatever</code></li>
@@ -809,8 +809,8 @@ managers, you will use the terminal, here are examples for each of the package m
 </ul>
 </div>
 </div>
-<div id="outline-container-orgebebbd0" class="outline-3">
-<h3 id="orgebebbd0"><span class="section-number-3">6.3.</span> pacman</h3>
+<div id="outline-container-org8cbde46" class="outline-3">
+<h3 id="org8cbde46"><span class="section-number-3">6.3.</span> pacman</h3>
 <div class="outline-text-3" id="text-6-3">
 <ul class="org-ul">
 <li>installing a package: <code>pacman -S whatever</code></li>
@@ -821,8 +821,8 @@ dependencies and config files)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org6df71dd" class="outline-3">
-<h3 id="org6df71dd"><span class="section-number-3">6.4.</span> zypper</h3>
+<div id="outline-container-org6a682bc" class="outline-3">
+<h3 id="org6a682bc"><span class="section-number-3">6.4.</span> zypper</h3>
 <div class="outline-text-3" id="text-6-4">
 <ul class="org-ul">
 <li>installing a package: <code>zypper install whatever</code></li>
@@ -833,8 +833,8 @@ dependencies and config files)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0e52038" class="outline-3">
-<h3 id="org0e52038"><span class="section-number-3">6.5.</span> portage</h3>
+<div id="outline-container-org097c169" class="outline-3">
+<h3 id="org097c169"><span class="section-number-3">6.5.</span> portage</h3>
 <div class="outline-text-3" id="text-6-5">
 <ul class="org-ul">
 <li>installing a package: <code>emerge -a whatever</code></li>
@@ -864,8 +864,8 @@ the windows approach). "syncing" just means updating the database.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbfa8aae" class="outline-3">
-<h3 id="orgbfa8aae"><span class="section-number-3">6.6.</span> dont delete your desktop</h3>
+<div id="outline-container-orga170165" class="outline-3">
+<h3 id="orga170165"><span class="section-number-3">6.6.</span> dont delete your desktop</h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 you may have seen that&hellip; situation linus was in when he deleted his desktop using pop os. this was
@@ -888,8 +888,8 @@ wont be stuck looking things up for very long, it just comes with time.
 </p>
 </div>
 </div>
-<div id="outline-container-org15e1939" class="outline-3">
-<h3 id="org15e1939"><span class="section-number-3">6.7.</span> be careful with third-party packages</h3>
+<div id="outline-container-org72b10a3" class="outline-3">
+<h3 id="org72b10a3"><span class="section-number-3">6.7.</span> be careful with third-party packages</h3>
 <div class="outline-text-3" id="text-6-7">
 <p>
 sometimes, youll need something that isnt available in your distros official repo. in these cases,
@@ -909,7 +909,7 @@ a third party package:
 </ul>
 
 <p>
-so, make sure you check the official repos or <a href="#org2ee5d0d">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">13</a></sup> for the
+so, make sure you check the official repos or <a href="#org5574cf6">flatpak</a><sup><a id="fnr.flatpak" class="footref" href="#fn.flatpak" role="doc-backlink">13</a></sup> for the
 package first.
 </p>
 
@@ -919,8 +919,8 @@ package first.
 </div>
 </div>
 </div>
-<div id="outline-container-org2ee5d0d" class="outline-2">
-<h2 id="org2ee5d0d"><span class="section-number-2">7.</span> flatpak and appimage</h2>
+<div id="outline-container-org5574cf6" class="outline-2">
+<h2 id="org5574cf6"><span class="section-number-2">7.</span> flatpak and appimage</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 ill admit i dont have much experience with flatpak or appimage, so itll be better you do your own
@@ -953,15 +953,15 @@ update, so only download them from the projects official site</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf44f685" class="outline-2">
-<h2 id="orgf44f685"><span class="section-number-2">8.</span> finding alternative apps</h2>
+<div id="outline-container-orgb2ebc06" class="outline-2">
+<h2 id="orgb2ebc06"><span class="section-number-2">8.</span> finding alternative apps</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 i once read a reddit post about a user who was asking how to get rufus working through wine to
 make a bootable usb. honestly, that seems to make total sense, thats how you do it on windows,
 so it must be how you do it on linux. but, linux has plenty of tools that do the same thing without
 the trouble of trying to get it working through wine. for this case, a good gui like balena etcher
-works, or just dd if you dont want to install anything (see <a href="#orgfb08dbb">dont lose your data</a>)
+works, or just dd if you dont want to install anything (see <a href="#org325ecf3">dont lose your data</a>)
 </p>
 
 <p>
@@ -982,8 +982,8 @@ as a last resort, wine does work great. just make sure to try the native route f
 </p>
 </div>
 </div>
-<div id="outline-container-orge511874" class="outline-2">
-<h2 id="orge511874"><span class="section-number-2">9.</span> permissions</h2>
+<div id="outline-container-orgdb6fbed" class="outline-2">
+<h2 id="orgdb6fbed"><span class="section-number-2">9.</span> permissions</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 youve already seen this: <code>sudo mkdir ./foo</code> gave you a directory you cant write to, and
@@ -997,19 +997,19 @@ also, "permissions" means three different things on linux and people mix them up
 
 <ol class="org-ol">
 <li>unix file permissions (this section)</li>
-<li>selinux / apparmor (see <a href="#org2ba3e92">selinux and apparmor</a>)</li>
-<li>app sandboxes like flatpak (see <a href="#org2ee5d0d">flatpak and appimage</a>)</li>
+<li>selinux / apparmor (see <a href="#orgbaf3632">selinux and apparmor</a>)</li>
+<li>app sandboxes like flatpak (see <a href="#org5574cf6">flatpak and appimage</a>)</li>
 </ol>
 </div>
-<div id="outline-container-org8ebc4a3" class="outline-3">
-<h3 id="org8ebc4a3"><span class="section-number-3">9.1.</span> basics</h3>
+<div id="outline-container-orge0c545b" class="outline-3">
+<h3 id="orge0c545b"><span class="section-number-3">9.1.</span> basics</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 every file has an owner and a group. then it has three sets of permissions for
 the owner, the group, and everyone else. run <code>ls -l</code> and look at one line
 </p>
 
-<pre class="example" id="org24ade1b">
+<pre class="example" id="org5c84e60">
 -rw-r--r-- 1 noah noah 1234 Nov  1 00:00 foo.txt
 drwxr-xr-x 2 noah noah 4096 Nov  1 00:00 Documents
 </pre>
@@ -1020,8 +1020,8 @@ themselves. so <code>foo.txt</code> is owned by user <code>noah</code> and group
 </p>
 </div>
 </div>
-<div id="outline-container-org6245436" class="outline-3">
-<h3 id="org6245436"><span class="section-number-3">9.2.</span> what is -rw-r&ndash;r--</h3>
+<div id="outline-container-org7d7a05e" class="outline-3">
+<h3 id="org7d7a05e"><span class="section-number-3">9.2.</span> what is -rw-r&ndash;r--</h3>
 <div class="outline-text-3" id="text-9-2">
 <p>
 <code>-rw-r--r--</code> has 1 character for the type, then 3 groups of 3 characters for perms
@@ -1052,7 +1052,7 @@ anything"</li>
 </ul>
 
 <p>
-if theres an 11th character (<code>.</code> or <code>+</code>), see <a href="#org2ba3e92">selinux and apparmor</a>
+if theres an 11th character (<code>.</code> or <code>+</code>), see <a href="#orgbaf3632">selinux and apparmor</a>
 </p>
 
 <p>
@@ -1060,8 +1060,8 @@ if theres an 11th character (<code>.</code> or <code>+</code>), see <a href="#or
 </p>
 </div>
 </div>
-<div id="outline-container-orgf3b9a97" class="outline-3">
-<h3 id="orgf3b9a97"><span class="section-number-3">9.3.</span> rwx is different for directories</h3>
+<div id="outline-container-org308a24c" class="outline-3">
+<h3 id="org308a24c"><span class="section-number-3">9.3.</span> rwx is different for directories</h3>
 <div class="outline-text-3" id="text-9-3">
 <p>
 here:
@@ -1111,8 +1111,8 @@ is still deletable by you. and a directory with <code>r</code> but no <code>x</c
 </p>
 </div>
 </div>
-<div id="outline-container-org70f2305" class="outline-3">
-<h3 id="org70f2305"><span class="section-number-3">9.4.</span> who am i and what groups am i in</h3>
+<div id="outline-container-org5e05187" class="outline-3">
+<h3 id="org5e05187"><span class="section-number-3">9.4.</span> who am i and what groups am i in</h3>
 <div class="outline-text-3" id="text-9-4">
 <p>
 <code>id</code> tells you your user, your primary group and every other group youre in. groups are how you get
@@ -1135,8 +1135,8 @@ a file from 1970 and thought it was cool)
 </p>
 </div>
 </div>
-<div id="outline-container-orga110c2c" class="outline-3">
-<h3 id="orga110c2c"><span class="section-number-3">9.5.</span> changing permissions</h3>
+<div id="outline-container-org386b658" class="outline-3">
+<h3 id="org386b658"><span class="section-number-3">9.5.</span> changing permissions</h3>
 <div class="outline-text-3" id="text-9-5">
 <p>
 <code>chmod</code> changes rwx
@@ -1161,8 +1161,8 @@ three digits are owner, group, other
 <ul class="org-ul">
 <li><code>644</code>: <code>rw-r--r--</code>, a normal file</li>
 <li><code>755</code>: <code>rwxr-xr-x</code>, a script or a directory</li>
-<li><code>600</code> / <code>700</code>: only you, used for secrets. ssh will actually refuse to work if <code>~/.ssh</code> isnt <code>700</code>
-and your keys arent <code>600</code>, which is the first time most people meet permissions on purpose</li>
+<li><code>600</code> / <code>700</code>: only you, used for secrets. ssh will actually refuse to work if <code>~/.ssh</code>
+and the contents of it are too open</li>
 </ul>
 
 <p>
@@ -1177,17 +1177,17 @@ user on the system. find out which permission is actually missing instead
 </p>
 </div>
 </div>
-<div id="outline-container-org67c2a65" class="outline-3">
-<h3 id="org67c2a65"><span class="section-number-3">9.6.</span> root ignores this</h3>
+<div id="outline-container-orgc64adda" class="outline-3">
+<h3 id="orgc64adda"><span class="section-number-3">9.6.</span> root ignores this</h3>
 <div class="outline-text-3" id="text-9-6">
 <p>
 root passes every rwx check, which is why <code>sudo</code> "fixes" permission errors (thats the wrong
-fix, see <a href="#orgfb08dbb">dont lose your data</a>). the one thing root doesnt ignore is the next section
+fix, see <a href="#org325ecf3">dont lose your data</a>). the one thing root doesnt ignore is the next section
 </p>
 </div>
 </div>
-<div id="outline-container-org298983d" class="outline-3">
-<h3 id="org298983d"><span class="section-number-3">9.7.</span> permission denied, but ls -l says im allowed?</h3>
+<div id="outline-container-org5a516b3" class="outline-3">
+<h3 id="org5a516b3"><span class="section-number-3">9.7.</span> permission denied, but ls -l says im allowed?</h3>
 <div class="outline-text-3" id="text-9-7">
 <p>
 in order of likelihood:
@@ -1195,7 +1195,7 @@ in order of likelihood:
 
 <ul class="org-ul">
 <li>you just added yourself to a group and havent logged out</li>
-<li>the drive is fat32/exfat/ntfs. (permissions come from mount options, see <a href="#org86d99fc">backups</a>)</li>
+<li>the drive is fat32/exfat/ntfs. (permissions come from mount options, see <a href="#orgf472178">backups</a>)</li>
 <li>the partition is mounted <code>noexec</code>, somewhat common for <code>/tmp</code> and usb drives</li>
 <li>the directory above it is missing <code>x</code> for you</li>
 <li>its a flatpak and the sandbox cant see that folder. fix it in flatseal</li>
@@ -1203,8 +1203,8 @@ in order of likelihood:
 </ul>
 </div>
 </div>
-<div id="outline-container-org2ba3e92" class="outline-3">
-<h3 id="org2ba3e92"><span class="section-number-3">9.8.</span> selinux and apparmor</h3>
+<div id="outline-container-orgbaf3632" class="outline-3">
+<h3 id="orgbaf3632"><span class="section-number-3">9.8.</span> selinux and apparmor</h3>
 <div class="outline-text-3" id="text-9-8">
 <p>
 standard permissions tell you "is this user allowed". selinux and apparmor ask "is this program
@@ -1223,6 +1223,10 @@ or disabled</li>
 </ul>
 
 <p>
+if you dont have it, skip this section
+</p>
+
+<p>
 <b>common issues</b>: you set up a web server (maybe using <a href="https://github.com/noahburchell/nhttp">nhttp</a>!), samba, game server or ssh,
 you move a file into its directory, <code>ls -l</code> says the permissions are fine, and the service
 still cant read it
@@ -1231,7 +1235,7 @@ still cant read it
 <p>
 with selinux thats because every file has a label (the 11th character <code>.</code> in <code>ls -l</code> means one is
 there, <code>ls -Z</code> shows it). a file <b>created</b> in <code>/var/www</code> gets a web label, a file <b>moved</b> there
-keeps the label from your home folder (remember, <code>mv</code> doesnt rewrite the file, see <sup><a id="fnr.inode.2" class="footref" href="#fn.inode" role="doc-backlink">2</a></sup>).
+keeps the label from your home folder (remember, <code>mv</code> doesnt rewrite the file, see here<sup><a id="fnr.inode.2" class="footref" href="#fn.inode" role="doc-backlink">2</a></sup>).
 <code>sudo restorecon -Rv /path</code> puts the correct labels back. to see what got denied, you can look at
 <code>sudo ausearch -m avc -ts recent</code>, or on fedora just open the setroubleshoot notification, it
 explains it in english (i think, its been a while)
@@ -1256,8 +1260,8 @@ best place to look
 </p>
 </div>
 </div>
-<div id="outline-container-orga430473" class="outline-3">
-<h3 id="orga430473"><span class="section-number-3">9.9.</span> special perms</h3>
+<div id="outline-container-orgff6dff5" class="outline-3">
+<h3 id="orgff6dff5"><span class="section-number-3">9.9.</span> special perms</h3>
 <div class="outline-text-3" id="text-9-9">
 <p>
 youll sometimes see <code>s</code> or <code>t</code> where an <code>x</code> should be, for example on <code>/usr/bin/sudo</code>
@@ -1267,8 +1271,8 @@ and <code>/tmp</code>. <code>s</code> (setuid) on the owner slot means the progr
 </div>
 </div>
 </div>
-<div id="outline-container-orge3a50a8" class="outline-2">
-<h2 id="orge3a50a8"><span class="section-number-2">10.</span> yes, everything is a file</h2>
+<div id="outline-container-org4c7a36b" class="outline-2">
+<h2 id="org4c7a36b"><span class="section-number-2">10.</span> yes, everything is a file</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 if you are on linux right now, i have an excersise that really made this concept click for me.
@@ -1280,7 +1284,7 @@ first, make a 1gb empty file using the <code>truncate</code> command. this comma
 a new file at that size if it doesnt exist)
 </p>
 
-<pre class="example" id="org91fe79b">
+<pre class="example" id="org4a602ee">
 truncate -s 1G disk
 </pre>
 
@@ -1288,7 +1292,7 @@ truncate -s 1G disk
 now, partition this file with <code>cfdisk</code>!
 </p>
 
-<pre class="example" id="orgfed7abd">
+<pre class="example" id="org6a42cc8">
 cfdisk ./disk
 </pre>
 
@@ -1297,7 +1301,7 @@ notice how it brought up a menu? pick a gpt disk label, and make some new partit
 changes to the "disk". then check what type of file it is with the <code>file</code> and <code>fdisk</code> commands
 </p>
 
-<pre class="example" id="org86b0cfe">
+<pre class="example" id="org7bc823e">
 noah@lychee ~/Documents % file ./disk            
 ./disk: DOS/MBR boot sector; partition 1 : ID=0xee, start-CHS (0x0,0,2), end-CHS (0x3ff,255,63), startsector 1, 2097151 sectors, extended partition table (last)
 noah@lychee ~/Documents % fdisk -l ./disk      
@@ -1318,7 +1322,7 @@ noah@lychee ~/Documents %
 wait.. that looks the same as my boot drive!
 </p>
 
-<pre class="example" id="org133ea80">
+<pre class="example" id="org4123262">
 noah@lychee ~/Documents % doas fdisk -l /dev/nvme0n1
 doas (noah@lychee) password: 
 Disk /dev/nvme0n1: 1.82 TiB, 2000398934016 bytes, 3907029168 sectors
@@ -1340,16 +1344,16 @@ this is becasue, they are both <i>files</i><sup><a id="fnr.files" class="footref
 </p>
 </div>
 </div>
-<div id="outline-container-org86d99fc" class="outline-2">
-<h2 id="org86d99fc"><span class="section-number-2">11.</span> backups</h2>
+<div id="outline-container-orgf472178" class="outline-2">
+<h2 id="orgf472178"><span class="section-number-2">11.</span> backups</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 youve heard the usual <a href="https://en.wikipedia.org/wiki/Backup">3-2-1 advice</a> many times so ill spare
 that, what is linux specific things you should backup.
 </p>
 </div>
-<div id="outline-container-orgf25a350" class="outline-3">
-<h3 id="orgf25a350"><span class="section-number-3">11.1.</span> what to backup</h3>
+<div id="outline-container-orgb5cb173" class="outline-3">
+<h3 id="orgb5cb173"><span class="section-number-3">11.1.</span> what to backup</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 your home folder covers most of it, but some important stuff lives outside of it:
@@ -1374,8 +1378,8 @@ databases. if you dont know what these are, you probably dont have any</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf36187e" class="outline-3">
-<h3 id="orgf36187e"><span class="section-number-3">11.2.</span> what not to backup</h3>
+<div id="outline-container-orgae81c00" class="outline-3">
+<h3 id="orgae81c00"><span class="section-number-3">11.2.</span> what not to backup</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 some stuff in home is big and useless to keep around:
@@ -1392,8 +1396,8 @@ them<sup><a id="fnr.steamsaves" class="footref" href="#fn.steamsaves" role="doc-
 </ul>
 </div>
 </div>
-<div id="outline-container-org52d78f5" class="outline-3">
-<h3 id="org52d78f5"><span class="section-number-3">11.3.</span> mistakes to avoid</h3>
+<div id="outline-container-orge4d2b2a" class="outline-3">
+<h3 id="orge4d2b2a"><span class="section-number-3">11.3.</span> mistakes to avoid</h3>
 <div class="outline-text-3" id="text-11-3">
 <ul class="org-ul">
 <li>hidden files: <code>cp -r ~/* /backup</code> skips hidden files. use <code>rsync -aHAX ~/ /backup/</code> or some other
@@ -1407,15 +1411,15 @@ them and back them up separately and encrypted, or encrypt your whole backup</li
 </div>
 </div>
 </div>
-<div id="outline-container-org868560d" class="outline-2">
-<h2 id="org868560d"><span class="section-number-2">12.</span> where to find help</h2>
+<div id="outline-container-orgee21cce" class="outline-2">
+<h2 id="orgee21cce"><span class="section-number-2">12.</span> where to find help</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 there are many great resources for finding help with anything you need to know about linux
 </p>
 </div>
-<div id="outline-container-orgdd6a8ef" class="outline-3">
-<h3 id="orgdd6a8ef"><span class="section-number-3">12.1.</span> for general advice</h3>
+<div id="outline-container-orgc968f8a" class="outline-3">
+<h3 id="orgc968f8a"><span class="section-number-3">12.1.</span> for general advice</h3>
 <div class="outline-text-3" id="text-12-1">
 <p>
 often the best way to get help with your distro is to find your distros specific wiki, such as the
@@ -1442,8 +1446,8 @@ for people who already somewhat know what theyre doing, id advise beginners to b
 </p>
 </div>
 </div>
-<div id="outline-container-org4651d61" class="outline-3">
-<h3 id="org4651d61"><span class="section-number-3">12.2.</span> for specific commands</h3>
+<div id="outline-container-org6a75caf" class="outline-3">
+<h3 id="org6a75caf"><span class="section-number-3">12.2.</span> for specific commands</h3>
 <div class="outline-text-3" id="text-12-2">
 <p>
 <code>tldr</code>
@@ -1477,8 +1481,8 @@ sometimes lags behind and may not know about a very new flag
 </div>
 </div>
 </div>
-<div id="outline-container-orge2b1d68" class="outline-2">
-<h2 id="orge2b1d68"><span class="section-number-2">13.</span> how to ask for help</h2>
+<div id="outline-container-org6bc16a8" class="outline-2">
+<h2 id="org6bc16a8"><span class="section-number-2">13.</span> how to ask for help</h2>
 <div class="outline-text-2" id="text-13">
 <p>
 now that you know where to find help, heres the information you need to include:
@@ -1490,7 +1494,7 @@ hardware if its relevant (especially the GPU). <code>inxi -Fxz</code> gives you 
 <li>what you were trying to do</li>
 <li>the exact error message copied as text. <b>do not upload a phone photo of your monitor</b></li>
 <li>relevant logs (get kernel logs with <code>dmesg</code>, boot logs with <code>journalctl -b</code> (this boot),
-<code>journalctl -b -1</code> (previous boot). see <a href="#orgbda0bfa">not every distro uses
+<code>journalctl -b -1</code> (previous boot). see <a href="#org2e6822b">not every distro uses
 systemd</a>)</li>
 <li>what you already tried</li>
 </ul>
@@ -1510,8 +1514,8 @@ what fixed it</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org30fa3ca" class="outline-2">
-<h2 id="org30fa3ca"><span class="section-number-2">14.</span> how to help yourself</h2>
+<div id="outline-container-org2d07394" class="outline-2">
+<h2 id="org2d07394"><span class="section-number-2">14.</span> how to help yourself</h2>
 <div class="outline-text-2" id="text-14">
 <p>
 this has moved to its own post: <a href="2026-11-05-how-to-fix-your-broken-install.html">how to fix
@@ -1519,8 +1523,8 @@ your "broken" install</a>
 </p>
 </div>
 </div>
-<div id="outline-container-orgbda0bfa" class="outline-2">
-<h2 id="orgbda0bfa"><span class="section-number-2">15.</span> not every distro uses systemd</h2>
+<div id="outline-container-org2e6822b" class="outline-2">
+<h2 id="org2e6822b"><span class="section-number-2">15.</span> not every distro uses systemd</h2>
 <div class="outline-text-2" id="text-15">
 <p>
 most guides you find online assume systemd, but its not the only init. if a guide tells you to run
@@ -1591,25 +1595,30 @@ says that try rc-update to see what you have)
 </table>
 </div>
 </div>
-<div id="outline-container-org81246f7" class="outline-2">
-<h2 id="org81246f7"><span class="section-number-2">16.</span> more terminal?</h2>
+<div id="outline-container-org98682c3" class="outline-2">
+<h2 id="org98682c3"><span class="section-number-2">16.</span> more terminal?</h2>
 <div class="outline-text-2" id="text-16">
 <p>
 yes, there are some more very useful commands you should know about but i didnt go over becasue they
 arent like super required:
 </p>
 </div>
-<div id="outline-container-orgfbf83d6" class="outline-3">
-<h3 id="orgfbf83d6"><span class="section-number-3">16.1.</span> ln</h3>
+<div id="outline-container-orgd688f7d" class="outline-3">
+<h3 id="orgd688f7d"><span class="section-number-3">16.1.</span> ln</h3>
 <div class="outline-text-3" id="text-16-1">
 <p>
-the most common use of the <code>ln</code> (link) command is creating a symlink. the syntax is <code>ln -s &lt;target&gt; &lt;source&gt;</code>,
-and the target is relative to the source
+the most common use of the <code>ln</code> (link) command is creating a symlink. the syntax is <code>ln -s &lt;target&gt; &lt;link name&gt;</code>,
+and the target is relative to the link
+</p>
+
+<p>
+<b>💡 tip</b>: you can create a symlink in a folder that points to the parent folder, creating a loop. this
+is actually completely useless, though
 </p>
 </div>
 </div>
-<div id="outline-container-orgba55a07" class="outline-3">
-<h3 id="orgba55a07"><span class="section-number-3">16.2.</span> grep</h3>
+<div id="outline-container-org88c9bec" class="outline-3">
+<h3 id="org88c9bec"><span class="section-number-3">16.2.</span> grep</h3>
 <div class="outline-text-3" id="text-16-2">
 <p>
 grep is pretty much control s (search) (it stands for global regular expression print). it is one of the best
@@ -1619,16 +1628,11 @@ mention of <code>foo</code>, you can do this: <code>grep "foo" foo.txt</code>, t
 can use: <code>grep -i "foo" foo.txt</code>. another common flag combo is this: <code>dmesg | grep -iE "amd|video|card"</code>.
 that will search dmesgs output for any mention of amd, video, or card, case insensitively.
 </p>
-
-<p>
-<b>💡 tip</b>: you can create a symlink in a folder that points to the parent folder, creating a loop. this is actually
-completely useless, though
-</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5e7ab03" class="outline-2">
-<h2 id="org5e7ab03"><span class="section-number-2">17.</span> glossary</h2>
+<div id="outline-container-org2e737cc" class="outline-2">
+<h2 id="org2e737cc"><span class="section-number-2">17.</span> glossary</h2>
 <div class="outline-text-2" id="text-17">
 <dl class="org-dl">
 <dt>appimage</dt><dd>a single executable that bundles an application with most of the libraries it
@@ -1799,7 +1803,7 @@ kinda like the <code>curl | bash</code> i mentioned earlier
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.backups" class="footnum" href="#fnr.backups" role="doc-backlink">9</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
-keeping backups is recommended, see <a href="#org86d99fc">backups</a> for more info
+keeping backups is recommended, see <a href="#orgf472178">backups</a> for more info
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.aptfull" class="footnum" href="#fnr.aptfull" role="doc-backlink">10</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
@@ -1853,7 +1857,7 @@ home folder by default
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-06 Fri 17:42</p>
+<p class="date">Created: 2026-11-06 Fri 18:04</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

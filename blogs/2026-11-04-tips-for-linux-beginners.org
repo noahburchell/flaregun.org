@@ -599,8 +599,8 @@ three digits are owner, group, other
 
 - =644=: =rw-r--r--=, a normal file
 - =755=: =rwxr-xr-x=, a script or a directory
-- =600= / =700=: only you, used for secrets. ssh will actually refuse to work if =~/.ssh= isnt =700=
-  and your keys arent =600=, which is the first time most people meet permissions on purpose
+- =600= / =700=: only you, used for secrets. ssh will actually refuse to work if =~/.ssh=
+  and the contents of it are too open
 
 =chown= changes the owner and group: =sudo chown user:group foo=. the one youll actually use is
 fixing a root-owned directory: =sudo chown -R "$USER": ./foo= (the trailing colon means "and my
@@ -634,13 +634,15 @@ allowed to touch this at all", this is called mandatory access control (mac)
 - ubuntu, debian, opensuse: apparmor. =sudo aa-status= lists the loaded profiles
 - arch, gentoo, void: probably neither unless you set it up
 
+if you dont have it, skip this section
+
 *common issues*: you set up a web server (maybe using [[https://github.com/noahburchell/nhttp][nhttp]]!), samba, game server or ssh,
 you move a file into its directory, =ls -l= says the permissions are fine, and the service
 still cant read it
 
 with selinux thats because every file has a label (the 11th character =.= in =ls -l= means one is
 there, =ls -Z= shows it). a file *created* in =/var/www= gets a web label, a file *moved* there
-keeps the label from your home folder (remember, =mv= doesnt rewrite the file, see [fn:inode]).
+keeps the label from your home folder (remember, =mv= doesnt rewrite the file, see here[fn:inode]).
 =sudo restorecon -Rv /path= puts the correct labels back. to see what got denied, you can look at
 =sudo ausearch -m avc -ts recent=, or on fedora just open the setroubleshoot notification, it
 explains it in english (i think, its been a while)
@@ -868,8 +870,11 @@ yes, there are some more very useful commands you should know about but i didnt 
 arent like super required:
 
 ** ln
-the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target> <source>=,
-and the target is relative to the source
+the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target> <link name>=,
+and the target is relative to the link
+
+*💡 tip*: you can create a symlink in a folder that points to the parent folder, creating a loop. this
+is actually completely useless, though
 
 ** grep
 grep is pretty much control s (search) (it stands for global regular expression print). it is one of the best
@@ -879,8 +884,6 @@ mention of =foo=, you can do this: =grep "foo" foo.txt=, to search =dmesg= for =
 can use: =grep -i "foo" foo.txt=. another common flag combo is this: =dmesg | grep -iE "amd|video|card"=.
 that will search dmesgs output for any mention of amd, video, or card, case insensitively.
 
-*💡 tip*: you can create a symlink in a folder that points to the parent folder, creating a loop. this is actually
-completely useless, though
 
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it
