@@ -1,6 +1,8 @@
 #+TITLE: tips for linux beginners [2026-11-04 Wed]
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../manual.css">
+#+OPTIONS: html-style:nil
 
 you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]? brilliant! now that youre part of the
 team, here are some tips!
