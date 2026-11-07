@@ -8,7 +8,7 @@ notice and this notice are preserved.  This file is offered as-is,
 without any warranty.
 */
 
-@import url('/style.css');
+@import url('style.css');
 
 /* makeinfo convert @deffn and similar functions to something inside
    <blockquote>.  style.css uses italic for blockquote.  This looks poor
