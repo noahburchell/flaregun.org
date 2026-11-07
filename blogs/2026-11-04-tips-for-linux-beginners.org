@@ -911,7 +911,7 @@ these dont fit anywhere i just thought they would make good bullets
 - wtf?? =[ 5379.382219] traps: python3[9480] trap stack segment ip:7f23c08e100a sp:400000000000000
   error:0 in dev/zero[a,7f23c08e1000+1000]=
 - jiffies usually start at -5m instead of 0.. im pretty sure this is to catch wraparound bugs
-- =creat()= is missing an e because ken thompson felt like it
+- =creat()= is missing an e i think because ken thompson felt like it. no good reason
 - =killall= on solaris kills everything
 - for some god knows reason systemd-tmpfiles creats /srv as a btrfs subvol if the dir doesnt exist?
 - anything on the kernel cmdline the kernel doesnt recognise gets given to init
