@@ -573,17 +573,7 @@ on debian/ubuntu) is what lets you use sudo at all
 
 add yourself to a group with =sudo usermod -aG groupname "$USER"=. without the -a, you replace your
 groups instead of adding one (not good). then log out and back in, group changes dont apply to
-sessions that are already open becasue theres no syscall to reread /etc/group for an existing
-process[fn:dumbsyscall]
-
-
-[fn:dumbsyscall] also there is no syscall to change the creation time of a file, uhh thats not relevant but
-its a fun fact. if you did want a file that was created a long time ago, you have to go line 1722 (i
-just checked!) of =kernel/time/timekeeping.c= and remove that check that checks if the time youre
-tying to set the time to is less than monotonic, then you can set the time to @0 and create a file.
-you can also ignore this its not relevant at all i just wanted to say this becasue i did it to
-create a file from 1970 and thought it was cool
-
+sessions that are already open process
 
 [fn:dockergroup] if docker daemon runs as root (it probably does), being in the docker group grants
 passwordless root, thats honestly probably fine for a home pc, but still be aware (omarchy!)
@@ -836,7 +826,7 @@ now that you know where to find help, heres the information you need to include:
   hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
 - what you were trying to do
 - the exact error message copied as text. *do not upload a phone photo of your monitor*
-- relevant logs (get kernel logs with =dmesg=, boot logs with =journalctl -b= (this boot),
+- relevant logs (get kernel logs with =(sudo) dmesg=, boot logs with =journalctl -b= (this boot),
   =journalctl -b -1= (previous boot). see [[*not every distro uses systemd][not every distro uses systemd]])
 - what you already tried
 
@@ -889,9 +879,9 @@ this is actually completely useless, though
 grep is pretty much control s (search) (it stands for global regular expression print). it is one of
 the best commands. to use it, you either search a file directly, or pipe somehting into it. to
 search =foo.txt= for any mention of =foo=, you can do this: =grep "foo" foo.txt=, to search =dmesg=
-for =nvidia=, you can do this: =dmesg | grep "nvidia"=. to search =foo.txt= for any match of "Foo",
+for =nvidia=, you can do this: =(sudo) dmesg | grep "nvidia"=. to search =foo.txt= for any match of "Foo",
 "fOo", etc (ignoring case), you can use: =grep -i "foo" foo.txt=. another common flag combo is this:
-=dmesg | grep -iE "amd|video|card"=. that will search dmesgs output for any mention of amd, video,
+=(sudo) dmesg | grep -iE "amd|video|card"=. that will search dmesgs output for any mention of amd, video,
 or card, case insensitively.
 
 ** du
@@ -907,6 +897,11 @@ these dont fit anywhere i just thought they would make good bullets
   thing as an absolute =clock_nanosleep()=)
 - you dont actuallt need a bootloader, as long as you built your kernel with =CONFIG_EFI_STUB= and give it
   an nvram entry
+- there is no syscall to change the creation time of a file. if you did want a file that was created
+  at epoch, you have to go line 1722 (i just checked!) of =kernel/time/timekeeping.c= and remove that
+  check that checks if the time youre tying to set the time to is less than monotonic, then you can set the
+  time to @0 and create a file
+- emacs is the best "text editor"
 
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
