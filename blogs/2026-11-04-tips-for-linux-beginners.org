@@ -895,7 +895,7 @@ these dont fit anywhere i just thought they would make good bullets
 
 - linux has =clock_nanosleep()= but macos doesnt for some reason (=mach_wait_until()= may acheive the same
   thing as an absolute =clock_nanosleep()=)
-- every distro is a "beginner" distro
+- every distro is a "beginner" distro if you can read (and have some patience and willingness to learn!)
 - you dont actuallt need a bootloader, as long as you built your kernel with =CONFIG_EFI_STUB= and give it
   an nvram entry
 - there is no syscall to change the creation time of a file. if you did want a file that was created
