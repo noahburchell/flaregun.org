@@ -906,11 +906,15 @@ these dont fit anywhere i just thought they would make good bullets
 - you can put anything except =/= and =\0= in a filename (newlines and carrige returns included!)
 - (defun hello () (interactive) (insert "hello")) ;;; you can just define functions while emacs
   is running in any buffer lol
-- au is the chemical symbol for the element gold
--  
+- =CONFIG_HZ=300= exists because 300 is divisible by both 50 and 60 (pal and ntsc)
 - wtf?? =[ 5379.382219] traps: python3[9480] trap stack segment ip:7f23c08e100a sp:400000000000000
   error:0 in dev/zero[a,7f23c08e1000+1000]=
-
+- jiffies usually start at -5m instead of 0.. im pretty sure this is to catch wraparound bugs
+- creat()= is missing an e because ken thompson felt like it
+- =killall= on solaris kills everything
+- for some god knows reason systemd-tmpfiles creats /srv as a btrfs subvol if the dir doesnt exist?
+- ...
+  
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
   runs on any distro without being installed
