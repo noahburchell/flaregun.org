@@ -1,4 +1,6 @@
 #+TITLE: flaregun.org
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css">
+#+OPTIONS: html-style:nil
 
 * blog
 - [[file:blogs/2026-11-05-how-to-fix-your-broken-install.org][how to fix your "broken" install]] [2026-11-05 Thu]
