@@ -901,7 +901,8 @@ these dont fit anywhere i just thought they would make good bullets
 - there is no syscall to change the creation time of a file. if you did want a file that was created
   at epoch, you have to go line 1722 (i just checked!) of =kernel/time/timekeeping.c= and remove that
   check that checks if the time youre tying to set the time to is less than monotonic, then you can set the
-  time to @0 and create a file
+  time to @0 and create a file (shut up! i hear you about to yell 'debugfs'. im on the SUPERIOR filesystem
+  btrfs!!)
 - emacs is the best "text editor"
 - you can put anything except =/= and =\0= in a filename (newlines and carrige returns included!)
 - (defun hello () (interactive) (insert "hello")) ;;; you can just define functions while emacs
