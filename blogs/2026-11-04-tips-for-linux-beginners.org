@@ -915,7 +915,7 @@ these dont fit anywhere i just thought they would make good bullets
 - =killall= on solaris kills everything
 - for some god knows reason systemd-tmpfiles creats /srv as a btrfs subvol if the dir doesnt exist?
 - anything on the kernel cmdline the kernel doesnt recognise gets given to init
-  
+
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
   runs on any distro without being installed
