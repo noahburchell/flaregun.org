@@ -895,6 +895,7 @@ these dont fit anywhere i just thought they would make good bullets
 
 - linux has =clock_nanosleep()= but macos doesnt for some reason (=mach_wait_until()= may acheive the same
   thing as an absolute =clock_nanosleep()=)
+- every distro is a "beginner" distro
 - you dont actuallt need a bootloader, as long as you built your kernel with =CONFIG_EFI_STUB= and give it
   an nvram entry
 - there is no syscall to change the creation time of a file. if you did want a file that was created
@@ -902,6 +903,13 @@ these dont fit anywhere i just thought they would make good bullets
   check that checks if the time youre tying to set the time to is less than monotonic, then you can set the
   time to @0 and create a file
 - emacs is the best "text editor"
+- you can put anything except =/= and =\0= in a filename (newlines and carrige returns included!)
+- (defun hello () (interactive) (insert "hello")) ;;; you can just define functions while emacs
+  is running in any buffer lol
+- au is the chemical symbol for the element gold
+-  
+- wtf?? =[ 5379.382219] traps: python3[9480] trap stack segment ip:7f23c08e100a sp:400000000000000
+  error:0 in dev/zero[a,7f23c08e1000+1000]=
 
 * glossary
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
