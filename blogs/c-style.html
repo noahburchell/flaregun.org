@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-07 Sat 22:45 -->
+<!-- 2026-11-07 Sat 23:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>c style</title>
@@ -18,18 +18,19 @@
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="content" class="content">
 <h1 class="title">c style</h1>
-<div class="org-src-container">
-<pre class="src src-C"><code>#include "style.h"
+<div id="outline-container-org40ce35b" class="outline-2">
+<h2 id="org40ce35b">style.h</h2>
+<div class="outline-text-2" id="text-org40ce35b">
+<pre class="example" id="orgcae1dcf">
+#pragma once
 
-#include &lt;errno.h&gt;
-#include &lt;stdarg.h&gt;
 #include &lt;stdint.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
 
-#define VAL_MIN      -1000
-#define VAL_MAX      1000
+#ifndef VAL_MAX
+#define VAL_MAX 1000
+#endif
+
+#define VAL_MIN      (-VAL_MAX)
 #define ARRAY_LEN(a) (sizeof(a) / sizeof(*(a)))
 
 typedef enum state {
@@ -38,6 +39,7 @@ typedef enum state {
 	STATE_DONE,
 } state;
 
+// the item owns vals and borrows name
 typedef struct item {
 	const char* name;
 	state       state;
@@ -45,29 +47,55 @@ typedef struct item {
 	int*        vals;
 } item;
 
-static const char* const state_names[] = { "idle", "running", "done" };
+int* item_find(const item* it, int v);
+void item_push(item* it, int v);
+void item_run(item* it);
+</pre>
+</div>
+</div>
+<div id="outline-container-org0a0bf73" class="outline-2">
+<h2 id="org0a0bf73">style.c</h2>
+<div class="outline-text-2" id="text-org0a0bf73">
+<pre class="example" id="org4c46d27">
+#include "style.h"
+
+#include &lt;errno.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+static const char* const state_names[] = {
+	[STATE_IDLE] = "idle",
+	[STATE_RUNNING] = "running",
+	[STATE_DONE] = "done",
+};
 static_assert(ARRAY_LEN(state_names) == STATE_DONE + 1, "state_names covers enum state");
 
 [[noreturn]] static void die(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
 
 static void usage(FILE* f) {
-	fputs("usage: style [OPTION]... VALUE...\n"
-	      "\n"
-	      "  -n NAME    name the item NAME\n"
-	      "      --help display this help and exit\n"
-	      "\n"
-	      "VALUE is an integer between -1000 and 1000, NAME defaults to item\n",
-	      f);
+	fprintf(f,
+	        "usage: style [OPTION]... VALUE...\n"
+	        "\n"
+	        "  -n NAME    name the item NAME\n"
+	        "      --help display this help and exit\n"
+	        "\n"
+	        "VALUE is an integer between %d and %d, NAME defaults to item\n",
+	        VAL_MIN, VAL_MAX);
 }
 
 static void die(const char* fmt, ...) {
 	va_list ap;
 
 	va_start(ap, fmt);
-	fputs("style: ", stderr);
+
+        fputs("style: ", stderr);
 	vfprintf(stderr, fmt, ap);
 	fputc('\n', stderr);
-	va_end(ap);
+
+        va_end(ap);
+
 	exit(1);
 }
 
@@ -84,6 +112,7 @@ static bool parse_int(const char* s, int* out) {
 
 	errno = 0;
 	v = strtol(s, &amp;end, 10);
+
 	if(errno || end == s || *end
 	   || v &lt; VAL_MIN || v &gt; VAL_MAX) {
 		return false;
@@ -94,7 +123,7 @@ static bool parse_int(const char* s, int* out) {
 	return true;
 }
 
-static int* item_find(const item* it, int v) {
+int* item_find(const item* it, int v) {
 	int* p = it-&gt;vals;
 	int* end = it-&gt;vals + it-&gt;n;
 
@@ -109,7 +138,7 @@ static int* item_find(const item* it, int v) {
 	return nullptr;
 }
 
-static void item_push(item* it, int v) {
+void item_push(item* it, int v) {
 	if(it-&gt;n == it-&gt;cap) {
 		it-&gt;cap = it-&gt;cap ? it-&gt;cap * 2 : 8;
 
@@ -123,7 +152,7 @@ static void item_push(item* it, int v) {
 }
 
 // the caller guarantees at least one value
-static void item_run(item* it) {
+void item_run(item* it) {
 	uint32_t i = 0;
 	int sum = 0;
 
@@ -131,9 +160,11 @@ static void item_run(item* it) {
 		case STATE_IDLE:
 			it-&gt;state = STATE_RUNNING;
 			break;
+
 		case STATE_RUNNING:
 			die("%s: already running", it-&gt;name);
-		case STATE_DONE:
+
+                case STATE_DONE:
 			return;
 	}
 
@@ -151,40 +182,44 @@ static void item_run(item* it) {
 
 int main(int argc, char** argv) {
 	item it = { .name = "item" };
-	int k, v, rc = 0;
+	int k, rc = 0;
 
 	for(k = 1; k &lt; argc; k++) {
 		if(!strcmp(argv[k], "--help")) {
 			usage(stdout);
 			return 0;
-		}
-
-		if(!strcmp(argv[k], "-n")) {
+		} else if(!strcmp(argv[k], "--")) {
+			k++;
+			break;
+		} else if(!strcmp(argv[k], "-n")) {
 			if(++k == argc) {
 				fprintf(stderr, "style: '-n' needs a name\n");
 				usage(stderr);
+
 				return 2;
 			}
 
 			it.name = argv[k];
-			continue;
-		}
-
-		if(argv[k][0] == '-') {
+		} else if(argv[k][0] == '-') {
 			fprintf(stderr, "style: unknown option '%s'\n", argv[k]);
 			usage(stderr);
-			return 2;
-		}
 
-		break;
+			return 2;
+		} else {
+			break;
+		}
 	}
 
 	if(k == argc) {
+		fprintf(stderr, "style: missing value operand\n");
 		usage(stderr);
+
 		return 2;
 	}
 
 	for(; k &lt; argc; k++) {
+		int v;
+
 		if(!parse_int(argv[k], &amp;v)) {
 			fprintf(stderr, "style: '%s' is not an integer between %d and %d\n", argv[k], VAL_MIN, VAL_MAX);
 			rc = 2;
@@ -205,12 +240,13 @@ out:
 
 	return rc;
 }
-</code></pre>
+</pre>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-07 Sat 22:45</p>
+<p class="date">Created: 2026-11-07 Sat 23:13</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

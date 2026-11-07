@@ -2,20 +2,20 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../manual.css">
-#+OPTIONS: html-style:nil
+#+OPTIONS: html-style:nil num:nil toc:nil
 
-#+begin_src C -i :eval no :tangle no
-#include "style.h"
+* style.h
 
-#include <errno.h>
-#include <stdarg.h>
+#+begin_example
+#pragma once
+
 #include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#define VAL_MIN      -1000
-#define VAL_MAX      1000
+#ifndef VAL_MAX
+#define VAL_MAX 1000
+#endif
+
+#define VAL_MIN      (-VAL_MAX)
 #define ARRAY_LEN(a) (sizeof(a) / sizeof(*(a)))
 
 typedef enum state {
@@ -24,6 +24,7 @@ typedef enum state {
 	STATE_DONE,
 } state;
 
+// the item owns vals and borrows name
 typedef struct item {
 	const char* name;
 	state       state;
@@ -31,29 +32,53 @@ typedef struct item {
 	int*        vals;
 } item;
 
-static const char* const state_names[] = { "idle", "running", "done" };
+int* item_find(const item* it, int v);
+void item_push(item* it, int v);
+void item_run(item* it);
+#+end_example
+
+* style.c
+
+#+begin_example
+#include "style.h"
+
+#include <errno.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+static const char* const state_names[] = {
+	[STATE_IDLE] = "idle",
+	[STATE_RUNNING] = "running",
+	[STATE_DONE] = "done",
+};
 static_assert(ARRAY_LEN(state_names) == STATE_DONE + 1, "state_names covers enum state");
 
 [[noreturn]] static void die(const char* fmt, ...) __attribute__((format(printf, 1, 2)));
 
 static void usage(FILE* f) {
-	fputs("usage: style [OPTION]... VALUE...\n"
-	      "\n"
-	      "  -n NAME    name the item NAME\n"
-	      "      --help display this help and exit\n"
-	      "\n"
-	      "VALUE is an integer between -1000 and 1000, NAME defaults to item\n",
-	      f);
+	fprintf(f,
+	        "usage: style [OPTION]... VALUE...\n"
+	        "\n"
+	        "  -n NAME    name the item NAME\n"
+	        "      --help display this help and exit\n"
+	        "\n"
+	        "VALUE is an integer between %d and %d, NAME defaults to item\n",
+	        VAL_MIN, VAL_MAX);
 }
 
 static void die(const char* fmt, ...) {
 	va_list ap;
 
 	va_start(ap, fmt);
-	fputs("style: ", stderr);
+
+        fputs("style: ", stderr);
 	vfprintf(stderr, fmt, ap);
 	fputc('\n', stderr);
-	va_end(ap);
+
+        va_end(ap);
+
 	exit(1);
 }
 
@@ -70,17 +95,18 @@ static bool parse_int(const char* s, int* out) {
 
 	errno = 0;
 	v = strtol(s, &end, 10);
+
 	if(errno || end == s || *end
 	   || v < VAL_MIN || v > VAL_MAX) {
 		return false;
 	}
 
-	,*out = (int)v;
+	*out = (int)v;
 
 	return true;
 }
 
-static int* item_find(const item* it, int v) {
+int* item_find(const item* it, int v) {
 	int* p = it->vals;
 	int* end = it->vals + it->n;
 
@@ -95,7 +121,7 @@ static int* item_find(const item* it, int v) {
 	return nullptr;
 }
 
-static void item_push(item* it, int v) {
+void item_push(item* it, int v) {
 	if(it->n == it->cap) {
 		it->cap = it->cap ? it->cap * 2 : 8;
 
@@ -109,7 +135,7 @@ static void item_push(item* it, int v) {
 }
 
 // the caller guarantees at least one value
-static void item_run(item* it) {
+void item_run(item* it) {
 	uint32_t i = 0;
 	int sum = 0;
 
@@ -117,9 +143,11 @@ static void item_run(item* it) {
 		case STATE_IDLE:
 			it->state = STATE_RUNNING;
 			break;
+
 		case STATE_RUNNING:
 			die("%s: already running", it->name);
-		case STATE_DONE:
+
+                case STATE_DONE:
 			return;
 	}
 
@@ -137,40 +165,44 @@ static void item_run(item* it) {
 
 int main(int argc, char** argv) {
 	item it = { .name = "item" };
-	int k, v, rc = 0;
+	int k, rc = 0;
 
 	for(k = 1; k < argc; k++) {
 		if(!strcmp(argv[k], "--help")) {
 			usage(stdout);
 			return 0;
-		}
-
-		if(!strcmp(argv[k], "-n")) {
+		} else if(!strcmp(argv[k], "--")) {
+			k++;
+			break;
+		} else if(!strcmp(argv[k], "-n")) {
 			if(++k == argc) {
 				fprintf(stderr, "style: '-n' needs a name\n");
 				usage(stderr);
+
 				return 2;
 			}
 
 			it.name = argv[k];
-			continue;
-		}
-
-		if(argv[k][0] == '-') {
+		} else if(argv[k][0] == '-') {
 			fprintf(stderr, "style: unknown option '%s'\n", argv[k]);
 			usage(stderr);
-			return 2;
-		}
 
-		break;
+			return 2;
+		} else {
+			break;
+		}
 	}
 
 	if(k == argc) {
+		fprintf(stderr, "style: missing value operand\n");
 		usage(stderr);
+
 		return 2;
 	}
 
 	for(; k < argc; k++) {
+		int v;
+
 		if(!parse_int(argv[k], &v)) {
 			fprintf(stderr, "style: '%s' is not an integer between %d and %d\n", argv[k], VAL_MIN, VAL_MAX);
 			rc = 2;
@@ -191,4 +223,4 @@ out:
 
 	return rc;
 }
-#+end_src
+#+end_example
