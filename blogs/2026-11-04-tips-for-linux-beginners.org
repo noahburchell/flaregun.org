@@ -144,7 +144,7 @@ sometimes lags behind and may not know about a very new flag
 
 ** sudo / doas
 first, which one does your distro come with? probably sudo, but if youre unsure you can check with
-=command -v sudo doas=. whichever returns a path is the one you have.
+=command -v sudo doas=. whichever returns a path is the one you have
 
 =sudo= and =doas= are privilege elevation tools that let permitted users run commands as root or
 another user. for now, your can ignore the "other user" part and just think of it as running a
