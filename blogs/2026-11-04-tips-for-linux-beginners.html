@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-08 Sun 13:58 -->
+<!-- 2026-11-08 Sun 14:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners [2026-11-04 Wed]</title>
@@ -22,41 +22,41 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2322c57">1. how to use this guide</a></li>
-<li><a href="#org8382d86">2. linux isnt windows</a></li>
-<li><a href="#org1fdf0c9">3. recovery options you must have</a></li>
-<li><a href="#org80c1601">4. the terminal isnt scary</a>
+<li><a href="#org27adf80">1. how to use this guide</a></li>
+<li><a href="#orgf9c6cb1">2. linux isnt windows</a></li>
+<li><a href="#orgaccb6a8">3. recovery options you must have</a></li>
+<li><a href="#orga49340c">4. the terminal isnt scary</a>
 <ul>
-<li><a href="#org90f77ed">4.1. how to use the terminal</a></li>
-<li><a href="#org8d7d3b7">4.2. learning to read commands</a></li>
-<li><a href="#org0ad6ed1">4.3. how to find out what a command does</a></li>
-<li><a href="#org4241c00">4.4. sudo / doas</a></li>
-<li><a href="#org2d36a13">4.5. terminal survival</a></li>
+<li><a href="#org9bf21cd">4.1. how to use the terminal</a></li>
+<li><a href="#orgba71627">4.2. learning to read commands</a></li>
+<li><a href="#orgc85bb98">4.3. how to find out what a command does</a></li>
+<li><a href="#org3cf97b3">4.4. sudo / doas</a></li>
+<li><a href="#org8af2f99">4.5. terminal survival</a></li>
 </ul>
 </li>
 <li><a href="#dont-lose-your-data">5. dont lose your data</a></li>
-<li><a href="#org00b9e13">6. you learnt windows, you can learn linux</a></li>
+<li><a href="#org3e2928f">6. you learnt windows, you can learn linux</a></li>
 <li><a href="#package-management">7. package management</a>
 <ul>
-<li><a href="#org83f63a9">7.1. apt</a></li>
-<li><a href="#org3201e6e">7.2. dnf</a></li>
-<li><a href="#orgf431897">7.3. pacman</a></li>
-<li><a href="#org6037e65">7.4. zypper</a></li>
-<li><a href="#org414547a">7.5. portage</a></li>
-<li><a href="#org3b3bc45">7.6. dont delete your desktop</a></li>
-<li><a href="#org53370e2">7.7. be careful with third-party packages</a></li>
+<li><a href="#org376065a">7.1. apt</a></li>
+<li><a href="#orgd23a9ce">7.2. dnf</a></li>
+<li><a href="#org1d68da5">7.3. pacman</a></li>
+<li><a href="#orga0a52b8">7.4. zypper</a></li>
+<li><a href="#org1453162">7.5. portage</a></li>
+<li><a href="#org550eb97">7.6. dont delete your desktop</a></li>
+<li><a href="#org8b55447">7.7. be careful with third-party packages</a></li>
 </ul>
 </li>
 <li><a href="#flatpak-and-appimage">8. flatpak and appimage</a></li>
-<li><a href="#orgf1dcfb1">9. finding alternative apps</a></li>
-<li><a href="#orgfb1786b">10. where to find help</a>
+<li><a href="#org2170447">9. finding alternative apps</a></li>
+<li><a href="#orge599ab7">10. where to find help</a>
 <ul>
-<li><a href="#orgcbc1f12">10.1. for general advice</a></li>
+<li><a href="#orgea12dac">10.1. for general advice</a></li>
 </ul>
 </li>
-<li><a href="#org2e07bf6">11. how to ask for help</a></li>
-<li><a href="#org19e03b6">12. how to help yourself</a></li>
-<li><a href="#org3e90a07">13. past the basics</a></li>
+<li><a href="#org7ceef87">11. how to ask for help</a></li>
+<li><a href="#org7e47a2b">12. how to help yourself</a></li>
+<li><a href="#orgba690cc">13. past the basics</a></li>
 <li><a href="#glossary">14. glossary</a></li>
 </ul>
 </div>
@@ -65,8 +65,8 @@
 you just installed your distro of choice using <a href="2026-11-03-distro-guide.html">the guide</a>?
 brilliant! now that youre part of the team, here are some tips!
 </p>
-<div id="outline-container-org2322c57" class="outline-2">
-<h2 id="org2322c57"><span class="section-number-2">1.</span> how to use this guide</h2>
+<div id="outline-container-org27adf80" class="outline-2">
+<h2 id="org27adf80"><span class="section-number-2">1.</span> how to use this guide</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 if youre a begginner and want to learn linux, read all the sections
@@ -81,8 +81,8 @@ beginners - extended</a> has the sections that need willingness to learn</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org8382d86" class="outline-2">
-<h2 id="org8382d86"><span class="section-number-2">2.</span> linux isnt windows</h2>
+<div id="outline-container-orgf9c6cb1" class="outline-2">
+<h2 id="orgf9c6cb1"><span class="section-number-2">2.</span> linux isnt windows</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 the old windows-isms of grabbing random executables off the web to install software, rebooting to
@@ -99,8 +99,8 @@ issue. otherwise you can just leave it running
 </p>
 </div>
 </div>
-<div id="outline-container-org1fdf0c9" class="outline-2">
-<h2 id="org1fdf0c9"><span class="section-number-2">3.</span> recovery options you must have</h2>
+<div id="outline-container-orgaccb6a8" class="outline-2">
+<h2 id="orgaccb6a8"><span class="section-number-2">3.</span> recovery options you must have</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 breaking your system and losing your data are two very different things
@@ -124,7 +124,7 @@ backups of your data. see
 external drive (ext4 or btrfs, not exfat) and either a backup app from your app store (deja dup,
 pika backup or kup) or this, run every so often:
 </p>
-<pre class="example" id="orgb4c2b19">
+<pre class="example" id="orgbcf1b0d">
 rsync -aHAX ~/ &lt;backup folder on external drive&gt;
 </pre></li>
 </ol>
@@ -134,8 +134,8 @@ if a typo in a command can cause irrecoverable data loss, your setup is the prob
 </p>
 </div>
 </div>
-<div id="outline-container-org80c1601" class="outline-2">
-<h2 id="org80c1601"><span class="section-number-2">4.</span> the terminal isnt scary</h2>
+<div id="outline-container-orga49340c" class="outline-2">
+<h2 id="orga49340c"><span class="section-number-2">4.</span> the terminal isnt scary</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 a lot of people advise beginners to avoid the terminal at all costs. this is counterproductive, at
@@ -146,8 +146,8 @@ some point you will have to use it to fix an issue or use some tool that you wan
 <b>if you can write</b> <code>/gamemode creative</code>, <b>you can write</b> <code>dnf upgrade --refresh</code>.
 </p>
 </div>
-<div id="outline-container-org90f77ed" class="outline-3">
-<h3 id="org90f77ed"><span class="section-number-3">4.1.</span> how to use the terminal</h3>
+<div id="outline-container-org9bf21cd" class="outline-3">
+<h3 id="org9bf21cd"><span class="section-number-3">4.1.</span> how to use the terminal</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 well, you first need to open one! if you have deliberately installed a terminal emulator, i can
@@ -166,7 +166,7 @@ so just open it like any other app, then you should see something that looks lik
 these:
 </p>
 
-<pre class="example" id="orgc68c8cc">
+<pre class="example" id="org756d7e3">
 [user@host ~]$ 
 user@host:~$ 
 </pre>
@@ -193,8 +193,8 @@ you can type text here and itll appear just after your prompt
 </p>
 </div>
 </div>
-<div id="outline-container-org8d7d3b7" class="outline-3">
-<h3 id="org8d7d3b7"><span class="section-number-3">4.2.</span> learning to read commands</h3>
+<div id="outline-container-orgba71627" class="outline-3">
+<h3 id="orgba71627"><span class="section-number-3">4.2.</span> learning to read commands</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 nobody knows every command, there are too many. so how do we tell a scary command from a safe
@@ -202,7 +202,7 @@ command? as a general rule, just look it up! we have <i>google</i> and <code>man
 preferred in many cases) if you are told to run a command you dont understand, for example:
 </p>
 
-<pre class="example" id="orga2f7a6a">
+<pre class="example" id="orgb96ed15">
 find /lib/modules/$(uname -r) -iname 'nvidia*.ko*'
 </pre>
 
@@ -242,12 +242,12 @@ look up "find command iname option" or something
 </p>
 
 <p>
-bonus bonus tip: <a href="https://explainshell.com">explainshell.com</a> and <code>tldr</code> are great resources that i explain more thoroughly in <a href="#org0ad6ed1">how to find out what a command does</a>, i very much recommend reading that section
+bonus bonus tip: <a href="https://explainshell.com">explainshell.com</a> and <code>tldr</code> are great resources that i explain more thoroughly in <a href="#orgc85bb98">how to find out what a command does</a>, i very much recommend reading that section
 </p>
 </div>
 </div>
-<div id="outline-container-org0ad6ed1" class="outline-3">
-<h3 id="org0ad6ed1"><span class="section-number-3">4.3.</span> how to find out what a command does</h3>
+<div id="outline-container-orgc85bb98" class="outline-3">
+<h3 id="orgc85bb98"><span class="section-number-3">4.3.</span> how to find out what a command does</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 <code>tldr</code>
@@ -280,8 +280,8 @@ sometimes lags behind and may not know about a very new flag
 </p>
 </div>
 </div>
-<div id="outline-container-org4241c00" class="outline-3">
-<h3 id="org4241c00"><span class="section-number-3">4.4.</span> sudo / doas</h3>
+<div id="outline-container-org3cf97b3" class="outline-3">
+<h3 id="org3cf97b3"><span class="section-number-3">4.4.</span> sudo / doas</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 <code>sudo</code> and <code>doas</code> are privilege elevation tools that let permitted users run commands as root or
@@ -310,8 +310,8 @@ administrator permissions
 </p>
 </div>
 </div>
-<div id="outline-container-org2d36a13" class="outline-3">
-<h3 id="org2d36a13"><span class="section-number-3">4.5.</span> terminal survival</h3>
+<div id="outline-container-org8af2f99" class="outline-3">
+<h3 id="org8af2f99"><span class="section-number-3">4.5.</span> terminal survival</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 if you have used the terminal previously, you may have noticed that the ususal control c and control
@@ -341,7 +341,7 @@ v is required. there are more key combinations important to know:
 <li>q quits man / less (and most pagers, so if esc doesnt work try q)</li>
 <li>reset: if you <code>cat</code> a binary file and your terminal "breaks", jsut type reset and hit enter even
 if you cant see the output</li>
-<li>if you are stuck in vim: <code>:wq</code> saves and quits, <code>:q!</code> quits without saving</li>
+<li>if you are stuck in vim: <code>esc :wq</code> saves and quits, <code>esc :q!</code> quits without saving</li>
 </ul>
 </div>
 </div>
@@ -358,7 +358,7 @@ there are certain commands to pay <b>extra</b> attention to
 </p>
 
 <p>
-<code>sudo / doas</code>: these commands were covered in <a href="#org4241c00">sudo / doas</a>. but i only covered how to use them, not
+<code>sudo / doas</code>: these commands were covered in <a href="#org3cf97b3">sudo / doas</a>. but i only covered how to use them, not
 the places where it becomes a problem. never run a gui app as root, and if a command doesnt work,
 running it with sudo often will not help unless the command genuinely needs root (such as
 installing/removing packages). if you happen to run something like <code>sudo mkdir ./&lt;dir&gt;</code>, you will
@@ -379,7 +379,7 @@ this is different becasuse <code>*</code> expands to all directories in root, wh
 <code>dd</code>: this command writes data somewhere, youll often see:
 </p>
 
-<pre class="example" id="org4241096">
+<pre class="example" id="orgd972bf6">
 {sudo | doas} dd if=&lt;image&gt;.iso of=/dev/sdX bs=4M status=progress conv=fsync
 </pre>
 
@@ -432,7 +432,7 @@ i dont want to go too much into teaching shell, but this one difference is worth
 redirection operators, as an example: <code>echo "gentoo" &gt; gentoo.txt</code> will do this<sup><a id="fnr.cat" class="footref" href="#fn.cat" role="doc-backlink">4</a></sup>:
 </p>
 
-<pre class="example" id="org09023f6">
+<pre class="example" id="org1f663ff">
 noah@lychee ~ % echo "gentoo" &gt; gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -443,7 +443,7 @@ noah@lychee ~ %
 now, lets look at what <code>&gt;&gt;</code> will do:
 </p>
 
-<pre class="example" id="org7b9f8e4">
+<pre class="example" id="org574e342">
 noah@lychee ~ % echo "gentoo" &gt; gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -458,7 +458,7 @@ noah@lychee ~ %
 now, lets use <code>&gt;</code> again on the same file:
 </p>
 
-<pre class="example" id="org36ac654">
+<pre class="example" id="org804186b">
 noah@lychee ~ % echo "gentoo" &gt; gentoo.txt
 noah@lychee ~ % cat gentoo.txt 
 gentoo
@@ -483,8 +483,8 @@ i have lost 12h of log data from this very difference &gt;:(
 </p>
 </div>
 </div>
-<div id="outline-container-org00b9e13" class="outline-2">
-<h2 id="org00b9e13"><span class="section-number-2">6.</span> you learnt windows, you can learn linux</h2>
+<div id="outline-container-org3e2928f" class="outline-2">
+<h2 id="org3e2928f"><span class="section-number-2">6.</span> you learnt windows, you can learn linux</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 i think its called the curse of knowledge, where you forget what it was like to not know? whatever
@@ -506,8 +506,8 @@ appimage, see <a href="#flatpak-and-appimage">flatpak and appimage</a>). to comm
 managers, you will use the terminal, here are examples for each of the package managers mentioned:
 </p>
 </div>
-<div id="outline-container-org83f63a9" class="outline-3">
-<h3 id="org83f63a9"><span class="section-number-3">7.1.</span> apt</h3>
+<div id="outline-container-org376065a" class="outline-3">
+<h3 id="org376065a"><span class="section-number-3">7.1.</span> apt</h3>
 <div class="outline-text-3" id="text-7-1">
 <ul class="org-ul">
 <li>installing a package: <code>{sudo | doas} apt install &lt;package&gt;</code></li>
@@ -519,8 +519,8 @@ to also delete config files)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3201e6e" class="outline-3">
-<h3 id="org3201e6e"><span class="section-number-3">7.2.</span> dnf</h3>
+<div id="outline-container-orgd23a9ce" class="outline-3">
+<h3 id="orgd23a9ce"><span class="section-number-3">7.2.</span> dnf</h3>
 <div class="outline-text-3" id="text-7-2">
 <ul class="org-ul">
 <li>installing a package: <code>{sudo | doas} dnf install &lt;package&gt;</code></li>
@@ -531,8 +531,8 @@ to also delete config files)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf431897" class="outline-3">
-<h3 id="orgf431897"><span class="section-number-3">7.3.</span> pacman</h3>
+<div id="outline-container-org1d68da5" class="outline-3">
+<h3 id="org1d68da5"><span class="section-number-3">7.3.</span> pacman</h3>
 <div class="outline-text-3" id="text-7-3">
 <ul class="org-ul">
 <li>installing a package: <code>{sudo | doas} pacman -S &lt;package&gt;</code></li>
@@ -543,8 +543,8 @@ to also remove unneeded dependencies and config files)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org6037e65" class="outline-3">
-<h3 id="org6037e65"><span class="section-number-3">7.4.</span> zypper</h3>
+<div id="outline-container-orga0a52b8" class="outline-3">
+<h3 id="orga0a52b8"><span class="section-number-3">7.4.</span> zypper</h3>
 <div class="outline-text-3" id="text-7-4">
 <ul class="org-ul">
 <li>installing a package: <code>{sudo | doas} zypper install &lt;package&gt;</code></li>
@@ -556,8 +556,8 @@ instead)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org414547a" class="outline-3">
-<h3 id="org414547a"><span class="section-number-3">7.5.</span> portage</h3>
+<div id="outline-container-org1453162" class="outline-3">
+<h3 id="org1453162"><span class="section-number-3">7.5.</span> portage</h3>
 <div class="outline-text-3" id="text-7-5">
 <ul class="org-ul">
 <li>installing a package: <code>{sudo | doas} emerge -a &lt;package&gt;</code></li>
@@ -586,13 +586,13 @@ the windows approach). "syncing" just means updating the database.
 </p>
 </div>
 </div>
-<div id="outline-container-org3b3bc45" class="outline-3">
-<h3 id="org3b3bc45"><span class="section-number-3">7.6.</span> dont delete your desktop</h3>
+<div id="outline-container-org550eb97" class="outline-3">
+<h3 id="org550eb97"><span class="section-number-3">7.6.</span> dont delete your desktop</h3>
 <div class="outline-text-3" id="text-7-6">
 <p>
-you may have seen that&hellip; situation linus was in when he deleted his desktop using pop os. this was
-caused by a packaging mistake with steam, but linus could have avoided this, and you can too, so
-heres how:
+you may have seen that&hellip; situation linus tech tips was in when he deleted his desktop using pop os.
+this was caused by a packaging mistake with steam, but linus could have avoided this, and you can too,
+so heres how:
 </p>
 
 <p>
@@ -610,8 +610,8 @@ wont be stuck looking things up for very long, it just comes with time.
 </p>
 </div>
 </div>
-<div id="outline-container-org53370e2" class="outline-3">
-<h3 id="org53370e2"><span class="section-number-3">7.7.</span> be careful with third-party packages</h3>
+<div id="outline-container-org8b55447" class="outline-3">
+<h3 id="org8b55447"><span class="section-number-3">7.7.</span> be careful with third-party packages</h3>
 <div class="outline-text-3" id="text-7-7">
 <p>
 sometimes, youll need something that isnt available in your distros official repo. in these cases,
@@ -679,8 +679,8 @@ update, so only download them from the projects official site</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf1dcfb1" class="outline-2">
-<h2 id="orgf1dcfb1"><span class="section-number-2">9.</span> finding alternative apps</h2>
+<div id="outline-container-org2170447" class="outline-2">
+<h2 id="org2170447"><span class="section-number-2">9.</span> finding alternative apps</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 i once read a reddit post about a user who was asking how to get rufus working through wine to make
@@ -709,15 +709,15 @@ as a last resort, wine does work great. just make sure to try the native route f
 </p>
 </div>
 </div>
-<div id="outline-container-orgfb1786b" class="outline-2">
-<h2 id="orgfb1786b"><span class="section-number-2">10.</span> where to find help</h2>
+<div id="outline-container-orge599ab7" class="outline-2">
+<h2 id="orge599ab7"><span class="section-number-2">10.</span> where to find help</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 there are many great resources for finding help with anything you need to know about linux
 </p>
 </div>
-<div id="outline-container-orgcbc1f12" class="outline-3">
-<h3 id="orgcbc1f12"><span class="section-number-3">10.1.</span> for general advice</h3>
+<div id="outline-container-orgea12dac" class="outline-3">
+<h3 id="orgea12dac"><span class="section-number-3">10.1.</span> for general advice</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 often the best way to get help with your distro is to find your distros specific wiki, such as the
@@ -745,8 +745,8 @@ for people who already somewhat know what theyre doing, id advise beginners to b
 </div>
 </div>
 </div>
-<div id="outline-container-org2e07bf6" class="outline-2">
-<h2 id="org2e07bf6"><span class="section-number-2">11.</span> how to ask for help</h2>
+<div id="outline-container-org7ceef87" class="outline-2">
+<h2 id="org7ceef87"><span class="section-number-2">11.</span> how to ask for help</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 now that you know where to find help, heres the information you need to include:
@@ -779,8 +779,8 @@ what fixed it</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org19e03b6" class="outline-2">
-<h2 id="org19e03b6"><span class="section-number-2">12.</span> how to help yourself</h2>
+<div id="outline-container-org7e47a2b" class="outline-2">
+<h2 id="org7e47a2b"><span class="section-number-2">12.</span> how to help yourself</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 this has moved to its own post: <a href="2026-11-05-how-to-fix-your-broken-install.html">how to fix
@@ -788,8 +788,8 @@ your "broken" install</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org3e90a07" class="outline-2">
-<h2 id="org3e90a07"><span class="section-number-2">13.</span> past the basics</h2>
+<div id="outline-container-orgba690cc" class="outline-2">
+<h2 id="orgba690cc"><span class="section-number-2">13.</span> past the basics</h2>
 <div class="outline-text-2" id="text-13">
 <p>
 thats everything you have to know. the rest is for people who are genuinely curious, and lives in
@@ -1000,7 +1000,7 @@ gaming is the exception to this. often steam will handle this for you
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-08 Sun 13:58</p>
+<p class="date">Created: 2026-11-08 Sun 14:04</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

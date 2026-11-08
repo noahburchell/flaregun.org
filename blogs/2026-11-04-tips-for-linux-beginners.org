@@ -185,7 +185,7 @@ v is required. there are more key combinations important to know:
 - q quits man / less (and most pagers, so if esc doesnt work try q)
 - reset: if you =cat= a binary file and your terminal "breaks", jsut type reset and hit enter even
   if you cant see the output
-- if you are stuck in vim: =:wq= saves and quits, =:q!= quits without saving
+- if you are stuck in vim: =esc :wq= saves and quits, =esc :q!= quits without saving
 
 * dont lose your data
 :PROPERTIES:
@@ -388,9 +388,9 @@ the windows approach). "syncing" just means updating the database.
 
 ** dont delete your desktop
 
-you may have seen that... situation linus was in when he deleted his desktop using pop os. this was
-caused by a packaging mistake with steam, but linus could have avoided this, and you can too, so
-heres how:
+you may have seen that... situation linus tech tips was in when he deleted his desktop using pop os.
+this was caused by a packaging mistake with steam, but linus could have avoided this, and you can too,
+so heres how:
 
 just listen to your package manager! it sounds simple, of course, but many people tend to just hit
 yes on autopilot. this is normal, but you should avoid this behavior as the output of your package
