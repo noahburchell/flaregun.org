@@ -3,6 +3,7 @@
 #+OPTIONS: html-style:nil
 
 * blog
+- [[file:blogs/2026-11-08-tips-for-linux-beginners-extended.org][tips for linux beginners - extended]] [2026-11-08 Sun]
 - [[file:blogs/2026-11-05-how-to-fix-your-broken-install.org][how to fix your "broken" install]] [2026-11-05 Thu]
 - [[file:blogs/2026-11-04-tips-for-linux-beginners.org][tips for linux beginners]] [2026-11-04 Wed]
 - [[file:blogs/2026-11-03-distro-guide.org][how to pick a linux distro]] [2026-11-03 Tue] 

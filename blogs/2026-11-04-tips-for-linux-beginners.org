@@ -4,22 +4,24 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../manual.css">
 #+OPTIONS: html-style:nil
 
-you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]? brilliant! now that youre part of the
-team, here are some tips!
+you just installed your distro of choice using [[file:2026-11-03-distro-guide.org][the guide]]?
+brilliant! now that youre part of the team, here are some tips!
 
 * how to use this guide
 if youre a begginner and want to learn linux, read all the sections
 
-- this guide is aimed at beginners, but some sections require willingness to learn
-- you dont have to read top down, jump to the sections you want to learn about
+- this guide is aimed at beginners
 - there may be words you dont understand and arent explained, you are encouraged to look things up.
   though, there is a [[*glossary][glossary]] you can check out first.
+- once youre done here, [[file:2026-11-08-tips-for-linux-beginners-extended.org][tips for linux
+  beginners - extended]] has the sections that need willingness to learn
 
 * linux isnt windows
 the old windows-isms of grabbing random executables off the web to install software, rebooting to
 fix issues, and playing valorant, are gone. on linux, software is installed through the command line
-using a package manager (see [[*package management][package management]]), through a gui app store (if your desktop
-environment provides one), through flatpak, or with an appimage (see [[*flatpak and appimage][flatpak and appimage]]).
+using a package manager (see [[*package management][package management]]), through a gui app store
+(if your desktop environment provides one), through flatpak, or with an appimage (see [[*flatpak and
+appimage][flatpak and appimage]]).
 
 most issues on linux do not need a reboot, and most updates dont need one either[fn:atomic]. unless
 the kernel, systemd (or whatever init youre using), graphics drivers (especially nvidia), or glibc
@@ -28,6 +30,26 @@ issue. otherwise you can just leave it running
 
 [fn:atomic] on an atomic distro like bazzite, every system update needs a reboot, because theyre
 done as images. flatpak updates dont
+
+* recovery options you must have
+breaking your system and losing your data are two very different things
+
+- breaking your system: always recoverable, never a big deal. see
+  [[file:2026-11-05-how-to-fix-your-broken-install.org][how to fix your "broken" install]]
+- losing your data: not recoverable. big deal
+
+so before anything else, you need both of these:
+
+1. a bootable linux usb, any distro
+2. backups of your data. see
+   [[file:2026-11-08-tips-for-linux-beginners-extended.org::#backups][backups]]. the minimum is an
+   external drive (ext4 or btrfs, not exfat) and either a backup app from your app store (deja dup,
+   pika backup or kup) or this, run every so often:
+   #+begin_example
+   rsync -aHAX ~/ <backup folder on external drive>
+   #+end_example
+
+if a typo in a command can cause irrecoverable data loss, your setup is the problem
 
 * the terminal isnt scary
 a lot of people advise beginners to avoid the terminal at all costs. this is counterproductive, at
@@ -63,147 +85,7 @@ is just decoration)
 - =$=: delimiter, it marks the end of the prompt (not important, just know as your user it is "=$="
   (or =%= for zsh), but as root its "=#=")
 
-you can type text here and itll appear just after your prompt. so now lets go over some important
-commands
-
-** ls, cd
-=ls= will list everything in your current working directory. usually, when you open the terminal
-this will be =/home/user= (=~= is a shortcut for =/home/user=). so if you run =ls= right now, you
-may see "Documents", "Downloads", etc.
-
-=cd= will move you into a directory. lets say you just ran =ls=, and you want to go to documents:
-since =ls= listed "Documents" in your current directory, you can type =cd Documents= to go there
-
-** "=.=" "=..="
-=.= is your current directory. so if you run =ls= and see "Documents", =cd ./Documents= is
-equivelant to =cd Documents=
-
-=..= is the parent directory. if you just ran =cd Documents=, you will be in =/home/user/Documents=.
-so running =cd ../= will move you back to =~=
-
-** sudo / doas
-=sudo= and =doas= are privilege elevation tools that let permitted users run commands as root or
-another user. for now, your can ignore the "other user" part and just think of it as running a
-command as *root*.
-
-*who is root?* root is the user account with the user id 0, now that probably doesnt mean much to
-you, so just think of it as the administrator account. certain things you will need to do require
-administrator privileges, the most common example is probably installing new software. see [[*package management][package
-management]]
-
-when you run a command with =sudo= or =doas=, a prompt will appear asking you to type your password.
-often, it will provide no visual feedback. this is normal, it isnt frozen, its just not showing you
-whats being typed. so, to get an idea, please open your terminal and type the command =sudo echo hi=
-or =doas echo hi=. (if your not sure which tool you have installed, try sudo first as its the more
-common one). you should see a prompt asking for your password. type your password in, and hit enter.
-if you typed your password correctly and you have the required privileges, you should see "hi". if
-you run the same command, it may not ask for your password, this is becasue sudo (and doas with
-persist enabled) cache your credentials so you dont have to repeatedly type your password. if you
-see an error such as "user is not in the sudoers file", it means your account does not have
-administrator permissions
-
-** file manipulation
-this may be the second most common use of the terminal next to [[*package management][package management]]. so its important
-to know how to view, create, move, and edit files without opening a file manager. im going to assume
-=nano= for this guide, if you installed =vim= or =mg=, ill assume you know how to use them
-
-*i dont want to type this super long filename*:
-
-luckily, you have *tab completion*. start typing a file or directory name then press tab and the
-shell fills in the rest (if what your looking for exists). hit tab twice to see every option.
-
-spaces in filenames? =cat my file.txt= looks for a file called "my" and one called "file.txt". quote
-it like =cat "my file.txt"= or escape the space =cat my\ file.txt=. tab completion does this for you
-
-also, most linux native filesystems is case sensitive so =Documents= and =documents= are two
-different directories
-
-*looking at files*:
-
-- =cat foo.txt=: prints the whole file
-- =less foo.txt=: opens the file in a pager you can scroll through. =q= to quit, =/word= to search,
-  =n= for the next match
-- =ls -l=: lists files with their size, owner, permissions and modification date. =ls -a= also shows
-  hidden files, =ls -la= does both
-- =file foo=: tells you what file a file is
-
-*making, copying, moving*:
-
-- =mkdir foo=: makes a directory. =mkdir -p foo/bar/baz= makes all of those at once if they dont
-  exist
-- =touch foo.txt=: makes an empty file
-- =cp foo.txt bar.txt=: copies a file foo.txt to bar.txt
-- =mv foo.txt bar.txt=: moves a file. this is also how you rename things
-
-note that =cp= and =mv= will overwrite an existing file with the same name without asking. add =-i=
-if you want to be asked
-
-another difference: =mv= (on the same drive) is instant and all or nothing, the file either has the
-old content or the new content. =cp= rewrites the destination bit by bit, so if its interrupted or
-something reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe way to
-replace a file is to write the new version somewhere else and =mv= it over the top
-
-when does =cp= or =rsync= copy only the contents of the directory into the new directory versus
-copying the whole directory into the directory making it a subdirectory of the new directory?
-honestly, i dont fucking know. it seems to flip a coin.
-
-[fn:inode] =cp= truncates the existing file and writes into the same inode. =mv= on the same
-filesystem is a =rename()=, which swaps the directory entry to point at the source inode. across
-filesystems =mv= is just copy then delete and loses this property
-
-
-*deleting*:
-
-=rm= deletes files, =rm -r= deletes directories, and none of it goes to the trash. i covered this in
-[[*dont lose your data][dont lose your data]]. if you want a terminal command that actually uses the trash, =gio trash foo=
-probably will work, or install =trash-cli= and use =trash-put foo=
-
-*editing with nano*:
-
-=nano foo.txt= opens the file (or creates it). the bottom of the screen shows the shortcuts. =^=
-means ctrl and =M-= means alt. here are common ones:
-
-- =ctrl+o=: save
-- =ctrl+x=: exit
-- =ctrl+w=: search
-- =ctrl+k=: cut the current line, =ctrl+u= to paste it back
-- =alt+u=: undo
-- =ctrl+g=: help
-
-if the file is owned by root (most of =/etc=), you will need =sudo nano /etc/foo=[fn:sudoedit]
-
-*wildcards*:
-
-you will see =*= in a lot of commands. the shell expands it to "every file that matches", so =ls
-*.txt= lists every file ending in .txt and =cp ~/Pictures/*.png /backup/= copies every png. this is
-useful and also how =rm -rf $DIR/*= goes wrong (see [[*dont lose your data][dont lose your data]])
-
-[fn:sudoedit] =sudoedit /etc/foo= is a better way to do this if you have sudo, it copies the file,
-opens it as your normal user, and copies it back when you save
-
-** terminal survival
-if you have used the terminal previously, you may have noticed that the ususal control c and control
-v do not work. this is becasue control c has a much more important purpose of delivering sigint to
-the active terminal process. what does that mean? sigint means signal interrupt. the usual effect of
-this is stopping the running process. (note: you can also use this to cancel a half typed command
-instead of deleting it all.) to copy something in the terminal, you have to use control shift. (*do
-not* rebind copy to control c or you cant kill a process if needed). same with paste, control shift
-v is required. there are more key combinations important to know:
-
-- ctrl s: stops the terminal showing output
-- ctrl q: resumes output
-- ctrl z: suspends running process (fg restores it)
-- ctrl \: a stronger ctrl c, delivers sigquit
-- ctrl l: same as the =clear= command
-- ctrl a: jump to the start of the line
-- ctrl e: jump to the end of the line
-
-*other odities*:
-
-- q quits man / less (most pagers, if esc doesnt work try q)
-- reset: if you =cat= a binary file and your terminal "breaks", jsut type reset and hit enter even
-  if you cant see the output
-- if you are stuck in vim: =:wq= saves and quits, =:q!= quits without saving
+you can type text here and itll appear just after your prompt
 
 ** learning to read commands
 nobody knows every command, there are too many. so how do we tell a scary command from a safe
@@ -226,25 +108,99 @@ this case =something=) inside the parentheses and uses its output as text. =unam
 kernels version string, in my case =7.3.1-lychee=, so the command would expand to =find
 /lib/modules/7.3.1-lychee -iname 'nvidia*.ko*'=)
 
+another thing, i will be using this syntax throughout the guide and man pages do the same, so learn
+this:
+- =<foo>= is a placeholder
+- =[foo]= is optional, or only needed on some installations
+- =[foo | bar]= means use one of =foo= or =bar=, or neither if you don't need it
+- ={foo | bar}= means you must use one of =foo= or =bar=
+
 bonus tip: if the command has some word or character starting with a hyphen (like -iname, -r, -rf,
 -a, -h) its probably a /flag/ that goes along with the command, so for the example above you could
 look up "find command iname option" or something
 
-bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources that i explain more thoroughly in
-[[*where to find
- help][where to find help]], i very much recommend reading that section
+bonus bonus tip: [[https://explainshell.com][explainshell.com]] and =tldr= are great resources that i explain more thoroughly in [[*how to find out what a command
+ does][how to find out what a command does]], i very much recommend reading that section
+
+** how to find out what a command does
+
+=tldr=
+
+this command is unlike man in that you will need to install it, but it is often more helpful for
+beginners as it gives short, example-based summaries, and a full man page is sometimes overwhelming
+
+=man=
+
+this command is an interface for manual pages, typing =man foo= will bring up the manual page for
+=foo=. this is good because the information there will (usually) be specific to the exact version of
+the software you have installed, though it is quite dense and assumes you already know what youre
+doing a lot of the time
+
+[[https://explainshell.com][explainshell.com]]
+
+i never knew about this site until recent! its great, and i wish someone told me about it sooner. it
+breaks a command down piece by piece, and makes it easy to understand. the only note is that it
+sometimes lags behind and may not know about a very new flag
+
+** sudo / doas
+=sudo= and =doas= are privilege elevation tools that let permitted users run commands as root or
+another user. for now, your can ignore the "other user" part and just think of it as running a
+command as *root*.
+
+*who is root?* root is the user account with the user id 0, now that probably doesnt mean much to
+you, so just think of it as the administrator account. certain things you will need to do require
+administrator privileges, the most common example is probably installing new software. see
+[[*package management][package management]]
+
+when you run a command with =sudo= or =doas=, a prompt will appear asking you to type your password.
+often, it will provide no visual feedback. this is normal, it isnt frozen, its just not showing you
+whats being typed. so, to get an idea, please open your terminal and type the command =sudo echo hi=
+or =doas echo hi=. (if your not sure which tool you have installed, try sudo first as its the more
+common one). you should see a prompt asking for your password. type your password in, and hit enter.
+if you typed your password correctly and you have the required privileges, you should see "hi". if
+you run the same command, it may not ask for your password, this is becasue sudo (and doas with
+persist enabled) cache your credentials so you dont have to repeatedly type your password. if you
+see an error such as "user is not in the sudoers file", it means your account does not have
+administrator permissions
+
+** terminal survival
+if you have used the terminal previously, you may have noticed that the ususal control c and control
+v do not work. this is becasue control c has a much more important purpose of delivering sigint to
+the active terminal process. what does that mean? sigint means signal interrupt. the usual effect of
+this is stopping the running process. (note: you can also use this to cancel a half typed command
+instead of deleting it all.) to copy something in the terminal, you have to use control shift. (*do
+not* rebind copy to control c or you cant kill a process if needed). same with paste, control shift
+v is required. there are more key combinations important to know:
+
+- ctrl s: stops the terminal showing output
+- ctrl q: resumes output
+- ctrl z: suspends running process (fg restores it)
+- ctrl \: a stronger ctrl c, delivers sigquit
+- ctrl l: same as the =clear= command
+- ctrl a: jump to the start of the line
+- ctrl e: jump to the end of the line
+
+*other odities*:
+
+- q quits man / less (and most pagers, so if esc doesnt work try q)
+- reset: if you =cat= a binary file and your terminal "breaks", jsut type reset and hit enter even
+  if you cant see the output
+- if you are stuck in vim: =:wq= saves and quits, =:q!= quits without saving
 
 * dont lose your data
+:PROPERTIES:
+:CUSTOM_ID: dont-lose-your-data
+:END:
 there are certain commands to pay *extra* attention to
 
 =sudo / doas, rm, dd, curl | *=
 
 =sudo / doas=: these commands were covered in [[*sudo / doas][sudo / doas]]. but i only covered how to use them, not
 the places where it becomes a problem. never run a gui app as root, and if a command doesnt work,
-running it with sudo often will not help unless the command genuinely needs root. if you happen to
-run something like =sudo mkdir ./foo=, you will later run into issues where you cannot make files in
-it. that is because the directory is owned by root and not your user. this can be resolved with
-=sudo chown -R "$USER": ./foo=
+running it with sudo often will not help unless the command genuinely needs root (such as
+installing/removing packages). if you happen to run something like =sudo mkdir ./<dir>=, you will
+later run into issues where you cannot make files in it. that is because the directory is owned by
+root and not your user. this can be resolved with ={sudo | doas} chown -R "$USER": ./<dir>=
 
 =rm=: this command doesnt send something to the trash, it permanently deletes it and there is no
 undo. the most common failure is most often not =rm -rf /= or something like that, but =rm -rf
@@ -256,7 +212,7 @@ this is different becasuse =*= expands to all directories in root, which isnt pr
 =dd=: this command writes data somewhere, youll often see:
 
 #+begin_example
-dd if=/some/diskimage.iso of=/dev/sdX bs=4M status=progress conv=fsync
+{sudo | doas} dd if=<image>.iso of=/dev/sdX bs=4M status=progress conv=fsync
 #+end_example
 
 this is not inherently unsafe, its actually the standard way to create a bootable usb. it becomes
@@ -349,70 +305,76 @@ leave you with an empty file. in this case =sort -o foo.txt foo.txt= is correct
 i think its called the curse of knowledge, where you forget what it was like to not know? whatever
 it is, the point is that at some point you had to learn how to use windows, you had to learn how to
 search for an app, you learnt what a sketchy vs safe download looked like[fn:curlbash]. so you
-should expect to have to learn how to use linux, learn how to use the package manager (see [[*package management][package
-management]]) for apps, learn how your desktop works, and, dont be discouraged if you fuck something
-up[fn:backups]. youre learning!
+should expect to have to learn how to use linux, learn how to use the package manager (see
+[[*package management][package management]]) for apps, learn how your desktop works, and, dont be
+discouraged if you fuck something up[fn:backups]. youre learning!
 
 [fn:curlbash] kinda like the =curl | bash= i mentioned earlier
 
-[fn:backups] keeping backups is recommended, see [[*backups][backups]] for more info
+[fn:backups] keeping backups is recommended, see
+[[file:2026-11-08-tips-for-linux-beginners-extended.org::#backups][backups]] for more info
 
 * package management
+:PROPERTIES:
+:CUSTOM_ID: package-management
+:END:
 the most common way to install software on linux is through the package manager. common package
 managers include: apt, dnf, pacman, zypper and portage. (note: for alternatives such as flatpak and
-appimage, see [[*flatpak and appimage][flatpak and appimage]]). to communicate with these package managers, you will use the
-terminal, here are examples for each of the package managers mentioned:
+appimage, see [[*flatpak and appimage][flatpak and appimage]]). to communicate with these package
+managers, you will use the terminal, here are examples for each of the package managers mentioned:
 
 ** apt
 
-- installing a package: =apt install whatever=
-- removing a package: =apt remove whatever= (or =apt purge whatever= to also delete config files)
-- syncing repos: =apt update=
-- updating everything: =apt upgrade=[fn:aptfull]
-- searching for a package: =apt search whatever=
+- installing a package: ={sudo | doas} apt install <package>=
+- removing a package: ={sudo | doas} apt remove <package>= (or ={sudo | doas} apt purge <package>=
+  to also delete config files)
+- syncing repos: ={sudo | doas} apt update=
+- updating everything: ={sudo | doas} apt upgrade=[fn:aptfull]
+- searching for a package: =apt search <package>=
 
-[fn:aptfull] =apt upgrade= wont remove packages, you may need =apt full-upgrade= occasionally
+[fn:aptfull] =apt upgrade= wont remove packages, you may need ={sudo | doas} apt full-upgrade=
+occasionally
 
 
 ** dnf
 
-- installing a package: =dnf install whatever=
-- removing a package: =dnf remove whatever=
-- syncing repos: =dnf makecache= (dnf usually does this automatically)
-- updating everything: =dnf upgrade=
-- searching for a package: =dnf search whatever=
+- installing a package: ={sudo | doas} dnf install <package>=
+- removing a package: ={sudo | doas} dnf remove <package>=
+- syncing repos: ={sudo | doas} dnf makecache= (dnf usually does this automatically)
+- updating everything: ={sudo | doas} dnf upgrade=
+- searching for a package: =dnf search <package>=
 
 ** pacman
 
-- installing a package: =pacman -S whatever=
-- removing a package: =pacman -R whatever= (or =pacman -Rns whatever= to also remove unneeded
-  dependencies and config files)
-- syncing repos + updating everything: =pacman -Syu=[fn:partial]
-- searching for a package: =pacman -Ss whatever=
+- installing a package: ={sudo | doas} pacman -S <package>=
+- removing a package: ={sudo | doas} pacman -R <package>= (or ={sudo | doas} pacman -Rns <package>=
+  to also remove unneeded dependencies and config files)
+- syncing repos + updating everything: ={sudo | doas} pacman -Syu=[fn:partial]
+- searching for a package: =pacman -Ss <package>=
 
-[fn:partial] never use =pacman -Sy whatever=, partial upgrades are unsupported
+[fn:partial] never use ={sudo | doas} pacman -Sy <package>=, partial upgrades are unsupported
 
 
 ** zypper
 
-- installing a package: =zypper install whatever=
-- removing a package: =zypper remove whatever=
-- syncing repos: =zypper refresh=
-- updating everything: =zypper update= (on tumbleweed use =zypper dup= instead)
-- searching for a package: =zypper search whatever=
+- installing a package: ={sudo | doas} zypper install <package>=
+- removing a package: ={sudo | doas} zypper remove <package>=
+- syncing repos: ={sudo | doas} zypper refresh=
+- updating everything: ={sudo | doas} zypper update= (on tumbleweed use ={sudo | doas} zypper dup=
+  instead)
+- searching for a package: =zypper search <package>=
 
 ** portage
 
-- installing a package: =emerge -a whatever=
-- removing a package: =emerge -a --deselect whatever= then =emerge --depclean=
-- syncing repos: =emerge --sync=
-- updating everything: =emerge -auDN @world=
-- searching for a package: =emerge --search whatever=
+- installing a package: ={sudo | doas} emerge -a <package>=
+- removing a package: ={sudo | doas} emerge --deselect <package>= then ={sudo | doas} emerge
+  --depclean=
+- syncing repos: ={sudo | doas} emerge --sync=
+- updating everything: ={sudo | doas} emerge -auDN @world=
+- searching for a package: =emerge --search <package>=
 
-if youre unsure which package manager came with your distro, you can use the command =which apt dnf
-pacman zypper emerge=, and the one that returns a path is the one you have. also installing or
-updating packages and syncing most often requires root privileges, so make sure to run those
-commands with =sudo= or =doas=
+if youre unsure which package manager came with your distro, you can use the command =command -v apt
+dnf pacman zypper emerge=, and the one that returns a path is the one you have
 
 now that you know how to use it, its important to know what youre doing and why it is this way.
 briefly, your distros maintainers have a "repo" (repository) that is pretty much a sort of database
@@ -455,7 +417,8 @@ a third party package:
 - can be outdated or unmaintained (security worry)
 - can, in very rare cases, just be malicious (google: "aur incident")
 
-so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][fn:flatpak] for the package first.
+so, make sure you check the official repos or [[*flatpak and appimage][flatpak]][fn:flatpak] for the
+package first.
 
 *tip*: remove third-party repos you dont use anymore
 
@@ -466,6 +429,9 @@ dont remove it unless you want a challenge
 [fn:flatpak] flatpak is also third-party, it just wont conflict with system packages
 
 * flatpak and appimage
+:PROPERTIES:
+:CUSTOM_ID: flatpak-and-appimage
+:END:
 ill admit i dont have much experience with flatpak or appimage, so itll be better you do your own
 research here. there are some points for each that i can talk about.
 
@@ -475,7 +441,8 @@ research here. there are some points for each that i can talk about.
 - apps share common "runtimes" instead of system libraries, so they wont conflict with system
   packages. (this is also why your first flatpak is a big download and the rest are smaller)
 - apps are sandboxed, but each app chooses its own permissions, and some ask for access to your
-  whole home folder. install [[https://flathub.org/apps/com.github.tchx84.Flatseal][flatseal]] to check and change them
+  whole home folder. install [[https://flathub.org/apps/com.github.tchx84.Flatseal][flatseal]] to
+  check and change them
 - install with =flatpak install flathub org.example.App=, update with =flatpak update= (your app
   store might already be doing this for you)
 - on some distros, flathub isnt configured by default, so you need to add the remote repo with
@@ -484,7 +451,7 @@ research here. there are some points for each that i can talk about.
 - to remove unused deps(runtimes), use =flatpak uninstall --unused=
 
 *appimage*:
-- an appimage needs the executable bit set before it can run. =chmod +x whatever.AppImage=
+- an appimage needs the executable bit set before it can run. =chmod +x <app>.AppImage=
 - it bundles almost everything it needs. if one wont start, you might be missing =libfuse2=
 - this is as close as youll get to the windows experience. appimages arent sandboxed and dont auto
   update, so only download them from the projects official site
@@ -496,8 +463,8 @@ be how you do it on linux. but, linux has plenty of tools that do the same thing
 of trying to get it working through wine. for this case, a good gui like balena etcher works, or
 just dd if you dont want to install anything (see [[*dont lose your data][dont lose your data]])
 
-so as a rule, try [[https://xyproblem.info/][reframe the question youre asking to what your trying to do]]. im not entirely sure
-how to describe this so here are some examples:
+so as a rule, try [[https://xyproblem.info/][reframe the question youre asking to what your trying
+to do]]. im not entirely sure how to describe this so here are some examples:
 
 - how do i get rufus working on linux? -> *how do i make a bootable usb on linux?*
 - how do i get notepad++ on linux -> +how do i install emacs on (your distro)?+ *best linux text
@@ -510,288 +477,18 @@ as a last resort, wine does work great. just make sure to try the native route f
 
 [fn:gaming] gaming is the exception to this. often steam will handle this for you
 
-* permissions
-youve already seen this: =sudo mkdir ./foo= gave you a directory you cant write to, and an appimage
-wont run until =chmod +x=. both are permissions. "permission denied" is probably one of the most
-common errors youll see
-
-also, "permissions" means three different things on linux and people mix them up:
-
-1. unix file permissions (this section)
-2. selinux / apparmor (see [[*selinux and apparmor][selinux and apparmor]])
-3. app sandboxes like flatpak (see [[*flatpak and appimage][flatpak and appimage]])
-
-** basics
-every file has an owner and a group. then it has three sets of permissions for the owner, the group,
-and everyone else. run =ls -l= and look at one line
-
-#+begin_example
--rw-r--r-- 1 noah noah 1234 Nov  1 00:00 foo.txt
-drwxr-xr-x 2 noah noah 4096 Nov  1 00:00 Documents
-#+end_example
-
-the third column is the owner, the fourth is the group. the first column is the permissions
-themselves. so =foo.txt= is owned by user =noah= and group =noah=
-
-** what is ~-rw-r--r--~
-=-rw-r--r--= has 1 character for the type, then 3 groups of 3 characters for perms
-
-*the first character*: the file type. =d= directory, =-= regular file, =l= symlink, =c= character
-device, =b= block device, =p= named pipe and =s= socket
-
-*the next 3*: the owner. =r= read, =w= write, =x= execute. =-= means no
-
-*the next 3*: the group
-
-*the last 3*: everyone else
-
-- =-rw-r--r--= -> "a regular file, the owner can read and write it, everyone else can only read it".
-
-- =drwxr-xr-x= -> "a directory, the owner can do everything, everyone else can look around but not
-  change anything"
-
-if theres an 11th character (=.= or =+=), see [[*selinux and apparmor][selinux and apparmor]]
-
-...also this footnote i couldnt attatch to anything [fn:acl]
-
-** rwx is different for directories
-here:
-
-| perm | on a file           | on a directory                                  |
-|------+---------------------+-------------------------------------------------|
-| =r=  | read the contents   | list the names in it (=ls=)                     |
-| =w=  | change it           | create, delete or rename things in it           |
-| =x=  | run it as a program | enter it (=cd=) and access things in it by name |
-
-to delete a file you need =w= on the directory, so a read only file in a directory you own is still
-deletable by you. and a directory with =r= but no =x= lets you see names but not open any of them
-
-** who am i and what groups am i in
-=id= tells you your user, your primary group and every other group youre in. groups are how you get
-access to things without being root. on most distros being in =video= gives you video card access,
-=dialout= gives you serial access (i think), =docker= lets you talk to docker without root (do not
-add yourself to docker group if you dont know the consequence[fn:dockergroup]), =wheel= (or =sudo=
-on debian/ubuntu) is what lets you use sudo at all
-
-add yourself to a group with =sudo usermod -aG groupname "$USER"=. without the -a, you replace your
-groups instead of adding one (not good). then log out and back in, group changes dont apply to
-sessions that are already open process
-
-[fn:dockergroup] if docker daemon runs as root (it probably does), being in the docker group grants
-passwordless root, thats honestly probably fine for a home pc, but still be aware (omarchy!)
-
-** changing permissions
-=chmod= changes rwx
-
-- =chmod +x script.sh=: make it executable (for everyone[fn:foreveryone]) (also make sure you
-  are holding shift and dont accidentally put =x, becasuse that does this weird bs where it
-  makes it only exectable causing a weird error that you /may/ spend too long trying to figure
-  out....)
-- =chmod u+w foo=: give the owner (=u=) write
-- =chmod go-r secret.txt=: take read away from group (=g=) and others (=o=)
-- =chmod -R ...=: do it recursively
-
-guides will instead tell you =chmod 755= or =chmod 644=. those are the same thing as numbers: =r=4=,
-=w=2=, =x=1=, add them up per set. so =7= is =rwx=, =6= is =rw-=, =5= is =r-x=, =4= is =r--=. the
-three digits are owner, group, other
-
-- =644=: =rw-r--r--=, a normal file
-- =755=: =rwxr-xr-x=, a script or a directory
-- =600= / =700=: only you, used for secrets. ssh will actually refuse to work if =~/.ssh= and the
-  contents of it are too open
-
-=chown= changes the owner and group: =sudo chown user:group foo=. the one youll actually use is
-fixing a root-owned directory: =sudo chown -R "$USER": ./foo= (the trailing colon means "and my
-primary group")
-
-dont =chmod -R 777= things. it "fixes" the error by making the file writable by every program and
-user on the system. find out which permission is actually missing instead
-
-[fn:foreveryone] without u/g/o/a, its filtered by your umask
-
-** root ignores this
-root passes every rw(x) check, which is why =sudo= "fixes" permission errors (thats the wrong fix,
-see [[*dont lose your data][dont lose your data]]). root doesnt ignore the execute bit on files, immutable files, read only
-mounted filesystems and [[*selinux and apparmor][selinux/apparmour]]
-
-** permission denied, but ls -l says im allowed?
-in order of likelihood:
-
-- you just added yourself to a group and havent logged out
-- the drive is fat32/exfat/ntfs. (permissions come from mount options, see [[*backups][backups]])
-- the partition is mounted =noexec=, somewhat common for =/tmp= and usb drives
-- the directory above it is missing =x= for you
-- its a flatpak and the sandbox cant see that folder. fix it in flatseal
-- selinux or apparmor (see below)
-
-** selinux and apparmor
-standard permissions tell you "is this user allowed". selinux and apparmor ask "is this program
-allowed to touch this at all", this is called mandatory access control (mac)
-
-*do i have this?*:
-
-- anything fedora or rhel based: selinux. =getenforce= prints enforcing, permissive or disabled
-- ubuntu, debian: apparmor. =sudo aa-status= lists the loaded profiles
-- arch, gentoo: probably neither unless you set it up
-- anything else: check! it should be easy to find if you look up your distro
-
-if you dont have it, skip this section
-
-*common issues*: you set up a web server (maybe using [[https://github.com/noahburchell/nhttp][nhttp]]!), samba, game server or ssh, you move a
-file into its directory, =ls -l= says the permissions are fine, and the service still cant read it
-
-with selinux thats because every file has a label (the 11th character =.= in =ls -l= means one is
-there, =ls -Z= shows it). a file *created* in =/var/www= gets a web label, a file *moved* there
-keeps the label from your home folder (remember, =mv= doesnt rewrite the file, see here[fn:inode]).
-=sudo restorecon -Rv /path= puts the correct labels back. to see what got denied, you can look at
-=sudo ausearch -m avc -ts recent=, or on fedora just open the setroubleshoot notification, it
-explains it in english (i think, its been a while)
-
-with apparmor its per program. each (confined) program has a profile in =/etc/apparmor.d/= listing
-what it may touch, and your path isnt there. logs show up in =(sudo) dmesg | grep -i apparmor= or
-=journalctl -k | grep DENIED= (with systemd). you can set one profile to complain mode (log but
-allow) with =sudo aa-complain /path/to/program= while you work out whats missing
-
-*dont turn it off* (=setenforce 0= / =SELINUX=disabled=)
-
-it "fixes it", by removing it entirely. this is like disabling windows defender entirely becasue an
-app wont run, so dont do it. there is a proper permenant fix with =semanage fcontext= or somethign,
-im not going to cover that becasue i have no idea and dont use selinux. rhel docs are probably the
-best place to look
-
-[fn:acl] a =+= at the end of the permission string means the file has an acl, extra permissions for
-specific users or groups beyond the three sets. =getfacl foo= shows them
-
-** special perms
-
-youll sometimes see =s= or =t= where an =x= should be, for example on =/usr/bin/sudo= and =/tmp=.
-=s= (setuid) on the owner slot means the program runs as its owner, =t= on a directory means you can
-only delete your own files in it
-
-* yes, everything is a file
-if you are on linux right now, i have an excersise that really made this concept click for me. make
-sure you read the terminal section of this guide first
-
-first, make a 1gb empty file using the =truncate= command. this command resizes a file (creating a
-new file at that size if it doesnt exist)
-
-#+begin_example
-truncate -s 1G disk
-#+end_example
-
-now, partition this file with =cfdisk=!
-
-#+begin_example
-cfdisk ./disk
-#+end_example
-
-notice how it brought up a menu? pick a gpt disk label, and make some new partitions. then write the
-changes to the "disk". then check what type of file it is with the =file= and =fdisk= commands
-
-#+begin_example
-noah@lychee ~/Documents % file ./disk            
-./disk: DOS/MBR boot sector; partition 1 : ID=0xee, start-CHS (0x0,0,2), end-CHS (0x3ff,255,63), startsector 1, 2097151 sectors, extended partition table (last)
-noah@lychee ~/Documents % fdisk -l ./disk      
-Disk ./disk: 1 GiB, 1073741824 bytes, 2097152 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: gpt
-Disk identifier: 70DA54E7-0AE1-44B0-AAA1-44F2D5E272A8
-
-Device       Start     End Sectors  Size Type
-./disk1       2048 1050623 1048576  512M Linux filesystem
-./disk2    1050624 2095103 1044480  510M Linux filesystem
-noah@lychee ~/Documents % 
-#+end_example
-
-wait.. that looks the same as my boot drive!
-
-#+begin_example
-noah@lychee ~/Documents % doas fdisk -l /dev/nvme0n1
-doas (noah@lychee) password: 
-Disk /dev/nvme0n1: 1.82 TiB, 2000398934016 bytes, 3907029168 sectors
-Disk model: Samsung SSD 970 EVO Plus 2TB            
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: gpt
-Disk identifier: 10EB2DC7-192B-4538-A851-64E70E219D2B
-
-Device           Start        End    Sectors  Size Type
-/dev/nvme0n1p1    2048    4196351    4194304    2G EFI System
-/dev/nvme0n1p2 4196352 3907029134 3902832783  1.8T Linux filesystem
-noah@lychee ~/Documents % 
-#+end_example
-
-this is becasue, they are both /files/[fn:files]. everything is!
-
-[fn:files] well, =/dev/nvme0n1= is a block device file, but "disk" is a regular file. the point is
-they respond to the same operations
-
-* backups
-youve heard the usual [[https://en.wikipedia.org/wiki/Backup][3-2-1 advice]] many times so ill spare that, what is linux specific things you
-should backup.
-
-** what to backup
-
-your home folder covers most of it, but some important stuff lives outside of it:
-
-- =/etc=: this is where system config is. fstab, network settings and third-party repos
-  and the lot, treat this as somewhat sensitive tho be becasue it may contain wifi
-  passwords and other shit. (is yours 12345678? i see you)
-- a list of your installed packages
-  - pacman: =pacman -Qqe > pkglist.txt=
-  - apt: =apt-mark showmanual > pkglist.txt=
-  - dnf: =dnf repoquery --userinstalled > pkglist.txt=
-  - zypper: im actually not sure, so look it up
-  - portage: backup =/var/lib/portage/world= and everything in =/etc/portage=
-  - flatpak: =flatpak list --app --columns=application > flatpaks.txt=
-- your kernel config (=/usr/src/linux/.config=) if you compile your own. *you do not want to redo
-  that from scratch*
-- some of =/var/lib=: vms (=/var/lib/libvirt/images=), docker volumes (=/var/lib/docker/volumes=),
-  databases. if you dont know what these are, you probably dont have any
-- =/root= and =/var/spool/cron= (if you dont know what this is it doesnt apply to you)
-
-** what not to backup
-
-some stuff in home is big and useless to keep around:
-
-- =~/.cache=: its literally cache
-- =~/.local/share/Trash=: ...
-- =~/.var/app/*/cache=: flatpak app caches. *keep the rest of* =~/.var/app= *though*, thats where
-  flatpak apps keep their settings and data
-- steam games (=~/.local/share/Steam/steamapps/common=): theyre huge and you can just redownload
-  them[fn:steamsaves]. (unless youre still on vdsl, fuck you iinet!)
-- anything you can rebuild, like =node_modules=, or build folders
-
-[fn:steamsaves] most games use steam cloud for saves, but not all of them, so check
-
-
-** mistakes to avoid
-
-- hidden files: =cp -r ~/* /backup= skips hidden files. use =rsync -aHAX ~/ /backup/= or some other
-  tool. (or just backup hidden files manually)
-- if you copy to a fat32 or exfat usb, you lose permissions, ownership and symlinks,use a linux
-  native filesystem
-- secrets: =~/.ssh= and =~/.gnupg= are in home, so they get backed up too. that means either exclude
-  them and back them up separately and encrypted, or encrypt your whole backup
-- snapshots arent backups[fn:snapshot]
-
-[fn:snapshot] theyre good for system rollbacks not for keeping data safe. also, timeshift skips your
-home folder by default
-
 * where to find help
 there are many great resources for finding help with anything you need to know about linux
 
 ** for general advice
 
 often the best way to get help with your distro is to find your distros specific wiki, such as the
-[[https://wiki.archlinux.org/title/Main_page][arch wiki]] or [[https://wiki.gentoo.org/wiki/Main_Page][gentoo wiki]]. also, there tends to be a discord server available, official or
-unofficial, with people there that like helping newcomers
+[[https://wiki.archlinux.org/title/Main_page][arch wiki]] or
+[[https://wiki.gentoo.org/wiki/Main_Page][gentoo wiki]]. also, there tends to be a discord server
+available, official or unofficial, with people there that like helping newcomers
 
-the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] tends to be particularly helpful even if you are not using arch, as it covers certain
-distro-agnostic topics very well
+the [[https://wiki.archlinux.org/title/Main_page][arch wiki]] tends to be particularly helpful even
+if you are not using arch, as it covers certain distro-agnostic topics very well
 
 *on llms*:
 
@@ -801,124 +498,51 @@ you might find it helpful to add system instructions that instruct the model to 
 its giving you, or just asking it about parts of the advice you dont understand. so, while powerful
 for people who already somewhat know what theyre doing, id advise beginners to be cautious
 
-** for specific commands
-
-=tldr=
-
-this command is unlike man in that you will need to install it, but it is often more helpful for
-beginners as it gives short, example-based summaries, and a full man page is sometimes overwhelming
-
-=man=
-
-this command is an interface for manual pages, typing =man foo= will bring up the manual page for
-=foo=. this is good because the information there will (usually) be specific to the exact version of
-the software you have installed, though it is quite dense and assumes you already know what youre
-doing a lot of the time
-
-[[https://explainshell.com][explainshell.com]]
-
-i never knew about this site until recent! its great, and i wish someone told me about it sooner. it
-breaks a command down piece by piece, and makes it easy to understand. the only note is that it
-sometimes lags behind and may not know about a very new flag
-
 * how to ask for help
 now that you know where to find help, heres the information you need to include:
 
 - your setup: distro and version, desktop environment, wayland or x11, kernel (uname -r), and
-  hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this in one go.
+  hardware if its relevant (especially the GPU). =inxi -Fxz= gives you most of this
 - what you were trying to do
 - the exact error message copied as text. *do not upload a phone photo of your monitor*
-- relevant logs (get kernel logs with =(sudo) dmesg=, boot logs with =journalctl -b= (this boot),
-  =journalctl -b -1= (previous boot). see [[*not every distro uses systemd][not every distro uses systemd]])
+- relevant logs (get kernel logs with =[sudo | doas] dmesg=, boot logs with =[sudo | doas]
+  journalctl -b= (this boot), =[sudo | doas] journalctl -b -1= (previous boot). see
+  [[file:2026-11-08-tips-for-linux-beginners-extended.org::#not-every-distro-uses-systemd][not every
+  distro uses systemd]])
 - what you already tried
 
 now that youve got the relevant information ready, heres what to do:
 
 - [[https://dontasktoask.com/][dont ask to ask]]
 - [[https://xyproblem.info/][ask about the real goal]]
-- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and what fixed it]]
+- stay there to answer questions and [[https://xkcd.com/979/][let people know when its resolved and
+  what fixed it]]
 - be patient and polite
 - *ask about commands you dont understand*
 - *again, ask about commands you dont understand*
 
 * how to help yourself
-this has moved to its own post: [[file:2026-11-05-how-to-fix-your-broken-install.org][how to fix your "broken" install]]
+this has moved to its own post: [[file:2026-11-05-how-to-fix-your-broken-install.org][how to fix
+your "broken" install]]
 
-* not every distro uses systemd
-most guides you find online assume systemd, but its not the only init. if a guide tells you to run
-=systemctl= and you get "command not found", youre probably on one of these:
+* past the basics
+thats everything you have to know. the rest is for people who are genuinely curious, and lives in
+[[file:2026-11-08-tips-for-linux-beginners-extended.org][tips for linux beginners - extended]]:
 
-- mx linux, antix, devuan: sysvinit
-- gentoo, alpine, artix: openrc (artix also offers runit, dinit, s6)
-- void: runit
-- youre a legend: [[https://github.com/noahburchell/ninit][ninit]]
-  
-not sure? =cat /proc/1/comm= tells you what your init is. (well, sysvinit shows as "init" so if it
-says that try rc-update to see what you have)
-
-| task            | systemd                | openrc                  | runit                             |
-|-----------------+------------------------+-------------------------+-----------------------------------|
-| check a service | =systemctl status foo= | =rc-service foo status= | =sv status foo=                   |
-| start a service | =systemctl start foo=  | =rc-service foo start=  | =sv up foo=                       |
-| start on boot   | =systemctl enable foo= | =rc-update add foo=     | =ln -s /etc/sv/foo /var/service/= |
-| logs            | =journalctl -u foo=    | usually =/var/log/=     | usually =/var/log/=               |
-
-* more terminal commands?
-im just rambling from memory here, so maybe use read the section about how to read terminal
-commands. i use the terminal for pretty much everything, and these are the commands i use all
-the time so they must be important but ill also probably forget some and add them later
-
-also, these arent man pages so go read them too
-
-** ln
-the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target>
-<link name>=, and the target is relative to the link
-
-*💡 tip*: you can create a symlink in a folder that points to the parent folder, creating a loop.
-this is actually completely useless, though
-
-** grep
-grep is pretty much control s (search) (it stands for global regular expression print). it is one of
-the best commands. to use it, you either search a file directly, or pipe somehting into it. to
-search =foo.txt= for any mention of =foo=, you can do this: =grep "foo" foo.txt=, to search =dmesg=
-for =nvidia=, you can do this: =(sudo) dmesg | grep "nvidia"=. to search =foo.txt= for any match of "Foo",
-"fOo", etc (ignoring case), you can use: =grep -i "foo" foo.txt=. another common flag combo is this:
-=(sudo) dmesg | grep -iE "amd|video|card"=. that will search dmesgs output for any mention of amd, video,
-or card, case insensitively.
-
-** du
-disk useage, =-h= makes the sizes readable, and =-a= includes files. so pretty much you can use
-=du -hd 1 ~= (=-d 1= specifies max depth to look, you can try it with and without on your home dir
-to see the difference) to see the disk useage of all folders in your home dir, and use
-=du -ahd 1 ~= to include the files too
-
-* trivia
-these dont fit anywhere i just thought they would make good bullets
-
-- linux has =clock_nanosleep()= but macos doesnt for some reason (=mach_wait_until()= may acheive the same
-  thing as an absolute =clock_nanosleep()=)
-- every distro is a "beginner" distro if you can read (and have some patience and willingness to learn!)
-- you dont actuallt need a bootloader, as long as you built your kernel with =CONFIG_EFI_STUB= and give it
-  an nvram entry
-- there is no syscall to change the creation time of a file. if you did want a file that was created
-  at epoch, you have to go line 1722 (i just checked!) of =kernel/time/timekeeping.c= and remove that
-  check that checks if the time youre tying to set the time to is less than monotonic, then you can set the
-  time to @0 and create a file (shut up! i hear you about to yell 'debugfs'. im on the SUPERIOR filesystem
-  btrfs!!)
-- emacs is the best "text editor"
-- you can put anything except =/= and =\0= in a filename (newlines and carrige returns included!)
-- (defun hello () (interactive) (insert "hello")) ;;; you can just define functions while emacs
-  is running in any buffer lol
-- =CONFIG_HZ=300= exists because 300 is divisible by both 50 and 60 (pal and ntsc)
-- wtf?? =[ 5379.382219] traps: python3[9480] trap stack segment ip:7f23c08e100a sp:400000000000000
-  error:0 in dev/zero[a,7f23c08e1000+1000]=
-- jiffies usually start at -5m instead of 0.. im pretty sure this is to catch wraparound bugs
-- =creat()= is missing an e i think because ken thompson felt like it. no good reason
-- =killall= on solaris kills everything
-- for some god knows reason systemd-tmpfiles creats /srv as a btrfs subvol if the dir doesnt exist?
-- anything on the kernel cmdline the kernel doesnt recognise gets given to init
+- [[file:2026-11-08-tips-for-linux-beginners-extended.org::#more-terminal-commands][more terminal
+  commands?]]
+- [[file:2026-11-08-tips-for-linux-beginners-extended.org::#permissions][permissions]]
+- [[file:2026-11-08-tips-for-linux-beginners-extended.org::#backups][backups]]
+- [[file:2026-11-08-tips-for-linux-beginners-extended.org::#everything-is-a-file][yes, everything is
+  a file]]
+- [[file:2026-11-08-tips-for-linux-beginners-extended.org::#not-every-distro-uses-systemd][not every
+  distro uses systemd]]
+- [[file:2026-11-08-tips-for-linux-beginners-extended.org::#trivia][trivia]]
 
 * glossary
+:PROPERTIES:
+:CUSTOM_ID: glossary
+:END:
 - appimage :: a single executable that bundles an application with most of the libraries it needs.
   runs on any distro without being installed
 - atomic distro :: a distro that updates the whole system as one image instead of package by
@@ -969,7 +593,7 @@ these dont fit anywhere i just thought they would make good bullets
   forgot the name of) but lets not overcomplicate this actually, just look it up it needs a whole
   nother article to explain 50% of it!
 - kernel module :: kernel code loaded at runtime, usually a driver. stored under
-  =/lib/modules/VERSION= as =.ko= files
+  =/lib/modules/<version>= as =.ko= files
 - live usb :: a usb drive that boots a complete linux system without installing anything. often used
   to install a distro and to repair one that no longer boots
 - man page :: manual page. read with =man=
