@@ -68,7 +68,7 @@ different directories
 note that =cp= and =mv= will overwrite an existing file with the same name without asking. add =-i=
 if you want to be asked
 
-another difference: =mv= (on the same drive) is instant and all or nothing, the file either has the
+another difference: =mv= (on the same filesystem) is instant and all or nothing, the file either has the
 old content or the new content. =cp= rewrites the destination bit by bit, so if its interrupted or
 something reads it mid-copy, you get a half-written file[fn:inode]. this is why the safe way to
 replace a file is to write the new version somewhere else and =mv= it over the top
@@ -109,7 +109,8 @@ you will see =*= in a lot of commands. the shell expands it to "every file that 
 useful and also how =rm -rf $DIR/*= goes wrong (see [[file:2026-11-04-tips-for-linux-beginners.org::#dont-lose-your-data][dont lose your data]])
 
 [fn:sudoedit] =sudoedit /etc/<file>= is a better way to do this if you have sudo, it copies the file,
-opens it as your normal user, and copies it back when you save
+opens it as your normal user, and copies it back when you save. if the editor defaults to vi change
+the =EDITOR=<foo>= env var to whatever you prefer
 
 ** ln
 the most common use of the =ln= (link) command is creating a symlink. the syntax is =ln -s <target>
@@ -119,7 +120,7 @@ the most common use of the =ln= (link) command is creating a symlink. the syntax
 this is actually completely useless, though
 
 ** grep
-grep is pretty much control s (search) (it stands for global regular expression print). it is one of
+grep is pretty much control search (it stands for global regular expression print). it is one of
 the best commands. to use it, you either search a file directly, or pipe somehting into it. to
 search =foo.txt= for any mention of =foo=, you can do this: =grep "foo" foo.txt=, to search =dmesg=
 for =nvidia=, you can do this: =[sudo | doas] dmesg | grep "nvidia"=. to search =foo.txt= for any match of "Foo",
@@ -176,9 +177,7 @@ device, =b= block device, =p= named pipe and =s= socket
 - =drwxr-xr-x= -> "a directory, the owner can do everything, everyone else can look around but not
   change anything"
 
-if theres an 11th character (=.= or =+=), see [[*selinux and apparmor][selinux and apparmor]]
-
-...also this footnote i couldnt attatch to anything [fn:acl]
+if theres an 11th character (=.= or =+=[fn:acl]), see [[*selinux and apparmor][selinux and apparmor]]
 
 ** rwx is different for directories
 here:

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-08 Sun 14:00 -->
+<!-- 2026-11-08 Sun 14:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>tips for linux beginners - extended [2026-11-08 Sun]</title>
@@ -24,32 +24,32 @@
 <ul>
 <li><a href="#more-terminal-commands">1. more terminal commands?</a>
 <ul>
-<li><a href="#org3202111">1.1. ls, cd</a></li>
-<li><a href="#orgf97b803">1.2. "<code>.</code>" "<code>..</code>"</a></li>
-<li><a href="#org4e78ce2">1.3. file manipulation</a></li>
-<li><a href="#org84b2229">1.4. ln</a></li>
-<li><a href="#org411199a">1.5. grep</a></li>
-<li><a href="#orgd063828">1.6. du</a></li>
+<li><a href="#orgaf55df5">1.1. ls, cd</a></li>
+<li><a href="#org5eb6783">1.2. "<code>.</code>" "<code>..</code>"</a></li>
+<li><a href="#org0b0d19d">1.3. file manipulation</a></li>
+<li><a href="#org1702848">1.4. ln</a></li>
+<li><a href="#org2e5d373">1.5. grep</a></li>
+<li><a href="#orge8ff850">1.6. du</a></li>
 </ul>
 </li>
 <li><a href="#permissions">2. permissions</a>
 <ul>
-<li><a href="#org4e8f535">2.1. basics</a></li>
-<li><a href="#orga1383f7">2.2. what is <code>-rw-r--r--</code></a></li>
-<li><a href="#org40b1ac6">2.3. rwx is different for directories</a></li>
-<li><a href="#org581ea42">2.4. who am i and what groups am i in</a></li>
-<li><a href="#orgb3587b3">2.5. changing permissions</a></li>
-<li><a href="#orgb47ee26">2.6. root ignores some of this</a></li>
-<li><a href="#org0f3e677">2.7. permission denied, but ls -l says im allowed?</a></li>
-<li><a href="#org74adcb1">2.8. selinux and apparmor</a></li>
-<li><a href="#orgfb7d153">2.9. special perms</a></li>
+<li><a href="#org29b7b5b">2.1. basics</a></li>
+<li><a href="#orgb5df265">2.2. what is <code>-rw-r--r--</code></a></li>
+<li><a href="#org27f13bd">2.3. rwx is different for directories</a></li>
+<li><a href="#org066ea65">2.4. who am i and what groups am i in</a></li>
+<li><a href="#org9a6bc19">2.5. changing permissions</a></li>
+<li><a href="#org9b36edd">2.6. root ignores some of this</a></li>
+<li><a href="#orgf366a49">2.7. permission denied, but ls -l says im allowed?</a></li>
+<li><a href="#orgb389121">2.8. selinux and apparmor</a></li>
+<li><a href="#orgcc6f0e5">2.9. special perms</a></li>
 </ul>
 </li>
 <li><a href="#backups">3. backups</a>
 <ul>
-<li><a href="#org84e8c71">3.1. what to backup</a></li>
-<li><a href="#org2089625">3.2. what not to backup</a></li>
-<li><a href="#org8a7e0c8">3.3. mistakes to avoid</a></li>
+<li><a href="#orgafeed2f">3.1. what to backup</a></li>
+<li><a href="#orgdadfa9a">3.2. what not to backup</a></li>
+<li><a href="#orgfcfb04b">3.3. mistakes to avoid</a></li>
 </ul>
 </li>
 <li><a href="#everything-is-a-file">4. yes, everything is a file</a></li>
@@ -75,8 +75,8 @@ the time so they must be important but ill also probably forget some and add the
 also, these arent man pages so go read them too
 </p>
 </div>
-<div id="outline-container-org3202111" class="outline-3">
-<h3 id="org3202111"><span class="section-number-3">1.1.</span> ls, cd</h3>
+<div id="outline-container-orgaf55df5" class="outline-3">
+<h3 id="orgaf55df5"><span class="section-number-3">1.1.</span> ls, cd</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 <code>ls</code> will list everything in your current working directory. usually, when you open the terminal
@@ -90,8 +90,8 @@ since <code>ls</code> listed "Documents" in your current directory, you can type
 </p>
 </div>
 </div>
-<div id="outline-container-orgf97b803" class="outline-3">
-<h3 id="orgf97b803"><span class="section-number-3">1.2.</span> "<code>.</code>" "<code>..</code>"</h3>
+<div id="outline-container-org5eb6783" class="outline-3">
+<h3 id="org5eb6783"><span class="section-number-3">1.2.</span> "<code>.</code>" "<code>..</code>"</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 <code>.</code> is your current directory. so if you run <code>ls</code> and see "Documents", <code>cd ./Documents</code> is
@@ -104,8 +104,8 @@ so running <code>cd ../</code> will move you back to <code>~</code>
 </p>
 </div>
 </div>
-<div id="outline-container-org4e78ce2" class="outline-3">
-<h3 id="org4e78ce2"><span class="section-number-3">1.3.</span> file manipulation</h3>
+<div id="outline-container-org0b0d19d" class="outline-3">
+<h3 id="org0b0d19d"><span class="section-number-3">1.3.</span> file manipulation</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 this may be the second most common use of the terminal next to <a href="2026-11-04-tips-for-linux-beginners.html#package-management">package management</a>. so its important
@@ -163,7 +163,7 @@ if you want to be asked
 </p>
 
 <p>
-another difference: <code>mv</code> (on the same drive) is instant and all or nothing, the file either has the
+another difference: <code>mv</code> (on the same filesystem) is instant and all or nothing, the file either has the
 old content or the new content. <code>cp</code> rewrites the destination bit by bit, so if its interrupted or
 something reads it mid-copy, you get a half-written file<sup><a id="fnr.inode" class="footref" href="#fn.inode" role="doc-backlink">1</a></sup>. this is why the safe way to
 replace a file is to write the new version somewhere else and <code>mv</code> it over the top
@@ -218,8 +218,8 @@ useful and also how <code>rm -rf $DIR/*</code> goes wrong (see <a href="2026-11-
 </p>
 </div>
 </div>
-<div id="outline-container-org84b2229" class="outline-3">
-<h3 id="org84b2229"><span class="section-number-3">1.4.</span> ln</h3>
+<div id="outline-container-org1702848" class="outline-3">
+<h3 id="org1702848"><span class="section-number-3">1.4.</span> ln</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 the most common use of the <code>ln</code> (link) command is creating a symlink. the syntax is <code>ln -s &lt;target&gt;
@@ -232,11 +232,11 @@ this is actually completely useless, though
 </p>
 </div>
 </div>
-<div id="outline-container-org411199a" class="outline-3">
-<h3 id="org411199a"><span class="section-number-3">1.5.</span> grep</h3>
+<div id="outline-container-org2e5d373" class="outline-3">
+<h3 id="org2e5d373"><span class="section-number-3">1.5.</span> grep</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
-grep is pretty much control s (search) (it stands for global regular expression print). it is one of
+grep is pretty much control search (it stands for global regular expression print). it is one of
 the best commands. to use it, you either search a file directly, or pipe somehting into it. to
 search <code>foo.txt</code> for any mention of <code>foo</code>, you can do this: <code>grep "foo" foo.txt</code>, to search <code>dmesg</code>
 for <code>nvidia</code>, you can do this: <code>[sudo | doas] dmesg | grep "nvidia"</code>. to search <code>foo.txt</code> for any match of "Foo",
@@ -246,8 +246,8 @@ or card, case insensitively.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd063828" class="outline-3">
-<h3 id="orgd063828"><span class="section-number-3">1.6.</span> du</h3>
+<div id="outline-container-orge8ff850" class="outline-3">
+<h3 id="orge8ff850"><span class="section-number-3">1.6.</span> du</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 disk useage, <code>-h</code> makes the sizes readable, and <code>-a</code> includes files. so pretty much you can use
@@ -273,19 +273,19 @@ also, "permissions" means three different things on linux and people mix them up
 
 <ol class="org-ol">
 <li>unix file permissions (this section)</li>
-<li>selinux / apparmor (see <a href="#org74adcb1">selinux and apparmor</a>)</li>
+<li>selinux / apparmor (see <a href="#orgb389121">selinux and apparmor</a>)</li>
 <li>app sandboxes like flatpak (see <a href="2026-11-04-tips-for-linux-beginners.html#flatpak-and-appimage">flatpak and appimage</a>)</li>
 </ol>
 </div>
-<div id="outline-container-org4e8f535" class="outline-3">
-<h3 id="org4e8f535"><span class="section-number-3">2.1.</span> basics</h3>
+<div id="outline-container-org29b7b5b" class="outline-3">
+<h3 id="org29b7b5b"><span class="section-number-3">2.1.</span> basics</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 every file has an owner and a group. then it has three sets of permissions for the owner, the group,
 and everyone else. run <code>ls -l</code> and look at one line
 </p>
 
-<pre class="example" id="org23f0403">
+<pre class="example" id="org8a10faa">
 -rw-r--r-- 1 noah noah 1234 Nov  1 00:00 foo.txt
 drwxr-xr-x 2 noah noah 4096 Nov  1 00:00 Documents
 </pre>
@@ -296,8 +296,8 @@ themselves. so <code>foo.txt</code> is owned by user <code>noah</code> and group
 </p>
 </div>
 </div>
-<div id="outline-container-orga1383f7" class="outline-3">
-<h3 id="orga1383f7"><span class="section-number-3">2.2.</span> what is <code>-rw-r--r--</code></h3>
+<div id="outline-container-orgb5df265" class="outline-3">
+<h3 id="orgb5df265"><span class="section-number-3">2.2.</span> what is <code>-rw-r--r--</code></h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 <code>-rw-r--r--</code> has 1 character for the type, then 3 groups of 3 characters for perms
@@ -328,16 +328,12 @@ change anything"</li>
 </ul>
 
 <p>
-if theres an 11th character (<code>.</code> or <code>+</code>), see <a href="#org74adcb1">selinux and apparmor</a>
-</p>
-
-<p>
-&hellip;also this footnote i couldnt attatch to anything <sup><a id="fnr.acl" class="footref" href="#fn.acl" role="doc-backlink">3</a></sup>
+if theres an 11th character (<code>.</code> or <code>+</code><sup><a id="fnr.acl" class="footref" href="#fn.acl" role="doc-backlink">3</a></sup>), see <a href="#orgb389121">selinux and apparmor</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org40b1ac6" class="outline-3">
-<h3 id="org40b1ac6"><span class="section-number-3">2.3.</span> rwx is different for directories</h3>
+<div id="outline-container-org27f13bd" class="outline-3">
+<h3 id="org27f13bd"><span class="section-number-3">2.3.</span> rwx is different for directories</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 here:
@@ -387,8 +383,8 @@ deletable by you. and a directory with <code>r</code> but no <code>x</code> lets
 </p>
 </div>
 </div>
-<div id="outline-container-org581ea42" class="outline-3">
-<h3 id="org581ea42"><span class="section-number-3">2.4.</span> who am i and what groups am i in</h3>
+<div id="outline-container-org066ea65" class="outline-3">
+<h3 id="org066ea65"><span class="section-number-3">2.4.</span> who am i and what groups am i in</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 <code>id</code> tells you your user, your primary group and every other group youre in. groups are how you get
@@ -405,8 +401,8 @@ sessions that are already open process
 </p>
 </div>
 </div>
-<div id="outline-container-orgb3587b3" class="outline-3">
-<h3 id="orgb3587b3"><span class="section-number-3">2.5.</span> changing permissions</h3>
+<div id="outline-container-org9a6bc19" class="outline-3">
+<h3 id="org9a6bc19"><span class="section-number-3">2.5.</span> changing permissions</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 <code>chmod</code> changes rwx
@@ -447,18 +443,18 @@ user on the system. find out which permission is actually missing instead
 </p>
 </div>
 </div>
-<div id="outline-container-orgb47ee26" class="outline-3">
-<h3 id="orgb47ee26"><span class="section-number-3">2.6.</span> root ignores some of this</h3>
+<div id="outline-container-org9b36edd" class="outline-3">
+<h3 id="org9b36edd"><span class="section-number-3">2.6.</span> root ignores some of this</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 root passes every rw(x) check, which is why <code>sudo</code> "fixes" permission errors (thats the wrong fix,
 see <a href="2026-11-04-tips-for-linux-beginners.html#dont-lose-your-data">dont lose your data</a>). root doesnt ignore the execute bit on files, immutable files, read only
-mounted filesystems and <a href="#org74adcb1">selinux/apparmour</a>
+mounted filesystems and <a href="#orgb389121">selinux/apparmour</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org0f3e677" class="outline-3">
-<h3 id="org0f3e677"><span class="section-number-3">2.7.</span> permission denied, but ls -l says im allowed?</h3>
+<div id="outline-container-orgf366a49" class="outline-3">
+<h3 id="orgf366a49"><span class="section-number-3">2.7.</span> permission denied, but ls -l says im allowed?</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 in order of likelihood:
@@ -474,8 +470,8 @@ in order of likelihood:
 </ul>
 </div>
 </div>
-<div id="outline-container-org74adcb1" class="outline-3">
-<h3 id="org74adcb1"><span class="section-number-3">2.8.</span> selinux and apparmor</h3>
+<div id="outline-container-orgb389121" class="outline-3">
+<h3 id="orgb389121"><span class="section-number-3">2.8.</span> selinux and apparmor</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 standard permissions tell you "is this user allowed". selinux and apparmor ask "is this program
@@ -530,8 +526,8 @@ best place to look
 </p>
 </div>
 </div>
-<div id="outline-container-orgfb7d153" class="outline-3">
-<h3 id="orgfb7d153"><span class="section-number-3">2.9.</span> special perms</h3>
+<div id="outline-container-orgcc6f0e5" class="outline-3">
+<h3 id="orgcc6f0e5"><span class="section-number-3">2.9.</span> special perms</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 youll sometimes see <code>s</code> or <code>t</code> where an <code>x</code> should be, for example on <code>/usr/bin/sudo</code> and <code>/tmp</code>.
@@ -549,8 +545,8 @@ youve heard the usual <a href="https://en.wikipedia.org/wiki/Backup">3-2-1 advic
 should backup.
 </p>
 </div>
-<div id="outline-container-org84e8c71" class="outline-3">
-<h3 id="org84e8c71"><span class="section-number-3">3.1.</span> what to backup</h3>
+<div id="outline-container-orgafeed2f" class="outline-3">
+<h3 id="orgafeed2f"><span class="section-number-3">3.1.</span> what to backup</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 your home folder covers most of it, but some important stuff lives outside of it:
@@ -577,8 +573,8 @@ databases. if you dont know what these are, you probably dont have any</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2089625" class="outline-3">
-<h3 id="org2089625"><span class="section-number-3">3.2.</span> what not to backup</h3>
+<div id="outline-container-orgdadfa9a" class="outline-3">
+<h3 id="orgdadfa9a"><span class="section-number-3">3.2.</span> what not to backup</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 some stuff in home is big and useless to keep around:
@@ -595,8 +591,8 @@ them<sup><a id="fnr.steamsaves" class="footref" href="#fn.steamsaves" role="doc-
 </ul>
 </div>
 </div>
-<div id="outline-container-org8a7e0c8" class="outline-3">
-<h3 id="org8a7e0c8"><span class="section-number-3">3.3.</span> mistakes to avoid</h3>
+<div id="outline-container-orgfcfb04b" class="outline-3">
+<h3 id="orgfcfb04b"><span class="section-number-3">3.3.</span> mistakes to avoid</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>hidden files: <code>cp -r ~/* /backup</code> skips hidden files. use <code>rsync -aHAX ~/ /backup/</code> or some other
@@ -623,7 +619,7 @@ first, make a 1gb empty file using the <code>truncate</code> command. this comma
 new file at that size if it doesnt exist)
 </p>
 
-<pre class="example" id="org226f233">
+<pre class="example" id="org4fbd192">
 truncate -s 1G disk
 </pre>
 
@@ -631,7 +627,7 @@ truncate -s 1G disk
 now, partition this file with <code>cfdisk</code>!
 </p>
 
-<pre class="example" id="orgdb0daaf">
+<pre class="example" id="orge60b695">
 cfdisk ./disk
 </pre>
 
@@ -640,7 +636,7 @@ notice how it brought up a menu? pick a gpt disk label, and make some new partit
 changes to the "disk". then check what type of file it is with the <code>file</code> and <code>fdisk</code> commands
 </p>
 
-<pre class="example" id="orgec52708">
+<pre class="example" id="org7ba7c13">
 noah@lychee ~/Documents % file ./disk            
 ./disk: DOS/MBR boot sector; partition 1 : ID=0xee, start-CHS (0x0,0,2), end-CHS (0x3ff,255,63), startsector 1, 2097151 sectors, extended partition table (last)
 noah@lychee ~/Documents % fdisk -l ./disk      
@@ -661,7 +657,7 @@ noah@lychee ~/Documents %
 wait.. that looks the same as my boot drive!
 </p>
 
-<pre class="example" id="org87e320d">
+<pre class="example" id="org1898f5b">
 noah@lychee ~/Documents % doas fdisk -l /dev/nvme0n1
 doas (noah@lychee) password: 
 Disk /dev/nvme0n1: 1.82 TiB, 2000398934016 bytes, 3907029168 sectors
@@ -800,7 +796,8 @@ filesystems <code>mv</code> is just copy then delete and loses this property
 
 <div class="footdef"><sup><a id="fn.sudoedit" class="footnum" href="#fnr.sudoedit" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <code>sudoedit /etc/&lt;file&gt;</code> is a better way to do this if you have sudo, it copies the file,
-opens it as your normal user, and copies it back when you save
+opens it as your normal user, and copies it back when you save. if the editor defaults to vi change
+the <code>EDITOR=&lt;foo&gt;</code> env var to whatever you prefer
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.acl" class="footnum" href="#fnr.acl" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
@@ -836,7 +833,7 @@ they respond to the same operations
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-08 Sun 14:00</p>
+<p class="date">Created: 2026-11-08 Sun 14:20</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
