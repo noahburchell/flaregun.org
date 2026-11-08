@@ -46,7 +46,7 @@ so before anything else, you need both of these:
    external drive (ext4 or btrfs, not exfat) and either a backup app from your app store (deja dup,
    pika backup or kup) or this, run every so often:
    #+begin_example
-   rsync -aHAX ~/ <backup folder on external drive>
+   rsync -aHAX ~/ <backup folder on external drive> --exclude=.cache
    #+end_example
 
 if a typo in a command can cause irrecoverable data loss, your setup is the problem
@@ -143,6 +143,9 @@ breaks a command down piece by piece, and makes it easy to understand. the only 
 sometimes lags behind and may not know about a very new flag
 
 ** sudo / doas
+first, which one does your distro come with? probably sudo, but if youre unsure you can check with
+=command -v sudo doas=. whichever returns a path is the one you have.
+
 =sudo= and =doas= are privilege elevation tools that let permitted users run commands as root or
 another user. for now, your can ignore the "other user" part and just think of it as running a
 command as *root*.
@@ -388,9 +391,9 @@ the windows approach). "syncing" just means updating the database.
 
 ** dont delete your desktop
 
-you may have seen that... situation linus tech tips was in when he deleted his desktop using pop os.
-this was caused by a packaging mistake with steam, but linus could have avoided this, and you can too,
-so heres how:
+you may have seen that... situation linus from linus tech tips was in when he deleted his desktop
+using pop os. this was caused by a packaging mistake with steam, but linus could have avoided this,
+and you can too, so heres how:
 
 just listen to your package manager! it sounds simple, of course, but many people tend to just hit
 yes on autopilot. this is normal, but you should avoid this behavior as the output of your package
