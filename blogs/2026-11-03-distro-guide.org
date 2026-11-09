@@ -85,6 +85,8 @@ this one is at the bottom, because i dont think it is very important. people wil
 distros like arch and gentoo and their "difficulty", but that is mostly *not* because of the
 installation process. the difficulty comes from maintenance (keeping it running smooth)
 
+** every distro is a beginner distro
+
 im a believer that if you locked 100 people in a room and handed them a printed copy of the arch
 wiki installation guide, most of them would come out with a working distro. obviously, this isnt
 something people want to do for no reason, but in the case that you were dead set on using a certain
