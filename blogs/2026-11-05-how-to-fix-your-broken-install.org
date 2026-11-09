@@ -169,7 +169,8 @@ but their mint was tracking 24.04, the fix was to manually install the firmware 
 upstream
 
 nvidia + fedora? you may have rebooted before akmods built the driver. live usb and [[*how to chroot][chroot]] to
-rebuild them, and verify theyre built before rebooting
+rebuild them, and verify theyre built before rebooting. (you have to tell akmods what your kernel
+is, becasue itll default to the live usbs kernel. =akmods --force --kernels x.y.z-w.fc4x.x86_64=
 
 * how to get out of an emergency shell
 
