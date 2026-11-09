@@ -160,6 +160,14 @@ through =systemctl= or somethign else
 
 ** i have a blinking cursor
 
+this ones pretty much imposible to 'diagnose' in a static blog so ill just have to list
+things that helped with previous people
+
+just installed newer kernel? make sure your linux-firmware is up to date, someone had an
+issue with amdgpu becasue on mint they updated their kernel to one from ubuntu 26.whatever
+but their mint was tracking 24.04, the fix was to manually install the firmware from
+upstream
+
 nvidia + fedora? you may have rebooted before akmods built the driver. live usb and [[*how to chroot][chroot]] to
 rebuild them, and verify theyre built before rebooting
 
