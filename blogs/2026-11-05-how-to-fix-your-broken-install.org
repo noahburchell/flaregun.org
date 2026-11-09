@@ -160,6 +160,8 @@ through =systemctl= or somethign else
 
 ** i have a blinking cursor
 
+(note: you can maybe avoid chroot if you have a previous kernel to boot from!)
+
 this ones pretty much imposible to 'diagnose' in a static blog so ill just have to list
 things that helped with previous people
 
