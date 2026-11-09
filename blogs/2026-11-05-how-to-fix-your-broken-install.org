@@ -27,7 +27,7 @@ Linux 7.3.1 (tty3)
 hostname login: _
 #+end_example
 
-everything booted, only the desktop is missing. you can log in and fix it from here without a live
+everything works, only the desktop is missing. you can log in and fix it from here without a live
 usb. go to [[*i have getty][i have getty]]
 
 ** blinking cursor
@@ -37,15 +37,15 @@ well, it looks like a blinking cursor in the top left
 _
 #+end_example
 
-the system booted and tried to start the desktop, but the graphics driver or display manager never
-got a picture up. pressing =ctrl+alt+f3= usually gets you a getty so you can look at logs. if that
+the system booted and tried to start the desktop, but the graphics driver or display manager broke somehow.
+pressing =ctrl+alt+f3= usually gets you a getty so you can look at logs. if that
 works and you get a getty, go to [[*i have getty][i have getty]], else go to [[*i have a blinking cursor][i have a blinking cursor]]
 
 ** systemd emergency shell
 note: i cant cover every init, but most of them will give you a root shell, and the same fixes may
 apply.
 
-systemd stopped partway through boot and asks for the root password
+systemd stopped partway through boot
 
 #+begin_example
 You are in emergency mode. After logging in, type "journalctl -xb" to view
@@ -56,11 +56,10 @@ Give root password for maintenance
 #+end_example
 
 the kernel is fine and your root filesystem is mounted, but something else (usually a line in
-=/etc/fstab=) failed to mount or failed its filesystem check. your whole system is right there to
-fix. go to [[*i have an emergency shell][i have an emergency shell]]
+=/etc/fstab=) failed to mount or failed its filesystem check. go to [[*i have an emergency shell][i have an emergency shell]]
 
 ** initramfs shell
-looks a lot like the emergency shell, but it doesnt ask for a password and the prompt is =dracut:/#=
+looks a lot like the emergency shell, but the prompt is =dracut:/#=
 (fedora, opensuse), =[rootfs ]#= (arch) or =(initramfs)= (debian, ubuntu, mint)
 
 #+begin_example
@@ -92,13 +91,13 @@ has run yet. go to [[*i have grub rescue][i have grub rescue]]
 
 ** no bootable device
 the firmware found nothing to boot at all. the exact words depend on your motherboard, and it may
-instead drop you into the firmware setup or boot straight into windows
+instead drop you into the firmware setup or boot straight into windows if you dual boot
 
 #+begin_example
 No bootable device -- insert boot disk and press any key
 #+end_example
 
-the bootloader is missing, its efi entry is gone, or the boot order points at the wrong disk. go to [[*i have no bootable
+the bootloader is missing, or its efi entry is gone. go to [[*i have no bootable
  device][i have no bootable device]]
 
 ** kernel panic
@@ -125,7 +124,7 @@ in the middle:
 #+end_example
 
 the last line is the reason. depending on the kernel the colours differ, and there may be a qr code
-next to the message, or the screen shows the last lines of the kernel log instead
+above the message, or the screen shows the last lines of the kernel log instead
 
 if your kernel is older or your graphics driver doesnt support the panic screen, you get the text
 version, a wall of log with a line that starts with =Kernel panic - not syncing:=
@@ -138,7 +137,7 @@ version, a wall of log with a line that starts with =Kernel panic - not syncing:
 [    1.234567] ---[ end Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) ]---
 #+end_example
 
-either way the kernel itself gave up, so nothing after it can run. the reason is the line under the
+either way nothing after it can run. the reason is the line under the
 message on the panic screen, or the text after =not syncing:= in the log version. find the matching
 heading in [[*fixing kernel panics][fixing kernel panics]]
 
@@ -206,4 +205,5 @@ necesary device and filesystem drivers as modules. make them =y
 💀
 
 * how to chroot
-
+mount rootfs at /mnt (or wherever you want, preferably not =dev=), then bind psuedo fs(s) to
+that root. and chroot into bash, then you have shell

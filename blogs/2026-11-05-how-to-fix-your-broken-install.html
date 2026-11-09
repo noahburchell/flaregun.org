@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-07 Sat 22:45 -->
+<!-- 2026-11-09 Mon 15:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>how to fix your "broken" install [2026-11-05 Thu]</title>
@@ -22,51 +22,51 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org28d80a4">1. this is a work in progress!</a></li>
-<li><a href="#org7b0fc80">2. jump table</a>
+<li><a href="#orga37833c">1. this is a work in progress!</a></li>
+<li><a href="#orge7b03da">2. jump table</a>
 <ul>
-<li><a href="#org1abe78b">2.1. getty</a></li>
-<li><a href="#org7fadece">2.2. blinking cursor</a></li>
-<li><a href="#org140a598">2.3. systemd emergency shell</a></li>
-<li><a href="#org9081249">2.4. initramfs shell</a></li>
-<li><a href="#org0fe10ce">2.5. grub rescue</a></li>
-<li><a href="#org78831e8">2.6. no bootable device</a></li>
-<li><a href="#org537df5d">2.7. kernel panic</a></li>
+<li><a href="#org630eda5">2.1. getty</a></li>
+<li><a href="#org8834a83">2.2. blinking cursor</a></li>
+<li><a href="#orgc57dcb6">2.3. systemd emergency shell</a></li>
+<li><a href="#org59d4e5f">2.4. initramfs shell</a></li>
+<li><a href="#org7f9d97c">2.5. grub rescue</a></li>
+<li><a href="#orgc1ff3ad">2.6. no bootable device</a></li>
+<li><a href="#orgf598807">2.7. kernel panic</a></li>
 </ul>
 </li>
-<li><a href="#orgd8858a2">3. how to get your desktop back</a>
+<li><a href="#org7d2da6f">3. how to get your desktop back</a>
 <ul>
-<li><a href="#orge1c7df7">3.1. i have getty</a></li>
-<li><a href="#orgec68d9a">3.2. i have a blinking cursor</a></li>
+<li><a href="#org7a53c87">3.1. i have getty</a></li>
+<li><a href="#org39ef5fe">3.2. i have a blinking cursor</a></li>
 </ul>
 </li>
-<li><a href="#org5b62735">4. how to get out of an emergency shell</a>
+<li><a href="#org5074aef">4. how to get out of an emergency shell</a>
 <ul>
-<li><a href="#org0244119">4.1. i have an emergency shell</a></li>
-<li><a href="#orgfe3e094">4.2. i have an initramfs shell</a></li>
+<li><a href="#orgc35d312">4.1. i have an emergency shell</a></li>
+<li><a href="#org7619ca0">4.2. i have an initramfs shell</a></li>
 </ul>
 </li>
-<li><a href="#orgaa77093">5. how to get your bootloader back</a>
+<li><a href="#org41d5639">5. how to get your bootloader back</a>
 <ul>
-<li><a href="#orge390f12">5.1. i have grub rescue</a></li>
-<li><a href="#org73bb089">5.2. i have no bootable device</a></li>
+<li><a href="#org3789f8a">5.1. i have grub rescue</a></li>
+<li><a href="#orgecc3ee6">5.2. i have no bootable device</a></li>
 </ul>
 </li>
-<li><a href="#org591ad48">6. fixing kernel panics</a>
+<li><a href="#org454a0e9">6. fixing kernel panics</a>
 <ul>
-<li><a href="#orgd82a2be">6.1. Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</a></li>
-<li><a href="#orgf6045d2">6.2. Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.</a></li>
-<li><a href="#org66101ed">6.3. Kernel panic - not syncing: Attempted to kill init! exitcode=0x&hellip;</a></li>
-<li><a href="#org533e41e">6.4. Kernel panic - not syncing: Fatal exception</a></li>
-<li><a href="#orgb046f95">6.5. Kernel panic - not syncing: Fatal Machine Check</a></li>
+<li><a href="#orgde11360">6.1. Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</a></li>
+<li><a href="#org1b6e748">6.2. Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.</a></li>
+<li><a href="#org6f7bd17">6.3. Kernel panic - not syncing: Attempted to kill init! exitcode=0x&hellip;</a></li>
+<li><a href="#orgfe380e3">6.4. Kernel panic - not syncing: Fatal exception</a></li>
+<li><a href="#orgf7833ec">6.5. Kernel panic - not syncing: Fatal Machine Check</a></li>
 </ul>
 </li>
-<li><a href="#org6c3f747">7. how to chroot</a></li>
+<li><a href="#orgfe82c41">7. how to chroot</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org28d80a4" class="outline-2">
-<h2 id="org28d80a4"><span class="section-number-2">1.</span> this is a work in progress!</h2>
+<div id="outline-container-orga37833c" class="outline-2">
+<h2 id="orga37833c"><span class="section-number-2">1.</span> this is a work in progress!</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 first, dont worry! chances are, no data is lost and nothing is broken. it takes a great deal of
@@ -77,8 +77,8 @@ your situation
 </p>
 </div>
 </div>
-<div id="outline-container-org7b0fc80" class="outline-2">
-<h2 id="org7b0fc80"><span class="section-number-2">2.</span> jump table</h2>
+<div id="outline-container-orge7b03da" class="outline-2">
+<h2 id="orge7b03da"><span class="section-number-2">2.</span> jump table</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 each of these is a point in the boot where things stopped. they go from "nearly everything works" to
@@ -86,45 +86,45 @@ each of these is a point in the boot where things stopped. they go from "nearly 
 to its section
 </p>
 </div>
-<div id="outline-container-org1abe78b" class="outline-3">
-<h3 id="org1abe78b"><span class="section-number-3">2.1.</span> getty</h3>
+<div id="outline-container-org630eda5" class="outline-3">
+<h3 id="org630eda5"><span class="section-number-3">2.1.</span> getty</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 this is the prompt you get most often when your gui breaks, it looks something like this:
 </p>
 
-<pre class="example" id="orgb780bce">
+<pre class="example" id="org1cf9e5e">
 Linux 7.3.1 (tty3)
 
 hostname login: _
 </pre>
 
 <p>
-everything booted, only the desktop is missing. you can log in and fix it from here without a live
-usb. go to <a href="#orge1c7df7">i have getty</a>
+everything works, only the desktop is missing. you can log in and fix it from here without a live
+usb. go to <a href="#org7a53c87">i have getty</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org7fadece" class="outline-3">
-<h3 id="org7fadece"><span class="section-number-3">2.2.</span> blinking cursor</h3>
+<div id="outline-container-org8834a83" class="outline-3">
+<h3 id="org8834a83"><span class="section-number-3">2.2.</span> blinking cursor</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 well, it looks like a blinking cursor in the top left
 </p>
 
-<pre class="example" id="org130aec1">
+<pre class="example" id="org66ce3aa">
 _
 </pre>
 
 <p>
-the system booted and tried to start the desktop, but the graphics driver or display manager never
-got a picture up. pressing <code>ctrl+alt+f3</code> usually gets you a getty so you can look at logs. if that
-works and you get a getty, go to <a href="#orge1c7df7">i have getty</a>, else go to <a href="#orgec68d9a">i have a blinking cursor</a>
+the system booted and tried to start the desktop, but the graphics driver or display manager broke somehow.
+pressing <code>ctrl+alt+f3</code> usually gets you a getty so you can look at logs. if that
+works and you get a getty, go to <a href="#org7a53c87">i have getty</a>, else go to <a href="#org39ef5fe">i have a blinking cursor</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org140a598" class="outline-3">
-<h3 id="org140a598"><span class="section-number-3">2.3.</span> systemd emergency shell</h3>
+<div id="outline-container-orgc57dcb6" class="outline-3">
+<h3 id="orgc57dcb6"><span class="section-number-3">2.3.</span> systemd emergency shell</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 note: i cant cover every init, but most of them will give you a root shell, and the same fixes may
@@ -132,10 +132,10 @@ apply.
 </p>
 
 <p>
-systemd stopped partway through boot and asks for the root password
+systemd stopped partway through boot
 </p>
 
-<pre class="example" id="org8a9fc31">
+<pre class="example" id="org146330b">
 You are in emergency mode. After logging in, type "journalctl -xb" to view
 system logs, "systemctl reboot" to reboot, or "exit"
 to continue bootup.
@@ -145,20 +145,19 @@ Give root password for maintenance
 
 <p>
 the kernel is fine and your root filesystem is mounted, but something else (usually a line in
-<code>/etc/fstab</code>) failed to mount or failed its filesystem check. your whole system is right there to
-fix. go to <a href="#org0244119">i have an emergency shell</a>
+<code>/etc/fstab</code>) failed to mount or failed its filesystem check. go to <a href="#orgc35d312">i have an emergency shell</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org9081249" class="outline-3">
-<h3 id="org9081249"><span class="section-number-3">2.4.</span> initramfs shell</h3>
+<div id="outline-container-org59d4e5f" class="outline-3">
+<h3 id="org59d4e5f"><span class="section-number-3">2.4.</span> initramfs shell</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
-looks a lot like the emergency shell, but it doesnt ask for a password and the prompt is <code>dracut:/#</code>
+looks a lot like the emergency shell, but the prompt is <code>dracut:/#</code>
 (fedora, opensuse), <code>[rootfs ]#</code> (arch) or <code>(initramfs)</code> (debian, ubuntu, mint)
 </p>
 
-<pre class="example" id="org90eb695">
+<pre class="example" id="org19fba6f">
 Warning: /dev/disk/by-uuid/1234abcd-56ef-7890-abcd-ef1234567890 does not exist
 
 Generating "/run/initramfs/rdsosreport.txt"
@@ -172,18 +171,18 @@ dracut:/# _
 <p>
 the initramfs (initial ram filesystem (needed becasuse often filesystem drivers are built as
 modules, so kernel cant mount root without help)) couldnt find your root filesystem. none of your
-real system is available yet. go to <a href="#orgfe3e094">i have an initramfs shell</a>
+real system is available yet. go to <a href="#org7619ca0">i have an initramfs shell</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org0fe10ce" class="outline-3">
-<h3 id="org0fe10ce"><span class="section-number-3">2.5.</span> grub rescue</h3>
+<div id="outline-container-org7f9d97c" class="outline-3">
+<h3 id="org7f9d97c"><span class="section-number-3">2.5.</span> grub rescue</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 grub started but cant find the rest of itself
 </p>
 
-<pre class="example" id="org0cde4dd">
+<pre class="example" id="orgdaad724">
 error: no such partition.
 Entering rescue mode...
 grub rescue&gt; _
@@ -191,36 +190,36 @@ grub rescue&gt; _
 
 <p>
 the partition grub was told to load from moved, was deleted or changed filesystem. nothing of linux
-has run yet. go to <a href="#orge390f12">i have grub rescue</a>
+has run yet. go to <a href="#org3789f8a">i have grub rescue</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org78831e8" class="outline-3">
-<h3 id="org78831e8"><span class="section-number-3">2.6.</span> no bootable device</h3>
+<div id="outline-container-orgc1ff3ad" class="outline-3">
+<h3 id="orgc1ff3ad"><span class="section-number-3">2.6.</span> no bootable device</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 the firmware found nothing to boot at all. the exact words depend on your motherboard, and it may
-instead drop you into the firmware setup or boot straight into windows
+instead drop you into the firmware setup or boot straight into windows if you dual boot
 </p>
 
-<pre class="example" id="org4085e0b">
+<pre class="example" id="orge4058b3">
 No bootable device -- insert boot disk and press any key
 </pre>
 
 <p>
-the bootloader is missing, its efi entry is gone, or the boot order points at the wrong disk. go to <a href="#org73bb089">i have no bootable device</a>
+the bootloader is missing, or its efi entry is gone. go to <a href="#orgecc3ee6">i have no bootable device</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org537df5d" class="outline-3">
-<h3 id="org537df5d"><span class="section-number-3">2.7.</span> kernel panic</h3>
+<div id="outline-container-orgf598807" class="outline-3">
+<h3 id="orgf598807"><span class="section-number-3">2.7.</span> kernel panic</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 on any recent kernel this is usually a black screen with a penguin in the corner and a short message
 in the middle:
 </p>
 
-<pre class="example" id="orgfb56b49">
+<pre class="example" id="org4d97ed5">
     .--.        _
    |o_o |      | |
    |:_/ |      | |
@@ -241,7 +240,7 @@ in the middle:
 
 <p>
 the last line is the reason. depending on the kernel the colours differ, and there may be a qr code
-next to the message, or the screen shows the last lines of the kernel log instead
+above the message, or the screen shows the last lines of the kernel log instead
 </p>
 
 <p>
@@ -249,7 +248,7 @@ if your kernel is older or your graphics driver doesnt support the panic screen,
 version, a wall of log with a line that starts with <code>Kernel panic - not syncing:</code>
 </p>
 
-<pre class="example" id="org2e34ab3">
+<pre class="example" id="org921a2a6">
 [    1.234567] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
 [    1.234567] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 7.3.1 #1
 [    1.234567] Call Trace:
@@ -258,24 +257,24 @@ version, a wall of log with a line that starts with <code>Kernel panic - not syn
 </pre>
 
 <p>
-either way the kernel itself gave up, so nothing after it can run. the reason is the line under the
+either way nothing after it can run. the reason is the line under the
 message on the panic screen, or the text after <code>not syncing:</code> in the log version. find the matching
-heading in <a href="#org591ad48">fixing kernel panics</a>
+heading in <a href="#org454a0e9">fixing kernel panics</a>
 </p>
 
 <p>
-most fixes from the initramfs shell onwards need a live usb and a <a href="#org6c3f747">chroot</a>, so read that section first
+most fixes from the initramfs shell onwards need a live usb and a <a href="#orgfe82c41">chroot</a>, so read that section first
 if you havent done one before
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd8858a2" class="outline-2">
-<h2 id="orgd8858a2"><span class="section-number-2">3.</span> how to get your desktop back</h2>
+<div id="outline-container-org7d2da6f" class="outline-2">
+<h2 id="org7d2da6f"><span class="section-number-2">3.</span> how to get your desktop back</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orge1c7df7" class="outline-3">
-<h3 id="orge1c7df7"><span class="section-number-3">3.1.</span> i have getty</h3>
+<div id="outline-container-org7a53c87" class="outline-3">
+<h3 id="org7a53c87"><span class="section-number-3">3.1.</span> i have getty</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 login, look at recent package transactions to find what deleted your desktop, then reinstall it
@@ -294,46 +293,46 @@ through <code>systemctl</code> or somethign else
 </p>
 </div>
 </div>
-<div id="outline-container-orgec68d9a" class="outline-3">
-<h3 id="orgec68d9a"><span class="section-number-3">3.2.</span> i have a blinking cursor</h3>
+<div id="outline-container-org39ef5fe" class="outline-3">
+<h3 id="org39ef5fe"><span class="section-number-3">3.2.</span> i have a blinking cursor</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
-nvidia + fedora? you may have rebooted before akmods built the driver. live usb and <a href="#org6c3f747">chroot</a> to
+nvidia + fedora? you may have rebooted before akmods built the driver. live usb and <a href="#orgfe82c41">chroot</a> to
 rebuild them, and verify theyre built before rebooting
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5b62735" class="outline-2">
-<h2 id="org5b62735"><span class="section-number-2">4.</span> how to get out of an emergency shell</h2>
+<div id="outline-container-org5074aef" class="outline-2">
+<h2 id="org5074aef"><span class="section-number-2">4.</span> how to get out of an emergency shell</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org0244119" class="outline-3">
-<h3 id="org0244119"><span class="section-number-3">4.1.</span> i have an emergency shell</h3>
+<div id="outline-container-orgc35d312" class="outline-3">
+<h3 id="orgc35d312"><span class="section-number-3">4.1.</span> i have an emergency shell</h3>
 </div>
 
-<div id="outline-container-orgfe3e094" class="outline-3">
-<h3 id="orgfe3e094"><span class="section-number-3">4.2.</span> i have an initramfs shell</h3>
+<div id="outline-container-org7619ca0" class="outline-3">
+<h3 id="org7619ca0"><span class="section-number-3">4.2.</span> i have an initramfs shell</h3>
 </div>
 </div>
-<div id="outline-container-orgaa77093" class="outline-2">
-<h2 id="orgaa77093"><span class="section-number-2">5.</span> how to get your bootloader back</h2>
+<div id="outline-container-org41d5639" class="outline-2">
+<h2 id="org41d5639"><span class="section-number-2">5.</span> how to get your bootloader back</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orge390f12" class="outline-3">
-<h3 id="orge390f12"><span class="section-number-3">5.1.</span> i have grub rescue</h3>
+<div id="outline-container-org3789f8a" class="outline-3">
+<h3 id="org3789f8a"><span class="section-number-3">5.1.</span> i have grub rescue</h3>
 </div>
 
-<div id="outline-container-org73bb089" class="outline-3">
-<h3 id="org73bb089"><span class="section-number-3">5.2.</span> i have no bootable device</h3>
+<div id="outline-container-orgecc3ee6" class="outline-3">
+<h3 id="orgecc3ee6"><span class="section-number-3">5.2.</span> i have no bootable device</h3>
 </div>
 </div>
-<div id="outline-container-org591ad48" class="outline-2">
-<h2 id="org591ad48"><span class="section-number-2">6.</span> fixing kernel panics</h2>
+<div id="outline-container-org454a0e9" class="outline-2">
+<h2 id="org454a0e9"><span class="section-number-2">6.</span> fixing kernel panics</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgd82a2be" class="outline-3">
-<h3 id="orgd82a2be"><span class="section-number-3">6.1.</span> Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</h3>
+<div id="outline-container-orgde11360" class="outline-3">
+<h3 id="orgde11360"><span class="section-number-3">6.1.</span> Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 <b>if you use an initramfs (if you dont know, this is you)</b>:
@@ -363,20 +362,20 @@ necesary device and filesystem drivers as modules. make them =y
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6045d2" class="outline-3">
-<h3 id="orgf6045d2"><span class="section-number-3">6.2.</span> Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.</h3>
+<div id="outline-container-org1b6e748" class="outline-3">
+<h3 id="org1b6e748"><span class="section-number-3">6.2.</span> Kernel panic - not syncing: No working init found.  Try passing init= option to kernel.</h3>
 </div>
 
-<div id="outline-container-org66101ed" class="outline-3">
-<h3 id="org66101ed"><span class="section-number-3">6.3.</span> Kernel panic - not syncing: Attempted to kill init! exitcode=0x&hellip;</h3>
+<div id="outline-container-org6f7bd17" class="outline-3">
+<h3 id="org6f7bd17"><span class="section-number-3">6.3.</span> Kernel panic - not syncing: Attempted to kill init! exitcode=0x&hellip;</h3>
 </div>
 
-<div id="outline-container-org533e41e" class="outline-3">
-<h3 id="org533e41e"><span class="section-number-3">6.4.</span> Kernel panic - not syncing: Fatal exception</h3>
+<div id="outline-container-orgfe380e3" class="outline-3">
+<h3 id="orgfe380e3"><span class="section-number-3">6.4.</span> Kernel panic - not syncing: Fatal exception</h3>
 </div>
 
-<div id="outline-container-orgb046f95" class="outline-3">
-<h3 id="orgb046f95"><span class="section-number-3">6.5.</span> Kernel panic - not syncing: Fatal Machine Check</h3>
+<div id="outline-container-orgf7833ec" class="outline-3">
+<h3 id="orgf7833ec"><span class="section-number-3">6.5.</span> Kernel panic - not syncing: Fatal Machine Check</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 💀
@@ -384,13 +383,19 @@ necesary device and filesystem drivers as modules. make them =y
 </div>
 </div>
 </div>
-<div id="outline-container-org6c3f747" class="outline-2">
-<h2 id="org6c3f747"><span class="section-number-2">7.</span> how to chroot</h2>
+<div id="outline-container-orgfe82c41" class="outline-2">
+<h2 id="orgfe82c41"><span class="section-number-2">7.</span> how to chroot</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+mount rootfs at /mnt (or wherever you want, preferably not <code>dev</code>), then bind psuedo fs(s) to
+that root. and chroot into bash, then you have shell
+</p>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Noah Burchell</p>
-<p class="date">Created: 2026-11-07 Sat 22:45</p>
+<p class="date">Created: 2026-11-09 Mon 15:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
