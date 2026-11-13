@@ -5,7 +5,12 @@
 #+OPTIONS: html-style:nil
 
 * this is a work in progress!
+sorry, ill take a while to finish this ! i realised uhh quite early that covering a huge amount of situations coverting
+edge cases and init systems i dont use is troubling..... so for now ask away on you distros community! just make
+sure you follow my /how to ask/ section in the tips for linux beginners guide (you cna use the jump tabel to
+tell them what you have)
 
+* the work in progress:
 first, dont worry! chances are, no data is lost and nothing is broken. it takes a great deal of
 effort to "break" a linux install, and no, a missing desktop is not a broken install! at one point
 getty was all you had, it wasnt broken then and it isnt now. so, how do we learn how to fix it? we
