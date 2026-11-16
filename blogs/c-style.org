@@ -2,7 +2,7 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../manual.css">
-#+OPTIONS: html-style:nil num:nil toc:nil
+#+OPTIONS: html-style:nil num:nil toc:nil html-postamble:nil
 
 * style.h
 

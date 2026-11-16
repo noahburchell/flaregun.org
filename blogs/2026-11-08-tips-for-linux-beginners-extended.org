@@ -2,7 +2,7 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../manual.css">
-#+OPTIONS: html-style:nil
+#+OPTIONS: html-style:nil html-postamble:nil
 
 this is the second half of [[file:2026-11-04-tips-for-linux-beginners.org][tips for linux beginners]], read that first. nothing here is /strictly/
 required. its for people who are genuinely curious. the [[file:2026-11-04-tips-for-linux-beginners.org::#glossary][glossary]] is over there too

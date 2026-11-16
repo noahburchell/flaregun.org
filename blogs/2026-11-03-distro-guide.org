@@ -2,7 +2,7 @@
 #+HTML_LINK_UP: ../index.html
 #+HTML_LINK_HOME: ../index.html
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../manual.css">
-#+OPTIONS: html-style:nil
+#+OPTIONS: html-style:nil html-postamble:nil
 
 you want to use linux but cant pick a distro? good news, its very easy. but it is also easy to be
 overwhelmed with choice when you start researching and find hundreds of options to choose from. if
