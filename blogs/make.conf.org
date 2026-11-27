@@ -12,7 +12,7 @@ CXXFLAGS="${COMMON_FLAGS} -U_GLIBCXX_ASSERTIONS"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
 
-LDFLAGS="${COMMON_FLAGS} -Wl,-O2 -Wl,--as-needed -Wl,--hash-style=gnu -Wl,-z,pack-relative-relocs"
+LDFLAGS="${COMMON_FLAGS} -Wl,-O2 -Wl,--as-needed -Wl,--hash-style=gnu -Wl,-z,pack-relative-relocs -Wl,--sort-common -Wl,-z,relro -Wl,-z,now"
 LDFLAGS="${LDFLAGS} -fuse-ld=mold"
 
 RUSTFLAGS="-C target-cpu=native -C opt-level=3"
