@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-16 Mon 18:28 -->
+<!-- 2026-11-27 Fri 17:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>make.conf</title>
@@ -18,11 +18,11 @@
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="content" class="content">
 <h1 class="title">make.conf</h1>
-<pre class="example" id="org7c4dd0e">
-COMMON_FLAGS="-march=native -O2 -pipe -flto=auto -ftrivial-auto-var-init=zero -fno-plt -fno-semantic-interposition -fisolate-erroneous-paths-attribute -fdevirtualize-at-ltrans"
+<pre class="example" id="org1de8d99">
+COMMON_FLAGS="-march=native -O2 -pipe -flto=auto -fno-plt -fno-semantic-interposition -fisolate-erroneous-paths-attribute -fdevirtualize-at-ltrans"
 
 CFLAGS="${COMMON_FLAGS}"
-CXXFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS} -U_GLIBCXX_ASSERTIONS"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
 
@@ -30,7 +30,7 @@ LDFLAGS="${COMMON_FLAGS} -Wl,-O2 -Wl,--as-needed -Wl,--hash-style=gnu -Wl,-z,pac
 LDFLAGS="${LDFLAGS} -fuse-ld=mold"
 
 RUSTFLAGS="-C target-cpu=native -C opt-level=3"
-RUSTFLAGS="${RUSTFLAGS} -C strip=debuginfo"
+RUSTFLAGS="${RUSTFLAGS} -C strip=debuginfo -C codegen-units=1"
 RUSTFLAGS="${RUSTFLAGS} -C link-arg=-fuse-ld=mold"
 
 MAKEOPTS="-j12 -l12"
@@ -47,7 +47,7 @@ BINPKG_COMPRESS_FLAGS="-T0 -3"
 PORTAGE_COMPRESS="zstd"
 PORTAGE_COMPRESS_FLAGS="-q --rm -9 -T0"
 
-FEATURES="${FEATURES} candy parallel-install parallel-fetch"
+FEATURES="${FEATURES} candy parallel-install parallel-fetch clean-logs"
 QEMU_SOFTMMU_TARGETS="x86_64"
 QEMU_USER_TARGETS=""
 NINIT_TEST_KERNEL="/var/lib/ninit/test-kernels/vmlinuz-7.2.8-nixos"
@@ -66,6 +66,7 @@ PORTAGE_LOGDIR="/var/log/portage"
 
 INSTALL_MASK="/usr/share/locale -/usr/share/locale/locale.alias"
 INSTALL_MASK="${INSTALL_MASK} /usr/share/bash-completion /etc/bash_completion.d"
+INSTALL_MASK="${INSTALL_MASK} /etc/cron.daily/systemd-tmpfiles-clean /etc/cron.monthly/smartmontools-update-drivedb"
 
 PORTAGE_LOGDIR_CLEAN='find "${PORTAGE_LOGDIR}" -type f ! -name "summary.log*" -mtime +7 -delete'
 </pre>
