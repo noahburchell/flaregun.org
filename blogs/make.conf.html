@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-11-27 Fri 17:59 -->
+<!-- 2026-11-27 Fri 18:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>make.conf</title>
@@ -18,7 +18,7 @@
  <a accesskey="H" href="../index.html"> HOME </a>
 </div><div id="content" class="content">
 <h1 class="title">make.conf</h1>
-<pre class="example" id="org803c0b5">
+<pre class="example" id="orge1c7c8a">
 COMMON_FLAGS="-march=native -O2 -pipe -flto=auto -fno-plt -fno-semantic-interposition -fisolate-erroneous-paths-attribute -fdevirtualize-at-ltrans"
 
 CFLAGS="${COMMON_FLAGS}"
@@ -32,6 +32,8 @@ LDFLAGS="${LDFLAGS} -fuse-ld=mold"
 RUSTFLAGS="-C target-cpu=native -C opt-level=3"
 RUSTFLAGS="${RUSTFLAGS} -C strip=debuginfo -C codegen-units=1"
 RUSTFLAGS="${RUSTFLAGS} -C link-arg=-fuse-ld=mold"
+
+GOAMD64="v4"
 
 MAKEOPTS="-j12 -l12"
 
